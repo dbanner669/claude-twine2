@@ -1,0 +1,36 @@
+:: UI Widgets [widget]
+/* ============================================================
+   UI UTILITY WIDGETS
+   Small reusable widgets for interface elements.
+   ============================================================ */
+
+<<widget "newFeatureIcon">><<nobr>>
+<div class="icon icon-new-feature"></div>
+<</nobr>><</widget>>
+
+<<widget "improvementIcon">><<nobr>>
+<div class="icon icon-improvement"></div>
+<</nobr>><</widget>>
+
+<<widget "header">><<nobr>>
+/* Renders the location/time header bar above passage text.
+   Set $header.location and $header.time before calling. */
+<<if $header.location>>
+<div id="header-bar">
+    <span class="header-location">$header.location</span>
+    <<if $header.time>><span class="header-time">$header.time</span><</if>>
+</div>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "bugreport">><<nobr>>
+<div class="bug-report">
+  <h3>Bug Report</h3>
+  <p>If you encounter a bug, please report it with:</p>
+  <ul>
+    <li>Current passage: <<print passage()>></li>
+    <li>Turns played: <<print turns()>></li>
+    <li>Save your game first, then describe the issue.</li>
+  </ul>
+</div>
+<</nobr>><</widget>>

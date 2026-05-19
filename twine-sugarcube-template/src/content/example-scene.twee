@@ -1,0 +1,151 @@
+:: DEMO-100 Arrival
+<<silently>>
+<<set $header.location to "City Centre">>
+<<set $header.time to "Monday, 08:00">>
+<<emote-calm>>
+<<avatar-setBody "fair">>
+<<wear-blackTshirt>>
+<<wear-darkJeans>>
+<<wear-sneakers>>
+<</silently>>
+<<header>>
+<<page>>
+
+<<first>>
+The taxi drops you at the corner of 5th and Main. The city is already alive with morning traffic, horns honking in the distance.
+<<then>>
+You're back at the corner of 5th and Main. The coffee shop across the street looks inviting.
+<<finally>>
+5th and Main. You know this corner well now.
+<</first>>
+
+You adjust your bag and look around. A tall glass building rises ahead of you &mdash; that must be the office.
+
+<<addNotification "You have arrived at City Centre.">>
+
+[[Enter the building|DEMO-200 Lobby]]
+[[Explore the street|DEMO-300 Street]]
+<</page>>
+
+
+:: DEMO-200 Lobby
+<<silently>>
+<<set $header.location to "Office Building &mdash; Lobby">>
+<<set $header.time to "Monday, 08:15">>
+<<emote-smile>>
+<</silently>>
+<<header>>
+<<page>>
+
+The lobby is all marble and chrome. A security guard behind the front desk looks up as you enter.
+
+<div class="dialogue">
+    <span class="speaker">Guard:</span> "Good morning. <<playerName>>, right? <<playerFaction>> sent word you'd be arriving. Take the elevator to the third floor."
+</div>
+
+<<emote-surprised>>
+
+//How does he know your name already?//
+
+<<rollDice "1d6">>
+<<if _diceResult gte 4>>
+    Your training kicks in. You keep your expression neutral and nod.
+    <<addNotification "Composure check: passed (rolled _diceResult)">>
+<<else>>
+    You can't quite hide your surprise. The guard smirks.
+    <<addNotification "Composure check: failed (rolled _diceResult)">>
+<</if>>
+<</rollDice>>
+
+[[Take the elevator|DEMO-400 Office]]
+[[Ask how he knows your name|DEMO-210 Question]]
+<</page>>
+
+
+:: DEMO-210 Question
+<<silently>>
+<<emote-frown>>
+<</silently>>
+<<header>>
+<<page>>
+
+<div class="dialogue">
+    <span class="speaker"><<playerName>>:</span> "How do you know who I am?"
+</div>
+
+The guard taps a folder on his desk.
+
+<div class="dialogue">
+    <span class="speaker">Guard:</span> "Your file arrived yesterday. Standard protocol for new transfers."
+</div>
+
+Fair enough. Nothing sinister &mdash; just bureaucracy.
+
+[[Take the elevator|DEMO-400 Office]]
+<</page>>
+
+
+:: DEMO-300 Street
+<<silently>>
+<<set $header.location to "City Centre &mdash; Street">>
+<<emote-calm>>
+<</silently>>
+<<header>>
+<<page>>
+
+You walk along the street. A coffee shop on the corner catches your eye. The smell of fresh roast drifts through the open door.
+
+A newsstand displays the morning headlines. Nothing interesting &mdash; just politics and weather.
+
+<<addNotification "You explored the street.">>
+
+[[Get coffee|DEMO-310 Coffee]]
+[[Head to the building|DEMO-200 Lobby]]
+<</page>>
+
+
+:: DEMO-310 Coffee
+<<silently>>
+<<set $header.time to "Monday, 08:30">>
+<</silently>>
+<<header>>
+<<page>>
+
+You order a flat white and take it to go. The warmth in your hands is grounding.
+
+<<set $player.statusEffects.pushUnique("Caffeinated")>>
+<<addNotification "Status effect: Caffeinated">>
+
+//Better get to work./
+
+[[Head to the building|DEMO-200 Lobby]]
+<</page>>
+
+
+:: DEMO-400 Office
+<<silently>>
+<<set $header.location to "Office &mdash; Third Floor">>
+<<set $header.time to "Monday, 08:45">>
+<<emote-calm>>
+<</silently>>
+<<header>>
+<<page>>
+
+The elevator opens onto a quiet floor. Cubicles line the walls, but only a few are occupied this early.
+
+A woman with short dark hair waves you over from a corner office.
+
+<div class="dialogue">
+    <span class="speaker">Director Chen:</span> "<<playerFullName>>. Welcome aboard. We have a lot to discuss."
+</div>
+
+She gestures to a chair across from her desk.
+
+//This is where it begins.//
+
+<<addNotification "Prologue complete.">>
+
+<div class="decisions">
+    <a data-passage="Start">Return to Main Menu</a>
+</div>
+<</page>>

@@ -1,0 +1,12 @@
+:: Start [avatar-hidden]
+<<nobr>>
+<div id="page" class="page page-main-menu">
+<div class="page-inner">
+  <h1>Game Title</h1>
+  <h3>A SugarCube Template</h3>
+  <div class="decisions">
+    <a data-passage="CC-100 Name">New Game</a>
+  </div>
+</div>
+</div>
+<</nobr>>

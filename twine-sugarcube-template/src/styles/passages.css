@@ -1,0 +1,105 @@
+/* ============================================================
+   PASSAGES — Page container and text styling
+   The <<page>> macro wraps content in .page > .page-inner > .text
+   ============================================================ */
+
+/* --- Page container ------------------------------------------ */
+.page {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.page-inner {
+  padding: 1.5rem 0;
+}
+
+.page .text {
+  line-height: 1.75;
+}
+
+.page .text p {
+  margin-bottom: 1em;
+}
+
+/* --- Emphasis and formatting --------------------------------- */
+.page .text em,
+.page .text i {
+  color: #b8b8d0;
+  font-style: italic;
+}
+
+.page .text strong,
+.page .text b {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --- Decision links (player choices) ------------------------- */
+.page .text a[data-passage],
+.decisions a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin: 0.5rem 0;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 6px;
+  color: #ffd700;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.page .text a[data-passage]:hover,
+.decisions a:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: #ffd700;
+  color: #fff;
+  transform: translateX(4px);
+}
+
+/* --- Decision container -------------------------------------- */
+.decisions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* --- Main menu page ------------------------------------------ */
+.page-main-menu {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.page-main-menu h1 {
+  font-family: var(--font-heading, Georgia, serif);
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+}
+
+.page-main-menu h3 {
+  color: #888;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.page-main-menu .decisions a {
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* --- Dialogue styling ---------------------------------------- */
+.dialogue {
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--color-accent, #ffd700);
+  margin: 1em 0;
+  font-style: italic;
+}
+
+.dialogue .speaker {
+  font-weight: 600;
+  font-style: normal;
+  color: var(--color-accent, #ffd700);
+}

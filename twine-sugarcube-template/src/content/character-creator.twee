@@ -1,0 +1,112 @@
+:: CC-100 Name [avatar-hidden character-creation]
+<<silently>>
+<<emote-calm>>
+<</silently>>
+<<page>>
+<h2>Create Your Character</h2>
+
+<div>
+  <span class="cc-label">First Name</span>
+  <<textbox "$player.firstName" $player.firstName>>
+</div>
+
+<div>
+  <span class="cc-label">Surname</span>
+  <<textbox "$player.surname" $player.surname>>
+</div>
+
+<<link '<span class="cc-randomize">Randomize Name</span>'>>
+    <<set $player.firstName to setup.firstNames.random()>>
+    <<set $player.surname to setup.surnames.random()>>
+    <<replace "#passages">><<include "CC-100 Name">><</replace>>
+<</link>>
+
+[[Continue to Appearance|CC-200 Appearance]]
+<</page>>
+
+
+:: CC-200 Appearance [avatar-hidden character-creation]
+<<page>>
+<h2>Appearance</h2>
+
+<span class="cc-label">Hair Colour</span>
+<div class="cc-options">
+    <<link "Brown">><<set $player.hairColour to "Brown">><<goto "CC-200 Appearance">><</link>>
+    <<link "Black">><<set $player.hairColour to "Black">><<goto "CC-200 Appearance">><</link>>
+    <<link "Blonde">><<set $player.hairColour to "Blonde">><<goto "CC-200 Appearance">><</link>>
+    <<link "Ginger">><<set $player.hairColour to "Ginger">><<goto "CC-200 Appearance">><</link>>
+    <<link "Auburn">><<set $player.hairColour to "Auburn">><<goto "CC-200 Appearance">><</link>>
+</div>
+<p>Current: $player.hairColour</p>
+
+<span class="cc-label">Hair Style</span>
+<div class="cc-options">
+    <<link "Short bob">><<set $player.hairStyle to "Short bob">><<goto "CC-200 Appearance">><</link>>
+    <<link "Long straight">><<set $player.hairStyle to "Long straight">><<goto "CC-200 Appearance">><</link>>
+    <<link "Long curly">><<set $player.hairStyle to "Long curly">><<goto "CC-200 Appearance">><</link>>
+    <<link "Wavy bob">><<set $player.hairStyle to "Wavy bob">><<goto "CC-200 Appearance">><</link>>
+    <<link "Bun with bangs">><<set $player.hairStyle to "Bun with bangs">><<goto "CC-200 Appearance">><</link>>
+</div>
+<p>Current: $player.hairStyle</p>
+
+<span class="cc-label">Eye Colour</span>
+<div class="cc-options">
+    <<link "Blue">><<set $player.eyeColour to "Blue">><<goto "CC-200 Appearance">><</link>>
+    <<link "Green">><<set $player.eyeColour to "Green">><<goto "CC-200 Appearance">><</link>>
+    <<link "Brown">><<set $player.eyeColour to "Brown">><<goto "CC-200 Appearance">><</link>>
+    <<link "Grey">><<set $player.eyeColour to "Grey">><<goto "CC-200 Appearance">><</link>>
+    <<link "Hazel">><<set $player.eyeColour to "Hazel">><<goto "CC-200 Appearance">><</link>>
+</div>
+<p>Current: $player.eyeColour</p>
+
+<<link '<span class="cc-randomize">Randomize All</span>'>>
+    <<set $player.hairColour to either("Brown","Black","Blonde","Ginger","Auburn")>>
+    <<set $player.hairStyle to either("Short bob","Long straight","Long curly","Wavy bob","Bun with bangs")>>
+    <<set $player.eyeColour to either("Blue","Green","Brown","Grey","Hazel")>>
+    <<set $player.faceShape to either("round","heart","square","diamond","oval")>>
+    <<goto "CC-200 Appearance">>
+<</link>>
+
+[[Back|CC-100 Name]] | [[Continue to Faction|CC-300 Faction]]
+<</page>>
+
+
+:: CC-300 Faction [avatar-hidden character-creation]
+<<page>>
+<h2>Choose Your Faction</h2>
+
+<p>Your faction determines your background and starting connections.</p>
+
+<div class="cc-options">
+    <<link "The Agency">><<set $player.faction to "agency">><<set $player.nationality to "american">><<goto "CC-300 Faction">><</link>>
+    <<link "The Bureau">><<set $player.faction to "bureau">><<set $player.nationality to "british">><<goto "CC-300 Faction">><</link>>
+    <<link "The Institute">><<set $player.faction to "institute">><<set $player.nationality to "australian">><<goto "CC-300 Faction">><</link>>
+    <<link "The Network">><<set $player.faction to "network">><<set $player.nationality to "canadian">><<goto "CC-300 Faction">><</link>>
+</div>
+<p>Current: <<playerFaction>> ($player.nationality)</p>
+
+[[Back|CC-200 Appearance]] | [[Continue to Summary|CC-400 Summary]]
+<</page>>
+
+
+:: CC-400 Summary [avatar-hidden character-creation]
+<<silently>>
+<<set $player.codename to setup.codenames.random()>>
+<</silently>>
+<<page>>
+<h2>Character Summary</h2>
+
+<table class="cc-summary">
+    <tr><td>Name</td><td>$player.firstName $player.surname</td></tr>
+    <tr><td>Codename</td><td>$player.codename</td></tr>
+    <tr><td>Age</td><td>$player.age</td></tr>
+    <tr><td>Faction</td><td><<playerFaction>></td></tr>
+    <tr><td>Nationality</td><td><<playerNationality>></td></tr>
+    <tr><td>Hair</td><td>$player.hairColour, $player.hairStyle</td></tr>
+    <tr><td>Eyes</td><td>$player.eyeColour</td></tr>
+    <tr><td>Face</td><td>$player.faceShape</td></tr>
+</table>
+
+[[Back|CC-300 Faction]]
+[[Begin the Story|DEMO-100 Arrival]]
+<</page>>

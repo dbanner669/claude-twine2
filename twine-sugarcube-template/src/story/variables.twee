@@ -1,0 +1,123 @@
+:: variables
+<<silently>>
+
+/* ============================================================
+   AVATAR STATE — 6-layer compositing system
+   Layers render bottom-to-top: background → body → bodyMods →
+   underwear → clothing → foreground
+   ============================================================ */
+<<set $avatar = {
+    background: [],
+    body: [],
+    bodyMods: [],
+    underwear: [],
+    clothing: [],
+    foreground: [],
+    blink: false,
+    barefoot: false,
+    cleavage: false,
+    showRear: false,
+    rearViewEnabled: false
+}>>
+<<set $avatar.top to 0>>
+
+/* ============================================================
+   UI SETTINGS
+   ============================================================ */
+<<set $ui = {
+    avatarSize: 1,
+    textSize: 1
+}>>
+
+/* Header state — populated per-passage by <<header>> widget */
+<<set $header to {}>>
+
+/* Temporary per-passage state — reset on each passage transition */
+<<set $temp to {}>>
+
+/* ============================================================
+   PLAYER CHARACTER
+   ============================================================ */
+<<set $player = {
+    age: 25,
+    firstName: "Alex",
+    surname: "Morgan",
+    faction: "agency",
+    complexion: "fair",
+    nationality: "american",
+    kinks: [],
+    quirks: [],
+    attributes: {},
+    statusEffects: [],
+    personalBio: [],
+    achievements: [],
+    skills: {},
+    isWearing: [],
+    piercings: [],
+    tattoos: [],
+    hairColour: "Brown",
+    hairStyle: "Short bob",
+    eyeColour: "Blue",
+    eyeShape: "Almond",
+    faceShape: "oval",
+    noseShape: "Celestial",
+    mouthShape: "Cupid",
+    arousal: 0
+}>>
+
+/* Cover identity */
+<<set $player.cover = {
+    firstname: "",
+    knownAs: "",
+    surname: ""
+}>>
+<<set $player.codename to "">>
+
+/* Skill initialization */
+<<set _skillNames to ["academic","agent","athlete","brawler","charmer","driver","musician","cook"]>>
+<<for _i to 0; _i lt _skillNames.length; _i++>>
+    <<set $player.skills[_skillNames[_i]] to {level: -4, xp: 0, specialities: []}>>
+<</for>>
+
+/* ============================================================
+   IMAGE PATHS — change for offline/online builds
+   ============================================================ */
+<<set $imagePath = {
+    base: "media/",
+    avatar: "media/avatar/",
+    ui: "media/ui/"
+}>>
+
+/* ============================================================
+   NOTIFICATION SYSTEM
+   ============================================================ */
+<<set $notifications = {
+    list: []
+}>>
+
+/* ============================================================
+   STATISTICS TRACKING
+   ============================================================ */
+<<set $statistics = new Map()>>
+
+/* ============================================================
+   SETUP NAMESPACE — for static data (name lists, constants)
+   Populated by StoryInit before this include, or by scripts
+   ============================================================ */
+<<set setup.factions to ["agency", "bureau", "institute", "network", "syndicate"]>>
+
+<<set setup.firstNames to ["Alex", "Blake", "Casey", "Drew", "Ellis",
+    "Finley", "Gray", "Harper", "Jordan", "Kelly",
+    "Logan", "Morgan", "Parker", "Quinn", "Riley",
+    "Sage", "Taylor", "Val", "Winter", "Zephyr"]>>
+
+<<set setup.surnames to ["Anderson", "Blake", "Chen", "Duval", "Edwards",
+    "Fletcher", "Grant", "Hayes", "Ivanov", "Jensen",
+    "Kessler", "Lawson", "Monroe", "Nash", "Ortiz",
+    "Palmer", "Quinn", "Reeves", "Stone", "Voss"]>>
+
+<<set setup.codenames to ["Falcon", "Ghost", "Hawk", "Jackal", "Lynx",
+    "Mantis", "Osprey", "Phantom", "Raven", "Viper",
+    "Wolf", "Cobra", "Eagle", "Fox", "Panther"]>>
+
+<</silently>>

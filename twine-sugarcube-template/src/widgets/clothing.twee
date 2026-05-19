@@ -1,0 +1,112 @@
+:: Clothing Widgets [widget]
+/* ============================================================
+   CLOTHING WIDGET PATTERN
+   Each clothing item follows the wear/remove pattern:
+   - <<wear-itemName>>  : removes conflicts, adds image to layer
+   - <<remove-itemName>>: removes image from layer
+
+   The $player.isWearing array tracks clothing SLOTS (not items).
+   The $player.lastWorn{Slot} tracks the current item name so
+   the generic <<remove{Slot}>> widget can call the right remove.
+
+   To add a new clothing item:
+   1. Create <<wear-yourItem>> and <<remove-yourItem>> widgets
+   2. In the wear widget, call <<remove{Slot}>> first
+   3. Push the image path to the correct $avatar layer
+   4. Update $player.isWearing and $player.lastWorn{Slot}
+   ============================================================ */
+
+/* --- GENERIC SLOT REMOVERS ----------------------------------- */
+
+<<widget "removeTop">><<nobr>>
+<<if $player.isWearing.includes("top")>>
+    <<= '<<remove-' + $player.lastWornTop + '>>'>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "removeBottom">><<nobr>>
+<<if $player.isWearing.includes("bottom")>>
+    <<= '<<remove-' + $player.lastWornBottom + '>>'>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "removeShoes">><<nobr>>
+<<if $player.isWearing.includes("shoes")>>
+    <<= '<<remove-' + $player.lastWornShoes + '>>'>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "removeDress">><<nobr>>
+<<if $player.isWearing.includes("dress")>>
+    <<= '<<remove-' + $player.lastWornDress + '>>'>>
+<</if>>
+<</nobr>><</widget>>
+
+/* --- EXAMPLE: BLACK T-SHIRT (top slot) ----------------------- */
+
+<<widget "wear-blackTshirt">><<nobr>>
+<<set _path to "clothing/tops/">>
+<<removeTop>>
+<<removeDress>>
+<<set $avatar.clothing.pushUnique(_path + "blackTshirt.png")>>
+<<set $player.isWearing.pushUnique("top")>>
+<<set $player.lastWornTop to "blackTshirt">>
+<</nobr>><</widget>>
+
+<<widget "remove-blackTshirt">><<nobr>>
+<<set _path to "clothing/tops/">>
+<<set $avatar.clothing.delete(_path + "blackTshirt.png")>>
+<<set $player.isWearing.delete("top")>>
+<</nobr>><</widget>>
+
+/* --- EXAMPLE: WHITE BLOUSE (top slot) ------------------------ */
+
+<<widget "wear-whiteBlouse">><<nobr>>
+<<set _path to "clothing/tops/">>
+<<removeTop>>
+<<removeDress>>
+<<set $avatar.clothing.pushUnique(_path + "whiteBlouse.png")>>
+<<set $player.isWearing.pushUnique("top")>>
+<<set $player.lastWornTop to "whiteBlouse">>
+<</nobr>><</widget>>
+
+<<widget "remove-whiteBlouse">><<nobr>>
+<<set _path to "clothing/tops/">>
+<<set $avatar.clothing.delete(_path + "whiteBlouse.png")>>
+<<set $player.isWearing.delete("top")>>
+<</nobr>><</widget>>
+
+/* --- EXAMPLE: DARK JEANS (bottom slot) ----------------------- */
+
+<<widget "wear-darkJeans">><<nobr>>
+<<set _path to "clothing/bottoms/">>
+<<removeBottom>>
+<<removeDress>>
+<<set $avatar.clothing.pushUnique(_path + "darkJeans.png")>>
+<<set $player.isWearing.pushUnique("bottom")>>
+<<set $player.lastWornBottom to "darkJeans">>
+<</nobr>><</widget>>
+
+<<widget "remove-darkJeans">><<nobr>>
+<<set _path to "clothing/bottoms/">>
+<<set $avatar.clothing.delete(_path + "darkJeans.png")>>
+<<set $player.isWearing.delete("bottom")>>
+<</nobr>><</widget>>
+
+/* --- EXAMPLE: SNEAKERS (shoes slot) -------------------------- */
+
+<<widget "wear-sneakers">><<nobr>>
+<<set _path to "clothing/shoes/">>
+<<removeShoes>>
+<<set $avatar.clothing.pushUnique(_path + "sneakers.png")>>
+<<set $player.isWearing.pushUnique("shoes")>>
+<<set $player.lastWornShoes to "sneakers">>
+<<set $avatar.barefoot to false>>
+<</nobr>><</widget>>
+
+<<widget "remove-sneakers">><<nobr>>
+<<set _path to "clothing/shoes/">>
+<<set $avatar.clothing.delete(_path + "sneakers.png")>>
+<<set $player.isWearing.delete("shoes")>>
+<<set $avatar.barefoot to true>>
+<</nobr>><</widget>>

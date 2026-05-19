@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "template-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');const f=path.join('C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template','output.html');http.createServer((q,r)=>{r.writeHead(200,{'Content-Type':'text/html'});r.end(fs.readFileSync(f))}).listen(3456,()=>console.log('Serving on 3456'))"],
+      "port": 3456
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(codex --version 2>&1)",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\Oculus\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-Oculus-My-Drive-Female-Agent\\\\13faf141-55c8-4b67-9cd0-2c96f2bcaffe\\\\tasks\\\\b0ybimu2s.output\" -Tail 80\\) -join \"`n\")",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); Set-Location \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-mcp-server\"; Remove-Item dist -Recurse -Force -Confirm:$false 2>$null; npm install 2>&1)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); $indexPath = \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-mcp-server\\\\dist\\\\index.js\"; $proc = Start-Process -FilePath \"node\" -ArgumentList \"`\"$indexPath`\"\" -NoNewWindow -PassThru -RedirectStandardError \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-mcp-server\\\\test-stderr.txt\"; Start-Sleep -Seconds 3; Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue; Get-Content \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-mcp-server\\\\test-stderr.txt\")",
+      "mcp__twine__import_story",
+      "mcp__twine__story_statistics",
+      "mcp__twine__sc_extract_widgets",
+      "mcp__twine__sc_extract_variables",
+      "mcp__twine__sc_extract_macros",
+      "mcp__twine__sc_trace_path",
+      "mcp__twine__find_by_prefix",
+      "mcp__twine__read_passage",
+      "mcp__twine__sc_find_links_typed",
+      "mcp__twine__get_passages_batch",
+      "mcp__twine__sc_extract_setup_vars",
+      "mcp__twine__search_passages",
+      "mcp__twine__get_story",
+      "WebFetch(domain:www.motoslave.net)",
+      "PowerShell($env:TWEEGO_PATH = \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\storyformats\"; & \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\tweego.exe\" -o \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template\\\\output.html\" \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template\\\\src\\\\\" 2>&1)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+:: Parser Widgets [widget]
+/* ============================================================
+   PARSER WIDGETS
+   These output dynamic text based on game state. Use them inline
+   in passage text to adapt prose to the player's circumstances.
+   Example: "You work for <<playerFaction>>."
+   ============================================================ */
+
+<<widget "playerName">><<nobr>>
+<<if $player.cover and $player.cover.knownAs neq "">>
+    <<print $player.cover.knownAs>>
+<<else>>
+    <<print $player.firstName>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "playerFullName">><<nobr>>
+<<if $player.cover and $player.cover.surname neq "">>
+    <<playerName>> <<print $player.cover.surname>>
+<<else>>
+    <<print $player.firstName>> <<print $player.surname>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "playerFaction">><<nobr>>
+<<switch $player.faction>>
+<<case "agency">>the Agency
+<<case "bureau">>the Bureau
+<<case "institute">>the Institute
+<<case "network">>the Network
+<<case "syndicate">>the Syndicate
+<<default>>an unknown organization
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "playerNationality">><<nobr>>
+<<switch $player.nationality>>
+<<case "american">>American
+<<case "british">>British
+<<case "australian">>Australian
+<<case "canadian">>Canadian
+<<default>><<print $player.nationality>>
+<</switch>>
+<</nobr>><</widget>>
+
+<<widget "playerPronouns">><<nobr>>
+/* Extend this for pronoun support if needed */
+she/her
+<</nobr>><</widget>>

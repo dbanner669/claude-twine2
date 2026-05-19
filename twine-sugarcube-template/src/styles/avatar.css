@@ -1,0 +1,78 @@
+/* ============================================================
+   AVATAR — Layered compositing display
+   The avatar container holds stacked absolutely-positioned
+   images. Size classes control the container width.
+   ============================================================ */
+
+/* --- Container ----------------------------------------------- */
+#avatar {
+  width: var(--avatar-width, 320px);
+  min-width: var(--avatar-width, 320px);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+}
+
+.avatar-inner {
+  position: relative;
+  width: 100%;
+  /* 4:3 aspect ratio for portrait avatars — adjust as needed */
+  padding-bottom: 150%;
+}
+
+.avatar-abs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Layer stacking ------------------------------------------ */
+.avatar-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* --- Size classes (set via Settings > Avatar Size) ------------ */
+.avatar-size-xxs #avatar { --avatar-width: 160px; }
+.avatar-size-xs  #avatar { --avatar-width: 220px; }
+.avatar-size-s   #avatar { --avatar-width: 280px; }
+.avatar-size-m   #avatar { --avatar-width: 320px; }
+.avatar-size-l   #avatar { --avatar-width: 400px; }
+.avatar-size-xl  #avatar { --avatar-width: 480px; }
+.avatar-size-xxl #avatar { --avatar-width: 560px; }
+
+/* --- Hidden state -------------------------------------------- */
+.avatar-hidden #avatar {
+  display: none;
+}
+
+/* Also hide for passages tagged avatar-hidden */
+[data-tags~="avatar-hidden"] ~ #game-inner #avatar,
+.avatar-hidden #avatar {
+  display: none;
+}
+
+/* --- Responsive ---------------------------------------------- */
+@media (max-width: 768px) {
+  #avatar {
+    width: 100%;
+    min-width: unset;
+    max-height: 50vh;
+  }
+
+  .avatar-inner {
+    padding-bottom: 100%;
+  }
+}

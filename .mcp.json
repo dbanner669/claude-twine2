@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "twine": {
+      "command": "node",
+      "args": ["C:\\Users\\Oculus\\My Drive\\Female Agent\\twine-mcp-server\\dist\\index.js"],
+      "env": {
+        "TWINE_SAVE_DIR": "C:\\Users\\Oculus\\My Drive\\Female Agent\\twine-mcp-server\\stories"
+      }
+    }
+  }
+}

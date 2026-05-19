@@ -1,0 +1,62 @@
+/* ============================================================
+   RESET — Hide SugarCube's default UI and establish base styles
+   ============================================================ */
+
+/* Hide SugarCube's built-in sidebar — we use a custom header */
+#ui-bar,
+#ui-bar-toggle {
+  display: none;
+}
+
+/* Base reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  color: #ffd700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #fff;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remove default button styles */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+/* SugarCube passage container — remove defaults */
+#story {
+  margin: 0;
+  padding: 0;
+}

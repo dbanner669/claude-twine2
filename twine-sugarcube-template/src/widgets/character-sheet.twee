@@ -1,0 +1,81 @@
+:: Character Sheet Widget [widget]
+/* ============================================================
+   CHARACTER SHEET — displayed in a SugarCube Dialog
+   Triggered by clicking "Character" in the header menu.
+   See src/scripts/index.js for the click handler.
+   ============================================================ */
+
+<<widget "charSheet">><<nobr>>
+<div id="character-profile">
+
+  <div class="profile-header">
+    <h2>$player.firstName $player.surname</h2>
+    <<if $player.codename neq "">>
+      <span class="codename">Codename: $player.codename</span>
+    <</if>>
+  </div>
+
+  <div class="profile-section">
+    <h3>Details</h3>
+    <table class="profile-table">
+      <tr><td>Age</td><td>$player.age</td></tr>
+      <tr><td>Nationality</td><td>$player.nationality</td></tr>
+      <tr><td>Faction</td><td>$player.faction</td></tr>
+      <tr><td>Hair</td><td>$player.hairColour $player.hairStyle</td></tr>
+      <tr><td>Eyes</td><td>$player.eyeColour $player.eyeShape</td></tr>
+      <tr><td>Face</td><td>$player.faceShape</td></tr>
+    </table>
+  </div>
+
+  <div class="profile-section">
+    <h3>Skills</h3>
+    <<for _skillName, _skill range $player.skills>>
+      <div class="skill-row">
+        <span class="skill-name">_skillName</span>
+        <span class="skill-level">Level: <<print _skill.level>></span>
+        <span class="skill-xp">XP: <<print _skill.xp>></span>
+      </div>
+    <</for>>
+  </div>
+
+  <<if $player.statusEffects.length gt 0>>
+  <div class="profile-section">
+    <h3>Status Effects</h3>
+    <<for _effect range $player.statusEffects>>
+      <span class="status-badge">_effect</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.quirks.length gt 0>>
+  <div class="profile-section">
+    <h3>Traits</h3>
+    <<for _quirk range $player.quirks>>
+      <span class="trait-badge">_quirk</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.achievements.length gt 0>>
+  <div class="profile-section">
+    <h3>Achievements</h3>
+    <<for _ach range $player.achievements>>
+      <span class="achievement-badge">_ach</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.personalBio.length gt 0>>
+  <div class="profile-section">
+    <h3>Journal</h3>
+    <<for _entry range $player.personalBio>>
+      <div class="bio-entry">
+        <span class="bio-timestamp"><<print _entry.timestamp>></span>
+        <span class="bio-text"><<print _entry.entry>></span>
+      </div>
+    <</for>>
+  </div>
+  <</if>>
+
+</div>
+<</nobr>><</widget>>

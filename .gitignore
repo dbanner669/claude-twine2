@@ -1,0 +1,31 @@
+node_modules/
+.npm-cache/
+dist/
+*.exe
+
+# Media assets (too large for git)
+Female_Agent_1.20.1P_offlin/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+*.tsbuildinfo
+
+# Local tools (Tweego binary, etc.)
+_tools/
+
+# Extracted reference files
+_extracted/
+
+# Template build output
+twine-sugarcube-template/output.html
+
+# MCP server story persistence
+twine-mcp-server/stories/
+twine-mcp-server/test-stderr.txt

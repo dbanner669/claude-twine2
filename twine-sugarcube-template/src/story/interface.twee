@@ -1,0 +1,32 @@
+:: StoryInterface
+<div id="game">
+  <header id="header">
+    <a href="#" data-target="#logo-dropdown" class="dropdown-toggle logo"></a>
+    <div id="logo-dropdown" class="dropdown-content">
+      <a id="restartId" href="#">Restart</a>
+    </div>
+    <div id="ui-bar-history">
+      <button id="history-backward" tabindex="0">&#xFF1C;</button>
+      <button id="history-forward" tabindex="0">&#xFF1E;</button>
+    </div>
+    <div id="menu">
+      <a id="turnAvatar" href="#">Turn avatar</a>
+      <a id="characterId" href="#">Character</a>
+      <a id="savesId" href="#">Saves</a>
+      <a id="settingsId" href="#">Settings</a>
+    </div>
+  </header>
+  <div id="game-inner">
+    <div id="avatar" class="avatar">
+      <div class="avatar-inner">
+        <div class="avatar-abs">
+          <div id="avatar-container" data-passage="StoryCaption" class="avatar-image">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="passages" class="game-main"></div>
+  </div>
+  <footer id="footer">
+  </footer>
+</div>
