@@ -116,7 +116,7 @@ You order a flat white and take it to go. The warmth in your hands is grounding.
 <<set $player.statusEffects.pushUnique("Caffeinated")>>
 <<addNotification "Status effect: Caffeinated">>
 
-//Better get to work./
+//Better get to work.//
 
 [[Head to the building|DEMO-200 Lobby]]
 <</page>>
