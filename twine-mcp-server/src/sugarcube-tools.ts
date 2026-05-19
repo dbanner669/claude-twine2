@@ -18,6 +18,7 @@ type TypedLinkType =
   | "wiki-arrow"
   | "wiki-reverse-arrow"
   | "goto"
+  | "goto-variable"
   | "include"
   | "button"
   | "link"
@@ -107,11 +108,20 @@ function pushIndexedMatch(
   matches.push({ ...link, index });
 }
 
+/**
+ * Strip SugarCube setter syntax from a wiki link target.
+ * E.g. "Target][$var to true" → "Target"
+ */
+function stripSetter(target: string): string {
+  const bracket = target.indexOf("][");
+  return bracket !== -1 ? target.slice(0, bracket).trim() : target.trim();
+}
+
 function extractTypedLinks(text: string): TypedLink[] {
   const matches: IndexedTypedLink[] = [];
   let match: RegExpExecArray | null;
 
-  const wikiRe = /\[\[([^\]]+)\]\]/g;
+  const wikiRe = /\[\[(.*?)\]\]/g;
   while ((match = wikiRe.exec(text)) !== null) {
     const inner = match[1].trim();
     const pipe = inner.indexOf("|");
@@ -122,36 +132,47 @@ function extractTypedLinks(text: string): TypedLink[] {
       pushIndexedMatch(matches, match.index, {
         type: "wiki",
         display: inner.slice(0, pipe).trim(),
-        target: inner.slice(pipe + 1).trim(),
+        target: stripSetter(inner.slice(pipe + 1)),
         raw: match[0],
       });
     } else if (arrow !== -1) {
       pushIndexedMatch(matches, match.index, {
         type: "wiki-arrow",
         display: inner.slice(0, arrow).trim(),
-        target: inner.slice(arrow + 2).trim(),
+        target: stripSetter(inner.slice(arrow + 2)),
         raw: match[0],
       });
     } else if (reverseArrow !== -1) {
       pushIndexedMatch(matches, match.index, {
         type: "wiki-reverse-arrow",
         display: inner.slice(reverseArrow + 2).trim(),
-        target: inner.slice(0, reverseArrow).trim(),
+        target: stripSetter(inner.slice(0, reverseArrow)),
         raw: match[0],
       });
     } else {
       pushIndexedMatch(matches, match.index, {
         type: "wiki",
-        target: inner,
+        target: stripSetter(inner),
         raw: match[0],
       });
     }
   }
 
+  /* <<goto "literal">> — string-targeted goto */
   const gotoRe = /<<goto\s+["']([^"']+)["'][^>]*>>/g;
   while ((match = gotoRe.exec(text)) !== null) {
     pushIndexedMatch(matches, match.index, {
       type: "goto",
+      target: match[1],
+      raw: match[0],
+    });
+  }
+
+  /* <<goto $variable>> or <<goto _variable>> — dynamic goto */
+  const gotoVarRe = /<<goto\s+([$_][A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*>>/g;
+  while ((match = gotoVarRe.exec(text)) !== null) {
+    pushIndexedMatch(matches, match.index, {
+      type: "goto-variable",
       target: match[1],
       raw: match[0],
     });

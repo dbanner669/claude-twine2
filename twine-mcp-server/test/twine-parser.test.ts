@@ -44,6 +44,16 @@ describe('extractLinks', () => {
     const text = '[[Simple]] then [[Show->Place]] then [[Alt|Dest]]';
     expect(extractLinks(text)).toEqual(['Simple', 'Place', 'Dest']);
   });
+
+  it('strips SugarCube setter syntax from link targets', () => {
+    expect(extractLinks('[[Go|Target][$var to true]]')).toEqual(['Target']);
+    expect(extractLinks('[[Go->Target][$x to 1]]')).toEqual(['Target']);
+    expect(extractLinks('[[Target][$y to "hello"]]')).toEqual(['Target']);
+  });
+
+  it('handles setter syntax with multiple setters', () => {
+    expect(extractLinks('[[Go|Room][$a to 1][$b to 2]]')).toEqual(['Room']);
+  });
 });
 
 // ---------------------------------------------------------------------------

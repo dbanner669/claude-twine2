@@ -9,6 +9,16 @@ interface ParsedHeader {
   index: number;
 }
 
+/**
+ * Strip SugarCube setter syntax from a link target.
+ * E.g. "Target][$var to true" → "Target"
+ *       "Target][someExpr" → "Target"
+ */
+function stripSetter(target: string): string {
+  const bracket = target.indexOf("][");
+  return bracket !== -1 ? target.slice(0, bracket).trim() : target.trim();
+}
+
 export function extractLinks(text: string): string[] {
   const links: string[] = [];
   const re = /\[\[(.*?)\]\]/g;
@@ -20,11 +30,11 @@ export function extractLinks(text: string): string[] {
     const pipe = inner.indexOf("|");
 
     if (arrow !== -1) {
-      links.push(inner.slice(arrow + 2).trim());
+      links.push(stripSetter(inner.slice(arrow + 2)));
     } else if (pipe !== -1) {
-      links.push(inner.slice(pipe + 1).trim());
+      links.push(stripSetter(inner.slice(pipe + 1)));
     } else {
-      links.push(inner.trim());
+      links.push(stripSetter(inner));
     }
   }
 
