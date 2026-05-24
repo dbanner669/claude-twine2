@@ -1,0 +1,12 @@
+{
+  "name": "Sizzle Story Sync",
+  "id": "sizzle-story-sync",
+  "api": "1.0.0",
+  "main": "build/code.js",
+  "ui": "src/ui.html",
+  "editorType": ["figjam"],
+  "networkAccess": {
+    "allowedDomains": ["http://127.0.0.1:4747"],
+    "reasoning": "Loads the Sizzle story graph from the local figjam-sync server and posts board exports back to it."
+  }
+}

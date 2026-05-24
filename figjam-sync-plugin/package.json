@@ -1,0 +1,14 @@
+{
+  "name": "figjam-sync-plugin",
+  "version": "0.1.0",
+  "description": "FigJam plugin that loads the Sizzle story graph from the local figjam-sync server and exports board state back for AI interpretation.",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "1.100.2",
+    "typescript": "5.7.3"
+  }
+}
