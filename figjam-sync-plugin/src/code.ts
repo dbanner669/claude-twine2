@@ -16,6 +16,7 @@ interface StoryGraphPassage {
   act: string;
   tags: string[];
   summary: string;
+  displayBody: string;
   body: string;
   sourceFile: string;
   wordCount: number;
@@ -62,13 +63,13 @@ const BODY_COLOR: RGB = { r: 0.98, g: 0.97, b: 0.93 };
 
 const LAYOUT = {
   stickyWidth: 240,
-  titleHeight: 140,
-  bodyHeight: 220,
-  pairGap: 24,
-  rowGap: 60,
-  columnGap: 80,
+  titleHeight: 160,
+  bodyHeight: 320,
+  pairGap: 16,
+  rowGap: 80,
+  columnGap: 100,
   sectionPadding: 60,
-  sectionGap: 240,
+  sectionGap: 280,
   columnsPerSection: 3,
 };
 
@@ -143,18 +144,9 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
       const bodyY = titleY + LAYOUT.titleHeight + LAYOUT.pairGap;
 
       const titleSticky = await createPassageSticky(passage, "title", x, titleY);
-      const bodySticky = await createPassageSticky(passage, "body", x, bodyY);
+      await createPassageSticky(passage, "body", x, bodyY);
 
       titleByPassage.set(passage.name, titleSticky);
-
-      const pairConnector = figma.createConnector();
-      pairConnector.connectorStart = { endpointNodeId: titleSticky.id, magnet: "BOTTOM" };
-      pairConnector.connectorEnd = { endpointNodeId: bodySticky.id, magnet: "TOP" };
-      pairConnector.connectorLineType = "STRAIGHT";
-      pairConnector.strokeWeight = 1;
-      pairConnector.setPluginData("kind", "pair-link");
-      pairConnector.setPluginData("passageName", passage.name);
-      pairConnector.setPluginData("namespace", PLUGIN_NAMESPACE);
     }
 
     sectionCursorX += sectionWidth + LAYOUT.sectionGap;
@@ -205,7 +197,7 @@ async function createPassageSticky(
   } else {
     sticky.isWideWidth = true;
     sticky.fills = [{ type: "SOLID", color: BODY_COLOR }];
-    sticky.text.characters = passage.body;
+    sticky.text.characters = passage.displayBody || passage.summary;
   }
 
   sticky.setPluginData("kind", kind);
@@ -215,6 +207,10 @@ async function createPassageSticky(
   sticky.setPluginData("sourceFile", passage.sourceFile);
   sticky.setPluginData("tags", JSON.stringify(passage.tags));
   sticky.setPluginData("namespace", PLUGIN_NAMESPACE);
+  /* Source of truth for round-trip: raw Twee body stored only on body stickies. */
+  if (kind === "body") {
+    sticky.setPluginData("rawBody", passage.body);
+  }
 
   return sticky;
 }

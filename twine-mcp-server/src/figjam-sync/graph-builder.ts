@@ -11,6 +11,7 @@ export interface StoryGraphPassage {
   act: string;
   tags: string[];
   summary: string;
+  displayBody: string;
   body: string;
   sourceFile: string;
   wordCount: number;
@@ -105,6 +106,19 @@ function summaryOf(body: string): string {
   return cleaned.slice(0, 157).trimEnd() + "…";
 }
 
+const DISPLAY_BODY_LIMIT = 600;
+
+function displayBodyOf(body: string): string {
+  /* Preserve paragraph breaks so the body sticky reads as prose, but strip
+     SugarCube structure and cap length so all bodies are roughly uniform. */
+  const cleaned = stripSugarCubeStructure(body)
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/^\s+|\s+$/g, "");
+  if (cleaned.length <= DISPLAY_BODY_LIMIT) return cleaned;
+  return cleaned.slice(0, DISPLAY_BODY_LIMIT - 1).replace(/\s+\S*$/, "") + "…";
+}
+
 function wordCountOf(body: string): number {
   return stripSugarCubeStructure(body).split(/\s+/).filter(Boolean).length;
 }
@@ -139,6 +153,7 @@ export async function buildGraphFromDirectory(contentDir: string, storyName: str
         act,
         tags: passage.tags ?? [],
         summary: summaryOf(passage.text),
+        displayBody: displayBodyOf(passage.text),
         body: passage.text,
         sourceFile: path.relative(path.resolve(contentDir, "..", "..", ".."), absPath).replace(/\\/g, "/"),
         wordCount: wordCountOf(passage.text),
