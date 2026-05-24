@@ -35,3 +35,6 @@ twine-mcp-server/test-stderr.txt
 .codex/
 .playwright-mcp/
 sizzle-daytime-header-check.png
+
+# FigJam sync board dumps (regenerated on demand)
+sizzle/.figjam/

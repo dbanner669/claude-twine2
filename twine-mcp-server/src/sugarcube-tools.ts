@@ -117,7 +117,7 @@ function stripSetter(target: string): string {
   return bracket !== -1 ? target.slice(0, bracket).trim() : target.trim();
 }
 
-function extractTypedLinks(text: string): TypedLink[] {
+export function extractTypedLinks(text: string): TypedLink[] {
   const matches: IndexedTypedLink[] = [];
   let match: RegExpExecArray | null;
 
