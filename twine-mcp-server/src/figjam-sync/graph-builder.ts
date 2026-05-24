@@ -78,25 +78,56 @@ function actOf(prefix: string): string {
   return PREFIX_TO_ACT[prefix] ?? "Unsorted";
 }
 
+function unescapeQuoted(text: string, quote: '"' | "'"): string {
+  return text.split(`\\${quote}`).join(quote);
+}
+
 function stripSugarCubeStructure(body: string): string {
   let text = body;
   /* Drop <<silently>>...<</silently>> setup blocks. */
   text = text.replace(/<<silently>>[\s\S]*?<<\/silently>>/g, "");
+  /* Extract the display text from <<link 'display' ...>>...<</link>> and
+     <<button 'display' ...>>...<</button>> blocks. The block body is the
+     click handler (<<set>>/<<goto>> logic, not story prose); the display
+     argument is the choice label, which we want to keep. The wrapping
+     quote can be ' or ", and may contain the opposite quote freely or its
+     own quote escaped with a backslash (e.g. `Master\'s`). Captured HTML
+     spans get cleaned up by the later HTML-strip pass. Captured escape
+     sequences are unescaped after the replace. */
+  text = text.replace(
+    /<<link\s+'((?:\\'|[^'])*)'[\s\S]*?<<\/link>>/g,
+    (_full, display) => `\n• ${unescapeQuoted(display, "'")}\n`,
+  );
+  text = text.replace(
+    /<<link\s+"((?:\\"|[^"])*)"[\s\S]*?<<\/link>>/g,
+    (_full, display) => `\n• ${unescapeQuoted(display, '"')}\n`,
+  );
+  text = text.replace(
+    /<<button\s+'((?:\\'|[^'])*)'[\s\S]*?<<\/button>>/g,
+    (_full, display) => `\n• ${unescapeQuoted(display, "'")}\n`,
+  );
+  text = text.replace(
+    /<<button\s+"((?:\\"|[^"])*)"[\s\S]*?<<\/button>>/g,
+    (_full, display) => `\n• ${unescapeQuoted(display, '"')}\n`,
+  );
   /* Drop /* ... *\/ SugarCube comments. */
   text = text.replace(/\/\*[\s\S]*?\*\//g, "");
   /* For <<if>>...<<elseif>>...<<else>>...<</if>>, keep only the first branch's body. */
   text = text.replace(
-    /<<if\s[^>]*>>([\s\S]*?)(?:<<elseif[\s\S]*?<<\/if>>|<<else>>[\s\S]*?<<\/if>>|<<\/if>>)/g,
+    /<<if\s[\s\S]*?>>([\s\S]*?)(?:<<elseif[\s\S]*?<<\/if>>|<<else>>[\s\S]*?<<\/if>>|<<\/if>>)/g,
     "$1",
   );
   /* Drop trailing-backslash line continuations. */
   text = text.replace(/\\$/gm, "");
   /* Drop any remaining macros. */
-  text = text.replace(/<<[^>]*>>/g, "");
+  text = text.replace(/<<[\s\S]*?>>/g, "");
   /* Convert [[display|target]] -> display, [[target]] -> empty. */
   text = text.replace(/\[\[([^\]|\->]+)\|[^\]]+\]\]/g, "$1");
   text = text.replace(/\[\[[^\]]+->[^\]]+\]\]/g, "");
   text = text.replace(/\[\[[^\]]+\]\]/g, "");
+  /* Separate adjacent HTML tags with a space so that <span>A</span><span>B</span>
+     reads as "A B" after tag removal, not "AB". */
+  text = text.replace(/></g, "> <");
   /* Drop raw HTML tags. */
   text = text.replace(/<[^>]+>/g, "");
   return text;
@@ -116,7 +147,13 @@ function displayBodyOf(body: string): string {
      and cap length so all bodies are roughly uniform. */
   const cleaned = he
     .decode(stripSugarCubeStructure(body))
+    /* Collapse intra-line whitespace runs to single spaces. */
     .replace(/[ \t]+/g, " ")
+    /* Drop trailing whitespace on every line so blank-with-spaces lines
+       become true blank lines (matters where macros lived on indented
+       lines and left spacing behind after stripping). */
+    .replace(/[ \t]+$/gm, "")
+    /* Collapse 2+ blank lines down to a single blank line. */
     .replace(/\n{3,}/g, "\n\n")
     .replace(/^\s+|\s+$/g, "");
   if (cleaned.length <= DISPLAY_BODY_LIMIT) return cleaned;

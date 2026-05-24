@@ -65,10 +65,12 @@ const LAYOUT = {
   /* Both title and body use FigJam's "wide" sticky width (~320px). */
   stickyWidth: 320,
   pairGap: 16,
-  layerGap: 80,
-  columnGap: 80,
-  sectionPadding: 60,
-  sectionGap: 320,
+  /* Generous gaps so connector labels (link display text, "Continue", etc.)
+     have room to sit between pairs without overlapping the sticky bodies. */
+  layerGap: 140,
+  columnGap: 180,
+  sectionPadding: 80,
+  sectionGap: 360,
   emptySectionWidth: 440,
   emptySectionHeight: 600,
   maxChainLength: 5,
@@ -174,8 +176,15 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
   }
 
   /* Inter-passage link connectors — drawn after all stickies exist so both
-     endpoints resolve. Cross-section connectors are fine. */
+     endpoints resolve. Cross-section connectors are fine.
+
+     Widget-back edges are skipped entirely: they're tab-strip "Back" links,
+     not story content, and they double up visually with the next-direction
+     edges. Widget-next edges still render so chain order is visible but
+     unlabeled (the "Continue" label is boilerplate). */
   for (const edge of graph.edges) {
+    if (edge.linkType === "widget-back") continue;
+
     const source = titleByPassage.get(edge.from);
     const target = titleByPassage.get(edge.to);
     if (!source || !target) continue;
@@ -191,8 +200,9 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     connector.setPluginData("to", edge.to);
     connector.setPluginData("namespace", PLUGIN_NAMESPACE);
 
-    if (edge.linkText) {
-      connector.text.characters = truncate(edge.linkText, 60);
+    const isWidgetEdge = edge.linkType.indexOf("widget-") === 0;
+    if (!isWidgetEdge && edge.linkText) {
+      connector.text.characters = truncate(edge.linkText, 50);
       connector.textBackground.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
     }
     createdNodes.push(connector);
