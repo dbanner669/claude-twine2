@@ -71,7 +71,7 @@ All avatar images must be the same dimensions (e.g., 512x768), transparent PNG, 
   - **Total: 3 clothing sprites**
 
 ### Background
-- [ ] **Briefing location background** — wherever the meeting with Robert happens. If it's a Branch office: institutional, generic, fluorescent-lit. If it's a diner: specific, warm, Toronto. One background image.
+- [ ] **Briefing location background** — diner on Bank Street, Ottawa (Centretown). Brown vinyl booths, weak light, civil-servant crowd. One background image.
 
 ---
 

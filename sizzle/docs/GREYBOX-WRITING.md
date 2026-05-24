@@ -44,10 +44,10 @@
 
 ## 2. Briefing Scene (Opening of Act 1)
 
-**Status: COMPLETE.** All briefing passages are written in `content/briefing.twee`. 23 passages covering the full briefing at Fran's Restaurant on College Street.
+**Status: COMPLETE.** All briefing passages are written in `content/briefing.twee`. 23 passages covering the full briefing at a diner on Bank Street in Ottawa (Centretown).
 
 ### INTRO-100 through INTRO-115 (Arrival)
-- [x] Setting description — Fran's on College, orange vinyl booths, weak-tea light
+- [x] Setting description — Bank Street diner in Ottawa, brown vinyl booths, weak-tea light, civil servants
 - [x] Background-specific internal monologue while waiting (4 variants)
 - [x] Robert Flett's introduction — physical details, mannerisms, the hands detail
 
@@ -83,7 +83,7 @@
 
 ### INTRO-700 through INTRO-800 (Departure + End)
 - [x] Robert paying for coffee (character detail)
-- [x] College Street exterior — sensory, period-specific Toronto
+- [x] Bank Street exterior — sensory, period-specific Ottawa (limestone, civil servants, OC Transpo)
 - [x] Three-way conditional ending based on briefing choices (calledOut / readRobert / default)
 - [x] End screen — "End of Prologue / To be continued — Act 1: Insertion"
 

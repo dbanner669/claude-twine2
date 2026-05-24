@@ -100,7 +100,7 @@ Mode is set per-passage by `events.js`:
 
 The in-passage header bar is rendered by the `<<header>>` widget. Set these variables before calling:
 
-- `$header.location` — uppercase location text (e.g., "Fran's Restaurant, College Street")
+- `$header.location` — uppercase location text (e.g., "Diner, Bank Street, Ottawa")
 - `$header.time` — italic time display (e.g., "Monday morning")
 - `$header.status` — status badge text (defaults to "COMPOSED" if not set)
 - `$header.weather` — optional weather text

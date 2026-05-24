@@ -310,7 +310,7 @@ The `$date` object tracks year, month, day, hour, and day of week. Time matters:
 - Assignment briefing: this is the mission, this is what we know, this is what we need.
 
 **Act 1: Insertion**
-- Briefing on Sizzle (surface-level intel). Arrival in downtown Toronto. Setting up shop in the neighbourhood — apartment, getting to know Queen West, establishing the cover life.
+- Arrival in downtown Toronto after the Ottawa briefing. Setting up shop in the neighbourhood — apartment, getting to know Queen West, establishing the cover life.
 - An operation to infiltrate the club's culture and get a job. This likely involves attending a party or event at or adjacent to Sizzle as a civilian/prospective member, making the right impression.
 - The world feels like a grounded spy thriller. No NYSE, no weirdness. Just tradecraft, social navigation, and the texture of 2005 Toronto.
 - Act ends when the player gets the job at Sizzle.
