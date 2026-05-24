@@ -23,6 +23,7 @@
   - Grad Student (Psychology)
   - Unemployed After University
 - [x] **Skill bonus text** — done, displayed per-option with `.cc-skills` class
+- [x] **Background selection guardrail** — done. Player cannot continue without making a selection.
 
 ### CC-400 The Incident
 - [ ] **Inciting incident options** — this is the biggest remaining writing task in character creation. Each option needs:
@@ -39,6 +40,7 @@
 - [x] CLASSIFIED footer text — done ("CLASSIFIED — Branch personnel file. Unauthorized access is an offence under the Security of Information Act.")
 - [x] Signature block with script font — done
 - [x] Transition to briefing — "Sign & Deploy" button links to INTRO-100
+- [x] Derived-state rebuild on revisit — done. Skills and background-derived story tags recalculate cleanly if the player goes back and changes background.
 
 ---
 
@@ -53,6 +55,7 @@
 
 ### INTRO-200 through INTRO-210 (The Assignment)
 - [x] Mission briefing — Sizzle, Queen West, NYSE classification, behavioral changes
+- [x] Hover glossary support for `NYSE` — done via `<<term>>`
 - [x] Three player response branches:
   - "What kind of anomalous?" → NYSE details path
   - "What's my cover?" → Cover/operational path
@@ -95,6 +98,7 @@
 - [ ] **Header navigation labels** — review: "MENU", "Character", "Saves", "Settings" — do these need renaming for tone?
 - [ ] **Character sheet labels** — review section headers
 - [x] **Notification text** — skill check toasts working ("Composure check: passed/failed")
+- [x] **Footer helper text cleanup** — done. Fake autosave/quicksave copy removed.
 - [ ] **Settings labels** — "Avatar Size", "Text Size" — fine as-is or rename?
 
 ---
@@ -125,8 +129,8 @@ Reference the GDD Section 10 (Tone & Content Guidelines) during all writing. Key
 | Briefing scene passages | 23 | 23 | 0 |
 | Dialogue branches | ~15 | ~15 | 0 |
 | Skill check variants | 3 | 3 | 0 |
-| UI text review | ~5 items | 2 | 3 |
-| **Total** | | | **~8 items remaining** |
+| UI text review | ~5 items | 3 | 2 |
+| **Total** | | | **~7 items remaining** |
 
 ### Critical path
 

@@ -4,7 +4,7 @@
     <span class="wordmark">Sizzle</span>
     <div class="header-divider"></div>
     <a href="#" data-target="#logo-dropdown" class="dropdown-toggle">
-      <span style="font-family:var(--sz-f-ui);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--sz-brass-dim)">MENU</span>
+      <span class="menu-label">MENU</span>
     </a>
     <div id="logo-dropdown" class="dropdown-content">
       <a id="restartId" href="#">Restart</a>
@@ -34,7 +34,6 @@
   </div>
   <footer id="footer">
     <span class="footer-save" data-passage="FooterStatus"></span>
-    <span class="footer-center">♥ AUTOSAVE ON · QUICK SAVE F5</span>
     <span class="footer-version">v 0.1.0</span>
   </footer>
 </div>

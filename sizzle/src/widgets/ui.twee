@@ -77,10 +77,17 @@
 <<set _ccNext to (typeof _args[2] !== 'undefined') ? _args[2] : "">>
 <<set _ccBackLabel to (typeof _args[3] !== 'undefined') ? _args[3] : "Back">>
 <<set _ccNextLabel to (typeof _args[4] !== 'undefined') ? _args[4] : "Continue">>
+<<set _ccNextDisabledLabel to (typeof _args[5] !== 'undefined') ? _args[5] : "">>
 <div class="cc-dossier-footer">
   <div><<if _ccBack>><<link "← " + _ccBackLabel>><<goto _ccBack>><</link>><</if>></div>
   <span class="step-counter">STEP <<print String(_ccStep).padStart(2, '0')>> / 05</span>
-  <div><<if _ccNext>><<link _ccNextLabel + " →">><<goto _ccNext>><</link>><</if>></div>
+  <div>
+    <<if _ccNext>>
+      <<link _ccNextLabel + " →">><<goto _ccNext>><</link>>
+    <<elseif _ccNextDisabledLabel>>
+      <span class="cc-next-disabled"><<print _ccNextDisabledLabel>></span>
+    <</if>>
+  </div>
 </div>
 <</nobr>><</widget>>
 

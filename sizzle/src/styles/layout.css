@@ -146,6 +146,14 @@
   cursor: pointer;
 }
 
+.menu-label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -268,14 +276,34 @@ body[data-mode="day"]::after {
 
 /* --- Daytime header ------------------------------------------ */
 body[data-mode="day"] #header {
-  background: var(--sz-ink-2);
+  background: var(--sz-ink-4);
   border-bottom: 2px solid var(--sz-ink-4);
   box-shadow: 0 2px 0 var(--sz-rule), 0 6px 14px rgba(40,25,10,0.15);
 }
 
 body[data-mode="day"] #header .wordmark {
-  color: var(--sz-brick);
-  text-shadow: 0 1px 0 rgba(255,240,210,0.5);
+  color: #ecdcb8;
+  text-shadow: 0 1px 0 rgba(40,25,10,0.18);
+}
+
+body[data-mode="day"] #header,
+body[data-mode="day"] #header #menu a,
+body[data-mode="day"] #header .menu-label {
+  color: #ecdcb8;
+}
+
+body[data-mode="day"] #header .header-divider {
+  background: rgba(236,220,184,0.22);
+}
+
+body[data-mode="day"] #header #menu a,
+body[data-mode="day"] #header .menu-label {
+  color: var(--sz-brass-glow);
+}
+
+body[data-mode="day"] #header #menu a:hover {
+  color: #f6ead0;
+  border-bottom-color: var(--sz-brass-glow);
 }
 
 

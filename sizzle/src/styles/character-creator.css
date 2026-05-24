@@ -153,6 +153,17 @@
   border-bottom: 1px solid var(--sz-brick-glow);
 }
 
+.cc-next-disabled {
+  display: inline-block;
+  padding: 8px 14px;
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sz-cream-faint);
+  border: 1px solid var(--sz-rule);
+}
+
 
 /* --- Two-column dossier layouts ------------------------------- */
 .cc-columns {

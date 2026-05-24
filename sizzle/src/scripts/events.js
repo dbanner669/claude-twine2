@@ -17,18 +17,20 @@ $(document).on(":passagedisplay", function () {
 
   /* Stamp data-screen on #game so CSS grid can adapt layout.
      Passage tags control which mode:
-       avatar-hidden       → "menu" (single-column, no avatar)
        character-creation  → "creation" (single-column, no avatar)
-       (default)           → "scene" (two-column with avatar) */
+       avatar-hidden       → "menu" (single-column, no avatar)
+       (default)           → "scene" (two-column with avatar)
+     Character-creation takes precedence because those passages
+     also carry avatar-hidden. */
   var game = document.getElementById("game");
   if (game) {
     var psg = Story.get(State.passage);
     var passageTags = (psg && psg.tags) ? psg.tags : [];
 
-    if (passageTags.indexOf("avatar-hidden") !== -1) {
-      game.setAttribute("data-screen", "menu");
-    } else if (passageTags.indexOf("character-creation") !== -1) {
+    if (passageTags.indexOf("character-creation") !== -1) {
       game.setAttribute("data-screen", "creation");
+    } else if (passageTags.indexOf("avatar-hidden") !== -1) {
+      game.setAttribute("data-screen", "menu");
     } else {
       game.setAttribute("data-screen", "scene");
     }

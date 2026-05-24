@@ -171,11 +171,18 @@
     <</link>>
   </div>
 </div>
-<<ccDossierFooter 3 "CC-200 Appearance" "CC-400 Incident">>
+<<if $player.background>>
+  <<ccDossierFooter 3 "CC-200 Appearance" "CC-400 Incident">>
+<<else>>
+  <<ccDossierFooter 3 "CC-200 Appearance" "" "Back" "Continue" "Select a background first">>
+<</if>>
 </div>
 
 
 :: CC-400 Incident [avatar-hidden character-creation nighttime nobr]
+<<silently>>
+<<if not $player.background>><<goto "CC-300 Background">><</if>>
+<</silently>>
 <<ccTabStrip 4>>
 <div class="cc-dossier">
 <<ccDossierHeader "The Incident" "There is a year of your file that no one talks about. Not even you.">>
@@ -220,25 +227,49 @@
 
 :: CC-500 Summary [avatar-hidden character-creation nighttime nobr]
 <<silently>>
-<<set $player.codename to setup.codenames.random()>>
+<<if not $player.background>><<goto "CC-300 Background">><</if>>
+<<if not $player.codename>>
+    <<set $player.codename to setup.codenames.random()>>
+<</if>>
+/* Rebuild derived skill state from the current creation choices.
+   This summary screen can be revisited, so bonuses must never stack. */
+<<set _skillNames to ["academic","agent","athlete","confrontation","charmer","streetwise","composure","sexology"]>>
+<<for _i to 0; _i lt _skillNames.length; _i++>>
+    <<set $player.skills[_skillNames[_i]].level to -4>>
+    <<set $player.skills[_skillNames[_i]].xp to 0>>
+    <<set $player.skills[_skillNames[_i]].specialities to []>>
+<</for>>
+/* Rebuild background-derived story tags from the current choices. */
+<<set _backgroundStoryTags to ["Northern Ontario", "City Dweller", "Lived in Toronto"]>>
+<<for _i to 0; _i lt _backgroundStoryTags.length; _i++>>
+    <<if $player.storyTags.includes(_backgroundStoryTags[_i])>>
+        <<set $player.storyTags.delete(_backgroundStoryTags[_i])>>
+    <</if>>
+<</for>>
 /* Apply skill bonuses based on background */
 <<switch $player.background>>
 <<case "RCMP constable">>
     <<set $player.skills.confrontation.level += 2>>
     <<set $player.skills.composure.level += 1>>
     <<set $player.skills.athlete.level += 1>>
+    <<set $player.storyTags.pushUnique("Northern Ontario")>>
 <<case "CSIS analyst">>
     <<set $player.skills.agent.level += 2>>
     <<set $player.skills.academic.level += 1>>
     <<set $player.skills.composure.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
 <<case "grad student">>
     <<set $player.skills.academic.level += 2>>
     <<set $player.skills.charmer.level += 1>>
     <<set $player.skills.sexology.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
+    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
 <<case "unemployed after university">>
     <<set $player.skills.streetwise.level += 1>>
     <<set $player.skills.sexology.level += 1>>
     <<set $player.skills.composure.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
+    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
 <</switch>>
 /* Branch training: two years adds baseline competence */
 <<set $player.skills.agent.level += 1>>

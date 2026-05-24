@@ -47,6 +47,7 @@
     nationality: "canadian",
     kinks: [],
     quirks: [],
+    storyTags: [],
     attributes: {},
     statusEffects: [],
     personalBio: [],
@@ -160,5 +161,9 @@
     "Wolf", "Cobra", "Eagle", "Fox", "Panther"]>>
 
 <<set setup.complexions to ["light", "medium", "dark"]>>
+
+<<set setup.glossary to {
+    "NYSE": "Not Yet Scientifically Explained"
+}>>
 
 <</silently>>

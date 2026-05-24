@@ -1,0 +1,156 @@
+# Sizzle Agent Guide
+
+Start here when working in `sizzle/`.
+
+This file is the fast handoff guide for implementation work. Use it alongside:
+
+- `CLAUDE.md` for the broader project and design-system walkthrough
+- `docs/GDD.md` for game design and narrative intent
+- `docs/NPC-handler.md` for Robert Flett's full profile
+- `docs/STORY-TAGS.md` for player-carried narrative flags
+
+## Current Scope
+
+The currently playable greybox is:
+
+- main menu
+- character creation: `CC-100` through `CC-500`
+- briefing/prologue: `INTRO-100` through `INTRO-800`
+
+There is no playable Act 1 content yet beyond `INTRO-800 End`.
+
+## Key Files
+
+Core story files:
+
+- `src/content/character-creator.twee`
+- `src/content/briefing.twee`
+- `src/story/init.twee`
+- `src/story/variables.twee`
+- `src/story/interface.twee`
+- `src/story/caption.twee`
+
+Reusable UI/runtime:
+
+- `src/widgets/ui.twee`
+- `src/widgets/parsers.twee`
+- `src/scripts/events.js`
+- `src/styles/layout.css`
+- `src/styles/passages.css`
+- `src/styles/character-creator.css`
+
+## Current Systems To Know
+
+### Character creation rebuild logic
+
+`CC-500 Summary` recalculates derived character state each time it is visited.
+
+- Background skill bonuses are rebuilt from a clean baseline instead of stacking.
+- Background-derived `storyTags` are rebuilt there as well.
+- Codename assignment is stable on revisit instead of rerolling every time.
+
+### Character creation guardrails
+
+The player cannot proceed past `CC-300 Background` without selecting a background.
+
+- `CC-400` and `CC-500` also guard against invalid skip-ahead states and redirect back to background selection if needed.
+
+### Story tags
+
+Persistent story tags live in:
+
+- `$player.storyTags`
+
+Current background mappings:
+
+- `RCMP constable` -> `Northern Ontario`
+- `CSIS analyst` -> `City Dweller`
+- `grad student` -> `City Dweller`, `Lived in Toronto`
+- `unemployed after university` -> `City Dweller`, `Lived in Toronto`
+
+Reference doc:
+
+- `docs/STORY-TAGS.md`
+
+### Glossary hover terms
+
+Glossary definitions live in:
+
+- `setup.glossary` in `src/story/variables.twee`
+
+Glossary term rendering uses:
+
+- `<<term "NYSE">>`
+
+The widget lives in `src/widgets/parsers.twee` and the tooltip styling lives in `src/styles/passages.css`.
+
+This is explicit markup, not automatic word replacement.
+
+### Screen-mode precedence
+
+`src/scripts/events.js` sets `data-screen`.
+
+Important: `character-creation` takes precedence over `avatar-hidden`, so creation passages resolve to `creation` mode instead of `menu` mode.
+
+### Header/footer state
+
+- Daytime header styling now uses the same darker bronze-brown family as the avatar meta strip.
+- The fake footer text `AUTOSAVE ON` / `QUICK SAVE F5` has been removed.
+- Footer status is now just the save/timestamp block plus the version block.
+
+## Art Assets Already Added
+
+Robert Flett assets now exist in `media/characters/`:
+
+- `robert-flett-diner-entry.png`
+- `robert-flett-reference-sheet.png`
+
+`robert-flett-diner-entry.png` is used at the top of `INTRO-110 Robert arrives`.
+
+Most avatar art is still placeholder-only.
+
+## Known Gaps
+
+- `CC-400 Incident` is still placeholder text with no real incident options yet.
+- The avatar panel still uses placeholder content because the layer art arrays are empty.
+- Avatar size/text size styling mismatch is intentionally left alone until avatar implementation work starts.
+- There is no gameplay content beyond the end of the prologue.
+
+## Build
+
+From the repo root:
+
+```powershell
+$env:TWEEGO_PATH = "_tools/tweego/storyformats"
+& _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/
+```
+
+Or:
+
+```powershell
+cd sizzle/build
+.\compile.bat
+```
+
+## Local Browser Testing
+
+If you need a lightweight local server:
+
+```powershell
+cd sizzle
+py -3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Then open:
+
+- `http://127.0.0.1:8000/output.html`
+
+## Handoff Notes
+
+Before handing off, another agent should usually read:
+
+1. `sizzle/AGENTS.md`
+2. `sizzle/CLAUDE.md`
+3. `sizzle/docs/GDD.md`
+4. `sizzle/docs/NPC-handler.md`
+5. `sizzle/docs/STORY-TAGS.md`

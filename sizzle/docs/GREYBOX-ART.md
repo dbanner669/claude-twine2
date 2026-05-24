@@ -12,6 +12,14 @@ The greybox scope is prologue (character creation) and briefing only. No Sizzle 
 
 Items marked `[AVATAR]` are needed for the briefing to have real character art instead of the placeholder.
 
+### Existing non-placeholder assets
+
+These assets already exist and can be reused as references or in-game art:
+
+- [x] `media/locations/sizzle-exterior.png`
+- [x] `media/characters/robert-flett-diner-entry.png`
+- [x] `media/characters/robert-flett-reference-sheet.png`
+
 ---
 
 ## 1. UI Assets
@@ -80,6 +88,15 @@ All avatar images must be the same dimensions (e.g., 512x768), transparent PNG, 
 These are inline images used in passage text, not avatar layers.
 
 - [ ] **Sizzle exterior** — already have this (`media/locations/sizzle-exterior.png`). Could be shown in the briefing when Robert describes the target, or saved for Act 1.
+- [x] **Robert arrives at the diner** — already implemented at the top of `INTRO-110` using `media/characters/robert-flett-diner-entry.png`
+
+---
+
+## 3A. Character Reference Assets
+
+These are production-reference assets rather than avatar layers.
+
+- [x] **Robert Flett reference sheet** — `media/characters/robert-flett-reference-sheet.png`
 
 ---
 
@@ -123,6 +140,4 @@ The art style for avatar sprites and location images hasn't been decided. Key qu
 
 ### Recommendation
 
-For the greybox, consider **hiding the avatar throughout** and focusing art effort on the UI (logo, colors, typography — which Claude Design will handle). The greybox is about proving the writing and the tone, not the visual character system. Avatar art can come in when we start Act 1 and the player is actually moving through the world.
-
-This would reduce the art list from ~25 assets to ~5-10 UI pieces.
+For the greybox, keep treating avatar art as lower priority than writing and flow polish. The current build already tolerates a placeholder avatar panel, and the most immediately useful art wins are still selective scene images, logo/branding work, and reference sheets that support character consistency.

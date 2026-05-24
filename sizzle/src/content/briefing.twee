@@ -43,6 +43,8 @@ Outside, an OC Transpo bus grinds past on Bank, throwing diesel haze across the 
 <</silently>>\
 <<header>>\
 <<page>>\
+<img src="media/characters/robert-flett-diner-entry.png" alt="Robert Flett entering the diner" class="passage-header-image">
+
 Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the Globe that looks like it's already been read.
 
 He doesn't look like a man who tracks the inexplicable for a living.  He looks like a mid-level bureaucrat — brown skin that could read as a lot of things to someone who isn't paying attention, hair going grey at the temples, a jacket that's seen better years.
@@ -110,7 +112,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 <</silently>>\
 <<header>>\
 <<page>>\
-He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on NYSE classification protocols and learning to shoot at a range in Barrie that the Branch pretends is a conservation club.
+He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Barrie that the Branch pretends is a conservation club.
 
 This is what it was for.
 
@@ -133,7 +135,7 @@ He says the name without inflection, like it's a case number.
 <<page>>\
 Another pause.  Robert is very good at pauses.  He uses them the way other people use emphasis — to let the weight of a word settle before he puts the next one on top.
 
-"The Branch has been tracking anomalous reports associated with the club and its membership for the past fourteen months.  Behavioural changes in regular members — progressive, directional, consistent enough to flag NYSE classification."
+"The Branch has been tracking anomalous reports associated with the club and its membership for the past fourteen months.  Behavioural changes in regular members — progressive, directional, consistent enough to flag <<term "NYSE">> classification."
 
 He takes a sip of coffee.  Puts the mug down.
 
@@ -211,11 +213,11 @@ He almost smiles.  Almost.  The corners of his mouth do something that in anothe
 <</silently>>\
 <<header>>\
 <<page>>\
-"The objective is access.  Get inside, observe, report.  Build relationships with staff and regular members.  Watch for anything that matches the NYSE indicators."
+"The objective is access.  Get inside, observe, report.  Build relationships with staff and regular members.  Watch for anything that matches the <<term "NYSE">> indicators."
 
 He leans back.
 
-"The secondary objective — the reason we're not sending someone from Metro Police — is that you have NYSE training.  You know what to look for and, more importantly, you know what it feels like when something isn't right."
+"The secondary objective — the reason we're not sending someone from Metro Police — is that you have <<term "NYSE">> training.  You know what to look for and, more importantly, you know what it feels like when something isn't right."
 
 [["What kind of anomalous reports are we talking about?"|INTRO-300 NYSE details]]
 [["Why me specifically?"|INTRO-340 Why me]]
@@ -247,7 +249,7 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 <</silently>>\
 <<header>>\
 <<page>>\
-"The assignment is intelligence-gathering in a sexually explicit environment," Robert says.  "That is what it is.  The NYSE element is why it's Branch instead of Vice.  If you have concerns about the nature of the work, this is the time to raise them."
+"The assignment is intelligence-gathering in a sexually explicit environment," Robert says.  "That is what it is.  The <<term "NYSE">> element is why it's Branch instead of Vice.  If you have concerns about the nature of the work, this is the time to raise them."
 
 <<if $player.background eq "grad student">>You wrote a thesis chapter on environments like this — the social dynamics, the consent frameworks, the group psychology.  Studying it is one thing.  Working inside it is something else.
 <<elseif $player.background eq "unemployed after university">>You've been in places like this.  Not as an agent — as a person.  That's a different kind of knowledge, and it's sitting in your chest right now doing something complicated.
@@ -307,7 +309,7 @@ You file that away.
 <<page>>\
 Robert's expression doesn't change, but something behind it shifts — a microsecond of something that isn't discomfort, exactly, but might be its professional cousin.
 
-"The assignment requires a credibly attractive woman under thirty who has completed Branch NYSE training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
+"The assignment requires a credibly attractive woman under thirty who has completed Branch <<term "NYSE">> training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
 
 He takes three deliberate sips of coffee to put space between the clinical assessment and whatever comes next.
 
@@ -322,7 +324,7 @@ He takes three deliberate sips of coffee to put space between the clinical asses
 <</silently>>\
 <<header>>\
 <<page>>\
-"You're good at reading people.  You can hold a conversation and a cover simultaneously.  You don't rattle easily.  And you understand NYSE classification well enough to recognize indicators in the field."
+"You're good at reading people.  You can hold a conversation and a cover simultaneously.  You don't rattle easily.  And you understand <<term "NYSE">> classification well enough to recognize indicators in the field."
 
 <<if $player.background eq "grad student">>You studied persuasion and influence for two years.  You know when someone is framing a limited choice as a compliment.  Right now, Robert is not saying: //and I don't have anyone else.//
 <<elseif $player.background eq "RCMP constable">>Three years of reading people on traffic stops and domestic calls taught you when someone is leaving something out.  Robert means everything he just said.  He also means something he didn't say.
@@ -378,7 +380,7 @@ He holds your gaze.
 <</silently>>\
 <<header>>\
 <<page>>\
-"One more thing.  Don't go looking for the NYSE directly.  Don't break cover to investigate.  Be patient.  You're there to observe and report.  The analysis happens on this end."
+"One more thing.  Don't go looking for the <<term "NYSE">> directly.  Don't break cover to investigate.  Be patient.  You're there to observe and report.  The analysis happens on this end."
 
 He folds his hands on the table.
 
@@ -416,7 +418,7 @@ He folds his hands on the table.
 <</silently>>\
 <<header>>\
 <<page>>\
-"Can you tell me more about the NYSE indicators?"
+"Can you tell me more about the <<term "NYSE">> indicators?"
 
 Robert takes a slow breath — the particular care he takes when bridging the gap between what the Branch knows and what it means.
 
@@ -460,11 +462,11 @@ Robert nods — the question he expected first.
 <<page>>\
 "What's the risk assessment?"
 
-"Moderate to high," Robert says, without the usual bureaucratic hedging.  "The NYSE element makes it unpredictable.  Prolonged exposure represents a genuine cognitive risk.  You will be affected.  The question is degree."
+"Moderate to high," Robert says, without the usual bureaucratic hedging.  "The <<term "NYSE">> element makes it unpredictable.  Prolonged exposure represents a genuine cognitive risk.  You will be affected.  The question is degree."
 
 He lets that sit.
 
-"Composure training gives you tools.  It gives you awareness.  But there's a difference between understanding NYSE indicators in a briefing room and experiencing them in the field."  He pauses.  "In a club."
+"Composure training gives you tools.  It gives you awareness.  But there's a difference between understanding <<term "NYSE">> indicators in a briefing room and experiencing them in the field."  He pauses.  "In a club."
 
 "The physical risk is lower.  The danger here is cognitive, not physical.  Which, in my experience, is harder to see coming."
 

@@ -1,5 +1,7 @@
 # Sizzle
 
+For agent handoff, read `AGENTS.md` first. This file remains the broader project and design-system guide.
+
 ## Overview
 
 An adult interactive fiction game built on the SugarCube Avatar Template. Set in Toronto, 2005/2006. The player is a woman recruited by a secret federal agency ("the Branch") to infiltrate an exclusive swingers club called Sizzle on Queen Street West. Something is happening beneath the surface — something the Branch classifies as "not yet scientifically explained" (NYSE, pronounced "nigh-see").
@@ -27,17 +29,20 @@ sizzle/
 ├── fonts/           WOFF2 web fonts (Allura, Cormorant Garamond, EB Garamond, Inter, JetBrains Mono)
 ├── media/
 │   ├── avatar/      Avatar layer images (body, clothing, expressions, etc.)
+│   ├── characters/  Character stills and reference sheets
 │   ├── locations/   Location images (building exteriors, interiors)
 │   └── ui/          UI images (icons, logos)
 ├── docs/
 │   ├── GDD.md                 Game Design Document (comprehensive)
+│   ├── STORY-TAGS.md          Narrative tag, quirk, and kink tracking reference
 │   ├── CLAUDE-DESIGN-BRIEF.md Claude Design prompt used to create the visual system
 │   ├── NPC-handler.md         Robert Flett — the player's Branch handler
 │   ├── GREYBOX-WRITING.md     Writing checklist for prologue + briefing scope
 │   ├── GREYBOX-ART.md         Art asset checklist for prologue + briefing scope
-│   ├── WRITING.md             Full writing dev list (placeholder — not yet written)
-│   └── ART.md                 Full art asset dev list (placeholder — not yet written)
+│   ├── WRITING.md             Top-level writing doc pointer
+│   └── ART.md                 Top-level art doc pointer
 ├── build/           Tweego compilation scripts
+├── AGENTS.md        Agent handoff guide
 └── CLAUDE.md        This file
 ```
 
@@ -84,6 +89,8 @@ The `data-screen` attribute on `#game` switches layout between three modes, driv
 | `character-creation` | `creation` | Single column, avatar hidden (dossier creation flow) |
 | *(none)* | `scene` | Two columns — avatar + passage (default gameplay) |
 
+If a passage has both `character-creation` and `avatar-hidden`, creation mode should win.
+
 ### Day/Night Mode
 
 The game has two visual palettes: **night** (default, warm charcoal) and **day** (sunlit parchment). CSS custom properties on `:root` swap automatically via `body[data-mode="day"]` overrides in `reset.css`. Atmosphere overlays (vignette, grain) also adapt in `layout.css`.
@@ -105,7 +112,19 @@ The in-passage header bar is rendered by the `<<header>>` widget. Set these vari
 - `$header.status` — status badge text (defaults to "COMPOSED" if not set)
 - `$header.weather` — optional weather text
 
-The avatar panel (left column) shows automatically on `scene` mode passages. The `AvatarMeta` passage (in `caption.twee`) renders the identity block and composure bar via `data-passage` attribute. The `FooterStatus` passage renders the save/time display in the footer.
+The avatar panel (left column) shows automatically on `scene` mode passages. The `AvatarMeta` passage (in `caption.twee`) renders the identity block and composure bar via `data-passage` attribute. The `FooterStatus` passage renders the save/time display in the footer. The fake autosave/quicksave helper text has been removed from the UI.
+
+### Glossary Terms
+
+Hover glossary terms use explicit widget markup rather than automatic text replacement.
+
+- Definitions live in `setup.glossary` in `variables.twee`
+- Terms render through `<<term "KEYWORD">>` in `widgets/parsers.twee`
+- Tooltip styling lives in `passages.css`
+
+Current live glossary term:
+
+- `NYSE` -> `Not Yet Scientifically Explained`
 
 ### Fonts
 
@@ -173,6 +192,7 @@ Follows PREFIX-NUMBER convention from the template:
 - `$player.cover` — cover identity used inside Sizzle (set in-story, not during creation)
 - `$player.codename` — Branch operational codename
 - `$player.arousal` — current arousal level (0-3)
+- `$player.storyTags` — array of persistent narrative flags used for later story checks
 - `$player.statusEffects` — array of active temporary modifiers (supports multiple)
 - `$player.kinks` — array of preferences (accumulated during play)
 - `$player.quirks` — array of personality traits (supports multiple)
@@ -240,22 +260,26 @@ Skills start at level -4. To display 0-based values (e.g., composure pips), use:
 
 ### What's built and working
 - **Main menu** — centered title page with night mode, single "Begin" link
-- **Character creation (5 steps)** — full dossier-style flow with tab strip, option grids with `:has()` selection, background cards, redacted incident file, summary table, signature block
+- **Character creation (5 steps)** — full dossier-style flow with tab strip, option grids with `:has()` selection, background cards, redacted incident file, summary table, signature block, and background-selection guardrails
+- **Derived-state rebuilds** — `CC-500` recalculates skill bonuses and background-derived story tags from scratch on revisit instead of stacking
 - **Briefing scene (INTRO-100 through INTRO-800)** — ~30 passages, complete prologue with branching dialogue, skill checks, background-specific variants
+- **Glossary hover terms** — `<<term>>` widget and tooltip styling are live, currently used for `NYSE`
+- **Robert briefing art** — `media/characters/robert-flett-diner-entry.png` is placed at the top of `INTRO-110`, with a matching reference sheet in `media/characters/robert-flett-reference-sheet.png`
 - **Avatar panel** — placeholder frame, identity block (name/kicker), composure pip bar
 - **Header bar** — location, time, status badge, weather
-- **Footer** — save timestamp, autosave indicator, version
+- **Footer** — save timestamp and version
 - **Day/night mode** — full CSS palette swap with atmosphere overlays
+- **Day-mode header polish** — daytime header now uses the darker bronze-brown UI family instead of a lighter mismatched bar
 - **UI design system** — 8 CSS files, 5 font families, complete token system
 
 ### What's placeholder / not yet built
 - **Avatar art** — all image arrays are empty; placeholder frame shows "avatar layers" text
 - **CC-400 inciting incidents** — placeholder text, no actual options
 - **Hair style swatches** — show dark rectangles (no art yet)
-- **Location images** — only `sizzle-exterior.png` exists
+- **Location/background art** — still sparse; only a small number of location/character images exist so far
 - **NPC roster** — only Robert Flett is profiled
 - **Act 1 content** — INTRO-800 is "End of Prologue" — no gameplay content beyond the briefing
-- **WRITING.md and ART.md** — stub files, not yet written
+- **WRITING.md and ART.md** — currently light-weight pointer docs, not full production trackers yet
 
 ## Writing Conventions
 

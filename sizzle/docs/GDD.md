@@ -153,7 +153,7 @@ The inciting incident (chosen during character creation) explains why the player
 |--------|--------|--------|
 | Name | CC-100 | First name and surname. Used for real identity. |
 | Appearance | CC-200 | Skin tone (3), hair colour (3), hair style (3), eye colour (3). Drives avatar sprite selection. |
-| Pre-Branch background | CC-300 | What the player was doing before the Branch recruited them. Four options: RCMP constable, CSIS analyst, grad student (psychology), unemployed after university. Influences starting skill levels. |
+| Pre-Branch background | CC-300 | What the player was doing before the Branch recruited them. Four options: RCMP constable, CSIS analyst, grad student (psychology), unemployed after university. Influences starting skill levels and can assign background-derived story tags. |
 | Inciting incident | CC-400 | Why the Branch recruited them. May grant a trait, establish backstory, and determine relationship to NYSE phenomena. |
 | Cover identity | *In-game* | The persona used inside Sizzle. Not defined during character creation — developed a few passages into the main story, possibly partially assigned by the Branch and partially crafted by the player. |
 
@@ -176,6 +176,7 @@ Skills start at -4 and are modified by the player's pre-Branch background choice
 
 - `$player.cover` — the cover identity used inside Sizzle (defined in-story, not during creation)
 - `$player.arousal` — current arousal level (0-3), influenced by encounters and NYSE effects
+- `$player.storyTags` — **array** of persistent narrative flags tied to backstory or later story developments. Used for dialogue checks, situational recognition, gating, and remembered history.
 - `$player.statusEffects` — **array** of active temporary modifiers, supports multiple simultaneous effects (e.g., ["Caffeinated", "Flustered", "Influenced"]). Effects are added/removed as situations change.
 - `$player.kinks` — **array** of character preferences, accumulated during play based on choices. Multiple kinks can be active simultaneously and influence available options and NPC reactions.
 - `$player.quirks` — **array** of personality traits, set during creation or early game. Multiple quirks can coexist and shape dialogue and internal narration.

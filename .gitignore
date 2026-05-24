@@ -30,3 +30,8 @@ sizzle/output.html
 # MCP server story persistence
 twine-mcp-server/stories/
 twine-mcp-server/test-stderr.txt
+
+# Local tool state / scratch
+.codex/
+.playwright-mcp/
+sizzle-daytime-header-check.png

@@ -9,6 +9,16 @@
   max-width: 680px;
 }
 
+.passage-header-image {
+  display: block;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 0 var(--sz-s-6);
+  border: 1px solid var(--sz-rule);
+  box-shadow: var(--sz-shadow-card);
+  object-fit: cover;
+}
+
 .page-inner {
   padding: 0;
 }
@@ -86,6 +96,96 @@
 .page .text b {
   color: var(--sz-cream);
   font-weight: 600;
+}
+
+
+/* --- Glossary hover terms ------------------------------------ */
+.glossary-term {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.glossary-label {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  color: var(--sz-brass);
+}
+
+.glossary-term:hover .glossary-label,
+.glossary-term:focus-visible .glossary-label {
+  color: var(--sz-brick-glow);
+}
+
+.glossary-term:focus-visible {
+  outline: 1px solid var(--sz-brass);
+  outline-offset: 2px;
+}
+
+.glossary-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(4px);
+  min-width: 12rem;
+  max-width: min(22rem, 75vw);
+  padding: 10px 12px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule-strong);
+  box-shadow: var(--sz-shadow-card);
+  color: var(--sz-cream);
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+}
+
+.glossary-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--sz-ink-3) transparent transparent transparent;
+}
+
+.glossary-term:hover .glossary-tooltip,
+.glossary-term:focus-visible .glossary-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+body[data-mode="day"] .glossary-label {
+  color: var(--sz-brass);
+}
+
+body[data-mode="day"] .glossary-term:hover .glossary-label,
+body[data-mode="day"] .glossary-term:focus-visible .glossary-label {
+  color: var(--sz-brick);
+}
+
+body[data-mode="day"] .glossary-tooltip {
+  background: var(--sz-ink-4);
+  border-color: rgba(40,25,10,0.28);
+  color: #ecdcb8;
+}
+
+body[data-mode="day"] .glossary-tooltip::after {
+  border-color: var(--sz-ink-4) transparent transparent transparent;
 }
 
 

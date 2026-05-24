@@ -50,6 +50,26 @@
 <</switch>>
 <</nobr>><</widget>>
 
+/* --- Glossary term widget ---
+   Renders an underlined keyword with a hover/focus definition box.
+   Usage:
+     <<term "NYSE">>
+     <<term "NYSE" "Custom label">>
+   ------------------------------------------------------------ */
+
+<<widget "term">><<nobr>>
+<<set _termKey to _args[0]>>
+<<set _termLabel to (typeof _args[1] !== 'undefined') ? _args[1] : _termKey>>
+<<if setup.glossary and setup.glossary[_termKey]>>
+<span class="glossary-term" tabindex="0">
+    <span class="glossary-label"><<print _termLabel>></span>
+    <span class="glossary-tooltip"><<print setup.glossary[_termKey]>></span>
+</span>
+<<else>>
+<<print _termLabel>>
+<</if>>
+<</nobr>><</widget>>
+
 /* --- Pronoun widgets ---
    Fixed to she/her for this game (player character is female).
    ------------------------------------------------------------ */
