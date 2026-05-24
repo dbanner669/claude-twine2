@@ -123,6 +123,34 @@ function wordCountOf(body: string): number {
   return stripSugarCubeStructure(body).split(/\s+/).filter(Boolean).length;
 }
 
+/* Project-specific widgets that take passage names as string arguments and
+   render navigation. The link extractor sees the widget call as a macro and
+   strips it; we re-discover the implied edges here so layout/connectors
+   reflect the real story flow. */
+function extractWidgetEdges(text: string, fromName: string): StoryGraphEdge[] {
+  const edges: StoryGraphEdge[] = [];
+
+  /* <<ccDossierFooter step "backTarget" "nextTarget" ...>>
+     args[0] = step number
+     args[1] = back passage name (optional, may be "")
+     args[2] = next passage name (optional, may be "")
+     args[3..] = label overrides (ignored) */
+  const footerRe = /<<ccDossierFooter\s+\d+\s+"([^"]*)"\s+"([^"]*)"/g;
+  let match: RegExpExecArray | null;
+  while ((match = footerRe.exec(text)) !== null) {
+    const back = match[1].trim();
+    const next = match[2].trim();
+    if (back) {
+      edges.push({ from: fromName, to: back, linkType: "widget-back", linkText: "Back" });
+    }
+    if (next) {
+      edges.push({ from: fromName, to: next, linkType: "widget-next", linkText: "Continue" });
+    }
+  }
+
+  return edges;
+}
+
 export async function buildGraphFromDirectory(contentDir: string, storyName: string): Promise<StoryGraph> {
   const entries = await fs.readdir(contentDir);
   const tweeFiles = entries.filter((name) => name.endsWith(".twee"));
@@ -167,6 +195,10 @@ export async function buildGraphFromDirectory(contentDir: string, storyName: str
           linkType: link.type,
           linkText: link.display,
         });
+      }
+
+      for (const widgetEdge of extractWidgetEdges(passage.text, passage.name)) {
+        edges.push(widgetEdge);
       }
     }
   }

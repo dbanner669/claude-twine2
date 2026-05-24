@@ -63,14 +63,13 @@ const BODY_COLOR: RGB = { r: 0.98, g: 0.97, b: 0.93 };
 
 const LAYOUT = {
   stickyWidth: 240,
-  titleHeight: 160,
-  bodyHeight: 320,
   pairGap: 16,
-  rowGap: 80,
-  columnGap: 100,
+  layerGap: 100,
+  columnGap: 80,
   sectionPadding: 60,
   sectionGap: 280,
-  columnsPerSection: 3,
+  emptySectionWidth: 360,
+  emptySectionHeight: 600,
 };
 
 const PLUGIN_NAMESPACE = "sizzle-story-sync";
@@ -108,46 +107,62 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
   await figma.loadFontAsync({ family: "Inter", style: "Regular" });
 
   const titleByPassage = new Map<string, StickyNode>();
+  const createdNodes: SceneNode[] = [];
 
-  /* Layout: sections side by side, passages stacked in columns within each
-     section. Each passage produces a title sticky + body sticky pair,
-     connected with a thin straight connector. */
+  /* Layout: sections side by side. Within each section, passages are placed in
+     BFS layers based on longest path from any entry point. Each layer is a row
+     whose Y advances by the actual rendered height of the tallest pair in the
+     previous layer, so long bodies never overlap the next row. */
   let sectionCursorX = 0;
 
   for (const section of graph.sections) {
     const passagesInSection = graph.passages.filter((passage) => sectionIdForPassage(passage) === section.id);
-    const columns = Math.max(1, Math.min(LAYOUT.columnsPerSection, passagesInSection.length || 1));
-    const rows = Math.max(1, Math.ceil(passagesInSection.length / columns));
-    const innerWidth = columns * LAYOUT.stickyWidth + (columns - 1) * LAYOUT.columnGap;
-    const pairHeight = LAYOUT.titleHeight + LAYOUT.pairGap + LAYOUT.bodyHeight;
-    const innerHeight = Math.max(pairHeight, rows * pairHeight + (rows - 1) * LAYOUT.rowGap);
-    const sectionWidth = innerWidth + LAYOUT.sectionPadding * 2;
-    const sectionHeight = innerHeight + LAYOUT.sectionPadding * 2;
 
-    const sectionNode = figma.createSection();
-    sectionNode.name = section.name;
-    sectionNode.x = sectionCursorX;
-    sectionNode.y = 0;
-    sectionNode.resizeWithoutConstraints(sectionWidth, sectionHeight);
-    const sectionFill = STICKY_COLORS[section.color] ?? STICKY_COLORS.light_gray;
-    sectionNode.fills = [{ type: "SOLID", color: sectionFill, opacity: 0.15 }];
-    sectionNode.setPluginData("kind", "section");
-    sectionNode.setPluginData("sectionId", section.id);
-    sectionNode.setPluginData("namespace", PLUGIN_NAMESPACE);
-
-    for (let index = 0; index < passagesInSection.length; index += 1) {
-      const passage = passagesInSection[index];
-      const column = index % columns;
-      const row = Math.floor(index / columns);
-      const x = sectionCursorX + LAYOUT.sectionPadding + column * (LAYOUT.stickyWidth + LAYOUT.columnGap);
-      const titleY = LAYOUT.sectionPadding + row * (pairHeight + LAYOUT.rowGap);
-      const bodyY = titleY + LAYOUT.titleHeight + LAYOUT.pairGap;
-
-      const titleSticky = await createPassageSticky(passage, "title", x, titleY);
-      await createPassageSticky(passage, "body", x, bodyY);
-
-      titleByPassage.set(passage.name, titleSticky);
+    if (passagesInSection.length === 0) {
+      /* Empty placeholder (e.g. the Act 1 concept section). Draw an empty
+         section at a default size so users have a target for new stickies. */
+      const sectionNode = createSectionNode(section, sectionCursorX, 0, LAYOUT.emptySectionWidth, LAYOUT.emptySectionHeight);
+      createdNodes.push(sectionNode);
+      sectionCursorX += LAYOUT.emptySectionWidth + LAYOUT.sectionGap;
+      continue;
     }
+
+    const layerByPassage = bfsLayers(passagesInSection, graph.edges);
+    const layers = groupByLayer(passagesInSection, layerByPassage);
+
+    let layerCursorY = LAYOUT.sectionPadding;
+    let sectionMaxRight = sectionCursorX;
+
+    for (const passagesInLayer of layers) {
+      let layerHeight = 0;
+      const layerWidth =
+        passagesInLayer.length * LAYOUT.stickyWidth + Math.max(0, passagesInLayer.length - 1) * LAYOUT.columnGap;
+      const layerStartX = sectionCursorX + LAYOUT.sectionPadding;
+
+      for (let index = 0; index < passagesInLayer.length; index += 1) {
+        const passage = passagesInLayer[index];
+        const x = layerStartX + index * (LAYOUT.stickyWidth + LAYOUT.columnGap);
+        const titleY = layerCursorY;
+
+        const titleSticky = await createPassageSticky(passage, "title", x, titleY);
+        const bodyY = titleY + titleSticky.height + LAYOUT.pairGap;
+        const bodySticky = await createPassageSticky(passage, "body", x, bodyY);
+
+        const pairHeight = titleSticky.height + LAYOUT.pairGap + bodySticky.height;
+        if (pairHeight > layerHeight) layerHeight = pairHeight;
+
+        titleByPassage.set(passage.name, titleSticky);
+        createdNodes.push(titleSticky, bodySticky);
+        sectionMaxRight = Math.max(sectionMaxRight, x + LAYOUT.stickyWidth);
+      }
+
+      layerCursorY += layerHeight + LAYOUT.layerGap;
+    }
+
+    const sectionWidth = Math.max(sectionMaxRight - sectionCursorX + LAYOUT.sectionPadding, LAYOUT.stickyWidth + LAYOUT.sectionPadding * 2);
+    const sectionHeight = layerCursorY - LAYOUT.layerGap + LAYOUT.sectionPadding;
+    const sectionNode = createSectionNode(section, sectionCursorX, 0, sectionWidth, sectionHeight);
+    createdNodes.push(sectionNode);
 
     sectionCursorX += sectionWidth + LAYOUT.sectionGap;
   }
@@ -174,9 +189,110 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
       connector.text.characters = truncate(edge.linkText, 60);
       connector.textBackground.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
     }
+    createdNodes.push(connector);
   }
 
-  figma.viewport.scrollAndZoomIntoView([...figma.currentPage.children].filter((node) => node.removed === false));
+  figma.viewport.scrollAndZoomIntoView(createdNodes);
+}
+
+function createSectionNode(section: StoryGraphSection, x: number, y: number, width: number, height: number): SectionNode {
+  const sectionNode = figma.createSection();
+  sectionNode.name = section.name;
+  sectionNode.x = x;
+  sectionNode.y = y;
+  sectionNode.resizeWithoutConstraints(width, height);
+  const sectionFill = STICKY_COLORS[section.color] ?? STICKY_COLORS.light_gray;
+  sectionNode.fills = [{ type: "SOLID", color: sectionFill, opacity: 0.15 }];
+  sectionNode.setPluginData("kind", "section");
+  sectionNode.setPluginData("sectionId", section.id);
+  sectionNode.setPluginData("namespace", PLUGIN_NAMESPACE);
+  return sectionNode;
+}
+
+/* Shortest-path BFS layering: each passage's layer = shortest distance from
+   any root, where a root is a passage with no in-section incoming edges.
+   Cycles are handled naturally (first visit wins). Orphans (unreachable from
+   any root, typically because they're inside a cycle with no entry point)
+   land on a trailing layer so they're visible rather than dropped. */
+function bfsLayers(passages: StoryGraphPassage[], edges: StoryGraphEdge[]): Map<string, number> {
+  const passageSet = new Set(passages.map((p) => p.name));
+  const adjacency = new Map<string, string[]>();
+  const inDegree = new Map<string, number>();
+
+  for (const passage of passages) {
+    adjacency.set(passage.name, []);
+    inDegree.set(passage.name, 0);
+  }
+
+  for (const edge of edges) {
+    if (edge.from === edge.to) continue;
+    if (!passageSet.has(edge.from) || !passageSet.has(edge.to)) continue;
+    adjacency.get(edge.from)!.push(edge.to);
+    inDegree.set(edge.to, (inDegree.get(edge.to) ?? 0) + 1);
+  }
+
+  const layer = new Map<string, number>();
+  const queue: string[] = [];
+
+  function drainQueue(): void {
+    while (queue.length > 0) {
+      const current = queue.shift()!;
+      const currentLayer = layer.get(current) ?? 0;
+      for (const next of adjacency.get(current) ?? []) {
+        if (!layer.has(next)) {
+          layer.set(next, currentLayer + 1);
+          queue.push(next);
+        }
+      }
+    }
+  }
+
+  /* Seed with passages that have no in-section incoming edges (true roots). */
+  for (const passage of passages) {
+    if ((inDegree.get(passage.name) ?? 0) === 0) {
+      layer.set(passage.name, 0);
+      queue.push(passage.name);
+    }
+  }
+  drainQueue();
+
+  /* Any passages still unvisited form a cycle with no in-section entry point
+     (e.g. CC tabs, which are bidirectional and have no true root). Seed each
+     remaining component from its alphabetically-smallest passage. */
+  while (true) {
+    const unvisited = passages.filter((p) => !layer.has(p.name));
+    if (unvisited.length === 0) break;
+    unvisited.sort((a, b) => a.name.localeCompare(b.name));
+    const seed = unvisited[0].name;
+    layer.set(seed, 0);
+    queue.push(seed);
+    drainQueue();
+  }
+
+  return layer;
+}
+
+function groupByLayer(
+  passages: StoryGraphPassage[],
+  layerByPassage: Map<string, number>,
+): StoryGraphPassage[][] {
+  const byLayer = new Map<number, StoryGraphPassage[]>();
+  for (const passage of passages) {
+    const layer = layerByPassage.get(passage.name) ?? 0;
+    let bucket = byLayer.get(layer);
+    if (!bucket) {
+      bucket = [];
+      byLayer.set(layer, bucket);
+    }
+    bucket.push(passage);
+  }
+  /* Within a layer, sort by passage name so siblings appear in a stable order. */
+  for (const bucket of byLayer.values()) {
+    bucket.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return Array.from(byLayer.keys())
+    .sort((a, b) => a - b)
+    .map((layer) => byLayer.get(layer)!);
 }
 
 async function createPassageSticky(
