@@ -1,0 +1,42 @@
+/* ============================================================
+   ICONS — Monospace glyph icons, brass-tinted
+   No icon font — we use ASCII / Unicode glyphs:
+     ◈ location · ✓ pass · ! warn · ✦ trait · ♥ save
+     ‹ › prev/next · ⊕ inv add · ⛔ locked · ⬥ ◇ pips
+   ============================================================ */
+
+.icon-glyph {
+  font-family: var(--sz-f-ui);
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  border: 1px solid var(--sz-rule);
+  color: var(--sz-brass);
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.icon-glyph.--hot {
+  color: var(--sz-brick-glow);
+  border-color: var(--sz-brick);
+}
+
+.icon-glyph.--success {
+  color: var(--sz-composed);
+  border-color: rgba(111,140,90,0.4);
+}
+
+.icon-glyph.--warn {
+  color: var(--sz-rattled);
+  border-color: rgba(196,107,61,0.4);
+}
+
+/* --- Inline icon helper -------------------------------------- */
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin-right: 4px;
+}

@@ -21,7 +21,31 @@
       "WebFetch(domain:www.motoslave.net)",
       "PowerShell($env:TWEEGO_PATH = \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\storyformats\"; & \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\tweego.exe\" -o \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template\\\\output.html\" \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template\\\\src\\\\\" 2>&1)",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(\\(Select-String -Path \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template\\\\output.html\" -Pattern \"tw-passagedata\" -AllMatches | ForEach-Object { $_.Matches.Count } | Measure-Object -Sum\\).Sum)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(where tweego *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "mcp__twine__list_stories",
+      "Bash(node -e *)",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "Bash(git push *)",
+      "PowerShell($env:TWEEGO_PATH = \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\storyformats\"; & \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\tweego.exe\" -o \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\output.html\" \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\src\\\\\")",
+      "Bash(find /tmp -maxdepth 3 -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" 2>/dev/null | head -20)",
+      "Bash(ls -la /tmp/00841469-f2cb-42e8-8793-649cbfcba4d8.png /tmp/0a0688bd-053d-44ab-83e7-5daf35b5cf5f.png)",
+      "Bash(cp /tmp/00841469-f2cb-42e8-8793-649cbfcba4d8.png \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\media\\\\locations\\\\sizzle-exterior.png\")",
+      "WebFetch(domain:support.claude.com)",
+      "mcp__twine__validate_story",
+      "Bash(ls \"C:\\\\Users\\\\Oculus\\\\Downloads\\\\Sizzle.zip\")",
+      "PowerShell($existing = Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle -match \"3457\" -or \\($_.CommandLine -and $_.CommandLine -match \"3457\"\\) }; if \\($existing\\) { \"Server may already be running\" } else { \"No server on 3457\" })",
+      "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\fonts\")",
+      "Bash(where codex *)",
+      "Bash(codex --help)",
+      "mcp__Claude_in_Chrome__tabs_create_mcp"
     ]
   }
 }

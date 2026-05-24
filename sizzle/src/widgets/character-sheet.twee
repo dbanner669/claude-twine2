@@ -1,0 +1,116 @@
+:: Character Sheet Widget [widget]
+/* ============================================================
+   CHARACTER SHEET — displayed in a SugarCube Dialog
+   Triggered by clicking "Character" in the header menu.
+   See src/scripts/index.js for the click handler.
+   ============================================================ */
+
+<<widget "charSheet">><<nobr>>
+<div id="character-profile">
+
+  <div class="profile-header">
+    <h2>$player.firstName $player.surname</h2>
+    <<if $player.codename neq "">>
+      <span class="codename">Codename: $player.codename</span>
+    <</if>>
+  </div>
+
+  <div class="profile-section">
+    <h3>Details</h3>
+    <table class="profile-table">
+      <tr><td>Age</td><td>$player.age</td></tr>
+      <tr><td>Background</td><td>$player.background</td></tr>
+      <tr><td>Complexion</td><td>$player.complexion</td></tr>
+      <tr><td>Hair</td><td>$player.hairColour $player.hairStyle</td></tr>
+      <tr><td>Eyes</td><td>$player.eyeColour $player.eyeShape</td></tr>
+      <tr><td>Face</td><td>$player.faceShape</td></tr>
+    </table>
+  </div>
+
+  <<if $player.cover and $player.cover.knownAs neq "">>
+  <div class="profile-section">
+    <h3>Cover Identity</h3>
+    <table class="profile-table">
+      <<if $player.cover.knownAs neq "">>
+      <tr><td>Known As</td><td><<print $player.cover.knownAs>></td></tr>
+      <</if>>
+      <<if $player.cover.firstname neq "">>
+      <tr><td>Cover Name</td><td><<print $player.cover.firstname>> <<print $player.cover.surname>></td></tr>
+      <</if>>
+    </table>
+  </div>
+  <</if>>
+
+  <div class="profile-section">
+    <h3>Skills</h3>
+    <<for _skillName, _skill range $player.skills>>
+      <div class="skill-row">
+        <span class="skill-name">_skillName</span>
+        <span class="skill-level">Level: <<print _skill.level>></span>
+        <span class="skill-xp">XP: <<print _skill.xp>></span>
+      </div>
+    <</for>>
+  </div>
+
+  <div class="profile-section">
+    <h3>Operation: Sizzle</h3>
+    <table class="profile-table">
+      <tr><td>Access Level</td><td>$sizzle.accessLevel</td></tr>
+      <tr><td>Reputation</td><td>$sizzle.reputation</td></tr>
+    </table>
+  </div>
+
+  <<if $player.statusEffects.length gt 0>>
+  <div class="profile-section">
+    <h3>Status Effects</h3>
+    <<for _effect range $player.statusEffects>>
+      <span class="status-badge">_effect</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.kinks.length gt 0>>
+  <div class="profile-section">
+    <h3>Preferences</h3>
+    <<for _kink range $player.kinks>>
+      <span class="trait-badge">_kink</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.quirks.length gt 0>>
+  <div class="profile-section">
+    <h3>Traits</h3>
+    <<for _quirk range $player.quirks>>
+      <span class="trait-badge">_quirk</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.achievements.length gt 0>>
+  <div class="profile-section">
+    <h3>Achievements</h3>
+    <<for _ach range $player.achievements>>
+      <span class="achievement-badge">_ach</span>
+    <</for>>
+  </div>
+  <</if>>
+
+  <<if $player.personalBio.length gt 0>>
+  <div class="profile-section">
+    <h3>Journal</h3>
+    <<for _entry range $player.personalBio>>
+      <div class="bio-entry">
+        <span class="bio-timestamp"><<print _entry.timestamp>></span>
+        <span class="bio-text"><<print _entry.entry>></span>
+      </div>
+    <</for>>
+  </div>
+  <</if>>
+
+  /* Note: $nyse.influence and $nyse.power are intentionally NOT
+     shown in the character sheet. These are hidden variables
+     whose effects are felt through narration and mechanics. */
+
+</div>
+<</nobr>><</widget>>

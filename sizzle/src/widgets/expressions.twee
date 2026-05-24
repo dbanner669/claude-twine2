@@ -1,0 +1,86 @@
+:: Expression Widgets [widget]
+/* ============================================================
+   EXPRESSION / EMOTE WIDGETS
+   These add or swap face expression images in the foreground
+   layer. Call <<emote-clear>> first to remove the previous
+   expression, then push the new one.
+   ============================================================ */
+
+/* --- Clearing ------------------------------------------------ */
+<<widget "emote-clear">><<nobr>>
+<<set _toRemove to []>>
+<<for _i to 0; _i lt $avatar.foreground.length; _i++>>
+    <<if $avatar.foreground[_i].includes("expression/")>>
+        <<set _toRemove.push($avatar.foreground[_i])>>
+    <</if>>
+<</for>>
+<<for _i to 0; _i lt _toRemove.length; _i++>>
+    <<set $avatar.foreground.delete(_toRemove[_i])>>
+<</for>>
+<</nobr>><</widget>>
+
+<<widget "emote-clearBrows">><<nobr>>
+<<set _toRemove to []>>
+<<for _i to 0; _i lt $avatar.foreground.length; _i++>>
+    <<if $avatar.foreground[_i].includes("expression/brows-")>>
+        <<set _toRemove.push($avatar.foreground[_i])>>
+    <</if>>
+<</for>>
+<<for _i to 0; _i lt _toRemove.length; _i++>>
+    <<set $avatar.foreground.delete(_toRemove[_i])>>
+<</for>>
+<</nobr>><</widget>>
+
+<<widget "emote-clearMouth">><<nobr>>
+<<set _toRemove to []>>
+<<for _i to 0; _i lt $avatar.foreground.length; _i++>>
+    <<if $avatar.foreground[_i].includes("expression/mouth-")>>
+        <<set _toRemove.push($avatar.foreground[_i])>>
+    <</if>>
+<</for>>
+<<for _i to 0; _i lt _toRemove.length; _i++>>
+    <<set $avatar.foreground.delete(_toRemove[_i])>>
+<</for>>
+<</nobr>><</widget>>
+
+/* --- Compound expressions ------------------------------------ */
+<<widget "emote-smile">><<nobr>>
+<<emote-clear>>
+<<set $avatar.foreground.pushUnique("expression/mouth-smile.png")>>
+<<set $avatar.foreground.pushUnique("expression/brows-relaxed.png")>>
+<</nobr>><</widget>>
+
+<<widget "emote-frown">><<nobr>>
+<<emote-clear>>
+<<set $avatar.foreground.pushUnique("expression/mouth-frown.png")>>
+<<set $avatar.foreground.pushUnique("expression/brows-worried.png")>>
+<</nobr>><</widget>>
+
+<<widget "emote-surprised">><<nobr>>
+<<emote-clear>>
+<<set $avatar.foreground.pushUnique("expression/mouth-open.png")>>
+<<set $avatar.foreground.pushUnique("expression/brows-raised.png")>>
+<</nobr>><</widget>>
+
+<<widget "emote-angry">><<nobr>>
+<<emote-clear>>
+<<set $avatar.foreground.pushUnique("expression/mouth-frown.png")>>
+<<set $avatar.foreground.pushUnique("expression/brows-angry.png")>>
+<</nobr>><</widget>>
+
+<<widget "emote-calm">><<nobr>>
+<<emote-clear>>
+<<set $avatar.foreground.pushUnique("expression/mouth-calm.png")>>
+<<set $avatar.foreground.pushUnique("expression/brows-relaxed.png")>>
+<</nobr>><</widget>>
+
+/* --- Individual parts ---------------------------------------- */
+<<widget "emote-brows-attentive">><<nobr>>
+<<emote-clearBrows>>
+<<set $avatar.foreground.pushUnique("expression/brows-attentive.png")>>
+<</nobr>><</widget>>
+
+<<widget "emote-mouth-calm">><<nobr>>
+<<emote-clearMouth>>
+<<set $avatar.foreground.pushUnique("expression/mouth-calm.png")>>
+<</nobr>><</widget>>

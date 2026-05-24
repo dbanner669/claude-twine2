@@ -1,0 +1,97 @@
+:: UI Widgets [widget]
+/* ============================================================
+   UI UTILITY WIDGETS
+   Small reusable widgets for interface elements.
+   ============================================================ */
+
+<<widget "newFeatureIcon">><<nobr>>
+<div class="icon icon-new-feature"></div>
+<</nobr>><</widget>>
+
+<<widget "improvementIcon">><<nobr>>
+<div class="icon icon-improvement"></div>
+<</nobr>><</widget>>
+
+<<widget "header">><<nobr>>
+/* Renders the location/time header bar above passage text.
+   Set $header.location, $header.time, $header.weather, $header.status before calling. */
+<<if $header.location>>
+<div id="header-bar">
+    <div class="header-left">
+      <span class="header-location">$header.location</span>
+      <<if $header.time>><div class="header-time">$header.time</div><</if>>
+    </div>
+    <div class="header-right">
+      <<if $header.status>>
+        <span class="header-status">· <<print $header.status>></span>
+      <<else>>
+        <span class="header-status">· COMPOSED</span>
+      <</if>>
+      <<if $header.weather>>
+        <span class="header-weather"><<print $header.weather>></span>
+      <</if>>
+    </div>
+</div>
+<</if>>
+<</nobr>><</widget>>
+
+/* --- Character creation dossier shell ---
+   ccTabStrip: renders the 5-step tab indicator strip
+   ccDossierOpen: opens the dossier page with header
+   ccDossierFooter: renders the navigation footer inside the dossier
+   ------------------------------------------------------------ */
+
+<<widget "ccTabStrip">><<nobr>>
+<<set _step to _args[0]>>
+<<set _labels to ["Personnel", "Appearance", "Background", "The Incident", "Summary"]>>
+<div class="cc-tabs" style="grid-template-columns:repeat(5,1fr)">
+<<for _i to 0; _i lt 5; _i++>>
+<<set _cls to "cc-tab">>
+<<if (_i + 1) is _step>><<set _cls to _cls + " --active">>
+<<elseif (_i + 1) lt _step>><<set _cls to _cls + " --done">>
+<</if>>
+<<print '<div class="' + _cls + '"><span class="step-num">' + String(_i + 1).padStart(2, '0') + '</span> ' + _labels[_i] + '</div>'>>
+<</for>>
+</div>
+<</nobr>><</widget>>
+
+<<widget "ccDossierHeader">><<nobr>>
+<<set _ccTitle to _args[0]>>
+<<set _ccSub to (typeof _args[1] !== 'undefined') ? _args[1] : "">>
+<div class="cc-dossier-header">
+  <div>
+    <div class="eyebrow --brick">Branch · Personnel File</div>
+    <div class="page-title"><<print _ccTitle>></div>
+    <<if _ccSub>><div class="page-subtitle"><<print _ccSub>></div><</if>>
+  </div>
+  <div class="file-meta">
+    <span class="stamp" style="display:block;margin-bottom:10px">Classified</span>
+    <div class="file-no">FILE NO. 04-227-B<br>REV 11.23.2005</div>
+  </div>
+</div>
+<</nobr>><</widget>>
+
+<<widget "ccDossierFooter">><<nobr>>
+<<set _ccStep to _args[0]>>
+<<set _ccBack to (typeof _args[1] !== 'undefined') ? _args[1] : "">>
+<<set _ccNext to (typeof _args[2] !== 'undefined') ? _args[2] : "">>
+<<set _ccBackLabel to (typeof _args[3] !== 'undefined') ? _args[3] : "Back">>
+<<set _ccNextLabel to (typeof _args[4] !== 'undefined') ? _args[4] : "Continue">>
+<div class="cc-dossier-footer">
+  <div><<if _ccBack>><<link "← " + _ccBackLabel>><<goto _ccBack>><</link>><</if>></div>
+  <span class="step-counter">STEP <<print String(_ccStep).padStart(2, '0')>> / 05</span>
+  <div><<if _ccNext>><<link _ccNextLabel + " →">><<goto _ccNext>><</link>><</if>></div>
+</div>
+<</nobr>><</widget>>
+
+<<widget "bugreport">><<nobr>>
+<div class="bug-report">
+  <h3>Bug Report</h3>
+  <p>If you encounter a bug, please report it with:</p>
+  <ul>
+    <li>Current passage: <<print passage()>></li>
+    <li>Turns played: <<print turns()>></li>
+    <li>Save your game first, then describe the issue.</li>
+  </ul>
+</div>
+<</nobr>><</widget>>

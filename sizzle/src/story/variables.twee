@@ -1,0 +1,164 @@
+:: variables
+<<silently>>
+
+/* ============================================================
+   AVATAR STATE — 6-layer compositing system
+   Layers render bottom-to-top: background -> body -> bodyMods ->
+   underwear -> clothing -> foreground
+   ============================================================ */
+<<set $avatar = {
+    background: [],
+    body: [],
+    bodyMods: [],
+    underwear: [],
+    clothing: [],
+    foreground: [],
+    blink: false,
+    barefoot: false,
+    cleavage: false,
+    showRear: false,
+    rearViewEnabled: false
+}>>
+<<set $avatar.top to 0>>
+
+/* ============================================================
+   UI SETTINGS
+   ============================================================ */
+<<set $ui = {
+    avatarSize: 1,
+    textSize: 1
+}>>
+
+/* Header state — populated per-passage by <<header>> widget */
+<<set $header to {}>>
+
+/* Temporary per-passage state — reset on each passage transition */
+<<set $temp to {}>>
+
+/* ============================================================
+   PLAYER CHARACTER
+   ============================================================ */
+<<set $player = {
+    age: 27,
+    firstName: "Alex",
+    surname: "Morgan",
+    background: "",
+    complexion: "light",
+    nationality: "canadian",
+    kinks: [],
+    quirks: [],
+    attributes: {},
+    statusEffects: [],
+    personalBio: [],
+    achievements: [],
+    skills: {},
+    isWearing: [],
+    piercings: [],
+    tattoos: [],
+    hairColour: "Brown",
+    hairStyle: "Short bob",
+    eyeColour: "Blue",
+    eyeShape: "Almond",
+    faceShape: "oval",
+    noseShape: "Celestial",
+    mouthShape: "Cupid",
+    arousal: 0,
+    incitingIncident: ""
+}>>
+
+/* Cover identity — the persona used inside Sizzle
+   Not defined during character creation. Established in-story. */
+<<set $player.cover = {
+    firstname: "",
+    knownAs: "",
+    surname: ""
+}>>
+<<set $player.codename to "">>
+
+/* Skill initialization
+   Skills: academic, agent, athlete, confrontation, charmer,
+           streetwise, composure, sexology */
+<<set _skillNames to ["academic","agent","athlete","confrontation","charmer","streetwise","composure","sexology"]>>
+<<for _i to 0; _i lt _skillNames.length; _i++>>
+    <<set $player.skills[_skillNames[_i]] to {level: -4, xp: 0, specialities: []}>>
+<</for>>
+
+/* ============================================================
+   GAME STATE
+   ============================================================ */
+<<set $date to {
+    year: 2005,
+    month: 9,
+    day: 12,
+    hour: 8,
+    dayOfWeek: "Monday"
+}>>
+
+<<set $sizzle to {
+    suspicion: 0,
+    accessLevel: 0,
+    reputation: 0
+}>>
+
+/* ============================================================
+   NYSE TRACKING — hidden from the player
+   influence: how affected the player is by NYSE phenomena
+              goes up/down but does NOT decay naturally
+              starting value set by inciting incident choice
+   power:     the player developing abilities of their own
+              dormant in early game, manifests later
+   ============================================================ */
+<<set $nyse to {
+    influence: 0,
+    power: 0
+}>>
+
+/* ============================================================
+   IMAGE PATHS — media sits alongside output.html
+   ============================================================ */
+<<set $imagePath = {
+    base: "media/",
+    avatar: "media/avatar/",
+    ui: "media/ui/"
+}>>
+
+/* ============================================================
+   NOTIFICATION SYSTEM
+   ============================================================ */
+<<set $notifications = {
+    list: []
+}>>
+
+/* ============================================================
+   STATISTICS TRACKING
+   ============================================================ */
+<<set $statistics = new Map()>>
+
+/* ============================================================
+   SETUP NAMESPACE — static data (name lists, constants)
+   ============================================================ */
+
+<<set setup.backgrounds to [
+    "RCMP constable",
+    "CSIS analyst",
+    "grad student",
+    "unemployed after university"
+]>>
+
+<<set setup.firstNames to ["Alex", "Sam", "Jordan", "Casey", "Riley",
+    "Morgan", "Taylor", "Quinn", "Avery", "Blake",
+    "Cameron", "Drew", "Ellis", "Finley", "Harper",
+    "Kelly", "Logan", "Parker", "Sage", "Val"]>>
+
+<<set setup.surnames to ["Anderson", "Belanger", "Chen", "Duval", "Edwards",
+    "Fletcher", "Grant", "Hayes", "Ivanov", "Jensen",
+    "Kessler", "Lawson", "Monroe", "Nash", "Okafor",
+    "Palmer", "Quinn", "Reeves", "Singh", "Tremblay"]>>
+
+<<set setup.codenames to ["Falcon", "Ghost", "Hawk", "Jackal", "Lynx",
+    "Mantis", "Osprey", "Phantom", "Raven", "Viper",
+    "Wolf", "Cobra", "Eagle", "Fox", "Panther"]>>
+
+<<set setup.complexions to ["light", "medium", "dark"]>>
+
+<</silently>>

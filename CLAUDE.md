@@ -2,9 +2,10 @@
 
 ## Overview
 
-Two deliverables:
+Three projects:
 1. **twine-mcp-server/** — MCP server (Node.js/TypeScript) for programmatic Twine story interaction (32 tools)
 2. **twine-sugarcube-template/** — Reusable SugarCube game template extracted from Female Agent
+3. **sizzle/** — An adult interactive fiction game built on the SugarCube template. See `sizzle/CLAUDE.md` for game-specific documentation.
 
 ## Project Structure
 
@@ -31,6 +32,18 @@ Female Agent/
 │   │   └── content/           # Example passages (3 files)
 │   ├── build/                 # Tweego compilation scripts
 │   └── template-docs/         # Architecture and reference documentation
+├── sizzle/                    # Sizzle game project (active development)
+│   ├── src/
+│   │   ├── story/             # System passages (StoryInit, interface, variables, caption)
+│   │   ├── widgets/           # Reusable widgets (7 files: avatar, clothing, expressions, etc.)
+│   │   ├── scripts/           # JavaScript (5 files: macros, events, avatar, preload, index)
+│   │   ├── styles/            # CSS (8 files: reset, layout, avatar, passages, character-creator, notifications, tables, icons)
+│   │   └── content/           # Playable passages (main-menu, character-creator, briefing)
+│   ├── fonts/                 # WOFF2 web fonts (5 families, 8 files)
+│   ├── media/                 # Avatar layers, location images, UI assets
+│   ├── docs/                  # GDD, design brief, NPC profiles, greybox checklists
+│   ├── build/                 # Tweego compilation scripts
+│   └── CLAUDE.md              # Game-specific project instructions (start here)
 ├── _tools/tweego/             # Tweego compiler + story formats (gitignored)
 ├── Female_Agent_1.20.1P_offlin/  # Reference game (gitignored)
 └── Twine-2.12.0-Windows.exe     # Twine app (gitignored)
@@ -72,6 +85,10 @@ $env:TWEEGO_PATH = "_tools/tweego/storyformats"
 
 # Or if Tweego is in PATH:
 cd twine-sugarcube-template && tweego -o output.html src/
+
+# Sizzle game:
+$env:TWEEGO_PATH = "_tools/tweego/storyformats"
+& _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/
 ```
 
 ## Reference Game Stats

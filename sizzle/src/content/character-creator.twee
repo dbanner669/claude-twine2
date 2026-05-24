@@ -1,0 +1,280 @@
+:: CC-100 Name [avatar-hidden character-creation nighttime nobr]
+<<silently>><<emote-calm>><</silently>>
+<<ccTabStrip 1>>
+<div class="cc-dossier">
+<<ccDossierHeader "Identification" "Tonight's name needn't be your last. The Branch assigns the rest.">>
+<div class="cc-columns --wide-left">
+  <div>
+    <div class="cc-field">
+      <span class="cc-label">Given Name</span>
+      <<textbox "$player.firstName" $player.firstName>>
+    </div>
+    <div class="cc-field">
+      <span class="cc-label">Surname</span>
+      <<textbox "$player.surname" $player.surname>>
+    </div>
+    <<link '<span class="cc-randomize">Randomize Name</span>'>>
+        <<set $player.firstName to setup.firstNames.random()>>
+        <<set $player.surname to setup.surnames.random()>>
+        <<replace "#passages">><<include "CC-100 Name">><</replace>>
+    <</link>>
+  </div>
+  <div>
+    <div class="cc-service-record">
+      <div class="eyebrow" style="margin-bottom:14px">Service Record · Pre-fill</div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">File No.</span><span class="record-value">04-227-B</span></div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">Clearance</span><span class="record-value">Tier III — restricted</span></div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">Branch Entry</span><span class="record-value">September 2003</span></div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">Status</span><span class="record-value" style="color:var(--sz-composed)">Active · cleared</span></div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">Handler</span><span class="record-value">R. Flett</span></div>
+      <div class="record-row"><span class="eyebrow" style="font-size:10px">Next of Kin</span><span class="record-value" style="color:var(--sz-cream-faint);font-style:italic">none on file</span></div>
+      <span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(6deg)">Verified</span>
+    </div>
+    <div style="margin-top:18px;font-family:var(--sz-f-body);font-size:15px;font-style:italic;color:var(--sz-cream-soft);line-height:1.55;border-left:2px solid var(--sz-brass-dim);padding-left:14px">
+      "Codename and cover identity will be assigned after the physical-description pass. The Branch likes to see a face before it gives one back to you."
+    </div>
+  </div>
+</div>
+<<ccDossierFooter 1 "" "CC-200 Appearance">>
+</div>
+
+
+:: CC-200 Appearance [avatar-hidden character-creation nighttime nobr]
+<<ccTabStrip 2>>
+<div class="cc-dossier">
+<<ccDossierHeader "Physical Description" "Three choices per attribute. The Branch keeps it simple.">>
+<div class="cc-columns --wide-right">
+  <div>
+    <div class="cc-field">
+      <span class="cc-label">Skin Tone</span>
+      <div class="cc-options --cols-3">
+        <div class="cc-option">
+          <<if $player.complexion eq "light">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#e2bf9f"></div><span class="option-name">Light</span>'>><<set $player.complexion to "light">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.complexion eq "medium">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#a87a55"></div><span class="option-name">Medium</span>'>><<set $player.complexion to "medium">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.complexion eq "dark">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#4a2f1f"></div><span class="option-name">Dark</span>'>><<set $player.complexion to "dark">><<goto "CC-200 Appearance">><</link>>
+        </div>
+      </div>
+    </div>
+    <div class="cc-field">
+      <span class="cc-label">Hair Colour</span>
+      <div class="cc-options --cols-3">
+        <div class="cc-option">
+          <<if $player.hairColour eq "Brown">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#3a2818"></div><span class="option-name">Brown</span>'>><<set $player.hairColour to "Brown">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.hairColour eq "Black">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#1a1410"></div><span class="option-name">Black</span>'>><<set $player.hairColour to "Black">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.hairColour eq "Blonde">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#8c6438"></div><span class="option-name">Blonde</span>'>><<set $player.hairColour to "Blonde">><<goto "CC-200 Appearance">><</link>>
+        </div>
+      </div>
+    </div>
+    <div class="cc-field">
+      <span class="cc-label">Hair Style</span>
+      <div class="cc-options --cols-3">
+        <div class="cc-option">
+          <<if $player.hairStyle eq "Short bob">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:var(--sz-ink-4);height:56px"></div><span class="option-name">Short Bob</span>'>><<set $player.hairStyle to "Short bob">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.hairStyle eq "Long straight">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:var(--sz-ink-4);height:56px"></div><span class="option-name">Long Straight</span>'>><<set $player.hairStyle to "Long straight">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.hairStyle eq "Long curly">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:var(--sz-ink-4);height:56px"></div><span class="option-name">Long Curly</span>'>><<set $player.hairStyle to "Long curly">><<goto "CC-200 Appearance">><</link>>
+        </div>
+      </div>
+    </div>
+    <div class="cc-field">
+      <span class="cc-label">Eye Colour</span>
+      <div class="cc-options --cols-3">
+        <div class="cc-option">
+          <<if $player.eyeColour eq "Blue">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#5a6770"></div><span class="option-name">Blue</span>'>><<set $player.eyeColour to "Blue">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.eyeColour eq "Green">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#5a7a50"></div><span class="option-name">Green</span>'>><<set $player.eyeColour to "Green">><<goto "CC-200 Appearance">><</link>>
+        </div>
+        <div class="cc-option">
+          <<if $player.eyeColour eq "Brown">><span class="is-selected"></span><</if>>
+          <<link '<div class="swatch" style="background:#1f1814"></div><span class="option-name">Brown</span>'>><<set $player.eyeColour to "Brown">><<goto "CC-200 Appearance">><</link>>
+        </div>
+      </div>
+    </div>
+    <<link '<span class="cc-randomize">Randomize All</span>'>>
+        <<set $player.complexion to setup.complexions.random()>>
+        <<set $player.hairColour to either("Brown","Black","Blonde")>>
+        <<set $player.hairStyle to either("Short bob","Long straight","Long curly")>>
+        <<set $player.eyeColour to either("Blue","Green","Brown")>>
+        <<set $player.faceShape to either("round","heart","square","diamond","oval")>>
+        <<goto "CC-200 Appearance">>
+    <</link>>
+  </div>
+  <div>
+    <div class="cc-avatar-preview">
+      <div class="eyebrow" style="margin-bottom:10px">Preview</div>
+      <div class="cc-slot" style="width:100%;height:420px">avatar.composite.png<br>— layered preview —<br>base · hair · eyes · attire</div>
+      <div class="preview-footer">
+        <span>← LAYER</span>
+        <span>LAYER →</span>
+      </div>
+    </div>
+  </div>
+</div>
+<<ccDossierFooter 2 "CC-100 Name" "CC-300 Background">>
+</div>
+
+
+:: CC-300 Background [avatar-hidden character-creation nighttime nobr]
+<<ccTabStrip 3>>
+<div class="cc-dossier">
+<<ccDossierHeader "Pre-Branch Career" "What did you do before the Branch found a use for you?">>
+<div class="cc-columns --equal" style="gap:16px">
+  <div class="cc-bg-card">
+    <<if $player.background eq "RCMP constable">><span class="selected-tag">SELECTED</span><</if>>
+    <<link '<span class="card-title">RCMP Constable</span><span class="card-blurb">Three years posted to a detachment in Northern Ontario. Long shifts, domestic calls, highway patrols, the occasional missing person report that didn\'t add up. You were good at your job — steady, observant, hard to rattle.</span><span class="card-perks"><span class="perk">+ Confrontation +2</span><span class="perk">+ Composure +1</span><span class="perk">+ Athlete +1</span></span>'>>
+      <<set $player.background to "RCMP constable">>
+      <<goto "CC-300 Background">>
+    <</link>>
+  </div>
+  <div class="cc-bg-card">
+    <<if $player.background eq "CSIS analyst">><span class="selected-tag">SELECTED</span><</if>>
+    <<link '<span class="card-title">CSIS Analyst</span><span class="card-blurb">Intelligence analysis in Ottawa. You read reports, cross-referenced data, identified patterns no one else saw. You were never in the field — you were the person the field reported to. Your mind works in systems.</span><span class="card-perks"><span class="perk">+ Agent +2</span><span class="perk">+ Academic +1</span><span class="perk">+ Composure +1</span></span>'>>
+      <<set $player.background to "CSIS analyst">>
+      <<goto "CC-300 Background">>
+    <</link>>
+  </div>
+  <div class="cc-bg-card">
+    <<if $player.background eq "grad student">><span class="selected-tag">SELECTED</span><</if>>
+    <<link '<span class="card-title">Grad Student (Psychology)</span><span class="card-blurb">Master\'s program at York, clinical psychology. Your thesis on coercive persuasion and interpersonal influence caught the Branch\'s attention — interesting enough to recruit you before you finished.</span><span class="card-perks"><span class="perk">+ Academic +2</span><span class="perk">+ Charmer +1</span><span class="perk">+ Sexology +1</span></span>'>>
+      <<set $player.background to "grad student">>
+      <<goto "CC-300 Background">>
+    <</link>>
+  </div>
+  <div class="cc-bg-card">
+    <<if $player.background eq "unemployed after university">><span class="selected-tag">SELECTED</span><</if>>
+    <<link '<span class="card-title">Unemployed After University</span><span class="card-blurb">BA from Ryerson, no job prospects, a lot of student debt, and too much free time spent in places your parents wouldn\'t approve of. You learned things about people — and about yourself — that don\'t go on a resume.</span><span class="card-perks"><span class="perk">+ Streetwise +1</span><span class="perk">+ Sexology +1</span><span class="perk">+ Composure +1</span></span>'>>
+      <<set $player.background to "unemployed after university">>
+      <<goto "CC-300 Background">>
+    <</link>>
+  </div>
+</div>
+<<ccDossierFooter 3 "CC-200 Appearance" "CC-400 Incident">>
+</div>
+
+
+:: CC-400 Incident [avatar-hidden character-creation nighttime nobr]
+<<ccTabStrip 4>>
+<div class="cc-dossier">
+<<ccDossierHeader "The Incident" "There is a year of your file that no one talks about. Not even you.">>
+<div class="cc-columns --left-heavy" style="gap:48px">
+  <div>
+    <div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative">
+      <span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(-10deg)">Redacted</span>
+      <div class="eyebrow --brick" style="margin-bottom:14px">File Extract · 09.2003</div>
+      <div style="font-family:var(--sz-f-body);font-size:16px;line-height:1.7;color:var(--sz-cream-soft)">
+        On the night of <span class="redact" style="width:70px"></span>, the subject reported for debrief at <span class="redact" style="width:110px"></span> in the company of <span class="redact" style="width:130px"></span>. Initial statements were consistent with the account given by <span class="redact" style="width:90px"></span>, however subsequent interviews revealed <span class="redact" style="width:60px"></span> <span class="redact" style="width:140px"></span> <span class="redact" style="width:80px"></span>.
+        <br><br>
+        The subject's recollection of events between <span class="redact" style="width:50px"></span> and <span class="redact" style="width:50px"></span> hours remains incomplete. Polygraph: <span style="color:var(--sz-brass);font-style:italic">inconclusive</span>. Psychiatric clearance: <span style="color:var(--sz-composed)">granted</span> on condition of <span class="redact" style="width:120px"></span>.
+        <br><br>
+        The Branch considers the file <span style="font-style:italic">operationally closed</span>. The subject does not.
+      </div>
+    </div>
+    <div style="margin-top:18px;font-family:var(--sz-f-mono);font-size:11px;color:var(--sz-cream-faint);letter-spacing:0.12em">
+      ※ Full text available upon completion of in-game memory recovery.
+    </div>
+  </div>
+  <div>
+    <div class="eyebrow" style="margin-bottom:14px">What do you remember?</div>
+    /* TODO: Replace with actual inciting incident options.
+       Each option should set $player.incitingIncident and
+       potentially $nyse.influence starting value.
+       The memory-checkbox format below is a placeholder
+       matching the Claude Design layout. */
+    <div style="display:grid;gap:10px">
+      <div class="cc-memory-option --faded">
+        <div class="checkbox"></div>
+        <span class="memory-text">Inciting incident options will be developed during the writing phase.</span>
+      </div>
+    </div>
+    <div style="margin-top:22px;font-family:var(--sz-f-body);font-size:14px;font-style:italic;color:var(--sz-cream-faint);line-height:1.55">
+      [ This section will gate scenes in Act II. Final design pending narrative outline. ]
+    </div>
+  </div>
+</div>
+<<ccDossierFooter 4 "CC-300 Background" "CC-500 Summary">>
+</div>
+
+
+:: CC-500 Summary [avatar-hidden character-creation nighttime nobr]
+<<silently>>
+<<set $player.codename to setup.codenames.random()>>
+/* Apply skill bonuses based on background */
+<<switch $player.background>>
+<<case "RCMP constable">>
+    <<set $player.skills.confrontation.level += 2>>
+    <<set $player.skills.composure.level += 1>>
+    <<set $player.skills.athlete.level += 1>>
+<<case "CSIS analyst">>
+    <<set $player.skills.agent.level += 2>>
+    <<set $player.skills.academic.level += 1>>
+    <<set $player.skills.composure.level += 1>>
+<<case "grad student">>
+    <<set $player.skills.academic.level += 2>>
+    <<set $player.skills.charmer.level += 1>>
+    <<set $player.skills.sexology.level += 1>>
+<<case "unemployed after university">>
+    <<set $player.skills.streetwise.level += 1>>
+    <<set $player.skills.sexology.level += 1>>
+    <<set $player.skills.composure.level += 1>>
+<</switch>>
+/* Branch training: two years adds baseline competence */
+<<set $player.skills.agent.level += 1>>
+<<set $player.skills.composure.level += 1>>
+<</silently>>
+<<ccTabStrip 5>>
+<div class="cc-dossier">
+<<ccDossierHeader "Personnel Summary" "Review and sign. The file goes to the vault at 06:00.">>
+<div class="cc-columns --wide-right">
+  <div>
+    <table class="cc-summary">
+        <tr><td>Name</td><td>$player.firstName $player.surname</td></tr>
+        <tr><td>Codename</td><td>$player.codename</td></tr>
+        <tr><td>Age</td><td>$player.age</td></tr>
+        <tr><td>Skin Tone</td><td>$player.complexion</td></tr>
+        <tr><td>Hair</td><td>$player.hairColour, $player.hairStyle</td></tr>
+        <tr><td>Eyes</td><td>$player.eyeColour</td></tr>
+        <tr><td>Face</td><td>$player.faceShape</td></tr>
+        <tr><td>Background</td><td>$player.background</td></tr>
+        <tr><td>Status</td><td><span style="color:var(--sz-composed)">Cleared for deployment</span></td></tr>
+    </table>
+  </div>
+  <div>
+    <div class="cc-avatar-preview">
+      <div class="eyebrow" style="margin-bottom:10px">Composite</div>
+      <div class="cc-slot" style="width:100%;height:300px">final avatar<br>composite</div>
+    </div>
+    <div class="cc-signature" style="margin-top:20px">
+      <div class="eyebrow" style="margin-bottom:10px">Sign</div>
+      <div class="sig-line">$player.firstName $player.surname</div>
+      <div class="sig-meta">SIGNATURE · <<print String($date.month).padStart(2,'0')>>.<<print String($date.day).padStart(2,'0')>>.<<print $date.year>> · BRANCH HQ</div>
+    </div>
+  </div>
+</div>
+<div class="cc-classified" style="margin-top:28px;font-family:var(--sz-f-body);font-size:14px;font-style:italic;color:var(--sz-cream-faint)">
+  CLASSIFIED — Branch personnel file. Unauthorized access is an offence under the Security of Information Act.
+</div>
+<<ccDossierFooter 5 "CC-400 Incident" "INTRO-100 Briefing" "Back" "Sign & Deploy">>
+</div>

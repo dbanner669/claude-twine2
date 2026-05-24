@@ -1,0 +1,81 @@
+:: Avatar Display [widget]
+/* ============================================================
+   AVATAR WIDGET — Renders the 6-layer compositing system
+   Each layer is an array of image filenames that get stacked
+   as absolutely-positioned images inside the avatar container.
+   ============================================================ */
+<<widget "avatar">><<nobr>>
+
+/* Background layer — sky, room, environment */
+<<for _i to 0; _i lt $avatar.background.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.background[_i]">
+<</for>>
+
+/* Body layer — base character sprite */
+<<for _i to 0; _i lt $avatar.body.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.body[_i]">
+<</for>>
+
+/* Body modifications — tattoos, scars, piercings */
+<<for _i to 0; _i lt $avatar.bodyMods.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.bodyMods[_i]">
+<</for>>
+
+/* Underwear layer */
+<<for _i to 0; _i lt $avatar.underwear.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.underwear[_i]">
+<</for>>
+
+/* Clothing layer — outerwear */
+<<for _i to 0; _i lt $avatar.clothing.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.clothing[_i]">
+<</for>>
+
+/* Foreground layer — expressions, overlays, effects */
+<<for _i to 0; _i lt $avatar.foreground.length; _i++>>
+    <img class="avatar-layer" @src="$imagePath.avatar + $avatar.foreground[_i]">
+<</for>>
+
+<</nobr>><</widget>>
+
+
+:: Avatar Helpers [widget]
+/* ============================================================
+   AVATAR HELPER WIDGETS — Clear, set body, toggle rear view
+   ============================================================ */
+
+<<widget "avatar-clear">><<nobr>>
+<<set $avatar.background to []>>
+<<set $avatar.body to []>>
+<<set $avatar.bodyMods to []>>
+<<set $avatar.underwear to []>>
+<<set $avatar.clothing to []>>
+<<set $avatar.foreground to []>>
+<</nobr>><</widget>>
+
+<<widget "avatar-setBody">><<nobr>>
+/* Usage: <<avatar-setBody "fair">> */
+/* $args[0] = complexion key (e.g., "fair", "tan", "dark") */
+<<set $avatar.body to ["20_body-" + $args[0] + ".png"]>>
+<</nobr>><</widget>>
+
+<<widget "avatar-setBackground">><<nobr>>
+/* Usage: <<avatar-setBackground "room-office.png">> */
+<<set $avatar.background to [$args[0]]>>
+<</nobr>><</widget>>
+
+<<widget "avatar-addClothing">><<nobr>>
+/* Usage: <<avatar-addClothing "tops/blackTshirt.png">> */
+<<set $avatar.clothing.pushUnique($args[0])>>
+<</nobr>><</widget>>
+
+<<widget "avatar-removeClothing">><<nobr>>
+/* Usage: <<avatar-removeClothing "tops/blackTshirt.png">> */
+<<set $avatar.clothing.delete($args[0])>>
+<</nobr>><</widget>>
+
+<<widget "avatar-checkBarefoot">><<nobr>>
+<<if $avatar.barefoot>>
+    <<set $avatar.clothing.delete($avatar._lastShoes)>>
+<</if>>
+<</nobr>><</widget>>

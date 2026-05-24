@@ -1,0 +1,133 @@
+/* ============================================================
+   NOTIFICATIONS — Toast-style alerts
+   Top-right stack. Four kinds: info, success, warn, hot.
+   Rendered by <<showNotifications>> in PassageDone.
+   ============================================================ */
+
+/* --- Toast container (fixed top-right) ----------------------- */
+#toasts,
+.notifications-container {
+  position: fixed;
+  top: 76px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 80;
+  pointer-events: none;
+}
+
+#toasts .toast,
+.notifications-container .notification {
+  pointer-events: auto;
+}
+
+
+/* --- Individual toast ---------------------------------------- */
+.toast,
+.notification {
+  width: 360px;
+  background: var(--sz-ink-2);
+  border: 1px solid var(--sz-rule);
+  border-left: 3px solid var(--sz-brass);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  box-shadow: var(--sz-shadow-card);
+  font-family: var(--sz-f-body);
+  animation: sz-toast-in 0.24s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+
+/* --- Toast kinds --------------------------------------------- */
+.toast.--success,
+.notification.--success { border-left-color: var(--sz-composed); }
+.toast.--warn,
+.notification.--warn    { border-left-color: var(--sz-rattled); }
+.toast.--hot,
+.notification.--hot     { border-left-color: var(--sz-brick); }
+
+
+/* --- Toast icon ---------------------------------------------- */
+.toast .icon,
+.notification .icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  display: grid;
+  place-items: center;
+  font-family: var(--sz-f-ui);
+  font-size: 14px;
+  color: var(--sz-brass);
+}
+
+.toast.--success .icon { color: var(--sz-composed); }
+.toast.--warn .icon    { color: var(--sz-rattled); }
+.toast.--hot .icon     { color: var(--sz-brick-glow); }
+
+
+/* --- Toast label (category) ---------------------------------- */
+.toast .label,
+.notification .label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  margin-bottom: 3px;
+}
+
+.toast.--success .label { color: var(--sz-composed); }
+.toast.--warn .label    { color: var(--sz-rattled); }
+.toast.--hot .label     { color: var(--sz-brick-glow); }
+
+
+/* --- Toast body text ----------------------------------------- */
+.toast .body,
+.notification .body {
+  font-size: 15px;
+  color: var(--sz-cream);
+  line-height: 1.4;
+}
+
+
+/* --- Toast age (timestamp) ----------------------------------- */
+.toast .age {
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  color: var(--sz-cream-faint);
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+
+/* --- Animations ---------------------------------------------- */
+@keyframes sz-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast.--leaving,
+.notification.--leaving {
+  animation: sz-toast-out 0.32s forwards;
+}
+
+@keyframes sz-toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+/* --- Stack rules --------------------------------------------- */
+/* Max 4 visible; JS handles oldest-drops-first and pause on hover.
+   Spec: slide-in 240ms, linger 4s, fade 320ms. */

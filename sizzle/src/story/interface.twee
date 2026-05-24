@@ -1,0 +1,40 @@
+:: StoryInterface
+<div id="game">
+  <header id="header">
+    <span class="wordmark">Sizzle</span>
+    <div class="header-divider"></div>
+    <a href="#" data-target="#logo-dropdown" class="dropdown-toggle">
+      <span style="font-family:var(--sz-f-ui);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--sz-brass-dim)">MENU</span>
+    </a>
+    <div id="logo-dropdown" class="dropdown-content">
+      <a id="restartId" href="#">Restart</a>
+    </div>
+    <div id="ui-bar-history">
+      <button id="history-backward" tabindex="0">&#x2039;</button>
+      <button id="history-forward" tabindex="0">&#x203A;</button>
+    </div>
+    <div id="menu">
+      <a id="characterId" href="#">Character</a>
+      <a id="savesId" href="#">Saves</a>
+      <a id="settingsId" href="#">Settings</a>
+    </div>
+  </header>
+  <div id="game-inner">
+    <div id="avatar" class="avatar">
+      <div class="avatar-inner">
+        <div class="avatar-abs">
+          <div id="avatar-container" data-passage="StoryCaption" class="avatar-image">
+          </div>
+        </div>
+        <div class="avatar-meta" data-passage="AvatarMeta">
+        </div>
+      </div>
+    </div>
+    <div id="passages" class="game-main"></div>
+  </div>
+  <footer id="footer">
+    <span class="footer-save" data-passage="FooterStatus"></span>
+    <span class="footer-center">♥ AUTOSAVE ON · QUICK SAVE F5</span>
+    <span class="footer-version">v 0.1.0</span>
+  </footer>
+</div>

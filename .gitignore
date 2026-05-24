@@ -23,8 +23,9 @@ _tools/
 # Extracted reference files
 _extracted/
 
-# Template build output
+# Build output
 twine-sugarcube-template/output.html
+sizzle/output.html
 
 # MCP server story persistence
 twine-mcp-server/stories/

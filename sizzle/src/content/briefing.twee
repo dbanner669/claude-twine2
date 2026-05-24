@@ -1,0 +1,661 @@
+:: INTRO-100 Briefing [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+/* Scene state object — persists across passages (unlike $temp which resets) */
+<<set $briefing to {}>>
+<</silently>>\
+<<header>>\
+<<page>>\
+The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since 1982.  Fran's on College — the real one, not the Yonge Street tourist trap — where the booths are orange vinyl and the light is the colour of weak tea.  It's the kind of place where nobody looks at you twice, which is the point.
+
+You're early.  You're always early for Robert.
+
+[[You sip your coffee and watch the door.|INTRO-105 Waiting]]
+<</page>>
+
+
+:: INTRO-105 Waiting [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The waitress brings coffee without being asked — you've been here before, enough times that she recognizes the booth but not your name.  You wrap your hands around the mug and watch the door.
+
+Outside, a streetcar grinds past on College, the sound arriving a half-second before the vibration through the floor.  September in Toronto.  Still warm, but the light has changed — that particular quality of autumn sun that makes the city look like it's been dipped in amber.
+
+<<if $player.background eq "RCMP constable">>You used to drink coffee like this at the detachment — institutional, slightly burnt.  The ritual is the same even if the context has shifted.
+<<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.  The stakes are different.
+<<elseif $player.background eq "grad student">>There's a woman two booths over eating eggs alone and staring at nothing.  The part of your brain that studied behavioural patterns can't stop reading the room.  You look away.  Not a case study.
+<<else>>Two years ago you wouldn't have known what to look for in a diner — the exits, the sightlines, the two men at the counter reading the same section of the Star.  Training changes how you see a room.
+<</if>>
+
+[[Continue|INTRO-110 Robert arrives]]
+<</page>>
+
+
+:: INTRO-110 Robert arrives [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the Globe that looks like it's already been read.
+
+He doesn't look like a man who tracks the inexplicable for a living.  He looks like a mid-level bureaucrat — brown skin that could read as a lot of things to someone who isn't paying attention, hair going grey at the temples, a jacket that's seen better years.
+
+[[The one thing that doesn't match is his hands.|INTRO-115 Morning]]
+<</page>>
+
+
+:: INTRO-115 Morning [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Working hands, scarred across the knuckles.  You noticed them the first day you met him, two years ago, and you still don't know the story.
+
+He slides into the booth across from you, sets the Globe on the table, and signals the waitress with a look that somehow communicates both "coffee" and "not yet" about the food.
+
+"Morning," he says.
+
+[["Morning."|INTRO-200 Assignment]]
+[["You look tired."|INTRO-200a Personal]]
+<</page>>
+
+
+:: INTRO-200a Personal [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He gives you a look — not annoyed, just noting it.  "Long weekend."  Which from Robert means he spent it reading case files, not at a cottage.  He lets a beat pass, then moves on.  He always moves on.
+
+He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
+
+"I have an assignment for you," he says.  "Your first sustained field placement."
+
+[[The weight of those words settles over the table.|INTRO-205 Field placement]]
+<</page>>
+
+
+:: INTRO-200 Assignment [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He nods.  Takes the coffee from the waitress, adds one cream, stirs it exactly three times.  Same as always.
+
+He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
+
+"I have an assignment for you," he says.  "Your first sustained field placement."
+
+[[The weight of those words settles over the table.|INTRO-205 Field placement]]
+<</page>>
+
+
+:: INTRO-205 Field placement [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on NYSE classification protocols and learning to shoot at a range in Barrie that the Branch pretends is a conservation club.
+
+This is what it was for.
+
+"There's a club on Queen West," he says.  "Members-only.  Been operating for about four years.  Called Sizzle."
+
+He says the name without inflection, like it's a case number.
+
+"It's a swingers club."
+
+[[You let the silence do the work.|INTRO-210 Swingers club]]
+<</page>>
+
+
+:: INTRO-210 Swingers club [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Another pause.  Robert is very good at pauses.  He uses them the way other people use emphasis — to let the weight of a word settle before he puts the next one on top.
+
+"The Branch has been tracking anomalous reports associated with the club and its membership for the past fourteen months.  Behavioural changes in regular members — progressive, directional, consistent enough to flag NYSE classification."
+
+He takes a sip of coffee.  Puts the mug down.
+
+"We don't have anyone inside.  We need someone inside."
+
+[["What kind of anomalous?"|INTRO-300 NYSE details]]
+[["What's my cover?"|INTRO-310 Cover]]
+[["A swingers club."|INTRO-320 Reaction]]
+<</page>>
+
+
+:: INTRO-300 NYSE details [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert turns his coffee mug a quarter rotation.  He does this when he's choosing his words.
+
+"Influence patterns," he says.  "Members who've been attending regularly show progressive changes in behaviour and personality.  Not sudden — gradual.  Each step looks like a natural extension of the one before it.  A person who was relatively conservative six months ago is now doing things they wouldn't have imagined a year prior."
+
+He looks past you for a moment, at something outside the window or something in a case file he read in 1993.
+
+"The escalation is the signature."
+
+[[Continue|INTRO-305 NYSE continued]]
+<</page>>
+
+
+:: INTRO-305 NYSE continued [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"We've also picked up reports of intrusive ideation.  Desires that feel implanted rather than organic.  Attraction to specific individuals that doesn't match established patterns.  Some reports of altered time perception inside the club.  Memory inconsistencies."
+
+<<if $player.background eq "CSIS analyst">>You recognize the briefing structure — he's presenting the indicators without the conclusion, letting you draw it yourself.  An analyst's habit.
+<</if>>
+
+"Everything we have is secondhand.  A therapist.  A spouse.  An acquaintance we recruited.  The members themselves don't know they're being observed."
+
+He meets your eyes.  "Which is why we need primary observation."
+
+[["What's actually causing it?"|INTRO-330 Source]]
+[["Walk me through the operational setup."|INTRO-400 Apartment]]
+<</page>>
+
+
+:: INTRO-310 Cover [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He almost smiles.  Almost.  The corners of his mouth do something that in another man might be amusement.
+
+"Straight to operational.  Good."  He shifts in the booth, leaning forward slightly — the shift from briefing officer to handler.
+
+"The cover is employment.  You're going to get a job at Sizzle.  Not as a member — as staff.  Bartender, hostess, coat check — whatever they're hiring for.  The Branch will set you up with an apartment in the neighbourhood, a backstory, documents."
+
+"Nothing suspicious about a young woman wanting a job at a bar."
+
+[[Continue|INTRO-315 Cover continued]]
+<</page>>
+
+
+:: INTRO-315 Cover continued [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"The objective is access.  Get inside, observe, report.  Build relationships with staff and regular members.  Watch for anything that matches the NYSE indicators."
+
+He leans back.
+
+"The secondary objective — the reason we're not sending someone from Metro Police — is that you have NYSE training.  You know what to look for and, more importantly, you know what it feels like when something isn't right."
+
+[["What kind of anomalous reports are we talking about?"|INTRO-300 NYSE details]]
+[["Why me specifically?"|INTRO-340 Why me]]
+[["What are the risks?"|INTRO-400 Apartment]]
+<</page>>
+
+
+:: INTRO-320 Reaction [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+You say it flat.  Not a question, not a judgment — just the words, sitting there between you on the table like the sugar dispenser.
+
+Robert doesn't blink.  "A swingers club.  Members-only, well-established, well-regarded within its community.  Not a front.  A functioning club with a real membership, real events, real —" he pauses — "activities.  That is the operational environment."
+
+There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the kitchen, someone drops a plate and swears in Greek.
+
+[["I don't have any concerns.  Walk me through it."|INTRO-325 No concerns]]
+<</page>>
+
+
+:: INTRO-325 No concerns [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"The assignment is intelligence-gathering in a sexually explicit environment," Robert says.  "That is what it is.  The NYSE element is why it's Branch instead of Vice.  If you have concerns about the nature of the work, this is the time to raise them."
+
+<<if $player.background eq "grad student">>You wrote a thesis chapter on environments like this — the social dynamics, the consent frameworks, the group psychology.  Studying it is one thing.  Working inside it is something else.
+<<elseif $player.background eq "unemployed after university">>You've been in places like this.  Not as an agent — as a person.  That's a different kind of knowledge, and it's sitting in your chest right now doing something complicated.
+<</if>>
+
+[["No concerns.  Walk me through it."|INTRO-400 Apartment]]
+[["What kind of anomalous reports are we talking about?"|INTRO-300 NYSE details]]
+[["Why me specifically?"|INTRO-340 Why me]]
+<</page>>
+
+
+:: INTRO-330 Source [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert is quiet for a moment.  It's a different quiet than his briefing pauses — less structured, more considered.
+
+"We don't know," he says.  And then, because he's Robert: "The Branch has classified the source as undetermined.  Current working hypotheses include an individual or individuals with anomalous capabilities, an environmental factor, or a combination."
+
+He picks up his coffee, looks at it, puts it back down.
+
+"In my experience —" he starts, then catches himself.  Starts again with the government version.  "In cases with this profile, there's usually a focal point."
+
+[[Continue|INTRO-335 Focal point]]
+<</page>>
+
+
+:: INTRO-335 Focal point [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"Something or someone that's generating the effect.  Finding that focal point is part of what you'll be looking for."
+
+<<if $player.skills.academic.level gte 0>>You catch the shift.  //In my experience.//  Robert has seen cases like this before.  He was going to say something from that experience, and then he put the government language back on.
+
+You file that away.
+<</if>>
+
+"But that's secondary to primary observation," he says, back on firm procedural ground.  "Your first priority is establishing cover and reporting what you see.  Don't go looking for the source.  Let the picture come to you."
+
+[["Understood.  Walk me through the operational setup."|INTRO-400 Apartment]]
+<</page>>
+
+
+:: INTRO-340 Why me [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert's expression doesn't change, but something behind it shifts — a microsecond of something that isn't discomfort, exactly, but might be its professional cousin.
+
+"The assignment requires a credibly attractive woman under thirty who has completed Branch NYSE training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
+
+He takes three deliberate sips of coffee to put space between the clinical assessment and whatever comes next.
+
+[[Continue|INTRO-345 Qualified]]
+<</page>>
+
+
+:: INTRO-345 Qualified [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"You're good at reading people.  You can hold a conversation and a cover simultaneously.  You don't rattle easily.  And you understand NYSE classification well enough to recognize indicators in the field."
+
+<<if $player.background eq "grad student">>You studied persuasion and influence for two years.  You know when someone is framing a limited choice as a compliment.  Right now, Robert is not saying: //and I don't have anyone else.//
+<<elseif $player.background eq "RCMP constable">>Three years of reading people on traffic stops and domestic calls taught you when someone is leaving something out.  Robert means everything he just said.  He also means something he didn't say.
+<<else>>There's a gap between his list of qualifications and his actual answer, and you can feel the shape of it.  The truth is simpler: the Branch doesn't have many options, and you're the best one.
+<</if>>
+
+"I wouldn't send you if I didn't think you could do it," he adds.  Quieter.  Not government anymore — Robert.
+
+[["Walk me through the operational details."|INTRO-400 Apartment]]
+<</page>>
+
+
+:: INTRO-400 Apartment [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert reaches into his jacket — not a folder, just a single sheet of paper folded twice.  He unfolds it on the table between the coffee mugs.  An address, a phone number, a short list in his careful handwriting.
+
+"Operational details," he says, and now he's all handler.
+
+"The Branch is setting up an apartment for you in Parkdale — close enough to the club to be plausible, far enough to not be conspicuous.  You'll have it by Wednesday.  Furnished, first and last covered through a shell company.  Cover name and documents will be ready by then."
+
+[[Continue|INTRO-405 Reporting]]
+<</page>>
+
+
+:: INTRO-405 Reporting [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He taps the paper.
+
+"You'll report to me directly.  Once a week to start, in-person, locations rotate.  If you need me urgently, there's a contact protocol — I'll walk you through it at the office."
+
+He holds your gaze.
+
+"If your cover is compromised — if someone at the club identifies you as Branch or law enforcement — you walk out.  Immediately.  You do not try to recover the cover.  You leave, you go to a pre-arranged location, and you wait for extraction."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-410 Rules [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"One more thing.  Don't go looking for the NYSE directly.  Don't break cover to investigate.  Be patient.  You're there to observe and report.  The analysis happens on this end."
+
+He folds his hands on the table.
+
+"Your job is to be a reliable pair of eyes inside that building."
+
+<<if not hasVisited("INTRO-300 NYSE details")>>\
+<<link "Tell me more about the NYSE reports.">><<goto "INTRO-500 Question NYSE">><</link>>
+<<else>>\
+<span class="greyedOut">//Tell me more about the NYSE reports.//</span>
+<</if>>
+<<if not hasVisited("INTRO-510 Question club")>>\
+<<link "Tell me more about the club itself.">><<goto "INTRO-510 Question club">><</link>>
+<<else>>\
+<span class="greyedOut">//Tell me more about the club itself.//</span>
+<</if>>
+<<if not hasVisited("INTRO-520 Question risk")>>\
+<<link "What's the risk assessment?">><<goto "INTRO-520 Question risk">><</link>>
+<<else>>\
+<span class="greyedOut">//What's the risk assessment?//</span>
+<</if>>
+<<if not hasVisited("INTRO-530 Question previous")>>\
+<<link "Have you sent anyone in before?">><<goto "INTRO-530 Question previous">><</link>>
+<<else>>\
+<span class="greyedOut">//Have you sent anyone in before?//</span>
+<</if>>
+
+[[Continue|INTRO-600 Subtext]]
+<</page>>
+
+
+:: INTRO-500 Question NYSE [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"Can you tell me more about the NYSE indicators?"
+
+Robert takes a slow breath — the particular care he takes when bridging the gap between what the Branch knows and what it means.
+
+"The pattern is escalation.  Members attending for six months or more show measurable personality shifts.  Progressive disinhibition.  Altered risk assessment.  And in several cases, desires that the subjects themselves describe as foreign.  'Not like me.'  That's a direct quote from an asset's notes."
+
+He turns his coffee mug.
+
+"And dreams.  Vivid, persistent, thematically consistent.  Several subjects reported dreaming about the club on nights they didn't attend."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-510 Question club [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"What do you know about the club itself?"
+
+Robert nods — the question he expected first.
+
+"Sizzle has been operating for approximately four years.  Heritage property, Victorian-era, corner lot.  Members-only, vetted entry.  Events several nights a week.  The membership is cross-sectional — professionals, creatives, some local names you'd recognize."
+
+"The owner operates under the name Viktor Reeves.  Thin file — business registration, property records.  Nothing that triggers on its own.  The club runs clean on paper."
+
+"Which is either good management or a very effective front.  That's what you're going to find out."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-520 Question risk [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"What's the risk assessment?"
+
+"Moderate to high," Robert says, without the usual bureaucratic hedging.  "The NYSE element makes it unpredictable.  Prolonged exposure represents a genuine cognitive risk.  You will be affected.  The question is degree."
+
+He lets that sit.
+
+"Composure training gives you tools.  It gives you awareness.  But there's a difference between understanding NYSE indicators in a briefing room and experiencing them in the field."  He pauses.  "In a club."
+
+"The physical risk is lower.  The danger here is cognitive, not physical.  Which, in my experience, is harder to see coming."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-530 Question previous [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"Have you sent anyone in before?"
+
+The pause is longer than usual.  Long enough that the waitress refills both your coffees and leaves before Robert speaks.
+
+"No," he says.  "This is the Branch's first direct intelligence operation targeting Sizzle."
+
+You wait.  Robert is a man who uses silence, but he also respects when someone uses it back.
+
+"We considered it eighteen months ago.  The operational profile at the time didn't justify the risk.  It does now."
+
+<<if $player.skills.composure.level gte 0>>He's telling the truth, but it's not the whole truth.  He's deciding whether to tell you the rest now or later.  He decides on later.
+<</if>>
+
+"You'll be the first.  No playbook.  That's a disadvantage and an advantage."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-600 Subtext [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert folds the paper and slides it across the table to you.  "Wednesday, 10 AM, the office.  Full ops briefing, documents, keys."
+
+He picks up his coffee and finishes it in one long pull — a practical man finishing a practical beverage.
+
+And then there's a moment.
+
+Not a dramatic one.  Just a small hitch in Robert's efficiency.  He puts the mug down and his hand stays on it for a beat too long, and he looks at you, and his expression is exactly the same as it always is, except —
+
+[[Continue|INTRO-610 Reading Robert]]
+<</page>>
+
+
+:: INTRO-610 Reading Robert [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+/* Skill check: can the player read Robert's unease? */
+<<set _checkSkill to $player.skills.composure.level>>
+<<set _checkDifficulty to 1>>
+<<rollDice "2d6">>
+<<set _checkResult to _diceResult + _checkSkill>>
+<</silently>>\
+<<header>>\
+<<page>>\
+<<if _checkResult gte _checkDifficulty>>\
+<<set $briefing.readRobert to true>>\
+Except it isn't.
+
+You've sat across from this man in dozens of briefings.  You've learned his rhythms — the pauses, the mug rotations, the way he deploys silence like punctuation.  You know his resting face.
+
+And right now, under the steady professional surface, Robert Flett is worried.  Not about the operation.  He's worried about //you//.
+
+<<addNotification "Composure check: passed.  You read Robert's concern.">>
+
+[["You're worried about me."|INTRO-620 Called out]]
+[[Say nothing.  Let it pass.|INTRO-700 Outside]]
+<<else>>\
+Except — you're not sure.  There's something there, in the way he's holding the mug, but you can't quite read it.  Two years of training and you still can't always crack Robert Flett.
+
+The man is a closed system.
+
+<<addNotification "Composure check: failed.">>
+
+Whatever it was, it passes.  He releases the mug and straightens in the booth.
+
+[[Continue|INTRO-700 Outside]]
+<</if>>
+<</page>>
+
+
+:: INTRO-620 Called out [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<<set $briefing.calledOut to true>>
+<</silently>>\
+<<header>>\
+<<page>>\
+His eyes meet yours.  For a second — less than a second — the handler isn't there.  Just Robert, a man in his late forties who has been doing this work for longer than you've been out of school, looking at someone he trained and feeling the specific weight of what that means.
+
+"I selected you for this assignment because you're the most qualified candidate available," he says.  And it's true.
+
+"But yes."
+
+Two words.  He doesn't elaborate.  He doesn't need to.
+
+<<addNotification "You saw through Robert's composure.  He trusts you enough to let you.">>
+
+[[Continue|INTRO-630 Moment passes]]
+<</page>>
+
+
+:: INTRO-630 Moment passes [daytime]
+<<silently>>
+<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The waitress comes by and asks if they want anything else.  Robert says no thank you and reaches for his wallet.
+
+The moment is over.  It existed for exactly as long as it needed to, and now it's filed in the space between professional and personal where Robert keeps the things he can't put in reports.
+
+[[Continue|INTRO-700 Outside]]
+<</page>>
+
+
+:: INTRO-700 Outside [daytime]
+<<silently>>
+<<set $header.location to "College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert pays for both coffees — he always does, out of pocket, never expensed.  You noticed that about six months in and never mentioned it.
+
+Outside, College Street is doing what it does on a Monday morning.  Students heading to U of T with backpacks and coffee cups.  A man unlocking the door of a used bookshop.  The 506 streetcar rattling west, the doors hissing open for no one at the stop across the road.
+
+September sun on old brick.  Toronto being unremarkably, specifically itself.
+
+[[Continue|INTRO-710 Last words]]
+<</page>>
+
+
+:: INTRO-710 Last words [daytime]
+<<silently>>
+<<set $header.location to "College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Robert stands on the sidewalk, hands in his jacket pockets.  He looks east, then west — not for threats, just an old habit, the way a northern man checks the weather by looking at the sky.
+
+"Wednesday," he says.  "Ten o'clock.  Bring ID photos — two passport-style, one casual."
+
+<<if $briefing.readRobert>>He pauses.  Looks at you one more time with an expression that's almost — not quite — the one from the diner.  Then he straightens his shoulders and puts the handler back on.
+
+<</if>>"And <<playerRealName>>?"
+
+You wait.
+
+"Get some sleep this week.  You're going to want it."
+
+[[Continue|INTRO-720 Departure]]
+<</page>>
+
+
+:: INTRO-720 Departure [daytime]
+<<silently>>
+<<set $header.location to "College Street">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+He turns north, toward the subway.  You watch him go — a man in an unremarkable jacket disappearing into the perfectly ordinary Monday morning, on his way back to an office where the paperwork includes things that shouldn't exist.
+
+<<if $briefing.calledOut>>He's worried about you.  You're a little worried about you too.  But not enough to walk away — not after two years of getting ready for exactly this.
+<<elseif $briefing.readRobert>>He's worried about you.  You wish you could tell him not to be.  But that would require a certainty you don't have.
+<<else>>A new apartment, a new name, a new life.  A club on Queen West where something is happening that the Branch can't explain.  And you, walking into it with two years of training and a composure that hasn't been tested yet.
+<</if>>
+
+Wednesday.  Ten o'clock.  ID photos.
+
+[[Your assignment begins.|INTRO-800 End]]
+<</page>>
+
+
+:: INTRO-800 End [daytime]
+<<page>>\
+<div class="end-screen">
+<p class="end-label">End of Prologue</p>
+<p class="end-continue">//To be continued — Act 1: Insertion//</p>
+</div>
+<</page>>

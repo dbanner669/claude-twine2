@@ -1,0 +1,387 @@
+/* ============================================================
+   LAYOUT — Grid scaffolding: header, avatar, passage, footer
+   StoryInterface structure:
+     #game > #header + #game-inner > (#avatar + #passages) + #footer
+   ============================================================ */
+
+/* --- Game container — CSS Grid -------------------------------- */
+#game {
+  display: grid;
+  grid-template-rows: 54px 1fr 28px;
+  grid-template-columns: var(--sz-avatar-w) 1fr;
+  grid-template-areas:
+    "header  header"
+    "avatar  passage"
+    "footer  footer";
+  height: 100vh;
+  min-height: 600px;
+  /* Cap width relative to text size so UI doesn't stretch on ultra-wide screens.
+     rem-based: scales with browser zoom / text-size setting. */
+  max-width: 90rem;   /* ~1440px at 16px base */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hide avatar on cover / creation passages via data-screen attr.
+   JS stamps this attribute on #game based on passage tags. */
+#game[data-screen="menu"],
+#game[data-screen="creation"] {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "passage"
+    "footer";
+}
+#game[data-screen="menu"] #avatar,
+#game[data-screen="creation"] #avatar {
+  display: none;
+}
+
+
+/* --- Header -------------------------------------------------- */
+#header {
+  grid-area: header;
+  background: linear-gradient(180deg, #1c1612 0%, #14100d 100%);
+  border-bottom: var(--sz-border-hair);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sz-s-7);
+  font-family: var(--sz-f-ui);
+  font-size: 13px;
+  color: var(--sz-cream-soft);
+  position: relative;
+  z-index: 5;
+}
+
+/* Wordmark in the header */
+#header .wordmark {
+  font-family: var(--sz-f-script);
+  font-size: 26px;
+  color: var(--sz-brick-glow);
+  text-shadow: 0 0 6px rgba(123,31,38,0.4);
+  transform: rotate(-1deg);
+  display: inline-block;
+  border-bottom: none;
+}
+
+/* Header divider pip */
+#header .header-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--sz-rule);
+  margin: 0 var(--sz-s-5);
+}
+
+/* Nav links in header */
+#header nav,
+#header #menu {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+#header nav a,
+#header #menu a {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  margin-left: var(--sz-s-7);
+  transition: color 0.15s, border-color 0.15s;
+}
+#header nav a[aria-current="page"],
+#header nav a:hover,
+#header #menu a:hover {
+  color: var(--sz-cream);
+  border-bottom-color: var(--sz-brass);
+}
+
+/* History buttons */
+#ui-bar-history {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--sz-s-4);
+}
+
+#ui-bar-history button {
+  width: 28px;
+  height: 28px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+}
+#ui-bar-history button:hover {
+  background: var(--sz-ink-4);
+}
+
+/* Turn counter between history buttons */
+#ui-bar-history .turn-counter {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  color: var(--sz-cream-faint);
+  letter-spacing: 0.18em;
+}
+
+/* Menu container — pushed to right */
+#menu {
+  margin-left: auto;
+}
+
+/* Dropdown toggle — logo area */
+.dropdown-toggle {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 54px;
+  left: 0;
+  min-width: 180px;
+  background: var(--sz-ink-2);
+  border: var(--sz-border-hair);
+  box-shadow: var(--sz-shadow-card);
+  z-index: 200;
+}
+
+.dropdown-content.dropdown-visible {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 12px 18px;
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sz-cream-soft);
+  border-bottom: 1px solid var(--sz-rule-cool);
+}
+.dropdown-content a:hover {
+  background: var(--sz-ink-3);
+  color: var(--sz-cream);
+}
+
+
+/* --- Avatar panel -------------------------------------------- */
+#avatar {
+  grid-area: avatar;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #15100d 0%, #0e0a08 100%);
+  border-right: var(--sz-border-hair);
+}
+
+
+/* --- Passage area -------------------------------------------- */
+#passages {
+  grid-area: passage;
+  padding: var(--sz-s-8) var(--sz-s-10);
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Center passage content on menu/cover screens (single-column layout) */
+#game[data-screen="menu"] #passages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sz-s-8);
+}
+
+/* game-inner compat — flex fallback if grid isn't used */
+#game-inner {
+  display: contents;
+}
+
+
+/* --- Footer -------------------------------------------------- */
+#footer {
+  grid-area: footer;
+  background: var(--sz-ink-2);
+  border-top: var(--sz-border-hair);
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--sz-cream-faint);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--sz-s-7);
+}
+
+
+/* --- Atmosphere overlays — vignette + film grain -------------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(120% 80% at 50% 35%, transparent 40%,
+              rgba(0,0,0,0.55) 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image:
+    radial-gradient(rgba(255,235,200,0.6) 1px, transparent 1px),
+    radial-gradient(rgba(255,235,200,0.4) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 2px 3px;
+}
+
+/* --- Daytime atmosphere — sunbeam + paper grain -------------- */
+body[data-mode="day"]::before {
+  background:
+    radial-gradient(80% 60% at 70% 20%, rgba(255,228,170,0.35) 0%, transparent 55%),
+    radial-gradient(120% 80% at 50% 100%, transparent 50%, rgba(70,40,20,0.25) 100%);
+}
+
+body[data-mode="day"]::after {
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  filter: sepia(0.3);
+}
+
+
+/* --- Daytime header ------------------------------------------ */
+body[data-mode="day"] #header {
+  background: var(--sz-ink-2);
+  border-bottom: 2px solid var(--sz-ink-4);
+  box-shadow: 0 2px 0 var(--sz-rule), 0 6px 14px rgba(40,25,10,0.15);
+}
+
+body[data-mode="day"] #header .wordmark {
+  color: var(--sz-brick);
+  text-shadow: 0 1px 0 rgba(255,240,210,0.5);
+}
+
+
+/* --- Daytime avatar panel ------------------------------------ */
+body[data-mode="day"] #avatar {
+  background: var(--sz-ink-2);
+  border-right: 2px solid var(--sz-ink-4);
+  box-shadow: 2px 0 0 var(--sz-rule), 6px 0 14px rgba(40,25,10,0.10);
+}
+
+body[data-mode="day"] #avatar::before {
+  background: radial-gradient(60% 50% at 50% 30%, rgba(255,228,170,0.30) 0%, transparent 60%);
+}
+
+body[data-mode="day"] .avatar-meta {
+  background: var(--sz-ink-4);
+  color: #ecdcb8;
+}
+
+body[data-mode="day"] .avatar-meta .display-name {
+  color: #ecdcb8;
+}
+
+body[data-mode="day"] .avatar-meta .kicker {
+  color: var(--sz-brass-glow);
+}
+
+body[data-mode="day"] .avatar-meta .stat-bar .stat-label {
+  color: var(--sz-brass-glow);
+}
+
+body[data-mode="day"] .avatar-meta .stat-bar .pip.--on {
+  background: var(--sz-brass-glow);
+}
+
+body[data-mode="day"] .avatar-meta .stat-bar .pip {
+  background: var(--sz-ink-2);
+}
+
+
+/* --- Daytime footer ------------------------------------------ */
+body[data-mode="day"] #footer {
+  background: var(--sz-ink-2);
+  border-top: 2px solid var(--sz-ink-4);
+  box-shadow: 0 -2px 0 var(--sz-rule);
+}
+
+
+/* Keep game content above atmosphere overlays */
+#game {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* --- In-passage header bar (location / time display) --------- */
+#header-bar {
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sz-rule);
+  margin-bottom: var(--sz-s-7);
+  background: transparent;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-location {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+}
+
+.header-time {
+  font-family: var(--sz-f-display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--sz-cream);
+  margin-top: 2px;
+}
+
+.header-status {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--sz-composed);
+  padding: 4px 10px;
+  border: 1px solid rgba(111,140,90,0.4);
+}
+
+.header-weather {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--sz-cream-faint);
+}

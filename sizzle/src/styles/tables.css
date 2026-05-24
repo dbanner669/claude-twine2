@@ -1,0 +1,381 @@
+/* ============================================================
+   TABLES — Dossier table + character sheet + stat bars
+   ============================================================ */
+
+/* --- Dossier table (generic data display) -------------------- */
+.dossier {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sz-f-body);
+  font-size: 15px;
+}
+
+.dossier tr {
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+.dossier tr:nth-child(even) {
+  background: rgba(184,148,94,0.03);
+}
+
+.dossier th,
+.dossier td.--label {
+  padding: 11px 14px;
+  width: 180px;
+  vertical-align: top;
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+  text-align: left;
+}
+
+.dossier td {
+  padding: 11px 14px;
+  color: var(--sz-cream);
+}
+
+
+/* --- Stat bar (attribute display with pips) ------------------- */
+.statbar {
+  display: grid;
+  grid-template-columns: 120px 1fr 36px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.statbar .stat-name {
+  font-family: var(--sz-f-ui);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+}
+
+.statbar .pips {
+  display: flex;
+  gap: 3px;
+}
+
+.statbar .pip {
+  flex: 1;
+  height: 10px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-ink-4);
+}
+
+.statbar .pip.--on {
+  background: var(--sz-brass);
+  border-color: var(--sz-brass-glow);
+}
+
+.statbar .stat-value {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  color: var(--sz-cream-soft);
+  text-align: right;
+}
+
+
+/* --- Profile table (character sheet identity) ----------------- */
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+.profile-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--sz-rule);
+  vertical-align: top;
+}
+
+.profile-table td:first-child {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  width: 180px;
+}
+
+.profile-table td:last-child {
+  color: var(--sz-cream);
+}
+
+
+/* --- Profile sections ---------------------------------------- */
+.profile-section {
+  margin-bottom: 1.5rem;
+}
+
+.profile-section h3 {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brick);
+  font-weight: 500;
+  border-bottom: 1px solid var(--sz-rule);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.profile-header h2 {
+  font-family: var(--sz-f-display);
+  font-style: italic;
+  font-size: 30px;
+  color: var(--sz-cream);
+  margin-bottom: 4px;
+}
+
+.profile-header .codename {
+  color: var(--sz-brass-glow);
+  font-style: italic;
+}
+
+
+/* --- Skill rows ---------------------------------------------- */
+.skill-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+.skill-row:nth-child(even) {
+  background: rgba(184,148,94,0.04);
+}
+
+.skill-name {
+  color: var(--sz-cream-soft);
+  text-transform: capitalize;
+  font-family: var(--sz-f-body);
+  font-size: 13px;
+}
+
+.skill-level {
+  font-family: var(--sz-f-mono);
+  color: var(--sz-brass);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.skill-xp {
+  color: var(--sz-cream-faint);
+  font-size: 11px;
+  font-family: var(--sz-f-mono);
+}
+
+
+/* --- Badges (status, trait, achievement) ---------------------- */
+.status-badge,
+.trait-badge,
+.achievement-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 2px;
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  background: rgba(196,107,61,0.12);
+  border: 1px solid rgba(196,107,61,0.35);
+  color: var(--sz-rattled);
+}
+
+.trait-badge {
+  background: rgba(184,148,94,0.08);
+  border: 1px solid var(--sz-rule);
+  color: var(--sz-brass);
+}
+
+.achievement-badge {
+  background: rgba(111,140,90,0.10);
+  border: 1px solid rgba(111,140,90,0.35);
+  color: var(--sz-composed);
+}
+
+
+/* --- Trait card (character sheet traits panel) ---------------- */
+.trait-card {
+  padding: 10px 12px;
+  background: var(--sz-ink-3);
+  border-left: 2px solid var(--sz-brass);
+  margin-bottom: 8px;
+}
+
+.trait-card.--warn {
+  border-left-color: var(--sz-brick);
+}
+
+.trait-card .trait-name {
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--sz-brass);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.trait-card.--warn .trait-name {
+  color: var(--sz-brick-glow);
+}
+
+.trait-card .trait-desc {
+  font-family: var(--sz-f-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--sz-cream-soft);
+  line-height: 1.45;
+}
+
+
+/* --- Journal entries ----------------------------------------- */
+.journal-entry {
+  margin-bottom: 14px;
+}
+
+.journal-entry .timestamp {
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  color: var(--sz-cream-faint);
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+
+.journal-entry .entry-text {
+  font-family: var(--sz-f-body);
+  font-size: 13px;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--sz-cream-soft);
+}
+
+
+/* --- Cover identity panel ------------------------------------ */
+.cover-panel {
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.cover-panel .cover-bio {
+  font-family: var(--sz-f-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sz-cream-soft);
+}
+
+.cover-panel .cover-integrity {
+  color: var(--sz-brass);
+  font-style: italic;
+}
+
+
+/* --- Operation status grid ----------------------------------- */
+.operation-grid {
+  display: grid;
+  gap: 8px;
+  font-family: var(--sz-f-body);
+  font-size: 14px;
+}
+
+.operation-grid .op-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+}
+
+
+/* --- Character sheet dialog ---------------------------------- */
+.dialog-character-sheet #ui-dialog-body {
+  background: var(--sz-ink-2);
+  color: var(--sz-cream);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px;
+}
+
+/* Character sheet modal overlay */
+.sheet-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 50;
+}
+
+.sheet-dialog {
+  position: fixed;
+  top: 78px;
+  left: 96px;
+  right: 96px;
+  bottom: 60px;
+  background: var(--sz-ink-2);
+  border: 1px solid var(--sz-brass-dim);
+  box-shadow: var(--sz-shadow-dialog);
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-dialog .sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+.sheet-dialog .sheet-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--sz-rule);
+  background: var(--sz-ink);
+}
+
+.sheet-dialog .sheet-tab {
+  padding: 14px 18px;
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  transition: color 0.15s;
+}
+
+.sheet-dialog .sheet-tab.--active {
+  color: var(--sz-cream);
+  border-bottom-color: var(--sz-brick);
+}
+
+.sheet-dialog .sheet-body {
+  flex: 1;
+  padding: 28px;
+  overflow-y: auto;
+}
+
+.sheet-dialog .close-btn {
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid var(--sz-brass-dim);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}

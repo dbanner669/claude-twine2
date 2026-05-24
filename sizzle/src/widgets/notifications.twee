@@ -1,0 +1,31 @@
+:: Notification Widgets [widget]
+/* ============================================================
+   NOTIFICATION SYSTEM
+   Add notifications during passage logic with <<addNotification>>.
+   They render automatically via <<showNotifications>> in PassageDone.
+   Notifications clear after display.
+   ============================================================ */
+
+<<widget "addNotification">><<nobr>>
+/* Usage: <<addNotification "You picked up the key.">> */
+<<if $args[0]>>
+    <<set $notifications.list.push($args[0])>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "showNotifications">><<nobr>>
+<<if $notifications.list.length gt 0>>
+<div class="notifications-container">
+    <<for _i to 0; _i lt $notifications.list.length; _i++>>
+        <div class="notification" data-index="_i">
+            <<print $notifications.list[_i]>>
+        </div>
+    <</for>>
+</div>
+<<set $notifications.list to []>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "clearNotifications">><<nobr>>
+<<set $notifications.list to []>>
+<</nobr>><</widget>>

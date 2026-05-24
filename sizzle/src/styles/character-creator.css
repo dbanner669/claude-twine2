@@ -1,0 +1,576 @@
+/* ============================================================
+   CHARACTER CREATOR — Dossier-style creation flow
+   5-step tab flow: Personnel, Appearance, Background,
+   The Incident, Summary.
+   ============================================================ */
+
+/* --- Tab indicator strip ------------------------------------- */
+.cc-tabs {
+  display: grid;
+  gap: 0;
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+.cc-tab {
+  padding: 18px 20px;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--sz-cream-faint);
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.cc-tab .step-num {
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  color: var(--sz-brass-dim);
+}
+
+.cc-tab.--active {
+  border-bottom-color: var(--sz-brick);
+  background: rgba(123,31,38,0.08);
+  color: var(--sz-cream);
+}
+
+.cc-tab.--active .step-num {
+  color: var(--sz-brick);
+}
+
+.cc-tab.--done {
+  color: var(--sz-brass);
+}
+
+
+/* --- Dossier page (the "file folder" surface) ---------------- */
+.cc-dossier {
+  margin: 32px 80px 0;
+  padding: 36px 56px 28px;
+  background: var(--sz-ink-2);
+  border: 1px solid var(--sz-rule);
+  box-shadow: inset 0 1px 0 rgba(184,148,94,0.08), 0 28px 60px rgba(0,0,0,0.45);
+  position: relative;
+  min-height: 580px;
+}
+
+/* Dossier page header — title + classified stamp */
+.cc-dossier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--sz-rule);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+
+.cc-dossier-header .page-title {
+  font-family: var(--sz-f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 38px;
+  color: var(--sz-cream);
+  margin-top: 6px;
+  letter-spacing: 0.01em;
+}
+
+.cc-dossier-header .page-subtitle {
+  font-family: var(--sz-f-body);
+  font-size: 15px;
+  color: var(--sz-cream-soft);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.cc-dossier-header .file-meta {
+  text-align: right;
+}
+
+.cc-dossier-header .file-meta .file-no {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  color: var(--sz-cream-faint);
+  letter-spacing: 0.12em;
+}
+
+
+/* --- Dossier footer — back/next + step counter --------------- */
+.cc-dossier-footer {
+  position: absolute;
+  bottom: 28px;
+  left: 56px;
+  right: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid var(--sz-rule);
+}
+
+.cc-dossier-footer .step-counter {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--sz-cream-faint);
+}
+
+/* Footer nav links styled as buttons */
+.cc-dossier-footer a {
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  font-weight: 500;
+  border-bottom: none;
+  transition: all 0.18s;
+}
+
+.cc-dossier-footer > div:first-child a {
+  color: var(--sz-cream-soft);
+  border: 1px solid transparent;
+}
+.cc-dossier-footer > div:first-child a:hover {
+  color: var(--sz-cream);
+}
+
+.cc-dossier-footer > div:last-child a {
+  background: linear-gradient(180deg, var(--sz-brick) 0%, var(--sz-brick-deep) 100%);
+  color: var(--sz-cream);
+  border: 1px solid var(--sz-brick-glow);
+  box-shadow: inset 0 1px 0 rgba(168,67,75,0.4), 0 8px 18px rgba(0,0,0,0.45);
+  border-radius: var(--sz-radius-sm);
+}
+.cc-dossier-footer > div:last-child a:hover {
+  filter: brightness(1.1);
+  color: var(--sz-cream);
+  border-bottom: 1px solid var(--sz-brick-glow);
+}
+
+
+/* --- Two-column dossier layouts ------------------------------- */
+.cc-columns {
+  display: grid;
+  gap: 56px;
+}
+
+.cc-columns.--wide-left  { grid-template-columns: 1.2fr 1fr; }
+.cc-columns.--wide-right { grid-template-columns: 1.4fr 1fr; }
+.cc-columns.--equal      { grid-template-columns: 1fr 1fr; }
+.cc-columns.--left-heavy { grid-template-columns: 1.3fr 1fr; }
+
+
+/* --- Avatar preview slot inside dossier ----------------------- */
+.cc-avatar-preview {
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  padding: 20px;
+  position: relative;
+}
+
+.cc-avatar-preview .preview-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  color: var(--sz-cream-faint);
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+
+/* --- Option grid --------------------------------------------- */
+.cc-options {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+}
+
+.cc-options.--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cc-options.--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.cc-options.--cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+.cc-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  position: relative;
+}
+
+.cc-option:hover {
+  border-color: var(--sz-brass-dim);
+}
+
+.cc-option.selected,
+.cc-option:has(.is-selected) {
+  border-color: var(--sz-brick);
+  outline: 1px solid var(--sz-brick-glow);
+  outline-offset: 2px;
+}
+
+.cc-option .is-selected {
+  display: none;
+}
+
+.cc-option .swatch {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--sz-rule-strong);
+}
+
+.cc-option .option-name {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sz-cream-soft);
+}
+
+.cc-option.selected .option-name,
+.cc-option:has(.is-selected) .option-name {
+  color: var(--sz-cream);
+}
+
+
+/* --- Field (text input with eyebrow label) ------------------- */
+.cc-field {
+  margin-bottom: 18px;
+}
+
+.cc-field .cc-label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cc-field .cc-value {
+  font-family: var(--sz-f-body);
+  font-size: 20px;
+  color: var(--sz-cream);
+  border-bottom: 1px solid var(--sz-brass-dim);
+  padding-bottom: 6px;
+}
+
+.cc-field .cc-note {
+  font-family: var(--sz-f-mono);
+  font-size: 11px;
+  color: var(--sz-cream-faint);
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
+
+.cc-input {
+  width: 100%;
+  max-width: 20rem;
+  padding: 8px 12px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  color: var(--sz-cream);
+  font-family: var(--sz-f-body);
+  font-size: 18px;
+}
+
+.cc-input:focus {
+  outline: none;
+  border-color: var(--sz-brass);
+  box-shadow: 0 0 0 2px rgba(184,148,94,0.15);
+}
+
+
+/* --- Background card ----------------------------------------- */
+.cc-bg-card {
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  padding: 20px 22px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s;
+}
+
+.cc-bg-card:hover {
+  border-color: var(--sz-brass-dim);
+}
+
+.cc-bg-card.selected,
+.cc-bg-card:has(.selected-tag) {
+  background: rgba(123,31,38,0.10);
+  border-color: var(--sz-brick-glow);
+}
+
+.cc-bg-card .selected-tag {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  padding: 4px 10px;
+  background: var(--sz-brick);
+  color: var(--sz-cream);
+  font-family: var(--sz-f-ui);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+}
+
+.cc-bg-card .card-title {
+  display: block;
+  font-family: var(--sz-f-display);
+  font-size: 24px;
+  font-style: italic;
+  color: var(--sz-cream);
+  margin-bottom: 6px;
+}
+
+.cc-bg-card .card-blurb {
+  display: block;
+  font-family: var(--sz-f-body);
+  font-size: 14px;
+  color: var(--sz-cream-soft);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.cc-bg-card .card-perks {
+  display: flex;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+}
+
+.cc-bg-card .perk {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--sz-brass);
+  text-transform: uppercase;
+}
+
+
+/* --- Service record panel ------------------------------------ */
+.cc-service-record {
+  background: var(--sz-ink-3);
+  padding: 24px;
+  border: 1px solid var(--sz-rule);
+  position: relative;
+}
+
+.cc-service-record .record-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.cc-service-record .record-value {
+  color: var(--sz-cream);
+  border-bottom: 1px solid var(--sz-rule);
+  padding-bottom: 4px;
+  font-family: var(--sz-f-body);
+  font-size: 15px;
+}
+
+
+/* --- Incident memory options --------------------------------- */
+.cc-memory-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.cc-memory-option:hover {
+  border-color: var(--sz-brass-dim);
+}
+
+.cc-memory-option.selected {
+  background: rgba(123,31,38,0.10);
+  border-color: var(--sz-brick-glow);
+}
+
+.cc-memory-option.--faded {
+  opacity: 0.55;
+}
+
+.cc-memory-option .checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--sz-brass-dim);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sz-cream);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.cc-memory-option.selected .checkbox {
+  border-color: var(--sz-brick-glow);
+  background: var(--sz-brick);
+}
+
+.cc-memory-option .memory-text {
+  font-family: var(--sz-f-body);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--sz-cream);
+}
+
+
+/* --- Summary table ------------------------------------------- */
+.cc-summary {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sz-f-body);
+  font-size: 15px;
+}
+
+.cc-summary tr {
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+.cc-summary tr:nth-child(even) {
+  background: rgba(184,148,94,0.03);
+}
+
+.cc-summary td:first-child {
+  padding: 11px 14px;
+  width: 180px;
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  vertical-align: top;
+}
+
+.cc-summary td:last-child {
+  padding: 11px 14px;
+  color: var(--sz-cream);
+}
+
+
+/* --- Signature block ----------------------------------------- */
+.cc-signature {
+  padding: 20px 22px;
+  border: 1px solid var(--sz-brass-dim);
+  background: rgba(184,148,94,0.04);
+}
+
+.cc-signature .sig-line {
+  font-family: var(--sz-f-script);
+  font-size: 42px;
+  color: var(--sz-cream);
+  border-bottom: 1px solid var(--sz-brass-dim);
+  padding-bottom: 4px;
+}
+
+.cc-signature .sig-meta {
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  color: var(--sz-cream-faint);
+  letter-spacing: 0.18em;
+  margin-top: 6px;
+}
+
+
+/* --- Placeholder image slot ---------------------------------- */
+.cc-slot {
+  background:
+    repeating-linear-gradient(135deg, rgba(184,148,94,0.08) 0 6px, transparent 6px 14px);
+  border: 1px dashed var(--sz-brass-dim);
+  color: var(--sz-brass-dim);
+  font-family: var(--sz-f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+}
+
+
+/* --- Background card link overrides (link wraps card content) --- */
+.cc-bg-card a.link-internal {
+  display: block;
+  color: inherit;
+  border-bottom: none;
+  padding: 0;
+  font-style: normal;
+  text-decoration: none;
+}
+.cc-bg-card a.link-internal::before,
+.cc-bg-card a.link-internal::after {
+  display: none;
+}
+.cc-bg-card a.link-internal:hover {
+  color: inherit;
+  border-bottom: none;
+  padding-left: 0;
+  background: transparent;
+}
+
+/* Option grid link overrides */
+.cc-option a.link-internal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  border-bottom: none;
+  padding: 0;
+  font-style: normal;
+  width: 100%;
+}
+.cc-option a.link-internal::before,
+.cc-option a.link-internal::after {
+  display: none;
+}
+.cc-option a.link-internal:hover {
+  color: inherit;
+  border-bottom: none;
+  padding-left: 0;
+  background: transparent;
+}
+
+
+/* --- Randomizer button --------------------------------------- */
+.cc-randomize {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--sz-brass-dim);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cc-randomize:hover {
+  border-color: var(--sz-brass);
+  color: var(--sz-cream);
+}

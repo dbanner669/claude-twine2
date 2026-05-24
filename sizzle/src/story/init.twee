@@ -1,0 +1,14 @@
+:: StoryData
+{
+  "ifid": "A3B7C9D1-4E5F-4A7B-8C9D-0E1F2A3B4C5D",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Start"
+}
+
+:: StoryTitle
+Sizzle
+
+:: StoryInit
+<<set setup to {}>>
+<<include "variables">>

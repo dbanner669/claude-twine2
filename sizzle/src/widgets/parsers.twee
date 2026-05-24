@@ -1,0 +1,84 @@
+:: Parser Widgets [widget]
+/* ============================================================
+   PARSER WIDGETS
+   These output dynamic text based on game state. Use them inline
+   in passage text to adapt prose to the player's circumstances.
+   ============================================================ */
+
+/* --- Name widgets ---
+   playerName: uses cover name if active, otherwise real first name
+   playerFullName: full name (cover or real)
+   playerRealName: always the real first name (for internal monologue, Branch scenes)
+   ------------------------------------------------------------ */
+
+<<widget "playerName">><<nobr>>
+<<if $player.cover and $player.cover.knownAs neq "">>
+    <<print $player.cover.knownAs>>
+<<else>>
+    <<print $player.firstName>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "playerFullName">><<nobr>>
+<<if $player.cover and $player.cover.surname neq "">>
+    <<playerName>> <<print $player.cover.surname>>
+<<else>>
+    <<print $player.firstName>> <<print $player.surname>>
+<</if>>
+<</nobr>><</widget>>
+
+<<widget "playerRealName">><<nobr>>
+<<print $player.firstName>>
+<</nobr>><</widget>>
+
+<<widget "playerRealFullName">><<nobr>>
+<<print $player.firstName>> <<print $player.surname>>
+<</nobr>><</widget>>
+
+/* --- Background widget ---
+   Outputs a natural-language description of the player's
+   pre-Branch background.
+   ------------------------------------------------------------ */
+
+<<widget "playerBackground">><<nobr>>
+<<switch $player.background>>
+<<case "RCMP constable">>an RCMP constable
+<<case "CSIS analyst">>a CSIS analyst
+<<case "grad student">>a grad student
+<<case "unemployed after university">>unemployed after university
+<<default>><<print $player.background>>
+<</switch>>
+<</nobr>><</widget>>
+
+/* --- Pronoun widgets ---
+   Fixed to she/her for this game (player character is female).
+   ------------------------------------------------------------ */
+
+<<widget "playerPronouns">><<nobr>>
+she/her
+<</nobr>><</widget>>
+
+<<widget "playerSubject">><<nobr>>she<</nobr>><</widget>>
+<<widget "playerObject">><<nobr>>her<</nobr>><</widget>>
+<<widget "playerPossessive">><<nobr>>her<</nobr>><</widget>>
+<<widget "playerPossessivePronoun">><<nobr>>hers<</nobr>><</widget>>
+<<widget "playerReflexive">><<nobr>>herself<</nobr>><</widget>>
+
+/* --- Date/time widget ---
+   Outputs the current in-game date in a readable format.
+   ------------------------------------------------------------ */
+
+<<widget "currentDate">><<nobr>>
+<<set _months to ["January","February","March","April","May","June","July","August","September","October","November","December"]>>
+<<print $date.dayOfWeek>>, <<print _months[$date.month - 1]>> <<print $date.day>>, <<print $date.year>>
+<</nobr>><</widget>>
+
+<<widget "currentTime">><<nobr>>
+<<if $date.hour lt 12>>
+    <<print $date.hour>>:00 AM
+<<elseif $date.hour eq 12>>
+    12:00 PM
+<<else>>
+    <<print $date.hour - 12>>:00 PM
+<</if>>
+<</nobr>><</widget>>

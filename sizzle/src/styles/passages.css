@@ -1,0 +1,425 @@
+/* ============================================================
+   PASSAGES — Narrative body, dialogue, choices, page container
+   The <<page>> macro wraps content in .page > .page-inner > .text
+   SugarCube emits <a class="link-internal"> for choice links.
+   ============================================================ */
+
+/* --- Page container ------------------------------------------ */
+.page {
+  max-width: 680px;
+}
+
+.page-inner {
+  padding: 0;
+}
+
+.page .text {
+  line-height: 1.7;
+  font-size: var(--sz-text-lg);
+}
+
+.page .text p {
+  max-width: 38em;
+  margin: 0 0 var(--sz-s-6);
+}
+
+/* --- Passage headings ---------------------------------------- */
+.passage h1,
+.page h1 {
+  font-family: var(--sz-f-display);
+  font-size: 34px;
+  font-style: italic;
+  color: var(--sz-cream);
+  line-height: 1.1;
+  margin: 0 0 var(--sz-s-6);
+}
+
+.passage h2,
+.page h2 {
+  font-family: var(--sz-f-display);
+  font-size: 28px;
+  font-style: italic;
+  color: var(--sz-cream);
+  line-height: 1.15;
+  margin: 0 0 var(--sz-s-5);
+}
+
+.passage h3,
+.page h3 {
+  font-family: var(--sz-f-display);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--sz-cream);
+  margin: 0 0 var(--sz-s-5);
+}
+
+/* --- Chapter header (above prose) ---------------------------- */
+.chapter-label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brick);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.chapter-title {
+  font-family: var(--sz-f-display);
+  font-size: 32px;
+  color: var(--sz-cream);
+  font-style: italic;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: var(--sz-s-6);
+}
+
+/* --- Emphasis and formatting --------------------------------- */
+.page .text em,
+.page .text i,
+.passage em {
+  color: var(--sz-cream-soft);
+  font-style: italic;
+}
+
+.page .text strong,
+.page .text b {
+  color: var(--sz-cream);
+  font-weight: 600;
+}
+
+
+/* --- Dialogue block ------------------------------------------ */
+.dialogue {
+  max-width: 38em;
+  margin: 0 0 var(--sz-s-7);
+}
+
+.dialogue .speaker {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-glow);
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 4px;
+}
+
+.dialogue .line {
+  font-style: italic;
+  font-size: var(--sz-text-xl);
+  line-height: 1.55;
+  color: var(--sz-cream-soft);
+  border-left: 2px solid var(--sz-brick);
+  padding-left: var(--sz-s-5);
+}
+
+/* Player dialogue — cream text, brass border */
+.dialogue.--player .line {
+  color: var(--sz-cream);
+  border-left-color: var(--sz-brass);
+}
+
+
+/* --- Choice links -------------------------------------------- */
+/* SugarCube emits <a class="link-internal"> for passage links.
+   We alias these to the .choice design pattern. */
+.choices {
+  margin-top: var(--sz-s-7);
+  max-width: 38em;
+}
+
+/* "What do you do?" label above choices */
+.choices-label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+  font-weight: 500;
+  margin-bottom: var(--sz-s-3);
+}
+
+.choices .choice,
+.page .text a.link-internal[data-passage],
+.decisions a {
+  display: flex;
+  align-items: center;
+  gap: var(--sz-s-3);
+  padding: var(--sz-s-3) 0 var(--sz-s-3) 22px;
+  font-family: var(--sz-f-body);
+  font-style: italic;
+  font-size: var(--sz-text-lg);
+  color: var(--sz-brass);
+  border-bottom: 1px solid var(--sz-rule);
+  position: relative;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, padding-left 0.15s;
+  background: transparent;
+  border-radius: 0;
+  text-decoration: none;
+  margin: 0;
+}
+
+/* Dash before each choice */
+.choices .choice::before,
+.page .text a.link-internal[data-passage]::before,
+.decisions a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* Chevron after each choice */
+.choices .choice::after,
+.page .text a.link-internal[data-passage]::after,
+.decisions a::after {
+  content: "\203A"; /* single right-pointing angle quotation mark */
+  margin-left: auto;
+  font-style: normal;
+  opacity: 0.5;
+}
+
+/* Hover state */
+.choices .choice:hover,
+.page .text a.link-internal[data-passage]:hover,
+.decisions a:hover {
+  color: var(--sz-brick-glow);
+  border-bottom-color: var(--sz-brick-glow);
+  padding-left: 28px;
+  background: transparent;
+  transform: none;
+}
+
+/* Locked / faded choice */
+.choices .choice.--locked,
+.greyedOut a.link-internal {
+  color: var(--sz-cream-faint);
+  pointer-events: none;
+}
+
+/* Skill check condition tag on a choice */
+.choices .choice .condition {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+/* --- Decision container (template compat) -------------------- */
+.decisions {
+  margin-top: var(--sz-s-7);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 38em;
+  padding-top: var(--sz-s-7);
+  border-top: 1px solid var(--sz-rule);
+}
+
+/* Auto-label above choices in scene mode (not main menu) */
+.decisions::before {
+  content: "What do you do?";
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+  font-weight: 500;
+  margin-bottom: var(--sz-s-3);
+}
+
+/* Hide auto-label on main menu and single-choice passages */
+.page-main-menu .decisions::before {
+  display: none;
+}
+.page-main-menu .decisions {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+/* --- Continue button ----------------------------------------- */
+.continue-btn,
+.page .text a.link-internal.continue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sz-f-ui);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: var(--sz-radius-sm);
+  border: 1px solid var(--sz-brick-glow);
+  background: linear-gradient(180deg, var(--sz-brick) 0%, var(--sz-brick-deep) 100%);
+  color: var(--sz-cream);
+  box-shadow: inset 0 1px 0 rgba(168,67,75,0.4), 0 8px 18px rgba(0,0,0,0.45);
+  cursor: pointer;
+  transition: all 0.18s;
+  font-weight: 500;
+}
+
+.continue-btn:hover {
+  filter: brightness(1.1);
+}
+
+
+/* --- Main menu page ------------------------------------------ */
+.page-main-menu {
+  text-align: center;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.page-main-menu h1 {
+  font-family: var(--sz-f-script);
+  font-size: 120px;
+  color: var(--sz-brick-glow);
+  line-height: 0.9;
+  text-shadow:
+    0 0 8px rgba(168,67,75,0.53),
+    0 0 22px rgba(123,31,38,0.40),
+    0 0 48px rgba(123,31,38,0.33);
+  transform: rotate(-2deg);
+  margin-bottom: var(--sz-s-3);
+}
+
+.page-main-menu .subtitle {
+  font-family: var(--sz-f-display);
+  font-style: italic;
+  font-size: 38px;
+  color: var(--sz-cream);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--sz-s-3);
+}
+
+.page-main-menu .tagline {
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--sz-brass-dim);
+  margin-bottom: var(--sz-s-9);
+}
+
+.page-main-menu .decisions {
+  align-items: center;
+}
+
+.page-main-menu .decisions a {
+  max-width: 280px;
+  width: 280px;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* --- Buttons (generic Sizzle button styles) ------------------- */
+.btn,
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sz-f-ui);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: var(--sz-radius-sm);
+  cursor: pointer;
+  transition: all 0.18s;
+  font-weight: 500;
+  border: 1px solid var(--sz-brick-glow);
+  background: linear-gradient(180deg, var(--sz-brick) 0%, var(--sz-brick-deep) 100%);
+  color: var(--sz-cream);
+  box-shadow: inset 0 1px 0 rgba(168,67,75,0.4), 0 8px 18px rgba(0,0,0,0.45);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sz-brass);
+  border-color: var(--sz-brass-dim);
+  box-shadow: none;
+}
+
+.btn-quiet {
+  background: transparent;
+  color: var(--sz-cream-soft);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn-small,
+.btn.--small {
+  font-size: 12px;
+  padding: 8px 14px;
+}
+
+
+/* --- Eyebrow label — uppercase tracked, brass ─────────────── */
+.eyebrow {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+}
+
+.eyebrow.--brick {
+  color: var(--sz-brick);
+}
+
+
+/* --- Hairline rule ------------------------------------------- */
+.rule {
+  background: var(--sz-rule);
+  width: 100%;
+  height: 1px;
+}
+
+.rule.--vertical {
+  width: 1px;
+  height: 100%;
+}
+
+
+/* --- Redaction bar (dossier flavor) --------------------------- */
+.redact {
+  display: inline-block;
+  height: 14px;
+  background: var(--sz-redact);
+  box-shadow: inset 0 0 0 1px var(--sz-ink-4);
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+
+/* --- Stamp (diagonal rubber-stamp text) ---------------------- */
+.stamp {
+  display: inline-block;
+  font-family: var(--sz-f-ui);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--sz-brick);
+  border: 2px solid var(--sz-brick);
+  padding: 3px 10px;
+  border-radius: 2px;
+  transform: rotate(-8deg);
+  opacity: 0.85;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 0 1px rgba(123,31,38,0.2);
+}

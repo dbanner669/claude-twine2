@@ -6,6 +6,12 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');const f=path.join('C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-sugarcube-template','output.html');http.createServer((q,r)=>{r.writeHead(200,{'Content-Type':'text/html'});r.end(fs.readFileSync(f))}).listen(3456,()=>console.log('Serving on 3456'))"],
       "port": 3456
+    },
+    {
+      "name": "sizzle",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const http=require('http'),fs=require('fs'),path=require('path');const base=path.join('C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle');const mime={'html':'text/html','css':'text/css','js':'application/javascript','png':'image/png','jpg':'image/jpeg','svg':'image/svg+xml','json':'application/json','woff2':'font/woff2','woff':'font/woff','ttf':'font/ttf'};http.createServer((q,r)=>{let u=q.url==='/'?'/output.html':q.url;let fp=path.join(base,decodeURIComponent(u));try{const d=fs.readFileSync(fp);const ext=path.extname(fp).slice(1);r.writeHead(200,{'Content-Type':mime[ext]||'application/octet-stream'});r.end(d)}catch(e){r.writeHead(404);r.end('Not found')}}).listen(3457,()=>console.log('Sizzle serving on 3457'))"],
+      "port": 3457
     }
   ]
 }
