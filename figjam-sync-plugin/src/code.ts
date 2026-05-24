@@ -62,14 +62,16 @@ const STICKY_COLORS: Record<string, RGB> = {
 const BODY_COLOR: RGB = { r: 0.98, g: 0.97, b: 0.93 };
 
 const LAYOUT = {
-  stickyWidth: 240,
+  /* Both title and body use FigJam's "wide" sticky width (~320px). */
+  stickyWidth: 320,
   pairGap: 16,
-  layerGap: 100,
+  layerGap: 80,
   columnGap: 80,
   sectionPadding: 60,
-  sectionGap: 280,
-  emptySectionWidth: 360,
+  sectionGap: 320,
+  emptySectionWidth: 440,
   emptySectionHeight: 600,
+  maxChainLength: 5,
 };
 
 const PLUGIN_NAMESPACE = "sizzle-story-sync";
@@ -129,38 +131,42 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
 
     const layerByPassage = bfsLayers(passagesInSection, graph.edges);
     const layers = groupByLayer(passagesInSection, layerByPassage);
+    /* Compact runs of single-passage layers into shared rows (up to
+       maxChainLength). Branching layers (>1 passage) flush the chain and get
+       their own row. This trims vertical sprawl for long linear stretches
+       (CC's tab chain becomes one wide row; INTRO-100..115 likewise) while
+       leaving real branches visually grouped. */
+    const rows = groupLayersIntoRows(layers, LAYOUT.maxChainLength);
 
-    let layerCursorY = LAYOUT.sectionPadding;
+    let rowCursorY = LAYOUT.sectionPadding;
     let sectionMaxRight = sectionCursorX;
 
-    for (const passagesInLayer of layers) {
-      let layerHeight = 0;
-      const layerWidth =
-        passagesInLayer.length * LAYOUT.stickyWidth + Math.max(0, passagesInLayer.length - 1) * LAYOUT.columnGap;
-      const layerStartX = sectionCursorX + LAYOUT.sectionPadding;
+    for (const passagesInRow of rows) {
+      let rowHeight = 0;
+      const rowStartX = sectionCursorX + LAYOUT.sectionPadding;
 
-      for (let index = 0; index < passagesInLayer.length; index += 1) {
-        const passage = passagesInLayer[index];
-        const x = layerStartX + index * (LAYOUT.stickyWidth + LAYOUT.columnGap);
-        const titleY = layerCursorY;
+      for (let index = 0; index < passagesInRow.length; index += 1) {
+        const passage = passagesInRow[index];
+        const x = rowStartX + index * (LAYOUT.stickyWidth + LAYOUT.columnGap);
+        const titleY = rowCursorY;
 
         const titleSticky = await createPassageSticky(passage, "title", x, titleY);
         const bodyY = titleY + titleSticky.height + LAYOUT.pairGap;
         const bodySticky = await createPassageSticky(passage, "body", x, bodyY);
 
         const pairHeight = titleSticky.height + LAYOUT.pairGap + bodySticky.height;
-        if (pairHeight > layerHeight) layerHeight = pairHeight;
+        if (pairHeight > rowHeight) rowHeight = pairHeight;
 
         titleByPassage.set(passage.name, titleSticky);
         createdNodes.push(titleSticky, bodySticky);
         sectionMaxRight = Math.max(sectionMaxRight, x + LAYOUT.stickyWidth);
       }
 
-      layerCursorY += layerHeight + LAYOUT.layerGap;
+      rowCursorY += rowHeight + LAYOUT.layerGap;
     }
 
     const sectionWidth = Math.max(sectionMaxRight - sectionCursorX + LAYOUT.sectionPadding, LAYOUT.stickyWidth + LAYOUT.sectionPadding * 2);
-    const sectionHeight = layerCursorY - LAYOUT.layerGap + LAYOUT.sectionPadding;
+    const sectionHeight = rowCursorY - LAYOUT.layerGap + LAYOUT.sectionPadding;
     const sectionNode = createSectionNode(section, sectionCursorX, 0, sectionWidth, sectionHeight);
     createdNodes.push(sectionNode);
 
@@ -272,6 +278,42 @@ function bfsLayers(passages: StoryGraphPassage[], edges: StoryGraphEdge[]): Map<
   return layer;
 }
 
+/* Collapse runs of single-passage layers into shared horizontal rows. A row
+   is either:
+     - a single multi-passage layer (a branch — passages render side-by-side
+       in BFS order), or
+     - a chain of consecutive single-passage layers up to maxChainLength
+       (linear stretches render as a horizontal ribbon).
+   A multi-passage layer always flushes the chain buffer first so branches
+   stay vertically separated from their preceding chain. */
+function groupLayersIntoRows(
+  layers: StoryGraphPassage[][],
+  maxChainLength: number,
+): StoryGraphPassage[][] {
+  const rows: StoryGraphPassage[][] = [];
+  let chain: StoryGraphPassage[] = [];
+
+  function flush(): void {
+    if (chain.length > 0) {
+      rows.push(chain);
+      chain = [];
+    }
+  }
+
+  for (const layer of layers) {
+    if (layer.length === 1) {
+      chain.push(layer[0]);
+      if (chain.length >= maxChainLength) flush();
+    } else {
+      flush();
+      rows.push(layer);
+    }
+  }
+  flush();
+
+  return rows;
+}
+
 function groupByLayer(
   passages: StoryGraphPassage[],
   layerByPassage: Map<string, number>,
@@ -305,13 +347,16 @@ async function createPassageSticky(
   sticky.x = x;
   sticky.y = y;
 
+  /* Both stickies use the wide width so titles don't wrap on long passage
+     names and pairs share a single column width. */
+  sticky.isWideWidth = true;
+
   if (kind === "title") {
     const fill = STICKY_COLORS[colorForPrefix(passage.prefix)] ?? STICKY_COLORS.light_gray;
     sticky.fills = [{ type: "SOLID", color: fill }];
     const tagSuffix = passage.tags.length ? `\n[${passage.tags.join(" ")}]` : "";
     sticky.text.characters = `${passage.name}${tagSuffix}\n\n${passage.summary}`;
   } else {
-    sticky.isWideWidth = true;
     sticky.fills = [{ type: "SOLID", color: BODY_COLOR }];
     sticky.text.characters = passage.displayBody || passage.summary;
   }

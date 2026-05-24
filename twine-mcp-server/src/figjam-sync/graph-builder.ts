@@ -1,6 +1,8 @@
 import { promises as fs } from "fs";
 import * as path from "path";
 
+import * as he from "he";
+
 import { parseTwee } from "../twine-parser";
 import { extractTypedLinks } from "../sugarcube-tools";
 
@@ -101,7 +103,7 @@ function stripSugarCubeStructure(body: string): string {
 }
 
 function summaryOf(body: string): string {
-  const cleaned = stripSugarCubeStructure(body).replace(/\s+/g, " ").trim();
+  const cleaned = he.decode(stripSugarCubeStructure(body)).replace(/\s+/g, " ").trim();
   if (cleaned.length <= 160) return cleaned;
   return cleaned.slice(0, 157).trimEnd() + "…";
 }
@@ -110,8 +112,10 @@ const DISPLAY_BODY_LIMIT = 600;
 
 function displayBodyOf(body: string): string {
   /* Preserve paragraph breaks so the body sticky reads as prose, but strip
-     SugarCube structure and cap length so all bodies are roughly uniform. */
-  const cleaned = stripSugarCubeStructure(body)
+     SugarCube structure, decode HTML entities (&middot;, &amp;, &nbsp;, etc.),
+     and cap length so all bodies are roughly uniform. */
+  const cleaned = he
+    .decode(stripSugarCubeStructure(body))
     .replace(/[ \t]+/g, " ")
     .replace(/\n{3,}/g, "\n\n")
     .replace(/^\s+|\s+$/g, "");

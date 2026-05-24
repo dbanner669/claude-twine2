@@ -49,6 +49,7 @@
     "zod": "3.24.0"
   },
   "devDependencies": {
+    "@types/he": "^1.2.3",
     "@types/node": "22.0.0",
     "ts-node-dev": "2.0.0",
     "typescript": "5.7.3",
