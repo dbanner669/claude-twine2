@@ -1,13 +1,13 @@
 :: INTRO-100 Briefing [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 /* Scene state object — persists across passages (unlike $temp which resets) */
 <<set $briefing to {}>>
 <</silently>>\
 <<header>>\
 <<page>>\
-The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since 1982.  Fran's on College — the real one, not the Yonge Street tourist trap — where the booths are orange vinyl and the light is the colour of weak tea.  It's the kind of place where nobody looks at you twice, which is the point.
+The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since the Trudeau government — the first one.  A place on Bank Street south of Gloucester, no sign worth reading, where the booths are brown vinyl and the light is the colour of weak tea.  Half the clientele are civil servants eating before the buildings open.  Nobody looks at you twice, which is the point.
 
 You're early.  You're always early for Robert.
 
@@ -17,19 +17,19 @@ You're early.  You're always early for Robert.
 
 :: INTRO-105 Waiting [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
 <<page>>\
 The waitress brings coffee without being asked — you've been here before, enough times that she recognizes the booth but not your name.  You wrap your hands around the mug and watch the door.
 
-Outside, a streetcar grinds past on College, the sound arriving a half-second before the vibration through the floor.  September in Toronto.  Still warm, but the light has changed — that particular quality of autumn sun that makes the city look like it's been dipped in amber.
+Outside, an OC Transpo bus grinds past on Bank, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that turns the limestone facades the colour of old honey.
 
 <<if $player.background eq "RCMP constable">>You used to drink coffee like this at the detachment — institutional, slightly burnt.  The ritual is the same even if the context has shifted.
 <<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.  The stakes are different.
 <<elseif $player.background eq "grad student">>There's a woman two booths over eating eggs alone and staring at nothing.  The part of your brain that studied behavioural patterns can't stop reading the room.  You look away.  Not a case study.
-<<else>>Two years ago you wouldn't have known what to look for in a diner — the exits, the sightlines, the two men at the counter reading the same section of the Star.  Training changes how you see a room.
+<<else>>Two years ago you wouldn't have known what to look for in a diner — the exits, the sightlines, the two men at the counter reading the same section of the Citizen.  Training changes how you see a room.
 <</if>>
 
 [[Continue|INTRO-110 Robert arrives]]
@@ -38,7 +38,7 @@ Outside, a streetcar grinds past on College, the sound arriving a half-second be
 
 :: INTRO-110 Robert arrives [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -53,7 +53,7 @@ He doesn't look like a man who tracks the inexplicable for a living.  He looks l
 
 :: INTRO-115 Morning [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -71,7 +71,7 @@ He slides into the booth across from you, sets the Globe on the table, and signa
 
 :: INTRO-200a Personal [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -88,7 +88,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 
 :: INTRO-200 Assignment [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -105,7 +105,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 
 :: INTRO-205 Field placement [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -126,7 +126,7 @@ He says the name without inflection, like it's a case number.
 
 :: INTRO-210 Swingers club [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -147,7 +147,7 @@ He takes a sip of coffee.  Puts the mug down.
 
 :: INTRO-300 NYSE details [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -166,7 +166,7 @@ He looks past you for a moment, at something outside the window or something in 
 
 :: INTRO-305 NYSE continued [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -187,7 +187,7 @@ He meets your eyes.  "Which is why we need primary observation."
 
 :: INTRO-310 Cover [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -206,7 +206,7 @@ He almost smiles.  Almost.  The corners of his mouth do something that in anothe
 
 :: INTRO-315 Cover continued [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -225,7 +225,7 @@ He leans back.
 
 :: INTRO-320 Reaction [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -242,7 +242,7 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 
 :: INTRO-325 No concerns [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -261,7 +261,7 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 
 :: INTRO-330 Source [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -280,7 +280,7 @@ He picks up his coffee, looks at it, puts it back down.
 
 :: INTRO-335 Focal point [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -300,7 +300,7 @@ You file that away.
 
 :: INTRO-340 Why me [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -317,7 +317,7 @@ He takes three deliberate sips of coffee to put space between the clinical asses
 
 :: INTRO-345 Qualified [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -337,7 +337,7 @@ He takes three deliberate sips of coffee to put space between the clinical asses
 
 :: INTRO-400 Apartment [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -354,7 +354,7 @@ Robert reaches into his jacket — not a folder, just a single sheet of paper fo
 
 :: INTRO-405 Reporting [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -373,7 +373,7 @@ He holds your gaze.
 
 :: INTRO-410 Rules [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -411,7 +411,7 @@ He folds his hands on the table.
 
 :: INTRO-500 Question NYSE [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -432,7 +432,7 @@ He turns his coffee mug.
 
 :: INTRO-510 Question club [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -453,7 +453,7 @@ Robert nods — the question he expected first.
 
 :: INTRO-520 Question risk [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -474,7 +474,7 @@ He lets that sit.
 
 :: INTRO-530 Question previous [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -500,7 +500,7 @@ You wait.  Robert is a man who uses silence, but he also respects when someone u
 
 :: INTRO-600 Subtext [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -519,7 +519,7 @@ Not a dramatic one.  Just a small hitch in Robert's efficiency.  He puts the mug
 
 :: INTRO-610 Reading Robert [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 /* Skill check: can the player read Robert's unease? */
 <<set _checkSkill to $player.skills.composure.level>>
@@ -557,7 +557,7 @@ Whatever it was, it passes.  He releases the mug and straightens in the booth.
 
 :: INTRO-620 Called out [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <<set $briefing.calledOut to true>>
 <</silently>>\
@@ -579,7 +579,7 @@ Two words.  He doesn't elaborate.  He doesn't need to.
 
 :: INTRO-630 Moment passes [daytime]
 <<silently>>
-<<set $header.location to "Fran's Restaurant, College Street">>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -594,16 +594,16 @@ The moment is over.  It existed for exactly as long as it needed to, and now it'
 
 :: INTRO-700 Outside [daytime]
 <<silently>>
-<<set $header.location to "College Street">>
+<<set $header.location to "Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
 <<page>>\
 Robert pays for both coffees — he always does, out of pocket, never expensed.  You noticed that about six months in and never mentioned it.
 
-Outside, College Street is doing what it does on a Monday morning.  Students heading to U of T with backpacks and coffee cups.  A man unlocking the door of a used bookshop.  The 506 streetcar rattling west, the doors hissing open for no one at the stop across the road.
+Outside, Bank Street is doing what it does on a Monday morning.  Civil servants walking south toward the office towers with travel mugs and lanyards tucked inside their jackets.  A woman locking her bicycle to a rack outside a café that hasn't opened yet.
 
-September sun on old brick.  Toronto being unremarkably, specifically itself.
+September sun on limestone.  Ottawa being unremarkably, specifically itself.
 
 [[Continue|INTRO-710 Last words]]
 <</page>>
@@ -611,7 +611,7 @@ September sun on old brick.  Toronto being unremarkably, specifically itself.
 
 :: INTRO-710 Last words [daytime]
 <<silently>>
-<<set $header.location to "College Street">>
+<<set $header.location to "Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
@@ -634,16 +634,16 @@ You wait.
 
 :: INTRO-720 Departure [daytime]
 <<silently>>
-<<set $header.location to "College Street">>
+<<set $header.location to "Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 <</silently>>\
 <<header>>\
 <<page>>\
-He turns north, toward the subway.  You watch him go — a man in an unremarkable jacket disappearing into the perfectly ordinary Monday morning, on his way back to an office where the paperwork includes things that shouldn't exist.
+He turns south, toward the office.  You watch him go — a man in an unremarkable jacket disappearing into the perfectly ordinary Monday morning, on his way back to a building where the paperwork includes things that shouldn't exist.
 
 <<if $briefing.calledOut>>He's worried about you.  You're a little worried about you too.  But not enough to walk away — not after two years of getting ready for exactly this.
 <<elseif $briefing.readRobert>>He's worried about you.  You wish you could tell him not to be.  But that would require a certainty you don't have.
-<<else>>A new apartment, a new name, a new life.  A club on Queen West where something is happening that the Branch can't explain.  And you, walking into it with two years of training and a composure that hasn't been tested yet.
+<<else>>A new city, a new apartment, a new name.  A club on Queen West where something is happening that the Branch can't explain.  And you, walking into it with two years of training and a composure that hasn't been tested yet.
 <</if>>
 
 Wednesday.  Ten o'clock.  ID photos.
