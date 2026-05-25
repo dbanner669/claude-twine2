@@ -42,6 +42,8 @@ These assets already exist and can be reused as references or in-game art:
 
 *Only needed if avatar is visible during the briefing scene.*
 
+**Updated avatar-production note:** this section is the older greybox minimum. The active avatar research now lives in `docs/avatar-bakeoff/`. The current production hypothesis is Option 2: explicit mix-and-match layers for `hairBack`, `body`, `bodyMods`, `eyes`, `underwear`, `clothingBottom`, `clothingTop`, `shoes`, `hairFront`, `expression`, and `overlay`. See `docs/avatar-bakeoff/STATUS.md` and `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` before producing final avatar art.
+
 ### Body Sprites
 All avatar images must be the same dimensions (e.g., 512x768), transparent PNG, layered via CSS.
 
@@ -140,4 +142,4 @@ The art style for avatar sprites and location images hasn't been decided. Key qu
 
 ### Recommendation
 
-For the greybox, keep treating avatar art as lower priority than writing and flow polish. The current build already tolerates a placeholder avatar panel, and the most immediately useful art wins are still selective scene images, logo/branding work, and reference sheets that support character consistency.
+For the greybox, keep treating avatar art as lower priority than writing and flow polish unless the briefing avatar becomes a presentation requirement. The current build already tolerates a placeholder avatar panel. If avatar work resumes, do not use the simplified counts above as the production plan; use `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` and validate layers with `docs/avatar-bakeoff/layer-composition-protocol.md`.

@@ -2,7 +2,15 @@
 
 This folder defines the ComfyUI bakeoff for Sizzle's layered avatar pipeline. It is research infrastructure, not production game art. Generated images must go to `C:\tmp\sizzle-avatar-bakeoff\outputs\`, not `sizzle/media/avatar/`.
 
-**Current status:** see `INTERIM-FINDINGS.md`. Early bakeoff results indicate the original direct text-to-image layer-generation approach is not consistent enough for production. The workflows in this folder are now Phase 1 evidence and diagnostics. The recommended next process is stylized master-reference generation plus controlled image-edit derivation.
+**Current status:** see `STATUS.md` and `INTERIM-FINDINGS.md`. Early bakeoff results indicate the original direct text-to-image layer-generation approach is not consistent enough for production. The workflows in this folder are now Phase 1 evidence and diagnostics. The recommended next process is stylized master-reference generation plus controlled image-edit derivation.
+
+Important companion files:
+
+- `STATUS.md` - consolidated current state and file inventory.
+- `OPTION-2-ASSET-TODO.md` - complete asset creation checklist for the expanded layer model.
+- `phase-2-image-edit-protocol.md` - master-reference plus image-edit protocol.
+- `baseline-inputs/README.md` - user-provided Alex reference files and hashes.
+- `master-candidates/README.md` - generated master-reference candidates and review criteria.
 
 The primary question is not "which model makes the prettiest character?" The primary question is whether a stack can render **separate same-canvas avatar elements** that remain coherent when recombined through Sizzle's actual SugarCube avatar model.
 
