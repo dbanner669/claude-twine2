@@ -14,24 +14,24 @@ Main findings:
 - Full realism makes the problem harder. Realistic models introduce small anatomical, lighting, fabric, and face changes that are visually obvious when layers are recombined.
 - The layered avatar format wants controlled, slightly stylized sprites more than it wants photographic realism.
 
-Conclusion: the primary production process should shift from **independent text-to-image layer generation** to **master-reference generation plus controlled image-edit derivation**.
+Conclusion: the primary production process should shift from **independent text-to-image layer generation** to **canonical-template controlled image-edit derivation**.
 
 ## Revised Hypothesis
 
 The strongest path is likely a combination workflow:
 
-1. Generate one approved stylized master avatar/reference sheet.
-2. Use image-edit models to derive variations from that master.
+1. Use the approved canonical Alex templates as the fixed registration source.
+2. Use image-edit models to derive variations from those templates.
 3. Extract transparent layers from edited variants.
-4. Composite-test every derived layer against the original master stack.
+4. Composite-test every derived layer against crossed combinations on the same canvas.
 
 Candidate roles:
 
-- **Master look generator:** ChatGPT image generation or another high-adherence image model, used to create the approved baseline style and identity.
-- **Local/offline edit model:** Qwen Image Edit, FLUX.2 Klein image edit, or another permissive local edit/inpaint model, used to make hair, skin, clothing, expression, and underwear variants from the master.
+- **Canonical source:** the `523x1536` transparent Alex crops in `baseline-inputs/canonical/`, especially `alex-noface-blank.png` for body and clothing tests.
+- **Local/offline edit model:** Qwen Image Edit, FLUX.2 Klein image edit, or another permissive local edit/inpaint model, used to make hair, skin, clothing, expression, and underwear variants from the canonical source.
 - **Segmentation/matting:** BiRefNet/rembg/SAM-style correction for alpha extraction after edits.
 
-Important constraint note: using ChatGPT image generation for master concept/reference work changes the original "fully offline" constraint. Treat cloud output as optional concept/reference material unless the production constraint is formally changed.
+Important constraint note: using ChatGPT/Codex image generation is now concept-only for this avatar workflow. Built-in imagegen tests have not preserved pose/canvas well enough for production extraction.
 
 ## Art Direction Pivot
 
@@ -59,10 +59,9 @@ The current ComfyUI workflows remain useful as Phase 1 evidence:
 
 A workflow only passes if it can:
 
-- Start from one approved master sprite/reference.
+- Start from the approved canonical template set.
 - Edit one attribute at a time while preserving the rest of the sprite.
-- Keep landmarks stable within roughly `3-5 px` at the bakeoff canvas.
-- Produce skin-tone, hair, eye, underwear, clothing, and expression variants that recombine through Sizzle's six-array runtime stack.
+- Keep landmarks stable within roughly `3-5 px` at the canonical `523x1536` canvas.
+- Produce body, hairBack, hairFront, face, eyes, nipples, genitals, underwear, clothingTop, clothingBottom, shoes, expression, and overlay-capable variants that recombine through the locked explicit stack.
 - Preserve the chosen stylized art direction across edits.
 - Support adult/tasteful anatomy variants without refusal or censor artifacts.
-

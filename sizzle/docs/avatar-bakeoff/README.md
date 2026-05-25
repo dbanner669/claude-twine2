@@ -1,29 +1,40 @@
 # Sizzle Avatar Bakeoff
 
-This folder defines the ComfyUI bakeoff for Sizzle's layered avatar pipeline. It is research infrastructure, not production game art. Generated images must go to `C:\tmp\sizzle-avatar-bakeoff\outputs\`, not `sizzle/media/avatar/`.
+This folder defines the ComfyUI bakeoff and draft-production workflow for Sizzle's layered avatar pipeline. It is research infrastructure, not production game art. Draft outputs should stay under `sizzle/docs/avatar-bakeoff/production-drafts/` or a clearly named external Comfy output folder until explicitly promoted; do not write generated assets directly to `sizzle/media/avatar/`.
 
-**Current status:** see `STATUS.md` and `INTERIM-FINDINGS.md`. Early bakeoff results indicate the original direct text-to-image layer-generation approach is not consistent enough for production. The workflows in this folder are now Phase 1 evidence and diagnostics. The recommended next process is stylized master-reference generation plus controlled image-edit derivation.
+**Current status:** see `STATUS.md` and `INTERIM-FINDINGS.md`. Early bakeoff results indicate the original direct text-to-image layer-generation approach is not consistent enough for production. The active process is now canonical-template image editing through ComfyUI, with fixed registration, local post-processing, and crossed composite QA.
 
 Important companion files:
 
 - `STATUS.md` - consolidated current state and file inventory.
 - `OPTION-2-ASSET-TODO.md` - complete asset creation checklist for the expanded layer model.
-- `phase-2-image-edit-protocol.md` - master-reference plus image-edit protocol.
-- `baseline-inputs/README.md` - user-provided Alex reference files and hashes.
+- `phase-2-image-edit-protocol.md` - canonical-template plus image-edit protocol.
+- `baseline-inputs/README.md` - user-provided Alex reference files, canonical cropped templates, and hashes.
 - `master-candidates/README.md` - generated master-reference candidates and review criteria.
 
 The primary question is not "which model makes the prettiest character?" The primary question is whether a stack can render **separate same-canvas avatar elements** that remain coherent when recombined through Sizzle's actual SugarCube avatar model.
 
-Sizzle currently renders six runtime arrays, bottom to top:
+Sizzle currently renders a generic runtime avatar widget, but the art target is now an explicit layer stack. The locked production target is:
 
-1. `$avatar.background[]`
-2. `$avatar.body[]`
-3. `$avatar.bodyMods[]`
-4. `$avatar.underwear[]`
-5. `$avatar.clothing[]`
-6. `$avatar.foreground[]`
+```text
+background
+hairBack
+body
+nipples
+genitals
+bodyMods
+face
+eyes
+underwear
+clothingBottom
+clothingTop
+shoes
+hairFront
+expression
+overlay
+```
 
-The art checklist subdivides those runtime arrays into production sprites: skin-tone body sprites, hair style/colour sprites, eye colour sprites, body modifications, underwear, clothing slots, and expression parts. The bakeoff must test that these sprites can be generated independently and recombined without repainting or drifting.
+The greybox proof deliberately locks appearance to medium skin, long straight hair, and blue eyes. The wider skin/hair/eye matrix remains a later production expansion after the layer process is proven.
 
 ## Contenders
 
@@ -38,21 +49,39 @@ No custom Sizzle character LoRA is in scope for this bakeoff.
 
 ## Revised Phase 2 Direction
 
-The next bakeoff phase should test image-edit workflows rather than fresh independent layer generation:
+The active bakeoff phase tests image-edit workflows rather than fresh independent layer generation:
 
-1. Create or select one approved stylized master avatar.
-2. Use an image-edit model to change one attribute at a time.
-3. Extract the changed element as a transparent layer.
-4. Composite it back over the original master and crossed appearance variants.
-5. Score pixel stability and style consistency before model beauty.
+1. Start from the canonical `523x1536` Alex templates in `baseline-inputs/canonical/`.
+2. Use FLUX.2 Klein image edit, preferably from the faceless/no-hair body for skin passes.
+3. Keep Comfy working images padded to `576x1536` only for latent compatibility.
+4. Crop back to `523x1536` and restore canonical alpha/silhouette before accepting a layer.
+5. Composite crossed previews before promoting any family.
 
-Likely candidates:
+Current working setup:
 
-- Master reference generation: high-adherence image generation such as ChatGPT image generation, if cloud reference generation is accepted.
-- Local edit derivation: Qwen Image Edit, FLUX.2 Klein image edit, or another local edit/inpaint workflow with adult/tasteful anatomy tolerance.
-- Alpha extraction: BiRefNet/rembg plus manual QA.
+- Local edit derivation: FLUX.2 Klein 4B image edit in ComfyUI.
+- Clothing edit testing: Qwen Image Edit currently looks more promising for garment realism, but still needs strict canvas/alpha/pose validation.
+- Prompting: short natural-language FLUX.2 prompts, no SD/SDXL-style negative prompt lists.
+- Candidate staging: `production-drafts/candidates/v1/`.
+- Body candidates: light, medium, and dark faceless-body layers exist as V1 candidates; greybox uses the medium candidate.
 
 This is also an art-direction pivot: full realism should be deprioritized in favor of stylized realism / painterly semi-realism that can survive layer recombination.
+
+## Recent Clothing Mask Tests
+
+Recent clothing experiments tested black visual garment masks for a white t-shirt, dark jeans, and shoes:
+
+- The built-in Codex imagegen path is not a production inpaint path. It can make a plausible concept image, but even with a tight guide it may redraw the whole avatar, change scale, and leave extraction residue.
+- The user-provided `mask-test.png` is the best garment guide so far. It is much more coherent than the early Codex masks and should be used as the next reference mask shape.
+- Qwen Image Edit produced the best clothing realism so far, but its first inspected output failed technical acceptance: it used a `576x1536` opaque RGB image, cropped the top of the head, shifted skin/lighting, omitted sneakers, and did not return transparent layers.
+
+Next clothing tests should use:
+
+```text
+C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png
+```
+
+This image is derived from `baseline-inputs/canonical/alex-noface-blank.png`. After generation, crop the rightmost 53 px back to `523x1536`, restore canonical alpha, and extract only garment pixels.
 
 ## Avatar Target
 
@@ -63,9 +92,9 @@ Use this target across every contender:
 - Grounded 2005 Toronto undercover thriller tone.
 - Natural proportions, understated photographic/semi-realistic look.
 - Avoid influencer glamour, anime, 3D render, cartoon, celebrity likeness, and underage-coded styling.
-- Test separate body, hair, eyes, bodyMods, underwear, clothing, expression, and background-capable layers.
+- Test separate body, nipples, genitals, bodyMods, face, eyes, hair, underwear, clothing, expression, overlay, and background-capable layers.
 
-Canvas: `1024x1360` for all tests. This is effectively a 3:4 portrait canvas and keeps both dimensions divisible by 16 for FLUX.2 Klein compatibility.
+Canonical canvas: `523x1536` for all accepted draft layers and QA composites. ComfyUI source/edit images may be padded to `576x1536`, but must be cropped back to `523x1536` before acceptance.
 
 Layer lock requirements:
 
@@ -77,6 +106,7 @@ Layer lock requirements:
 - Expression sprites must land on the same brows/mouth region over all body/hair/eye combinations.
 - Underwear must be tested both as its own layer and under outer clothing.
 - A layer fails if it only looks correct when baked into the original full-body render.
+- Clothing tests fail if the source crop changes, the model alters visible skin or pose outside the garment area, or the extraction includes background/checker/skin residue.
 
 Seed discipline:
 
@@ -124,7 +154,7 @@ See `layer-composition-protocol.md` for exact scoring rules.
 
 ## Output Convention
 
-Use this output root:
+Legacy Phase 1 workflow outputs used this output root:
 
 `C:\tmp\sizzle-avatar-bakeoff\outputs\`
 
@@ -152,13 +182,15 @@ outputs/
     layer-composition/
 ```
 
-Each run should save:
+Current Phase 2 candidate outputs should save:
 
 - Main RGB render.
 - RGBA transparent PNG.
 - Alpha/mask preview.
 - Composite preview over dark, light, and Sizzle-like backgrounds.
 - Manifest JSON using `manifest-template.json`.
+
+Use `production-drafts/candidates/v1/` for current candidate layers and QA previews.
 
 ## Decision Rule
 

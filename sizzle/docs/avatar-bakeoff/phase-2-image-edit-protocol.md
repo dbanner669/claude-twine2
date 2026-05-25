@@ -1,22 +1,32 @@
-# Phase 2 Protocol: Master Reference + Image Edit
+# Phase 2 Protocol: Canonical Template + Image Edit
 
 This protocol replaces the original assumption that independent text-to-image generations can produce production-ready avatar layers.
 
 ## Goal
 
-Test whether a model stack can start from one approved master avatar and derive reusable Sizzle layers through controlled image edits.
+Test whether a model stack can start from approved canonical avatar templates and derive reusable Sizzle layers through controlled image edits.
 
 Primary success condition:
 
 ```text
-one master sprite -> edited variants -> extracted layers -> crossed composites still align
+canonical template -> edited variants -> extracted layers -> crossed composites still align
 ```
 
 ## Required Inputs
 
-Create one approved master sprite/reference before running edits.
+Use the approved canonical cropped templates before running edits. Earlier protocol text referred to creating a separate master sprite; the current Sizzle process instead treats the user-provided Alex canonical crops as the fixed master registration.
 
-Master requirements:
+Current canonical template set:
+
+- `baseline-inputs/canonical/alex-blank-crop.png`
+- `baseline-inputs/canonical/alex-nohair-nude-crop.png`
+- `baseline-inputs/canonical/alex-noface-blank.png`
+- `baseline-inputs/canonical/alex-hair-nude-crop.png`
+- `baseline-inputs/canonical/alex-hair-underwear-crop.png`
+
+These cropped transparent-background templates are the default source references for Phase 2 control-map extraction and image-edit tests. They share a `523x1536` canvas; any derived control maps, edit outputs, masks, and extracted layers should preserve that registration unless the project explicitly migrates to a new canonical canvas.
+
+Canonical/reference requirements:
 
 - Adult woman, age 27.
 - Front-facing 3:4 avatar pose.
@@ -27,9 +37,9 @@ Master requirements:
 - Stylized realism / painterly semi-realism, not full photographic realism.
 - Clean, readable silhouette.
 - Lighting simple enough that derived layers will not fight each other.
-- Canvas: `1024x1360`.
+- Canvas: `523x1536` for accepted draft layers. ComfyUI working images may be padded to `576x1536` and cropped back after generation.
 
-Recommended master-reference prompt direction:
+Legacy master-reference prompt direction:
 
 ```text
 stylized realistic visual novel character sprite, adult 27 year old Canadian woman, grounded undercover thriller tone, 2005 Toronto, realistic proportions, clean silhouette, controlled soft lighting, subtle painterly realism, front-facing avatar pose, neutral expression, plain background, designed for layered PNG game avatar
@@ -37,12 +47,12 @@ stylized realistic visual novel character sprite, adult 27 year old Canadian wom
 
 ## Copy-Ready ChatGPT Image Prompt
 
-Use this when generating the first master reference. The goal is to create a stable art-direction anchor, not a finished production layer.
+This is retained for historical reference and optional art-direction exploration. The active production workflow now uses the canonical Alex templates instead of generating a new master reference.
 
 ```text
 Create a full-body character sprite reference for an adult interactive fiction game called Sizzle.
 
-This image will be used as the master reference for a layered PNG avatar system. The final game avatar will be built from separate transparent layers: base body, skin tone variants, hair style and hair colour variants, eye colour overlays, underwear, clothing items, shoes, and facial expression overlays. Because of that, the character must be drawn in a clean, stable, front-facing pose with clear attachment points for hair, clothing, and expression layers.
+This image will be used as the art-direction reference for a layered PNG avatar system. The final game avatar will be built from separate transparent layers: body, nipples, genitals, non-anatomy body mods, face, eyes, hair back/front, underwear, clothing bottoms, clothing tops, shoes, expressions, overlays, and backgrounds. Because of that, the character must be drawn in a clean, stable, front-facing pose with clear attachment points for hair, clothing, anatomy overlays, and expression layers.
 
 Subject:
 - Adult woman, age 27.
@@ -128,40 +138,25 @@ Do not change:
 This is for a layered PNG game avatar, so the edited result must remain geometrically aligned with the master image for later layer extraction.
 ```
 
-## Phase 2A: Master Candidate Generation
+## Phase 2A: Canonical Template Selection
 
-Before testing local image-edit models, generate a small set of master avatar candidates with Codex/ChatGPT-style image generation. This phase is allowed to be more art-directable and less offline-pure because its purpose is to establish the baseline look, pose, silhouette, and stylization target. Treat these images as **reference candidates** until the project formally accepts cloud-generated master art.
+Earlier Phase 2A proposed generating master candidates with Codex/ChatGPT-style image generation. That path failed the mask/pose test for production layers. The current canonical source is the user-provided Alex template set, especially `alex-noface-blank.png` for body skin-tone work.
 
-The output of this phase is not a final production layer. It is the visual anchor that later edit/inpaint models must preserve.
+Current body production approach:
 
-Generate 3-5 candidates with the same production constraints:
+- Start from `alex-noface-blank.png`.
+- Use FLUX.2 Klein image edit for skin-tone candidates.
+- Use simple natural-language prompts and low CFG.
+- Prefer raw output when silhouette adheres well, then crop padded output back to `523x1536` and restore canonical alpha.
+- Keep `face`, `eyes`, `expression/brows`, `expression/mouth`, `nipples`, and `genitals` as separate overlays.
 
-- Full-body, centered, front-facing.
-- Adult woman, age 27.
-- Neutral underwear baseline: plain opaque bra and briefs.
-- Arms relaxed slightly away from torso.
-- Hands visible and not occluding body.
-- Feet visible and aligned to a simple standing pose.
-- Plain neutral background.
-- Stylized realism / painterly semi-realism.
-- Clean sprite silhouette over photographic realism.
-- No props, no logos, no modern fashion tells, no celebrity likeness.
+Current clothing production approach:
 
-Candidate review criteria:
-
-- Does the pose support reusable clothing layers?
-- Does the hair silhouette support hair-front/hair-back separation?
-- Are face, eyes, brows, and mouth clear enough for expression overlays?
-- Is the body attractive but grounded, adult, and non-caricatured?
-- Does the style feel like Sizzle: mature, 2005 Toronto thriller, erotic-capable but not pornographic?
-- Would this still look good as a small avatar panel in the current UI?
-
-Once one master candidate is approved, save it as:
-
-- `master_stylized_reference.png`
-- `master_manifest.json`
-
-Then move to Phase 2B.
+- Start from the noface blank body when testing clothing shape unless a specific hair/underwear occlusion test is intended.
+- For ComfyUI, use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png` as the current source image.
+- Use the user-provided `mask-test.png` style as the garment-region guide: black filled shirt, jeans, and shoe regions on the same avatar pose.
+- Treat built-in Codex image generation as concept-only for clothing. It does not guarantee hard-mask preservation of unmasked pixels.
+- Treat Qwen Image Edit as the current best clothing-model candidate, pending a successful no-crop, no-skin-drift, all-garments run.
 
 ## Phase 2B: Candidate Model Roles
 
@@ -184,28 +179,28 @@ Matting/segmentation:
 
 ## Phase 2C: Comfy Edit Workflow Build
 
-After a master candidate is approved, build ComfyUI workflows for the local edit phase. These workflows should not repeat the Phase 1 mistake of relying on prompts alone. They must include an explicit control phase that derives and reuses control images from the approved master.
+After the canonical source is selected, build ComfyUI workflows for the local edit phase. These workflows should not repeat the Phase 1 mistake of relying on prompts alone. They must preserve canonical registration and either use hard-mask compositing or post-process the raw output by restoring canonical alpha.
 
 Required workflow families:
 
-- `qwen-image-edit-master-variants.json`
-- `flux2-klein-image-edit-master-variants.json`
+- `workflows/phase2-edit/flux2-klein-4b-base-mask-edit.api.json`
+- Optional later: `qwen-image-edit-master-variants.json`
 - Optional fallback: `sdxl-inpaint-controlnet-master-variants.json`
 
 Each workflow must include:
 
-- Master image loader.
+- Canonical source image loader.
 - Mask loader or mask-generation node.
 - Control image loaders derived from the master.
 - Image-edit/inpaint model loader.
 - Prompt slot for the single attribute being changed.
-- Negative/constraint prompt slot.
+- Empty negative conditioning for FLUX.2 unless a later workflow documents a FLUX-compatible negative guidance method.
 - Output saver for edited RGB image.
 - Optional alpha extraction pass or export handoff to BiRefNet/rembg workflow.
 
 Control phase:
 
-- Generate and save a canonical pose/edge/depth/control bundle from the approved master.
+- Generate and save a canonical pose/edge/depth/control bundle from the approved template set.
 - At minimum:
   - `control_openpose.png` or equivalent body pose guide.
   - `control_canny.png` or soft edge guide.
@@ -216,11 +211,18 @@ Control phase:
 
 Edit workflow requirement:
 
-- The edit model receives the master image plus a tight mask for the target change.
+- The edit model receives the canonical source image plus a tight mask for the target change when masking helps. For broad body skin-tone edits, raw FLUX output may preserve texture better; in that case crop back to `523x1536` and restore canonical alpha.
 - Control images constrain the full canvas, not just the masked area.
 - The prompt asks for exactly one changed attribute.
 - Denoise/edit strength starts low enough to preserve geometry.
-- Every output keeps `1024x1360` dimensions.
+- Every accepted output keeps `523x1536` dimensions. Comfy working outputs may be `576x1536` and must be cropped back.
+
+Clothing edit source rule:
+
+- Use `sizzle_alex_noface_blank_padded_576x1536.png` for the next shirt/jeans/shoes tests.
+- Do not use the hair/underwear source for the main clothing test unless the goal is specifically to evaluate hair or underwear occlusion.
+- If the edit model outputs `576x1536`, the rightmost 53 px are padding. Crop them away before QA.
+- Restore the canonical transparent alpha from `alex-noface-blank.png` before extracting clothing layers.
 
 Recommended initial edit settings:
 
@@ -260,6 +262,8 @@ Run each edit from the same approved master.
 - Add dark jeans.
 - Add sneakers.
 
+For the shirt/jeans/sneakers test, the model prompt should explicitly say that the pose, canvas, crop, body silhouette, blank face, visible skin, lighting, and unmasked regions must remain unchanged. For FLUX.2, phrase this as positive natural language rather than a negative prompt list.
+
 ### Expression Edits
 
 - Calm/neutral.
@@ -298,13 +302,23 @@ Not allowed for scoring:
 
 Master:
 
-- `master_stylized_reference.png`
-- `master_manifest.json`
+- `source/alex-noface-blank.png`
+- `source/alex-blank-crop.png`
+- `source/alex-nohair-nude-crop.png`
+- `source/alex-hair-nude-crop.png`
+- `source/alex-hair-underwear-crop.png`
+- `master_manifest.json` or candidate report JSON
 
 Edited variants:
 
 - `edit_skin-medium.png`
 - `edit_skin-dark.png`
+- `edit_face-nose.png`
+- `edit_eyes-blue.png`
+- `edit_brows-relaxed.png`
+- `edit_mouth-calm.png`
+- `edit_nipples-medium.png`
+- `edit_genitals-medium.png`
 - `edit_hair-black.png`
 - `edit_hair-blonde.png`
 - `edit_hair-short-bob.png`
@@ -325,12 +339,16 @@ Extracted layers should use Sizzle-compatible names:
 - `20_body-light.png`
 - `20_body-medium.png`
 - `20_body-dark.png`
+- `38_face-nose-medium.png`
+- `40_eyes-blue.png`
+- `43_nipples-medium.png`
+- `44_genitals-medium.png`
 - `30_hair-long-straight-black.png`
 - `30_hair-long-straight-blonde.png`
 - `30_hair-short-bob-brown.png`
 - `30_hair-long-curly-brown.png`
-- `35_eyes-green.png`
-- `35_eyes-brown.png`
+- `40_eyes-green.png`
+- `40_eyes-brown.png`
 - `underwear/neutral-bra.png`
 - `underwear/neutral-briefs.png`
 - `clothing/tops/blackTshirt.png`
@@ -360,6 +378,10 @@ Hard fail:
 - Edit changes face identity when only clothing changes.
 - Edit changes body silhouette when only skin tone changes.
 - Edit changes pose/canvas framing.
+- Edit crops the top of the head, feet, or hands relative to the canonical canvas.
+- Clothing edit changes unmasked skin tone, lighting, body proportions, or blank-face state.
+- Clothing output omits a requested garment, such as shoes in a full outfit test.
+- Output is only an opaque RGB full render with no recoverable alpha or clean extraction path.
 - Extracted layer only works over the image it was edited from.
 - Style drifts toward full photo realism, anime, or adult-site gloss.
 

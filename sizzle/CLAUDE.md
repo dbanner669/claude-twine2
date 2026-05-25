@@ -277,7 +277,7 @@ Skills start at level -4. To display 0-based values (e.g., composure pips), use:
 - **UI design system** — 8 CSS files, 5 font families, complete token system
 
 ### What's placeholder / not yet built
-- **Avatar art** — all image arrays are empty; placeholder frame shows "avatar layers" text
+- **Avatar art/runtime** — `media/avatar/` remains placeholder-only and the runtime image arrays still need the explicit-slot implementation. Current candidate body layers, clothing-mask experiments, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/`; the greybox avatar proof is locked to medium skin, long straight hair, and blue eyes. Clothing tests are still draft-only; Qwen Image Edit is the current promising route if it preserves the noface source crop, pose, alpha, and unmasked skin.
 - **CC-400 inciting incidents** — placeholder text, no actual options
 - **Hair style swatches** — show dark rectangles (no art yet)
 - **Location/background art** — still sparse; only a small number of location/character images exist so far

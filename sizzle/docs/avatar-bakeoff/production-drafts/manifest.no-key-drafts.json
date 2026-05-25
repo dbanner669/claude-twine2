@@ -1,0 +1,20 @@
+{
+  "workflow": "no-key deterministic draft generator",
+  "canvas": {
+    "width": 523,
+    "height": 1536
+  },
+  "inputs": {
+    "body_primary": "baseline-inputs/canonical/alex-blank-crop.png",
+    "body_compatibility": "baseline-inputs/canonical/alex-nohair-nude-crop.png",
+    "hair": "baseline-inputs/canonical/alex-hair-nude-crop.png",
+    "underwear": "baseline-inputs/canonical/alex-hair-underwear-crop.png"
+  },
+  "notes": [
+    "Drafts are generated without API calls or ComfyUI.",
+    "Body skin tones are recolors of the less explicit blank template.",
+    "Hair colour variants reuse one extracted hair geometry.",
+    "Clothing top/bottom/shoes are simple local mask drafts for registration QA, not final art direction.",
+    "No files are written to media/avatar."
+  ]
+}

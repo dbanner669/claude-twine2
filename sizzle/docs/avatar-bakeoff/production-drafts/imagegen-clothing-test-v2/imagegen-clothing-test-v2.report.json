@@ -1,0 +1,16 @@
+{
+  "canvas": [
+    523,
+    1536
+  ],
+  "source_body": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\body\\20_body-medium-canonical-noface.png",
+  "purpose": "V2 imagegen clothing test with tighter opaque garment masks only where clothing should literally go.",
+  "outputs": {
+    "guide_white": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\guide\\body-medium-tight-clothing-guide-white.png",
+    "guide_safe_white": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\guide\\body-medium-tight-clothing-guide-safe-white.png",
+    "mask_combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\masks\\mask-clothing-combined-tight.png",
+    "mask_shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\masks\\mask-shirt-tight.png",
+    "mask_jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\masks\\mask-jeans-tight.png",
+    "mask_shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\masks\\mask-shoes-tight.png"
+  }
+}

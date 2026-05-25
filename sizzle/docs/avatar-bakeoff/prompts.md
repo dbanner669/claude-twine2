@@ -86,6 +86,14 @@ same locked avatar canvas and lower body position, isolated transparent PNG clot
 same locked avatar canvas and foot position, isolated transparent PNG shoe sprite only, practical sneakers, soles aligned to canonical foot position, no legs or skin baked into the shoe layer, plain matte grey background for segmentation
 ```
 
+## Qwen Clothing Edit Test
+
+Use this for the current Comfy/Qwen shirt, jeans, and sneakers pass with `sizzle_alex_noface_blank_padded_576x1536.png` and the user mask guide.
+
+```text
+Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain white fitted t-shirt, dark blue jeans, and simple black sneakers. Do not change any unmasked pixels or redraw the body.
+```
+
 ## Layer Neutral Underwear
 
 ```text
@@ -128,9 +136,9 @@ grounded semi-realistic photographic anatomical character reference of an adult 
 anime, cartoon, illustration, 3d render, plastic skin, glossy fashion shoot, influencer, exaggerated breasts, exaggerated hips, childlike, teen, young-looking, deformed anatomy, extra fingers, missing fingers, bad hands, bad eyes, crossed eyes, asymmetrical face, heavy makeup, modern smartphone, watermark, signature, text, logo, cropped, out of frame, celebrity
 ```
 
-## FLUX Negative/Constraint Text
+## Legacy FLUX Constraint Text
 
-FLUX workflows often rely more on positive prompt constraints than long negative prompts. Include these constraints in the conditioning path supported by the installed FLUX.2 Comfy nodes:
+This was used during the original Phase 1 bakeoff. For the active FLUX.2 image-edit workflow, use short natural-language positive prompts and keep the negative/constraint node empty unless a later workflow documents a FLUX-compatible negative guidance method.
 
 ```text
 avoid anime, avoid cartoon, avoid 3d render, avoid influencer glamour, avoid childlike features, avoid teen appearance, avoid celebrity likeness, avoid exaggerated body proportions, avoid watermark, avoid text, avoid logo

@@ -1,0 +1,34 @@
+{
+  "outputs": {
+    "raw": {
+      "source_path": "C:\\Users\\Oculus\\Documents\\ComfyUI\\output\\sizzle-avatar-bakeoff\\phase2-edit\\flux2\\raw\\skin-medium_00002_.png",
+      "size": [
+        576,
+        1536
+      ],
+      "copied": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\comfy-review\\skin-medium_raw_latest_576x1536.png",
+      "cropped": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\comfy-review\\skin-medium_raw_latest_523x1536.png",
+      "diff_bbox_vs_source": [
+        0,
+        0,
+        576,
+        1536
+      ]
+    },
+    "masked": {
+      "source_path": "C:\\Users\\Oculus\\Documents\\ComfyUI\\output\\sizzle-avatar-bakeoff\\phase2-edit\\flux2\\masked\\skin-medium_00002_.png",
+      "size": [
+        576,
+        1536
+      ],
+      "copied": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\comfy-review\\skin-medium_masked_latest_576x1536.png",
+      "cropped": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\comfy-review\\skin-medium_masked_latest_523x1536.png",
+      "diff_bbox_vs_source": [
+        0,
+        0,
+        576,
+        1536
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "method": "V3 built-in imagegen with full garment-coverage visual masks; bbox-fit generated full render to canonical alpha; extract through exact full masks.",
+  "raw_generated": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\source\\imagegen-v3-black-shirt-jeans-sneakers-raw.png",
+  "generated_size": [
+    732,
+    2148
+  ],
+  "canonical_size": [
+    523,
+    1536
+  ],
+  "target_bbox": [
+    0,
+    21,
+    523,
+    1536
+  ],
+  "generated_foreground_bbox": [
+    47,
+    23,
+    663,
+    2012
+  ],
+  "scale_to_target_height": 0.7616892911010558,
+  "paste_xy": [
+    -9,
+    4
+  ],
+  "extracted": {
+    "shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\extracted\\60_black-tshirt-imagegen-v3-test.png",
+    "jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\extracted\\55_dark-jeans-imagegen-v3-test.png",
+    "shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\extracted\\65_black-sneakers-imagegen-v3-test.png",
+    "combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\extracted\\clothing-combined-imagegen-v3-test.png"
+  },
+  "qa": {
+    "body_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\qa\\composite-medium-body-imagegen-v3-clothing-test.png",
+    "dark_ui_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\qa\\composite-medium-body-imagegen-v3-clothing-test-dark-ui.png",
+    "checker_extracted": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v3\\qa\\extracted-combined-imagegen-v3-clothing-checker.png"
+  }
+}

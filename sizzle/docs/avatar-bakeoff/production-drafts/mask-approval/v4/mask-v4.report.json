@@ -1,0 +1,15 @@
+{
+  "canvas": [
+    523,
+    1536
+  ],
+  "assessment": "Candidate approval mask: actual garment silhouettes with full sleeves/underarms, full jean outer sides, narrower inner thigh cutout, and shoe-shaped masks with foot-zone allowance.",
+  "outputs": {
+    "plain_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\guide\\body-medium-clothing-mask-v4-white.png",
+    "review_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\guide\\body-medium-clothing-mask-v4-review-white.png",
+    "shirt_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\masks\\mask-shirt-v4.png",
+    "jeans_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\masks\\mask-jeans-v4.png",
+    "shoes_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\masks\\mask-shoes-v4.png",
+    "combined_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v4\\masks\\mask-clothing-combined-v4.png"
+  }
+}

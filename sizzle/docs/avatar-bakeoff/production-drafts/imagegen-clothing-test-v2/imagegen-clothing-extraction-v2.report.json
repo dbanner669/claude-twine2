@@ -1,0 +1,40 @@
+{
+  "method": "V2 built-in imagegen with tighter opaque visual masks; bbox-fit generated full render to canonical alpha; extract through exact tight masks.",
+  "raw_generated": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\source\\imagegen-v2-black-shirt-jeans-sneakers-raw.png",
+  "generated_size": [
+    732,
+    2148
+  ],
+  "canonical_size": [
+    523,
+    1536
+  ],
+  "target_bbox": [
+    0,
+    21,
+    523,
+    1536
+  ],
+  "generated_foreground_bbox": [
+    33,
+    23,
+    665,
+    2031
+  ],
+  "scale_to_target_height": 0.7544820717131474,
+  "paste_xy": [
+    -2,
+    4
+  ],
+  "extracted": {
+    "shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\extracted\\60_black-tshirt-imagegen-v2-test.png",
+    "jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\extracted\\55_dark-jeans-imagegen-v2-test.png",
+    "shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\extracted\\65_black-sneakers-imagegen-v2-test.png",
+    "combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\extracted\\clothing-combined-imagegen-v2-test.png"
+  },
+  "qa": {
+    "body_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\qa\\composite-medium-body-imagegen-v2-clothing-test.png",
+    "dark_ui_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\qa\\composite-medium-body-imagegen-v2-clothing-test-dark-ui.png",
+    "checker_extracted": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-v2\\qa\\extracted-combined-imagegen-v2-clothing-checker.png"
+  }
+}

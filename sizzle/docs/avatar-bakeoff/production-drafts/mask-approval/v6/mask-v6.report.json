@@ -1,0 +1,25 @@
+{
+  "canvas": [
+    523,
+    1536
+  ],
+  "changes_from_v5": [
+    "jeans no longer use full row including arms; waistband uses largest central torso segment",
+    "jeans lower legs are derived from actual alpha leg rows with small allowance",
+    "shirt shoulders are constrained to a 3px body-edge allowance",
+    "shoe masks use actual foot alpha with compact sneaker-shaped clipping"
+  ],
+  "waist_y": 632,
+  "waist_segment_used": [
+    122,
+    396
+  ],
+  "outputs": {
+    "plain_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\guide\\body-medium-clothing-mask-v6-white.png",
+    "review_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\guide\\body-medium-clothing-mask-v6-review-white.png",
+    "shirt_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\masks\\mask-shirt-v6.png",
+    "jeans_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\masks\\mask-jeans-v6.png",
+    "shoes_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\masks\\mask-shoes-v6.png",
+    "combined_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v6\\masks\\mask-clothing-combined-v6.png"
+  }
+}

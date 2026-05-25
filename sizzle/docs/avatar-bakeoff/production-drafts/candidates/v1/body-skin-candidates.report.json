@@ -1,0 +1,42 @@
+{
+  "method": "Crop Comfy 576x1536 RGB body output to canonical 523x1536 and restore alpha from alex-noface-blank.png.",
+  "canonical_alpha": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\baseline-inputs\\canonical\\alex-noface-blank.png",
+  "candidates": [
+    {
+      "role": "light",
+      "source": "C:\\Users\\Oculus\\Downloads\\body-skin-medium_00029_.png",
+      "archived_source": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\source\\body-skin-medium_00029_.png",
+      "layer": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\body\\20_body-light-comfy-00029.png",
+      "qa_checker": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-light-comfy-00029-checker.png",
+      "qa_dark_ui": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-light-comfy-00029-dark-ui.png",
+      "size": [
+        523,
+        1536
+      ]
+    },
+    {
+      "role": "medium",
+      "source": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\baseline-inputs\\canonical\\alex-noface-blank.png",
+      "archived_source": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\source\\alex-noface-blank.png",
+      "layer": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\body\\20_body-medium-canonical-noface.png",
+      "qa_checker": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-medium-canonical-noface-checker.png",
+      "qa_dark_ui": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-medium-canonical-noface-dark-ui.png",
+      "size": [
+        523,
+        1536
+      ]
+    },
+    {
+      "role": "dark",
+      "source": "C:\\Users\\Oculus\\Downloads\\body-skin-medium_00017_.png",
+      "archived_source": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\source\\body-skin-medium_00017_.png",
+      "layer": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\body\\20_body-dark-comfy-00017.png",
+      "qa_checker": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-dark-comfy-00017-checker.png",
+      "qa_dark_ui": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\qa\\20_body-dark-comfy-00017-dark-ui.png",
+      "size": [
+        523,
+        1536
+      ]
+    }
+  ]
+}

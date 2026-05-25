@@ -1,0 +1,20 @@
+{
+  "canvas": [
+    523,
+    1536
+  ],
+  "changes_from_v6": [
+    "continuous jeans polygon removes horizontal artifacts",
+    "waist remains x122..396",
+    "calves remain covered by full leg silhouette",
+    "shoes compacted further"
+  ],
+  "outputs": {
+    "plain_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\guide\\body-medium-clothing-mask-v7-white.png",
+    "review_guide": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\guide\\body-medium-clothing-mask-v7-review-white.png",
+    "shirt_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\masks\\mask-shirt-v7.png",
+    "jeans_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\masks\\mask-jeans-v7.png",
+    "shoes_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\masks\\mask-shoes-v7.png",
+    "combined_mask": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\mask-approval\\v7\\masks\\mask-clothing-combined-v7.png"
+  }
+}

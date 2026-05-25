@@ -1,0 +1,60 @@
+{
+  "prompting_notes": [
+    "FLUX.2 prefers natural-language prompts.",
+    "Do not use SD/SDXL-style negative prompt lists.",
+    "Keep negative conditioning empty unless a local Comfy workflow specifically documents another FLUX.2-compatible guidance method.",
+    "State the desired invariant result positively: same pose, same silhouette, same source identity, unchanged unmasked regions."
+  ],
+  "negative": "",
+  "presets": [
+    {
+      "name": "body-skin-medium",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "sizzle_mask_noface_body_skin_padded_576x1536.png",
+      "positive": "This is a precise image edit for a layered visual-novel avatar. The source image is the fixed reference: keep the same canvas, camera, scale, front-facing standing pose, figure silhouette, head shape, shoulders, torso, arms, hands, hips, legs, feet, soft lighting, linework, and painterly style. Treat this as a conservative colour-correction pass on the existing painting, not a redraw and not a smoothing pass. Shift the body skin to a natural medium warm brown skin tone with believable undertones while preserving the source's fine skin texture, subtle pore grain, brush texture, small colour variations, soft anatomical shading, and existing highlight pattern. The skin should remain matte and organic, not glossy, plastic, airbrushed, waxy, oily, or cartoon-smooth. Keep the face blank and featureless. Keep the body outline and the unmasked parts of the image visually the same as the source.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/body-skin-medium"
+    },
+    {
+      "name": "body-skin-dark",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "sizzle_mask_noface_body_skin_padded_576x1536.png",
+      "positive": "This is a precise image edit for a layered visual-novel avatar. The source image is the fixed reference: keep the same canvas, camera, scale, front-facing standing pose, figure silhouette, head shape, shoulders, torso, arms, hands, hips, legs, feet, soft lighting, linework, and painterly style. Treat this as a conservative colour-correction pass on the existing painting, not a redraw and not a smoothing pass. Shift the body skin to a natural dark deep brown skin tone with warm realistic undertones while preserving the source's fine skin texture, subtle pore grain, brush texture, small colour variations, soft anatomical shading, and existing highlight pattern. The skin should remain matte and organic, not glossy, plastic, airbrushed, waxy, oily, or cartoon-smooth. Keep the face blank and featureless. Keep the body outline and the unmasked parts of the image visually the same as the source.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/body-skin-dark"
+    },
+    {
+      "name": "top-black-tshirt",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "mask-test.png",
+      "positive": "Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain fitted black t-shirt. Do not change any unmasked pixels or redraw the body.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/top-black-tshirt"
+    },
+    {
+      "name": "bottom-dark-jeans",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "mask-test.png",
+      "positive": "Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add dark blue straight-leg 2005 jeans. The waistband aligns to the avatar waist and the legs follow the existing hips, knees, calves, and ankles. Do not change any unmasked pixels or redraw the body.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/bottom-dark-jeans"
+    },
+    {
+      "name": "shoes-sneakers",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "mask-test.png",
+      "positive": "Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add simple black low-profile sneakers that align exactly to the existing foot position. Do not change any unmasked pixels or redraw the body.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/shoes-sneakers"
+    },
+    {
+      "name": "outfit-white-tshirt-dark-jeans-sneakers",
+      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
+      "mask": "mask-test.png",
+      "positive": "Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain white fitted t-shirt, dark blue jeans, and simple black sneakers. Do not change any unmasked pixels or redraw the body.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/qwen/outfit-white-tshirt-dark-jeans-sneakers"
+    },
+    {
+      "name": "hair-long-straight-black",
+      "source": "sizzle_alex_hair_nude_crop_padded_576x1536.png",
+      "mask": "sizzle_mask_hair_padded_576x1536.png",
+      "positive": "This is a precise image edit for a layered visual-novel avatar. Keep the same canvas, camera, head position, face geometry, eye line, brows, mouth, shoulders, body, soft lighting, linework, and painterly style. Repaint the masked hair region as long straight black hair while preserving the same hairstyle silhouette, part, attachment points, and clean edges from the source. Face, eyes, brows, mouth, skin, body, pose, and the unmasked parts of the image remain visually the same as the source.",
+      "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/flux2/masked/hair-long-straight-black"
+    }
+  ]
+}

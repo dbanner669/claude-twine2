@@ -6,7 +6,10 @@ Option 2 means the avatar runtime gets explicit visual layers instead of forcing
 background
 hairBack
 body
+nipples
+genitals
 bodyMods
+face
 eyes
 underwear
 clothingBottom
@@ -17,14 +20,19 @@ expression
 overlay
 ```
 
-All avatar assets must share the same full canvas, currently `1024x1360` for bakeoff/reference work. Production can downscale later, but every layer in a given set must keep identical dimensions and alignment.
+All accepted avatar draft assets must share the same full canonical canvas: `523x1536`. ComfyUI may use padded `576x1536` working images for FLUX latent compatibility, but accepted layers must be cropped back to `523x1536` and preserve registration.
 
 ## 0. Source / Control Assets
 
+Use `baseline-inputs/canonical/` as the current canonical source set. Any exported control images should preserve the canonical crop registration unless the whole avatar stack intentionally migrates to a new canvas.
+
 - [ ] `source/master_stylized_reference.png`
-- [ ] `source/master_nohair_nude.png`
-- [ ] `source/master_hair_nude.png`
-- [ ] `source/master_hair_underwear.png`
+- [ ] `source/alex-blank-crop.png`
+- [ ] `source/alex-nohair-nude-crop.png`
+- [ ] `source/alex-noface-blank.png`
+- [ ] `source/alex-hair-nude-crop.png`
+- [ ] `source/alex-hair-underwear-crop.png`
+- [ ] `source/mask-test-clothing-guide.png`
 - [ ] `source/control_silhouette.png`
 - [ ] `source/control_openpose.png`
 - [ ] `source/control_canny.png`
@@ -33,15 +41,27 @@ All avatar assets must share the same full canvas, currently `1024x1360` for bak
 - [ ] `source/checkerboard_background.png`
 - [ ] `source/sizzle_dark_ui_background.png`
 
+## Greybox Scope Lock
+
+For the first greybox/avatar proof, lock player appearance to:
+
+- Skin tone: medium only.
+- Hair style: long straight only.
+- Eye colour: blue only.
+
+The full three-by-three appearance matrix remains a later production goal. The greybox goal is to prove layer registration, compositing, and extraction on one coherent avatar.
+
 ## 1. Body Layer
 
-Base body sprites should include body, head, face skin, nose, ears, and neutral non-eye facial structure. They should not include hair, clothing, underwear, or body modifications. To support expression overlays cleanly, avoid strongly baked mouth/brow shapes where possible.
+Base body sprites should include body, head, ears, and blank/featureless face skin. They should not include hair, clothing, underwear, nipples, genitals, face details, eyes, brows, mouth, or other body modifications. To support overlays cleanly, avoid baked facial features.
 
 - [ ] `body/20_body-light.png`
 - [ ] `body/20_body-medium.png`
 - [ ] `body/20_body-dark.png`
 
 Count: **3**
+
+Greybox count: **1** (`body/20_body-medium.png`)
 
 ## 2. Hair Back Layer
 
@@ -67,6 +87,8 @@ Hair back renders behind the body/clothing. Required for long styles; optional b
 
 Count: **9**
 
+Greybox count: **1** (`hair/back/30_hair-back-long-straight-brown.png`)
+
 ## 3. Hair Front Layer
 
 Hair front renders above body, clothing, and underwear. It contains bangs, face-framing strands, and any hair that falls over shoulders/chest.
@@ -91,7 +113,17 @@ Hair front renders above body, clothing, and underwear. It contains bangs, face-
 
 Count: **9**
 
-## 4. Eye Layer
+Greybox count: **1** (`hair/front/70_hair-front-long-straight-brown.png`)
+
+## 4. Face Layer
+
+Face layers contain neutral non-expression facial structure, especially the nose. They should not include irises, brows, mouth, hair, or skin outside the face feature area.
+
+- [ ] `face/38_face-nose-medium.png`
+
+Minimum count: **1**
+
+## 5. Eye Layer
 
 Eye layers should be iris/eye-colour overlays only, aligned to the same eye geometry. Avoid repainting eyelids, lashes, brows, skin, or expression.
 
@@ -101,16 +133,34 @@ Eye layers should be iris/eye-colour overlays only, aligned to the same eye geom
 
 Count: **3**
 
-## 5. Body Mods Layer
+Greybox count: **1** (`eyes/40_eyes-blue.png`)
 
-Not required for the character creator, but create one diagnostic layer to prove the layer works.
+## 6. Nipples Layer
+
+Nipple layers contain chest anatomy details only. They render above body and below underwear/clothing. These may need tone-specific variants if one overlay does not blend across skin tones.
+
+- [ ] `nipples/43_nipples-medium.png`
+
+Greybox count: **1**
+
+## 7. Genitals Layer
+
+Genital layers contain pelvis anatomy details only. They render above body and below underwear/clothing. These may need tone-specific variants if one overlay does not blend across skin tones.
+
+- [ ] `genitals/44_genitals-medium.png`
+
+Greybox count: **1**
+
+## 8. Body Mods Layer
+
+Body mods are non-anatomy modifications: scars, tattoos, piercings, bruises, temporary marks, and other state overlays. Nipples and genitals do not live in `bodyMods`.
 
 - [ ] `bodyMods/45_scar-small-torso.png`
 - [ ] `bodyMods/45_tattoo-small-hip.png`
 
 Count: **2**
 
-## 6. Underwear Layer
+## 9. Underwear Layer
 
 Underwear must fit all three body skin tones and sit below outer clothing. Split bra/briefs so future topless/bottomless states can be represented.
 
@@ -127,7 +177,7 @@ Optional variants:
 Minimum count: **2**  
 Expanded count: **6**
 
-## 7. Clothing Bottom Layer
+## 10. Clothing Bottom Layer
 
 Bottoms render above underwear and below tops/hair front. For the briefing slice, one bottom is enough.
 
@@ -137,7 +187,7 @@ Bottoms render above underwear and below tops/hair front. For the briefing slice
 Minimum count: **1**  
 Recommended v1 count: **2**
 
-## 8. Clothing Top Layer
+## 11. Clothing Top Layer
 
 Tops render above underwear and bottoms, below hair front. They must not include baked skin at collar, sleeves, or hem.
 
@@ -148,7 +198,7 @@ Tops render above underwear and bottoms, below hair front. They must not include
 Minimum count: **1**  
 Recommended v1 count: **3**
 
-## 9. Shoes Layer
+## 12. Shoes Layer
 
 Shoes render above body/bottoms at the feet. They must align with the same foot position across all bodies.
 
@@ -158,9 +208,9 @@ Shoes render above body/bottoms at the feet. They must align with the same foot 
 Minimum count: **1**  
 Recommended v1 count: **2**
 
-## 10. Expression Layer
+## 13. Expression Layer
 
-Current widgets expect separate mouth and brow sprites. These render in `expression`/foreground above face and hair-front where appropriate.
+Current widgets expect separate mouth and brow sprites. These render in `expression`/foreground above face and hair-front where appropriate. Brows are expression layers, not part of `face`, `eyes`, or `hairFront`.
 
 ### Mouth
 
@@ -180,7 +230,7 @@ Current widgets expect separate mouth and brow sprites. These render in `express
 Minimum count for current widgets: **6**  
 Recommended v1 count: **9**
 
-## 11. Overlay Layer
+## 14. Overlay Layer
 
 Optional atmospheric or state overlays.
 
@@ -191,7 +241,7 @@ Optional atmospheric or state overlays.
 Minimum count: **0**  
 Optional count: **3**
 
-## 12. Background Layer
+## 15. Background Layer
 
 Backgrounds sit behind the figure. These do not need to be transparent but should match the avatar canvas and not interfere with edge QA.
 
@@ -202,7 +252,7 @@ Backgrounds sit behind the figure. These do not need to be transparent but shoul
 Minimum count: **1**  
 Recommended v1 count: **2**
 
-## 13. Composite QA Images
+## 16. Composite QA Images
 
 Create these after the individual layers exist. They are review outputs, not runtime assets.
 
@@ -220,11 +270,14 @@ Count: **7**
 
 | Category | Minimum | Recommended v1 |
 |---|---:|---:|
-| Source/control assets | 11 | 11 |
+| Source/control assets | 14 | 14 |
 | Body | 3 | 3 |
 | Hair back | 9 | 9 |
 | Hair front | 9 | 9 |
 | Eyes | 3 | 3 |
+| Nipples | 1 | 3 |
+| Genitals | 1 | 3 |
+| Face | 1 | 3 |
 | Body mods | 0 | 2 |
 | Underwear | 2 | 6 |
 | Clothing bottoms | 1 | 2 |
@@ -235,11 +288,11 @@ Count: **7**
 | Backgrounds | 1 | 2 |
 | QA composites | 7 | 7 |
 
-Minimum production asset count, excluding source/control and QA: **36**
+Minimum production asset count, excluding source/control and QA: **39**
 
-Recommended v1 production asset count, excluding source/control and QA: **53**
+Recommended v1 production asset count, excluding source/control and QA: **60**
 
 Including source/control and QA outputs:
 
-- Minimum tracked files: **54**
-- Recommended v1 tracked files: **71**
+- Minimum tracked files: **60**
+- Recommended v1 tracked files: **81**

@@ -7,29 +7,44 @@ This is the primary bakeoff test. A contender wins only if it can make separate 
 Produce interchangeable transparent PNG layers that behave like Sizzle runtime assets:
 
 ```text
-background[] + body[] + bodyMods[] + underwear[] + clothing[] + foreground[] = coherent avatar
+background + hairBack + body + nipples + genitals + bodyMods + face + eyes + underwear + clothingBottom + clothingTop + shoes + hairFront + expression + overlay = coherent avatar
 ```
 
 The same layer must be reusable across combinations. A clothing item generated against the light-skin body must also fit medium and dark body sprites. Hair sprites must fit all skin tones. Eye-colour sprites and expression parts must land on the same face geometry regardless of skin tone and hair selection. The result should look like a single coherent person, not a collage.
 
-## Runtime Layer Model
+## Target Layer Model
 
-The active Sizzle widget renders six arrays in this order:
+The current SugarCube runtime may still need implementation work, but the target art/runtime layer model is explicit:
 
-| Runtime array | Production sprites to test | Notes |
-|---|---|---|
-| `background[]` | Diner/neutral avatar background | Optional for visual context; must not affect alignment. |
-| `body[]` | Base body skin tones, hair sprites, eye sprites if no dedicated runtime array exists | The docs and current media folders do not define a separate hair/eyes array; until code changes, these are production sublayers that must be assigned to an existing runtime array. |
-| `bodyMods[]` | Tattoos, scars, piercings | Not required for the v1 briefing slice, but include one simple diagnostic if time allows. |
-| `underwear[]` | Bra/briefs or neutral underwear | Must fit under clothing and over all skin-tone bodies. |
-| `clothing[]` | Top, bottom, shoes, dress | Slot-managed by `wear-*`/`remove-*` widgets. Test top/bottom/shoes, plus dress only if time allows. |
-| `foreground[]` | Mouth expressions, brow expressions, overlays/effects | Current expression widgets use separate `expression/mouth-*` and `expression/brows-*` PNGs. |
+```text
+background
+hairBack
+body
+nipples
+genitals
+bodyMods
+face
+eyes
+underwear
+clothingBottom
+clothingTop
+shoes
+hairFront
+expression
+overlay
+```
 
-The bakeoff should not assume a nonexistent dedicated hair runtime array. If the winning stack needs one, that becomes a later implementation recommendation, not a bakeoff precondition.
+`body` is now a faceless body base. `face` contains the nose/neutral face structure. `eyes` contains the eye layer. `expression` contains brows and mouth. `nipples` and `genitals` are explicit anatomy overlays, not `bodyMods`. `bodyMods` is reserved for non-anatomy marks such as scars, tattoos, piercings, bruises, and similar state changes.
 
 ## Required Layer Set
 
-Use `1024x1360` for every layer and preview.
+Use `523x1536` for every accepted layer and preview. ComfyUI working images may be padded to `576x1536`, but accepted assets must be cropped back to the canonical canvas and preserve registration.
+
+Greybox appearance lock:
+
+- Skin tone: medium.
+- Hair style: long straight.
+- Eye colour: blue.
 
 ### Background
 
@@ -38,19 +53,16 @@ Use `1024x1360` for every layer and preview.
 
 ### Body / Appearance Sublayers
 
-- `20_body-light.png`
 - `20_body-medium.png`
-- `20_body-dark.png`
-- `30_hair-short-bob-brown.png`
-- `30_hair-long-straight-black.png`
 - `30_hair-long-straight-brown.png`
-- `30_hair-long-straight-blonde.png`
-- `30_hair-long-curly-brown.png`
-- `35_eyes-blue.png`
-- `35_eyes-green.png`
-- `35_eyes-brown.png`
+- `38_face-nose-medium.png`
+- `40_eyes-blue.png`
+- `43_nipples-medium.png`
+- `44_genitals-medium.png`
+- `expression/81_brows-relaxed-brown.png`
+- `expression/80_mouth-calm.png`
 
-This is smaller than the eventual full `3 skin tones x 3 hair styles x 3 hair colours x 3 eye colours` matrix, but it deliberately hits the hardest reuse cases: multiple skin tones, hair-colour swaps, hair-style swaps, and eye-colour overlays.
+The full production matrix can later add light/dark skin bodies, more hair styles/colours, eye colours, expression variants, and tone-specific anatomy overlays.
 
 ### Body Mods
 
@@ -79,12 +91,10 @@ This is smaller than the eventual full `3 skin tones x 3 hair styles x 3 hair co
 
 ### Required Composite Previews
 
-- `composite_light_long-straight-black_blue_blackTshirt_darkJeans_sneakers_calm.png`
-- `composite_medium_long-straight-brown_green_blackTshirt_darkJeans_sneakers_calm.png`
-- `composite_dark_long-straight-blonde_brown_blackTshirt_darkJeans_sneakers_calm.png`
-- `composite_light_long-curly-brown_blue_whiteBlouse_darkJeans_sneakers_worried.png`
-- `composite_medium_short-bob-brown_brown_whiteBlouse_darkJeans_sneakers_surprised.png`
-- `composite_dark_long-straight-black_green_underwear_only_calm.png`
+- `composite_medium_long-straight-brown_blue_body-only.png`
+- `composite_medium_long-straight-brown_blue_anatomy-overlays.png`
+- `composite_medium_long-straight-brown_blue_underwear-only.png`
+- `composite_medium_long-straight-brown_blue_blackTshirt_darkJeans_sneakers_calm.png`
 
 Optional diagnostic previews:
 
@@ -112,11 +122,12 @@ The following landmarks must stay aligned across every layer:
 - Waistline for bottoms.
 - Shoe sole/foot anchor.
 - Brow and mouth boxes for expression overlays.
+- Full canvas crop, including top of head/skull and bottom of feet.
 
 Tolerance target:
 
 - Exact pixel identity is not required.
-- Landmark drift above roughly `3-5 px` at 1024x1360 should be treated as a problem.
+- Landmark drift above roughly `3-5 px` at `523x1536` should be treated as a problem.
 - Any drift large enough to expose skin gaps, crop hair, float clothing, or misplace facial features is a fail.
 
 ## Generation Strategy To Test
@@ -131,17 +142,18 @@ Each contender should try to use the strongest available control stack for its e
 
 Do not score a layer that was manually painted to fit after generation. Minor alpha cleanup is allowed; geometry repair is not.
 
+For clothing masks, the mask itself must first pass visual review. A usable clothing mask covers only the intended garment regions and hugs the avatar silhouette: shoulders/sleeves follow the body, jean waist matches the avatar waist, pant legs cover the full visible leg width where jeans should exist, and shoes do not swallow toes/ankles beyond the intended shoe shape. Bad masks are process failures, not model evidence.
+
 ## Recommended Layer Build Order
 
-1. Generate or select a canonical full-body reference image.
-2. Extract/approve the body geometry reference.
-3. Generate `20_body-light.png`, `20_body-medium.png`, and `20_body-dark.png` against that same geometry.
-4. Generate hair layers on the same head/shoulder geometry, preserving transparent background.
-5. Generate eye-colour overlays on the same eye line.
+1. Use the approved canonical templates in `baseline-inputs/canonical/`, preserving the `523x1536` registration.
+2. Extract/approve the body geometry reference from the noface body template.
+3. Accept `20_body-medium.png` for the greybox, with light/dark retained as later palette candidates.
+4. Generate separate `face`, `eyes`, `expression/brows`, `expression/mouth`, `nipples`, and `genitals` overlays.
+5. Generate long-straight hair layers on the same head/shoulder geometry, preserving transparent background.
 6. Generate underwear using the same bust/waist/hip guide, with no baked skin.
 7. Generate top, bottom, and shoe sprites using the same torso/leg/foot guide, with no baked skin.
-8. Generate expression mouth and brow overlays on the same face geometry.
-9. Composite all crossed combinations without further image edits.
+8. Composite all greybox combinations without further image edits.
 
 ## Pass/Fail Checks
 
@@ -152,6 +164,8 @@ Hard fail:
 - Underwear includes baked skin or only fits one body tone.
 - Clothing includes baked skin that conflicts with another body layer.
 - Top/bottom/shoes float, stretch, or expose gaps when moved to another body layer.
+- Clothing edit changes unmasked skin, lighting, pose, blank face, canvas crop, or body proportions.
+- Clothing extraction includes checkerboard, white background, skin fragments, or broad body-outline residue.
 - Hair/face position changes between hair colours or hair styles beyond the intended silhouette.
 - Expression overlays do not land on the same brows/mouth.
 - Alpha edges leave obvious halos over Sizzle dark UI.

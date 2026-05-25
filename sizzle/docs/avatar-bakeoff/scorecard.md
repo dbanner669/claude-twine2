@@ -2,7 +2,7 @@
 
 Score `1-5`, where `5` means production-ready for the criterion and `1` means unusable.
 
-Current interim read: early results suggest the Phase 1 direct text-to-image layer workflows are not production-viable. Continue scoring only to document evidence; the next recommended bakeoff should evaluate master-reference plus image-edit workflows.
+Current interim read: early results suggest the Phase 1 direct text-to-image layer workflows are not production-viable. Continue scoring only to document evidence; the active bakeoff should evaluate canonical-template image-edit workflows.
 
 ## Summary Scores
 
@@ -39,7 +39,7 @@ Fill this after selecting the best setup from each contender family.
 
 ## Criterion Notes
 
-- **Full stack composite:** background, body, hair, eyes, underwear, clothing, and expression parts recombine into a coherent avatar.
+- **Full stack composite:** background, hairBack, body, nipples, genitals, bodyMods, face, eyes, underwear, clothingBottom, clothingTop, shoes, hairFront, expression, and overlay-capable parts recombine into a coherent avatar.
 - **Pixel stability:** head, face, shoulders, torso, clothing anchors, shoe anchors, and expression boxes remain locked to the same canvas positions.
 - **Alpha quality:** segmentation produces usable hair/skin/fabric edges with minimal halos.
 - **Slot reuse:** top, bottom, shoes, underwear, hair, and eyes can be reused across tested appearance combinations.
@@ -54,7 +54,7 @@ Fill this after selecting the best setup from each contender family.
 
 Winner:
 
-Interim recommendation: no Phase 1 winner. Move to Phase 2 image-edit derivation unless remaining runs show unexpectedly stable geometry.
+Interim recommendation: no Phase 1 winner. Move to Phase 2 canonical-template image-edit derivation unless remaining runs show unexpectedly stable geometry.
 
 Rationale:
 

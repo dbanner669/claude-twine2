@@ -1,0 +1,40 @@
+{
+  "method": "Built-in imagegen using user-provided mask-test.png as visual guide; extract aligned full render through dark-pixel mask derived from mask-test constrained to canonical body alpha.",
+  "generated_source": "C:\\Users\\Oculus\\.codex\\generated_images\\019e5f87-f28d-77a0-bdcb-3d2ac52c601c\\ig_0b05e9cd2bce7fd8016a14bf4690c08197a60130ebb1425f9f.png",
+  "generated_size": [
+    732,
+    2149
+  ],
+  "canonical_size": [
+    523,
+    1536
+  ],
+  "target_bbox": [
+    0,
+    21,
+    523,
+    1536
+  ],
+  "generated_foreground_bbox": [
+    49,
+    22,
+    661,
+    1960
+  ],
+  "scale_to_target_height": 0.781733746130031,
+  "paste_xy": [
+    -16,
+    4
+  ],
+  "extracted": {
+    "shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\extracted\\shirt-imagegen-user-mask-test.png",
+    "jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\extracted\\jeans-imagegen-user-mask-test.png",
+    "shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\extracted\\shoes-imagegen-user-mask-test.png",
+    "combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\extracted\\combined-imagegen-user-mask-test.png"
+  },
+  "qa": {
+    "dark_ui_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\qa\\composite-medium-body-user-mask-clothing-test-dark-ui.png",
+    "checker_extracted": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\qa\\extracted-combined-user-mask-clothing-checker.png",
+    "mask_preview": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test-user-mask\\qa\\user-mask-source-preview.png"
+  }
+}

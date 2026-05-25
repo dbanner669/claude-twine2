@@ -35,7 +35,7 @@
     }
   ],
   "positive_prompt_source": "../prompts.md#Base Natural-Language Prompt",
-  "constraint_prompt_source": "../prompts.md#FLUX Negative/Constraint Text",
+  "constraint_prompt_source": "../prompts.md#Legacy FLUX Constraint Text",
   "generation": {
     "seed": 2309122005,
     "steps": 6,

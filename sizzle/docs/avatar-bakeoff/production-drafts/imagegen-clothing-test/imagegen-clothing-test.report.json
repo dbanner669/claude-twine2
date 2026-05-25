@@ -1,0 +1,16 @@
+{
+  "canvas": [
+    523,
+    1536
+  ],
+  "source_body": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\candidates\\v1\\body\\20_body-medium-canonical-noface.png",
+  "purpose": "Imagegen clothing extraction test: t-shirt, jeans, sneakers from masked guide composite.",
+  "outputs": {
+    "guide_white": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\guide\\body-medium-clothing-mask-guide-white.png",
+    "guide_transparent": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\guide\\body-medium-clothing-mask-guide-transparent.png",
+    "mask_combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\masks\\mask-clothing-combined.png",
+    "mask_shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\masks\\mask-shirt.png",
+    "mask_jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\masks\\mask-jeans.png",
+    "mask_shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\masks\\mask-shoes.png"
+  }
+}

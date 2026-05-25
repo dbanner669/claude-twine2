@@ -1,0 +1,41 @@
+{
+  "method": "Use built-in imagegen output, bbox-fit to canonical body alpha, then extract pixels through prebuilt shirt/jeans/shoes masks.",
+  "raw_generated": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\source\\imagegen-black-shirt-jeans-sneakers-raw.png",
+  "generated_size": [
+    731,
+    2149
+  ],
+  "canonical_size": [
+    523,
+    1536
+  ],
+  "target_bbox": [
+    0,
+    21,
+    523,
+    1536
+  ],
+  "generated_foreground_bbox": [
+    31,
+    23,
+    669,
+    2028
+  ],
+  "scale_to_target_height": 0.7556109725685786,
+  "paste_xy": [
+    -3,
+    4
+  ],
+  "extracted": {
+    "shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\extracted\\60_black-sleeveless-tshirt-imagegen-test.png",
+    "jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\extracted\\55_dark-jeans-imagegen-test.png",
+    "shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\extracted\\65_black-sneakers-imagegen-test.png",
+    "combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\extracted\\clothing-combined-imagegen-test.png"
+  },
+  "qa": {
+    "body_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\qa\\composite-medium-body-imagegen-clothing-test.png",
+    "dark_ui_composite": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\qa\\composite-medium-body-imagegen-clothing-test-dark-ui.png",
+    "checker_extracted": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\imagegen-clothing-test\\qa\\extracted-combined-imagegen-clothing-checker.png"
+  },
+  "assessment": "Experimental only. Imagegen followed clothing request but changed figure proportions/registration; mask extraction clips and misaligns around hips, legs, and shoes."
+}

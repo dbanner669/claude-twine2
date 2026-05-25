@@ -1,8 +1,8 @@
 # Avatar Research: Offline Image Generation Stack
 
-**2026-05-25 status update:** this report is the original offline-stack research baseline. Subsequent bakeoff work found that direct independent text-to-image generation is not stable enough for Sizzle's mix-and-match layered avatar needs. The current recommended process is documented in `docs/avatar-bakeoff/STATUS.md`, `docs/avatar-bakeoff/INTERIM-FINDINGS.md`, and `docs/avatar-bakeoff/phase-2-image-edit-protocol.md`: create one approved stylized master reference, derive variants through controlled image editing, then prove every extracted layer through crossed composites. The model landscape below remains useful for choosing local edit/render candidates, but the production question has shifted from "which model makes the best single sprite?" to "which workflow preserves pixel-stable layers?"
+**2026-05-25 status update:** this report is the original offline-stack research baseline. Subsequent bakeoff work found that direct independent text-to-image generation is not stable enough for Sizzle's mix-and-match layered avatar needs. The current recommended process is documented in `docs/avatar-bakeoff/STATUS.md`, `docs/avatar-bakeoff/INTERIM-FINDINGS.md`, and `docs/avatar-bakeoff/phase-2-image-edit-protocol.md`: use the approved canonical templates as fixed registration references, derive variants through controlled image editing, then prove every extracted layer through crossed composites. The model landscape below remains useful for choosing local edit/render candidates, but the production question has shifted from "which model makes the best single sprite?" to "which workflow preserves pixel-stable layers?"
 
-This report assumes Sizzle's current avatar architecture: a SugarCube layered PNG system with arrays for `background`, `body`, `bodyMods`, `underwear`, `clothing`, and `foreground`, rendered bottom-to-top inside a 3:4 avatar frame. The character creator currently exposes skin tone, hair colour, hair style, and eye colour, with clothing and expression layers already anticipated by the template. The art direction is not pin-up gloss or anime. It needs grounded, attractive, adult, period-2005 Toronto thriller imagery: a believable under-30 Canadian woman in an undercover/infiltration story, with tasteful but explicit-adult capacity later.
+This report originally assumed Sizzle's generic SugarCube avatar arrays: `background`, `body`, `bodyMods`, `underwear`, `clothing`, and `foreground`. The current art/runtime target is now a locked explicit stack: `background`, `hairBack`, `body`, `nipples`, `genitals`, `bodyMods`, `face`, `eyes`, `underwear`, `clothingBottom`, `clothingTop`, `shoes`, `hairFront`, `expression`, and `overlay`. The character creator currently exposes skin tone, hair colour, hair style, and eye colour, with clothing and expression layers already anticipated by the template. The art direction is not pin-up gloss or anime. It needs grounded, attractive, adult, period-2005 Toronto thriller imagery: a believable under-30 Canadian woman in an undercover/infiltration story, with tasteful but explicit-adult capacity later.
 
 The practical implication: do not treat this as "generate many unrelated pretty portraits." It is a production asset pipeline problem. The stack must preserve one body rig, face identity, hair silhouette, clothing alignment, and alpha edges across many regenerated layers.
 
@@ -109,18 +109,20 @@ Use a fixed canonical body/pose rig plus a character LoRA as the main anchor. Us
 
 ## 4. Transparent-PNG layer pipeline
 
-The current runtime wants same-dimension transparent PNGs. The template docs recommend all avatar images share dimensions such as 512x768; Sizzle's CSS uses a 3:4 frame and `object-fit: contain`. For production, choose a higher working size, for example 1024x1365 or 1024x1366, then optionally downscale to the final in-game size. Every layer must share the exact canvas size.
+The current runtime wants same-dimension transparent PNGs. Sizzle's accepted production draft canvas is now the canonical `523x1536` crop. ComfyUI working images may be padded to `576x1536` for latent compatibility, but accepted layers and QA composites must be cropped/restored to `523x1536` with registration preserved.
 
 Recommended path: generate on a controlled plain background, segment, then clean/inpaint masks. Do not ask the diffusion model to directly produce transparent PNGs as the primary method. Most diffusion models generate RGB images; alpha is a postprocess.
 
 For segmentation, prefer BiRefNet first. ComfyUI's [BiRefNet background removal docs](https://docs.comfy.org/tutorials/utility/remove-background-birefnet) describe native support, MIT-licensed weights, RGBA output, and good hair/detail masks. This is a strong match for avatar compositing, especially hair edges. `rembg`/U2Net is simpler and fast, but weaker around hair and translucent fabric. SAM2 is useful for promptable correction masks and isolating specific parts, but it is not automatically a better matting tool for hair. The [SAM2 paper](https://arxiv.org/abs/2408.00714) frames it as promptable image/video segmentation, not alpha matting.
 
-Layer-specific guidance:
+Layer-specific guidance, updated for the locked explicit layer model:
 
-- Body base: generate a full body/front canonical pose on a neutral solid background. Segment the full person. Clean the alpha manually or with mask grow/shrink/blur. This becomes the alignment master.
+- Body base: use the canonical noface/blank body as the geometry anchor. Accepted body layers include body, head, ears, and blank face skin, but not hair, clothing, underwear, face details, eyes, brows, mouth, nipples, genitals, or non-anatomy body mods.
+- Face: keep nose/neutral face structure in its own overlay. Do not bake brows, mouth, eyes, or hair into it.
 - Hair-back/hair-front: generate hair either as part of the base reference, then separate by mask, or inpaint hair on top of a locked bald/neutral head reference. Long hair needs a back layer and a front layer if it falls behind shoulders and over clothing.
-- Eyes: do not rely on separate full eye-colour generated images at avatar resolution unless close-up detail matters. For normal portrait scale, eye colour can be baked into body/face and expression overlays. If kept as a layer, use tiny masked overlays aligned to the same face geometry.
-- Clothing: generate clothing over the locked body pose using inpainting masks. Segment the garment, not the whole person. Keep sleeves/hair occlusion rules explicit: garment below hair-front, above body, sometimes above hair-back.
+- Eyes: keep eye colour as a small overlay aligned to the same face geometry. Do not repaint eyelids, brows, makeup, or surrounding skin.
+- Nipples/genitals: keep anatomy details as separate overlays from `bodyMods`, with tone-specific variants if one overlay does not blend across skin tones.
+- Clothing: generate clothing over the locked noface body pose using inpainting/edit masks. Segment the garment, not the whole person. Current evidence suggests Qwen Image Edit is more promising than built-in Codex imagegen for clothing realism, but it must preserve canvas crop, alpha, pose, and unmasked skin before any layer is accepted.
 - Expressions: generate face-expression variants via inpaint on the canonical face crop, then extract brow/mouth/eye-region transparent overlays. For realism, full-face expression overlays may look better than separated cartoon mouth/brow layers, but the widget system can still store them as foreground PNGs.
 
 Save alpha in straight PNG RGBA. Test layers over black, white, and the actual Sizzle avatar background to catch halos. Add a 1-2 pixel alpha choke/feather for hair and fabric. Do not premultiply alpha unless the web renderer pipeline expects it.
@@ -145,11 +147,13 @@ InvokeAI has a strong canvas and a node workflow system. Its docs describe a sav
 
 SwarmUI is useful as a front-end manager over ComfyUI-style backends and can spread batches across backends. That is useful later if the project grows to multiple GPUs. It adds another layer to pin and debug, so it is not the starting recommendation.
 
-## 6. First-pass concrete workflow
+## 6. First-pass concrete workflow (historical)
 
-Target deliverable: `sizzle/media/avatar/body/20_body-light-long-straight-brown-blue.png`
+This section is retained as the original SDXL production sketch, not the current active workflow. Do not write generated avatar assets directly into `sizzle/media/avatar/` until the project explicitly approves promotion. Current draft outputs belong under `sizzle/docs/avatar-bakeoff/production-drafts/`.
 
-Goal: a canonical body layer for `skin-tone=light`, `hair-colour=brown`, `hair-style=long-straight`, `eye-colour=blue`, front view, neutral/calm expression, transparent background, aligned to a 3:4 avatar canvas.
+Current target deliverable for the greybox proof: `sizzle/docs/avatar-bakeoff/production-drafts/candidates/v1/body/20_body-medium.png`
+
+Goal: a canonical faceless body layer for `skin-tone=medium`, front view, transparent background, aligned to the canonical `523x1536` avatar canvas. Hair, face, eyes, brows, mouth, nipples, genitals, underwear, clothing, and shoes are separate layers.
 
 Model:
 
@@ -165,9 +169,9 @@ Negative prompt:
 
 `anime, cartoon, illustration, 3d render, plastic skin, glossy fashion shoot, influencer, exaggerated breasts, exaggerated hips, childlike, teen, deformed anatomy, extra fingers, missing fingers, bad hands, bad eyes, crossed eyes, asymmetrical face, heavy makeup, modern smartphone, watermark, signature, text, logo, cropped, out of frame`
 
-Generation settings:
+Historical SDXL generation settings:
 
-- Canvas: 1024x1365 or 1024x1366. Pick one and freeze it.
+- Canvas: superseded. Accepted Sizzle avatar drafts now use `523x1536`; ComfyUI working images may use padded `576x1536` and must be cropped/restored before acceptance.
 - Seed: choose one fixed seed after exploratory search, for example `2309122005`. Do not treat this sample seed as sacred until the first approved anchor exists.
 - Sampler: DPM++ 2M Karras or Euler. For maximum reproducibility, validate Euler/DDIM against DPM++ 2M Karras before freezing.
 - Steps: 30-40.
@@ -188,12 +192,12 @@ Segmentation and alpha:
 2. Run BiRefNet background removal to RGBA.
 3. Inspect alpha over black, white, and Sizzle avatar panel colours.
 4. Manually or node-clean mask: remove background residue, preserve hair edges, feather 1 pixel, no halo.
-5. Save RGBA PNG to `sizzle/media/avatar/body/20_body-light-long-straight-brown-blue.png`.
+5. Save RGBA PNG to the draft workspace first, not production media.
 
 Save alongside when implementation begins:
 
-- `20_body-light-long-straight-brown-blue.manifest.json`: prompt, negative, seed, model hashes, VAE hash, sampler, steps, CFG, dimensions, node versions, source refs.
-- `20_body-light-long-straight-brown-blue.workflow.json`: ComfyUI workflow in API format.
+- `20_body-medium.manifest.json`: prompt, negative/empty-negative policy, seed, model hashes, VAE hash, sampler, steps, CFG, dimensions, node versions, source refs.
+- `20_body-medium.workflow.json`: ComfyUI workflow in API format.
 - `refs/`: pose image, face reference, segmentation preview, mask image, and approval notes.
 
 Important: this "body" includes hair and face in the first anchor only if the current game needs a quick vertical slice. For a shippable layered system, split into base skin/body, hair-back, face/eyes, hair-front, and expression overlays after the canonical rig is approved.
@@ -204,7 +208,7 @@ Licensing is the first risk. Base SDXL/OpenRAIL is manageable, and Stability's S
 
 The second risk is the gap between "consistent enough for a demo" and "consistent enough for hundreds of variants." A prompt plus seed is not enough. Even IP-Adapter alone is not enough. The production answer is a frozen character LoRA plus fixed pose controls plus masked inpainting plus human curation.
 
-The third risk is layer physics. Photographic clothing does not naturally become a clean transparent sprite. Hair crossing shoulders, collars under hair, transparent fabric, hands over clothing, and breasts/waist silhouettes can create occlusion conflicts. The avatar system may need more layer categories than the template's six arrays: hair-back, base/body, eyes/face, underwear, clothing-bottom, clothing-top, hair-front, expression, foreground effects.
+The third risk is layer physics. Photographic clothing does not naturally become a clean transparent sprite. Hair crossing shoulders, collars under hair, transparent fabric, hands over clothing, and breasts/waist silhouettes can create occlusion conflicts. The avatar system has therefore moved beyond the template's six generic arrays into explicit slots for hair back/front, faceless body, anatomy overlays, face, eyes, underwear, clothing bottom/top, shoes, expression, and overlay.
 
 The fourth risk is adult quality. "Uncensored" does not mean anatomically reliable. Some NSFW finetunes are permissive but ugly, overfit, or biased toward glossy adult-site aesthetics. Sizzle needs erotic capacity inside a classy thriller tone. That likely means starting with a tasteful photoreal model, adding anatomy/pose controls, and only using explicit finetunes/LoRAs where needed.
 

@@ -9,7 +9,7 @@ This file is the fast handoff guide for implementation work. Use it alongside:
 - `docs/NPC-handler.md` for Robert Flett's full profile
 - `docs/STORY-TAGS.md` for player-carried narrative flags
 - `docs/WRITING-TODOS.md` for open prose-level revisions captured from FigJam round-trip passes
-- `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows. Start at `docs/avatar-bakeoff/STATUS.md` — it tracks the current pipeline conclusion (direct text-to-image isn't stable enough; pivoted to master-reference + image-edit) and what decisions are still pending. `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` is the production asset checklist (36-53 layers depending on scope) if Option 2 runtime is approved.
+- `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows. Start at `docs/avatar-bakeoff/STATUS.md` — it tracks the current pipeline conclusion (direct text-to-image isn't stable enough; pivoted to canonical-template + image-edit). `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` is the current production asset checklist for the locked explicit layer model.
 
 ## Current Scope
 
@@ -120,7 +120,7 @@ Robert Flett assets now exist in `media/characters/`:
 
 `robert-flett-diner-entry.png` is used at the top of `INTRO-110 Robert arrives`.
 
-Most avatar art is still placeholder-only.
+Avatar art in `media/avatar/` is still placeholder-only. Current candidate body layers, clothing-mask experiments, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/` until explicitly promoted. The next clothing edit test should use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png` rather than the older hair/underwear source.
 
 ## Known Gaps
 
@@ -128,7 +128,7 @@ Most avatar art is still placeholder-only.
 - The avatar panel currently shows a single composited placeholder PNG (`media/avatar/placeholder-suit.png`) instead of the dashed pattern, painted via CSS in `avatar.css`. This is temporary — the real `<<avatar>>` widget layer arrays are still empty. Remove the `.avatar-abs::after` background-image rule once Codex's layer pipeline lands and the arrays start populating (see `docs/avatar-bakeoff/STATUS.md`).
 - Avatar size/text size styling mismatch is intentionally left alone until avatar implementation work starts.
 - `INTRO-322 Concerns` (refusal/exit branch) and `INTRO-550 Question Toronto` (Northern Ontario reaction) are stubs only — content TBD.
-- The avatar layer-slot model is currently the generic `background`/`body`/`bodyMods`/`underwear`/`clothing`/`foreground` arrays in the `<<avatar>>` widget. Codex's Option 2 proposal would split these into explicit slots (`hairBack`/`hairFront`/`clothingTop`/`clothingBottom`/`shoes`/`expression`/etc.) — decision pending; see `docs/avatar-bakeoff/STATUS.md` and `OPTION-2-ASSET-TODO.md`.
+- The intended avatar layer-slot model is locked as explicit slots: `background`, `hairBack`, `body`, `nipples`, `genitals`, `bodyMods`, `face`, `eyes`, `underwear`, `clothingBottom`, `clothingTop`, `shoes`, `hairFront`, `expression`, and `overlay`. The current `<<avatar>>` runtime still uses older generic arrays and needs implementation work before production assets are promoted; see `docs/avatar-bakeoff/STATUS.md` and `OPTION-2-ASSET-TODO.md`.
 - There is no gameplay content beyond the end of the prologue.
 
 ## Build
