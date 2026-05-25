@@ -58,6 +58,8 @@
   box-shadow: inset 0 1px 0 rgba(184,148,94,0.08), 0 28px 60px rgba(0,0,0,0.45);
   position: relative;
   min-height: 580px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Dossier page header — title + classified stamp */
@@ -102,16 +104,19 @@
 
 /* --- Dossier footer — back/next + step counter --------------- */
 .cc-dossier-footer {
-  position: absolute;
-  bottom: 28px;
-  left: 56px;
-  right: 56px;
+  margin-top: auto;
+  padding-top: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 18px;
   border-top: 1px solid var(--sz-rule);
 }
+
+/* Push the footer below page content with breathing room on short pages.
+   On tall pages the auto margin collapses and content flows naturally. */
+.cc-dossier > .cc-dossier-footer { margin-top: auto; padding-top: 28px; }
+.cc-dossier > .cc-columns,
+.cc-dossier > .cc-classified { margin-bottom: 24px; }
 
 .cc-dossier-footer .step-counter {
   font-family: var(--sz-f-mono);

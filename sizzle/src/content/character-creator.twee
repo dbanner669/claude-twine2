@@ -207,17 +207,9 @@
     <div class="eyebrow" style="margin-bottom:14px">What do you remember?</div>
     /* TODO: Replace with actual inciting incident options.
        Each option should set $player.incitingIncident and
-       potentially $nyse.influence starting value.
-       The memory-checkbox format below is a placeholder
-       matching the Claude Design layout. */
-    <div style="display:grid;gap:10px">
-      <div class="cc-memory-option --faded">
-        <div class="checkbox"></div>
-        <span class="memory-text">Inciting incident options will be developed during the writing phase.</span>
-      </div>
-    </div>
-    <div style="margin-top:22px;font-family:var(--sz-f-body);font-size:14px;font-style:italic;color:var(--sz-cream-faint);line-height:1.55">
-      [ This section will gate scenes in Act II. Final design pending narrative outline. ]
+       potentially $nyse.influence starting value. */
+    <div style="font-family:var(--sz-f-body);font-size:15px;font-style:italic;color:var(--sz-cream-faint);line-height:1.6">
+      Memory recovery pending.
     </div>
   </div>
 </div>
