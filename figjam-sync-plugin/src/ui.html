@@ -96,7 +96,7 @@
 
     <div class="row">
       <button id="load">Load story</button>
-      <button id="export" class="secondary" disabled title="Phase 3">Export board</button>
+      <button id="export" class="secondary">Export board</button>
     </div>
 
     <div id="status">Idle.</div>
@@ -132,7 +132,13 @@
         }
       });
 
-      window.addEventListener("message", (event) => {
+      exportBtn.addEventListener("click", () => {
+        setStatus("Walking board …");
+        exportBtn.disabled = true;
+        parent.postMessage({ pluginMessage: { type: "request-export" } }, "*");
+      });
+
+      window.addEventListener("message", async (event) => {
         const message = event.data && event.data.pluginMessage;
         if (!message) return;
 
@@ -142,9 +148,42 @@
           return;
         }
 
+        if (message.type === "export-ready") {
+          const base = endpoint.value.replace(/\/+$/, "");
+          const board = message.board;
+          setStatus(
+            "Walked: " +
+              board.passages.length + " passages, " +
+              board.conceptStickies.length + " concept stickies, " +
+              board.edges.length + " edges, " +
+              board.conceptEdges.length + " concept edges. POSTing …",
+          );
+          try {
+            const response = await fetch(base + "/board.json", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(board),
+            });
+            if (!response.ok) {
+              throw new Error("HTTP " + response.status + " " + response.statusText);
+            }
+            const result = await response.json();
+            setStatus(
+              "Exported " + (result.savedAs || "board") + " (also as " + (result.latest || "board-latest.json") + ").",
+              "ok",
+            );
+          } catch (err) {
+            setStatus("Export POST failed: " + (err && err.message ? err.message : String(err)), "error");
+          } finally {
+            exportBtn.disabled = false;
+          }
+          return;
+        }
+
         if (message.type === "error") {
           setStatus("Plugin error: " + message.message, "error");
           loadBtn.disabled = false;
+          exportBtn.disabled = false;
           return;
         }
       });

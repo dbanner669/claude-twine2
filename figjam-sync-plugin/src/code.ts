@@ -111,11 +111,213 @@ figma.ui.onmessage = async (msg: UiMessage) => {
   }
 
   if (msg.type === "request-export") {
-    /* Phase 3 — board export. Stub for now. */
-    figma.ui.postMessage({ type: "error", message: "Export not implemented yet (Phase 3)." });
+    try {
+      const board = await exportBoard();
+      figma.ui.postMessage({ type: "export-ready", board });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      figma.ui.postMessage({ type: "error", message });
+    }
     return;
   }
 };
+
+interface ExportedPassage {
+  passageName: string;
+  currentText: string;
+  x: number;
+  y: number;
+  fillColor: RGB | null;
+  tags: string[];
+  branch: boolean;
+}
+
+interface ExportedConceptSticky {
+  stickyId: string;
+  x: number;
+  y: number;
+  text: string;
+  fillColor: RGB | null;
+}
+
+interface ExportedEdge {
+  from: string;
+  to: string;
+  styleKind: string | null;
+  linkType: string | null;
+  label: string | null;
+}
+
+interface ExportedConceptEdge {
+  fromStickyId: string | null;
+  toStickyId: string | null;
+  fromPassageName: string | null;
+  toPassageName: string | null;
+  label: string | null;
+}
+
+interface ExportedSection {
+  name: string;
+  kind: string;
+  generated: boolean;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+interface BoardExport {
+  exportedAt: string;
+  namespace: string;
+  passages: ExportedPassage[];
+  conceptStickies: ExportedConceptSticky[];
+  edges: ExportedEdge[];
+  conceptEdges: ExportedConceptEdge[];
+  sections: ExportedSection[];
+}
+
+const CHROME_STICKY_KINDS = new Set([
+  "header-title",
+  "header-legend-color",
+  "header-legend-connector",
+  "act-1-todo",
+]);
+
+/* Walk the page, classify nodes by their setPluginData stamps, and emit a
+   JSON snapshot Claude can interpret against current Twee source.
+
+   Classification:
+   - Sticky with namespace = ours AND kind = "scene" -> known passage. We
+     also include its currentText so Claude can detect prose edits.
+   - Sticky with namespace = ours AND kind in CHROME_STICKY_KINDS -> our
+     own header/TODO chrome, skipped entirely.
+   - Sticky without namespace = ours -> concept (user-authored). Could be
+     a proposed new passage, a margin note, or a label.
+   - Connector with namespace = ours AND kind = "link" -> known edge,
+     emitted with its from/to passage names.
+   - Connector without namespace = ours -> concept edge, emitted with the
+     ids of the stickies it joins (Claude can resolve them via the sticky
+     lists). */
+async function exportBoard(): Promise<BoardExport> {
+  const passages: ExportedPassage[] = [];
+  const conceptStickies: ExportedConceptSticky[] = [];
+  const edges: ExportedEdge[] = [];
+  const conceptEdges: ExportedConceptEdge[] = [];
+  const sections: ExportedSection[] = [];
+  const stickyById = new Map<string, StickyNode>();
+
+  const allNodes = figma.currentPage.findAll(() => true);
+
+  for (const node of allNodes) {
+    const namespace = node.getPluginData("namespace");
+    const kind = node.getPluginData("kind");
+    const ours = namespace === PLUGIN_NAMESPACE;
+
+    if (node.type === "STICKY") {
+      const sticky = node as StickyNode;
+      stickyById.set(sticky.id, sticky);
+
+      if (ours && CHROME_STICKY_KINDS.has(kind)) continue;
+
+      if (ours && kind === "scene") {
+        passages.push({
+          passageName: sticky.getPluginData("passageName"),
+          currentText: sticky.text.characters,
+          x: sticky.x,
+          y: sticky.y,
+          fillColor: extractFillColor(sticky),
+          tags: parseTagsPluginData(sticky.getPluginData("tags")),
+          branch: sticky.getPluginData("branch") === "true",
+        });
+      } else if (!ours) {
+        conceptStickies.push({
+          stickyId: sticky.id,
+          x: sticky.x,
+          y: sticky.y,
+          text: sticky.text.characters,
+          fillColor: extractFillColor(sticky),
+        });
+      }
+    } else if (node.type === "SECTION") {
+      const section = node as SectionNode;
+      sections.push({
+        name: section.name,
+        kind: ours ? kind || "section" : "user-section",
+        generated: ours,
+        x: section.x,
+        y: section.y,
+        width: section.width,
+        height: section.height,
+      });
+    }
+  }
+
+  /* Connectors after stickies so the sticky lookup table is populated. */
+  for (const node of allNodes) {
+    if (node.type !== "CONNECTOR") continue;
+    const conn = node as ConnectorNode;
+    const namespace = conn.getPluginData("namespace");
+    const ours = namespace === PLUGIN_NAMESPACE;
+    const label = conn.text.characters || null;
+
+    if (ours && conn.getPluginData("kind") === "link") {
+      edges.push({
+        from: conn.getPluginData("from"),
+        to: conn.getPluginData("to"),
+        styleKind: conn.getPluginData("styleKind") || null,
+        linkType: conn.getPluginData("linkType") || null,
+        label,
+      });
+    } else {
+      const startId = endpointNodeId(conn.connectorStart);
+      const endId = endpointNodeId(conn.connectorEnd);
+      const fromSticky = startId ? stickyById.get(startId) : null;
+      const toSticky = endId ? stickyById.get(endId) : null;
+      conceptEdges.push({
+        fromStickyId: startId,
+        toStickyId: endId,
+        fromPassageName: fromSticky ? fromSticky.getPluginData("passageName") || null : null,
+        toPassageName: toSticky ? toSticky.getPluginData("passageName") || null : null,
+        label,
+      });
+    }
+  }
+
+  return {
+    exportedAt: new Date().toISOString(),
+    namespace: PLUGIN_NAMESPACE,
+    passages,
+    conceptStickies,
+    edges,
+    conceptEdges,
+    sections,
+  };
+}
+
+function endpointNodeId(endpoint: ConnectorEndpoint): string | null {
+  if (endpoint && "endpointNodeId" in endpoint && typeof endpoint.endpointNodeId === "string") {
+    return endpoint.endpointNodeId;
+  }
+  return null;
+}
+
+function extractFillColor(node: StickyNode): RGB | null {
+  const fills = node.fills as ReadonlyArray<Paint> | symbol;
+  if (!Array.isArray(fills) || fills.length === 0) return null;
+  const fill = fills[0];
+  if (fill.type !== "SOLID") return null;
+  return { r: fill.color.r, g: fill.color.g, b: fill.color.b };
+}
+
+function parseTagsPluginData(raw: string): string[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((value) => typeof value === "string") : [];
+  } catch {
+    return [];
+  }
+}
 
 interface LayoutResult {
   width: number;
