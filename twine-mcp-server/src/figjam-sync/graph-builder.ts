@@ -119,6 +119,22 @@ function stripSugarCubeStructure(body: string): string {
   );
   /* Drop trailing-backslash line continuations. */
   text = text.replace(/\\$/gm, "");
+  /* Replace <<term "Key">> / <<term "Key" "Label">> with the visible label so
+     glossary hover terms survive macro stripping. Without this, the generic
+     macro sweep below erases them and leaves blank gaps in the sticky text. */
+  text = text.replace(
+    /<<term\s+(?:'((?:\\'|[^'])*)'|"((?:\\"|[^"])*)")(?:\s+(?:'((?:\\'|[^'])*)'|"((?:\\"|[^"])*)"))?\s*>>/g,
+    (_full, k1, k2, l1, l2) => {
+      const key = k1 !== undefined ? unescapeQuoted(k1, "'") : unescapeQuoted(k2 ?? "", '"');
+      const label =
+        l1 !== undefined
+          ? unescapeQuoted(l1, "'")
+          : l2 !== undefined
+            ? unescapeQuoted(l2, '"')
+            : key;
+      return label;
+    },
+  );
   /* Drop any remaining macros. */
   text = text.replace(/<<[\s\S]*?>>/g, "");
   /* Convert wiki links to "→ display" so the player choice / next beat is
