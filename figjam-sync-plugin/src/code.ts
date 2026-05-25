@@ -144,7 +144,15 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
 
   const stickyByPassage = new Map<string, StickyNode>();
   const createdNodes: SceneNode[] = [];
-  let briefingBottom = 0;
+
+  /* === Header zone: title / premise / legend / reading-order (Design #9) ===
+     Sits at the very top of the board so a first-time reader knows what
+     they're looking at before they hit the narrative. */
+  const header = await createHeaderFrame(LAYOUT.sectionPadding, LAYOUT.sectionPadding);
+  createdNodes.push(...header.createdNodes);
+  const briefingTop = header.bottom + LAYOUT.zoneGap;
+
+  let briefingBottom = briefingTop;
 
   /* === Top zone: Prologue · Briefing with nested beat sub-sections ===
 
@@ -168,7 +176,7 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
 
     const beatIds = ["beat-1", "beat-2", "beat-3"];
     const outerOriginX = LAYOUT.sectionPadding;
-    const outerOriginY = LAYOUT.sectionPadding;
+    const outerOriginY = briefingTop;
     let beatCursorY = outerOriginY + LAYOUT.beatHeaderClearance;
     let outerMaxRight = outerOriginX + LAYOUT.sectionPadding + LAYOUT.stickyWidth;
 
@@ -222,6 +230,18 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     if (sectionPassages.length === 0) {
       const node = createSectionNode(section, bottomCursorX, bottomY, LAYOUT.emptySectionWidth, LAYOUT.emptySectionHeight);
       createdNodes.push(node);
+
+      /* Drop a TODO sticky inside the Act 1 concept section listing the
+         planned beats so the placeholder is informative rather than blank
+         (Design item #8). */
+      if (section.id === "concept-act-1") {
+        const todo = await createActOneTodoSticky(
+          bottomCursorX + LAYOUT.sectionPadding,
+          bottomY + LAYOUT.sectionPadding,
+        );
+        createdNodes.push(todo);
+      }
+
       bottomCursorX += LAYOUT.emptySectionWidth + LAYOUT.sectionGap;
       continue;
     }
@@ -557,6 +577,110 @@ function beatForIntroPassage(name: string): { id: string; label: string; order: 
 /* Inner beat sub-section inside the outer Prologue · Briefing wrapper.
    Slightly warmer / lower-opacity tint than the prefix section so the
    nesting is visible without competing with the outer section's color. */
+/* Board-level header (Design item #9). Holds title + premise + color legend
+   + connector legend + reading order in a single Section so a first-time
+   reader knows what they're looking at. Returns the bottom Y so the caller
+   can place the next zone below it. */
+async function createHeaderFrame(x: number, y: number): Promise<{ bottom: number; createdNodes: SceneNode[] }> {
+  const stickyWidth = LAYOUT.stickyWidth;
+  const innerPadding = LAYOUT.sectionPadding;
+  const stickyGap = 48;
+
+  const titleSticky = figma.createSticky();
+  titleSticky.isWideWidth = true;
+  titleSticky.x = x + innerPadding;
+  titleSticky.y = y + innerPadding;
+  titleSticky.authorVisible = false;
+  titleSticky.fills = [{ type: "SOLID", color: { r: 0.98, g: 0.95, b: 0.85 } }];
+  titleSticky.text.characters =
+    "SIZZLE\n\n" +
+    "Adult interactive fiction · Toronto, 2005\n\n" +
+    "A government recruit infiltrates a members-only swingers club on Queen Street West where members are being influenced by something the Branch classifies as NYSE — Not Yet Scientifically Explained.\n\n" +
+    "Current scope: character creation + briefing prologue. Act 1 (insertion) is concept-only.";
+  titleSticky.setPluginData("kind", "header-title");
+  titleSticky.setPluginData("namespace", PLUGIN_NAMESPACE);
+
+  const colorLegendSticky = figma.createSticky();
+  colorLegendSticky.isWideWidth = true;
+  colorLegendSticky.x = x + innerPadding + stickyWidth + stickyGap;
+  colorLegendSticky.y = y + innerPadding;
+  colorLegendSticky.authorVisible = false;
+  colorLegendSticky.fills = [{ type: "SOLID", color: { r: 0.98, g: 0.97, b: 0.93 } }];
+  colorLegendSticky.text.characters =
+    "COLOR LEGEND\n\n" +
+    "Blue        INTRO scenes (Prologue · Briefing)\n" +
+    "Green     CC schema (Character Creation)\n" +
+    "Dark gray   System / entry\n" +
+    "Tan          Branch passages (e.g. INTRO-200a)\n" +
+    "Yellow      Act 1 · Insertion (concept)";
+  colorLegendSticky.setPluginData("kind", "header-legend-color");
+  colorLegendSticky.setPluginData("namespace", PLUGIN_NAMESPACE);
+
+  const connectorLegendSticky = figma.createSticky();
+  connectorLegendSticky.isWideWidth = true;
+  connectorLegendSticky.x = x + innerPadding + (stickyWidth + stickyGap) * 2;
+  connectorLegendSticky.y = y + innerPadding;
+  connectorLegendSticky.authorVisible = false;
+  connectorLegendSticky.fills = [{ type: "SOLID", color: { r: 0.98, g: 0.97, b: 0.93 } }];
+  connectorLegendSticky.text.characters =
+    "CONNECTOR LEGEND\n\n" +
+    "Solid black    Linear next beat\n" +
+    "Dashed red    Player choice / dialogue fork\n" +
+    "Dashed tan    Branch / optional side-beat\n" +
+    "Dashed gray   CC tab navigation (widget)\n\n" +
+    "READING ORDER\n\n" +
+    "1. Read this header\n" +
+    "2. Prologue · Briefing, top-to-bottom by beat\n" +
+    "3. Character Creation schema (below narrative)\n" +
+    "4. Act 1 · Insertion (concept, future)";
+  connectorLegendSticky.setPluginData("kind", "header-legend-connector");
+  connectorLegendSticky.setPluginData("namespace", PLUGIN_NAMESPACE);
+
+  const stickies = [titleSticky, colorLegendSticky, connectorLegendSticky];
+  /* All three stickies sit at the same Y; section height = innerPadding +
+     tallest sticky height + innerPadding. */
+  const tallest = stickies.reduce((max, sticky) => Math.max(max, sticky.height), 0);
+  const frameWidth = innerPadding * 2 + stickyWidth * 3 + stickyGap * 2;
+  const frameHeight = innerPadding * 2 + tallest;
+
+  const frame = figma.createSection();
+  frame.name = "Sizzle · Board overview";
+  frame.x = x;
+  frame.y = y;
+  frame.resizeWithoutConstraints(frameWidth, frameHeight);
+  frame.fills = [{ type: "SOLID", color: { r: 0.95, g: 0.92, b: 0.84 }, opacity: 0.4 }];
+  frame.setPluginData("kind", "header-frame");
+  frame.setPluginData("namespace", PLUGIN_NAMESPACE);
+
+  return {
+    bottom: y + frameHeight,
+    createdNodes: [...stickies, frame],
+  };
+}
+
+/* TODO sticky for the Act 1 concept placeholder (Design item #8). Lists the
+   GDD's planned Act 1 beats so the section communicates intent instead of
+   sitting blank. */
+async function createActOneTodoSticky(x: number, y: number): Promise<StickyNode> {
+  const sticky = figma.createSticky();
+  sticky.isWideWidth = true;
+  sticky.x = x;
+  sticky.y = y;
+  sticky.authorVisible = false;
+  sticky.fills = [{ type: "SOLID", color: STICKY_COLORS.yellow }];
+  sticky.text.characters =
+    "TODO · Act 1 · Insertion\n\n" +
+    "Planned beats (from GDD §9):\n" +
+    "• Arrival in downtown Toronto (post-Ottawa briefing)\n" +
+    "• Apartment setup + Queen West cover life\n" +
+    "• Civilian infiltration — party adjacent to Sizzle\n" +
+    "• Land the job at Sizzle (act ends)\n\n" +
+    "Tone: grounded spy thriller. No NYSE yet. 2005 Toronto texture, tradecraft, social navigation.";
+  sticky.setPluginData("kind", "act-1-todo");
+  sticky.setPluginData("namespace", PLUGIN_NAMESPACE);
+  return sticky;
+}
+
 function createBeatSection(label: string, x: number, y: number, width: number, height: number): SectionNode {
   const node = figma.createSection();
   node.name = label;
