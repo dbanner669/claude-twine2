@@ -77,7 +77,7 @@ const LAYOUT = {
   stickyWidth: 320,
   /* Generous gaps so connector labels have room between stickies. All values
      snap to a 16px grid per Design item #10. */
-  layerGap: 144,
+  layerGap: 176,
   columnGap: 176,
   sectionPadding: 80,
   beatHeaderClearance: 96,
@@ -251,7 +251,13 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
      Labels on chain-adjacent connectors (source and target in the same row,
      in adjacent columns) are skipped: the visual proximity already implies
      the link, and the wiki display text was sitting on top of the next
-     sticky's body. Labels on cross-row / cross-section connectors stay. */
+     sticky's body. Labels on cross-row / cross-section connectors stay.
+
+     Convergent labels (multiple edges that share linkText AND target — e.g.
+     INTRO-200 and INTRO-200a both linking to INTRO-205 with "The weight of
+     those words settles...") are de-duplicated: the first occurrence keeps
+     the label, parallel duplicates render unlabeled. */
+  const labeledConvergence = new Set<string>();
   for (const edge of graph.edges) {
     if (edge.linkType === "widget-back") continue;
 
@@ -282,9 +288,13 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     connector.setPluginData("to", edge.to);
     connector.setPluginData("namespace", PLUGIN_NAMESPACE);
 
-    if (style.showLabel && edge.linkText && !chainAdjacent) {
-      connector.text.characters = truncate(edge.linkText, 35);
+    const convergenceKey = `${edge.linkText ?? ""}::${edge.to}`;
+    const alreadyLabeled = edge.linkText ? labeledConvergence.has(convergenceKey) : false;
+
+    if (style.showLabel && edge.linkText && !chainAdjacent && !alreadyLabeled) {
+      connector.text.characters = truncate(edge.linkText, 30);
       connector.textBackground.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
+      labeledConvergence.add(convergenceKey);
     }
     createdNodes.push(connector);
   }
