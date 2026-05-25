@@ -121,10 +121,15 @@ function stripSugarCubeStructure(body: string): string {
   text = text.replace(/\\$/gm, "");
   /* Drop any remaining macros. */
   text = text.replace(/<<[\s\S]*?>>/g, "");
-  /* Convert [[display|target]] -> display, [[target]] -> empty. */
-  text = text.replace(/\[\[([^\]|\->]+)\|[^\]]+\]\]/g, "$1");
-  text = text.replace(/\[\[[^\]]+->[^\]]+\]\]/g, "");
-  text = text.replace(/\[\[[^\]]+\]\]/g, "");
+  /* Convert wiki links to "→ display" so the player choice / next beat is
+     visually distinct in the sticky text (per FigJam round-trip feedback —
+     the unmarked display text didn't read as a link target). Handles all
+     four SugarCube wiki-link forms; for the bare [[target]] form the
+     target itself becomes the display. */
+  text = text.replace(/\[\[([^\]|\->]+)\|[^\]]+\]\]/g, "→ $1");
+  text = text.replace(/\[\[([^\]|\->]+)->[^\]]+\]\]/g, "→ $1");
+  text = text.replace(/\[\[[^\]]+<-([^\]]+)\]\]/g, "→ $1");
+  text = text.replace(/\[\[([^\]]+)\]\]/g, "→ $1");
   /* Separate adjacent HTML tags with a space so that <span>A</span><span>B</span>
      reads as "A B" after tag removal, not "AB". */
   text = text.replace(/></g, "> <");
