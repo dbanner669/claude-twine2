@@ -36,6 +36,10 @@ Format: one block per concern, grouped by source passage, newest at the top of e
 
 ## INTRO-115 Morning
 
+- **Source:** FigJam board export (2026-05-25, second pass)
+  **Status:** open · reaffirmed
+  **Concern:** User flagged this a second time on the board: `[This doesn't make sense, Claude revise]` on the "you still don't know the story" line. Same concern as the original entry below — kept open.
+
 - **Source:** FigJam board export (2026-05-25)
   **Status:** open
   **Concern:** "you still don't know the story" about Robert's scarred hands doesn't align with what we've established about his background. The NPC handler doc gives him a Lakehead → U of T → field-work-up-north path. Plausible sources for the knuckle scars: northern field work, fights in his Sault/Thunder Bay youth, manual labour during school. Either pick one and seed it earlier (so the player *does* roughly know the story), or revise this line to acknowledge what she does know but flag what she doesn't (e.g. "you know the why — northern winters, communities you'd rather not name — but not the specific night").
@@ -48,9 +52,19 @@ Format: one block per concern, grouped by source passage, newest at the top of e
 
 ## INTRO-205 Field placement
 
-- **Source:** FigJam board export (2026-05-25)
+- **Source:** FigJam board export (2026-05-25, second pass)
   **Status:** open
-  **Concern:** "You let the silence do the work." reads as an AI-ism — the construction is a tell. Recast.
+  **Concern:** User noted on the board that the Branch's pretend-conservation-club shooting range "should be somewhere near Ottawa, not Toronto." Currently the line places it in Barrie (north of Toronto, halfway to Muskoka). Move to somewhere plausible for an Ottawa-based agent to actually shoot at — Carp, Renfrew County, the Gatineau side, or a specific named range in the National Capital Region. Pick one with verisimilitude.
+
+- **Source:** FigJam board export (2026-05-25)
+  **Status:** resolved (applied this pass)
+  **Concern:** ~~"You let the silence do the work." reads as an AI-ism.~~ Link text rewritten to "You raise an eyebrow." in commit applying interpretation pass 2.
+
+## INTRO-340 Why me
+
+- **Source:** FigJam board export (2026-05-25, second pass)
+  **Status:** open
+  **Concern:** User design note on the board: *"this sequence, or a version of it, feels important, it should be harder to miss."* INTRO-340 currently sits as one optional branch of INTRO-325 No concerns. Player can reach the end of the briefing without ever asking "Why me specifically?" Consider promoting it to a mandatory beat, gating later passages on having visited it, or surfacing the same information through another channel (e.g. Robert volunteers a version of it during INTRO-410 Rules if the player hasn't asked).
 
 ## Cross-passage notes
 

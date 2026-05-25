@@ -7,11 +7,11 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since the Trudeau government — the first one.  A place on Bank Street south of Gloucester, no sign worth reading, where the booths are brown vinyl and the light is the colour of weak tea.  Half the clientele are civil servants eating before the buildings open, career government workers worried that the minority Liberal parliament might lose a confidence vote.  Nobody looks at you twice, which is the point.
+The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since the Trudeau government — the first one.  A place on <<term "Bank Street">> south of Gloucester, no sign worth reading, where the booths are brown vinyl and the light is the colour of weak tea.  Half the clientele are civil servants eating before the buildings open, career government workers worried that the minority Liberal parliament might lose a confidence vote.  Nobody looks at you twice, which is the point.
 
 You're early.  You're always early for Robert.
 
-[[You sip your coffee and watch the door.|INTRO-105 Waiting]]
+[[You sip your coffee and watch the door.|INTRO-101 Lost in thought]]
 <</page>>
 
 
@@ -24,7 +24,7 @@ You're early.  You're always early for Robert.
 <<page>>\
 The waitress brings coffee without being asked — you've been here before, enough times that she recognizes the booth but not your name.  Her name is Gladys.  You wrap your hands around the mug and watch the door.
 
-Outside, an OC Transpo bus grinds past on Bank, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that turns the limestone facades the colour of old honey.
+Outside, an <<term "OC Transpo">> bus grinds past on <<term "Bank Street" "Bank">>, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that turns the limestone facades the colour of old honey.
 
 <<if $player.background eq "RCMP constable">>You used to drink coffee like this at the detachment — institutional, slightly burnt.  The ritual is the same even if the context has shifted.
 <<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.  The stakes are different.
@@ -45,9 +45,9 @@ Outside, an OC Transpo bus grinds past on Bank, throwing diesel haze across the 
 <<page>>\
 <img src="media/characters/robert-flett-diner-entry.png" alt="Robert Flett entering the diner" class="passage-header-image">
 
-Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the Globe that looks like it's already been read.
+Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the <<term "Globe">> that looks like it's already been read.  It's a ridiculous thing to do half a block from the office you both work at.  You smile that he does it anyway.
 
-He doesn't look like a man who tracks the inexplicable for a living.  He looks like a mid-level bureaucrat — brown skin you've long since placed as Métis, hair going grey at the temples, a jacket that's seen better years.  He grew up in Shield country between the Sault and Thunder Bay.
+He doesn't look like a man who tracks the inexplicable for a living.  He looks like a mid-level bureaucrat — brown skin you've long since placed as <<term "Métis">>, hair going grey at the temples, a jacket that's seen better years.  He grew up in <<term "Shield country">> between the <<term "Sault">> and <<term "Thunder Bay">>.
 
 [[The one thing that doesn't match is his hands.|INTRO-115 Morning]]
 <</page>>
@@ -62,7 +62,7 @@ He doesn't look like a man who tracks the inexplicable for a living.  He looks l
 <<page>>\
 Working hands, scarred across the knuckles.  You noticed them the first day you met him, two years ago, and you still don't know the story.
 
-He slides into the booth across from you, sets the Globe on the table, and signals the waitress with a look that somehow communicates both "coffee" and "not yet" about the food.
+He slides into the booth across from you, sets the <<term "Globe">> on the table, and signals the waitress with a look that somehow communicates both "coffee" and "not yet" about the food.
 
 "Morning," he says.
 
@@ -78,7 +78,7 @@ He slides into the booth across from you, sets the Globe on the table, and signa
 <</silently>>\
 <<header>>\
 <<page>>\
-He gives you a look — not annoyed, just noting it.  "Long weekend."  Which from Robert means he spent it reading case files, not at a cottage.  He lets a beat pass, then moves on.  He always moves on.
+He gives you a look and a smile.  "Well fuck you too, junior."  He takes the coffee from the waitress, adds one cream, stirs it exactly three times.  Same as always.
 
 He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
 
@@ -112,17 +112,23 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 <</silently>>\
 <<header>>\
 <<page>>\
-He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Barrie that the Branch pretends is a conservation club.
+He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Barrie that the <<term "Branch">> pretends is a conservation club.
 
 This is what it was for.
 
-"There's a club on Queen West," he says.  "Members-only.  Been operating for about four years.  Called Sizzle."
+"There's a club on Queen West," he says.
+
+Huh, Toronto.  That's odd.  Most NYSE incidents are further north.  Also, a Toronto field placement is a plum assignment — someone more senior would surely be fighting for it.  There must be a catch.
+
+"Members-only.  Been operating for about two years.  Called Sizzle."
 
 He says the name without inflection, like it's a case number.
 
 "It's a swingers club."
 
-[[You let the silence do the work.|INTRO-210 Swingers club]]
+Ah, there it is.
+
+[[You raise an eyebrow.|INTRO-210 Swingers club]]
 <</page>>
 
 
@@ -133,13 +139,15 @@ He says the name without inflection, like it's a case number.
 <</silently>>\
 <<header>>\
 <<page>>\
-Another pause.  Robert is very good at pauses.  He uses them the way other people use emphasis — to let the weight of a word settle before he puts the next one on top.
+Another pause.  Robert is very good at pauses.  But so are you.
 
-"The Branch has been tracking anomalous reports associated with the club and its membership for the past fourteen months.  Behavioural changes in regular members — progressive, directional, consistent enough to flag <<term "NYSE">> classification."
+"The <<term "Branch">> has been tracking anomalous reports associated with the club and its membership for the past fourteen months.  Behavioural changes in regular members — progressive, directional, consistent enough to flag <<term "NYSE">> classification."
 
 He takes a sip of coffee.  Puts the mug down.
 
 "We don't have anyone inside.  We need someone inside."
+
+No shit, Bob.
 
 [["What kind of anomalous?"|INTRO-300 NYSE details]]
 [["What's my cover?"|INTRO-310 Cover]]
@@ -158,7 +166,9 @@ Robert turns his coffee mug a quarter rotation.  He does this when he's choosing
 
 "Influence patterns," he says.  "Members who've been attending regularly show progressive changes in behaviour and personality.  Not sudden — gradual.  Each step looks like a natural extension of the one before it.  A person who was relatively conservative six months ago is now doing things they wouldn't have imagined a year prior."
 
-He looks past you for a moment, at something outside the window or something in a case file he read in 1993.
+Another pause.  "Ass fisting," he says dryly.
+
+You raise an eyebrow.  He gets an imp-like glimmer in his eye.  He's giving you shit.
 
 "The escalation is the signature."
 
@@ -239,6 +249,7 @@ Robert doesn't blink.  "A swingers club.  Members-only, well-established, well-r
 There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the kitchen, someone drops a plate and swears in Greek.
 
 [["I don't have any concerns.  Walk me through it."|INTRO-325 No concerns]]
+[["I'm not doing it."|INTRO-322 Concerns]]
 <</page>>
 
 
@@ -270,7 +281,7 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 <<page>>\
 Robert is quiet for a moment.  It's a different quiet than his briefing pauses — less structured, more considered.
 
-"We don't know," he says.  And then, because he's Robert: "The Branch has classified the source as undetermined.  Current working hypotheses include an individual or individuals with anomalous capabilities, an environmental factor, or a combination."
+"We don't know," he says.  And then, because he's Robert: "The <<term "Branch">> has classified the source as undetermined.  Current working hypotheses include an individual or individuals with anomalous capabilities, an environmental factor, or a combination."
 
 He picks up his coffee, looks at it, puts it back down.
 
@@ -309,9 +320,11 @@ You file that away.
 <<page>>\
 Robert's expression doesn't change, but something behind it shifts — a microsecond of something that isn't discomfort, exactly, but might be its professional cousin.
 
-"The assignment requires a credibly attractive woman under thirty who has completed Branch <<term "NYSE">> training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
+"The assignment requires a credibly attractive woman under thirty who has completed <<term "Branch">> <<term "NYSE">> training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
 
 He takes three deliberate sips of coffee to put space between the clinical assessment and whatever comes next.
+
+You've known Robert a while now.  This is maybe the first time you can remember when he isn't meeting your eyes.
 
 [[Continue|INTRO-345 Qualified]]
 <</page>>
@@ -405,6 +418,16 @@ He folds his hands on the table.
 <<link "Have you sent anyone in before?">><<goto "INTRO-530 Question previous">><</link>>
 <<else>>\
 <span class="greyedOut">//Have you sent anyone in before?//</span>
+<</if>>
+<<if $player.storyTags.includes("Lived in Toronto") and not hasVisited("INTRO-540 Question recognized")>>\
+<<link "I lived in Toronto for a few years.  What if someone recognizes me?">><<goto "INTRO-540 Question recognized">><</link>>
+<<elseif $player.storyTags.includes("Lived in Toronto")>>\
+<span class="greyedOut">//I lived in Toronto for a few years.  What if someone recognizes me?//</span>
+<</if>>
+<<if $player.storyTags.includes("Northern Ontario") and not hasVisited("INTRO-550 Question Toronto")>>\
+<<link "Ugh, Toronto?">><<goto "INTRO-550 Question Toronto">><</link>>
+<<elseif $player.storyTags.includes("Northern Ontario")>>\
+<span class="greyedOut">//Ugh, Toronto?//</span>
 <</if>>
 
 [[Continue|INTRO-600 Subtext]]
@@ -603,7 +626,7 @@ The moment is over.  It existed for exactly as long as it needed to, and now it'
 <<page>>\
 Robert pays for both coffees — he always does, out of pocket, never expensed.  You noticed that about six months in and never mentioned it.
 
-Outside, Bank Street is doing what it does on a Monday morning.  Civil servants walking south toward the office towers with travel mugs and lanyards tucked inside their jackets.  A woman locking her bicycle to a rack outside a café that hasn't opened yet.
+Outside, <<term "Bank Street">> is doing what it does on a Monday morning.  Civil servants walking south toward the office towers with travel mugs and lanyards tucked inside their jackets.  A woman locking her bicycle to a rack outside a café that hasn't opened yet.
 
 September sun on limestone.  Ottawa being unremarkably, specifically itself.
 
@@ -660,4 +683,75 @@ Wednesday.  Ten o'clock.  ID photos.
 <p class="end-label">End of Prologue</p>
 <p class="end-continue">//To be continued — Act 1: Insertion//</p>
 </div>
+<</page>>
+
+
+:: INTRO-101 Lost in thought [daytime]
+<<silently>>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+You aren't sure why Robert wanted to meet here instead of just at the office.  Despite the fact that you both worked in the field of the supernatural — sorry, the <<term "NYSE">> — all you'd done for the past two years since <<print $player.incitingIncident || "the incident">> was get trained.
+
+Plucked out of your life as a <<print $player.background || "civilian">>.  Your government agency didn't officially have a name (everyone just called it the <<term "Branch">>), but it was still absolutely a government agency.  Meaning two years in you were still near the bottom of the pecking order — doing analysis, not going out into the field.
+
+[[You rub your temples and let the thought go.|INTRO-105 Waiting]]
+<</page>>
+
+
+:: INTRO-322 Concerns [daytime]
+<<silently>>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+//Placeholder · refusal branch.  Explaining you won't do it.  Robert says okay.  Back to the office.  Boring job.  Game over.//
+
+//To be written — this is the exit branch when the player declines the assignment.//
+
+[[Begin again|Start]]
+<</page>>
+
+
+:: INTRO-540 Question recognized [daytime]
+<<silently>>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"I lived in Toronto for a few years.  What if someone recognizes me?"
+
+"Your cover will need to incorporate it.  Sadly, you'll have to go in under your own name."
+
+<<if $player.background eq "unemployed after university">>"Though from what I remember from your file, going to or working at a sex club won't be that big of a stretch for the people who knew you back then."
+<<elseif $player.background eq "grad student">>"It might be a bit surprising for people who knew you back then, but it wouldn't be that strange for a person to start expanding their horizons after a few years of being a real adult."
+<<else>>"We'll workshop the cover with that in mind."
+<</if>>
+
+You just stare at him.
+
+"Just try not to bump into anyone."
+
+[[Continue|INTRO-410 Rules]]
+<</page>>
+
+
+:: INTRO-550 Question Toronto [daytime]
+<<silently>>
+<<set $header.location to "Diner, Bank Street, Ottawa">>
+<<set $header.time to "Monday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+"Ugh, Toronto?"
+
+//Placeholder · Northern Ontario reaction.  Player's groan about being sent to the big city.  Robert deadpan reply.  Brief banter that lands as character, not info.//
+
+//To be written.//
+
+[[Continue|INTRO-410 Rules]]
 <</page>>

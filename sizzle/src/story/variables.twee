@@ -163,7 +163,15 @@
 <<set setup.complexions to ["light", "medium", "dark"]>>
 
 <<set setup.glossary to {
-    "NYSE": "Not Yet Scientifically Explained"
+    "NYSE": "Not Yet Scientifically Explained",
+    "Branch": "The undisclosed federal Canadian agency that tracks NYSE phenomena. No public name, no signage; everyone inside calls it 'the Branch.' The player's and Robert's employer.",
+    "OC Transpo": "Ottawa's public transit operator. Runs the city's buses (and later light rail). On Bank Street, the diesel coaches grinding past are the unmistakable sound of an Ottawa weekday morning.",
+    "Globe": "The Globe and Mail — Canada's national daily newspaper of record. Centre-right, broadsheet, the paper a mid-level federal bureaucrat reads with his coffee.",
+    "Métis": "One of three constitutionally recognized Indigenous peoples of Canada, alongside First Nations and Inuit. Distinct nation arising from intermarriage between European fur traders and Indigenous (largely Cree, Ojibwe, and Saulteaux) communities, with its own language (Michif), culture, and homeland centred on the Prairies and extending east into Northern Ontario.",
+    "Shield country": "The Canadian Shield. Vast Precambrian-rock landscape of boreal forest, lakes, and exposed bedrock covering most of Northern Ontario, Quebec, Manitoba, and the territories. Old land. Hard winters.",
+    "Sault": "Sault Ste. Marie — small city on the St. Marys River at the Ontario–Michigan border. Steel town, paper town, gateway between the Great Lakes. Pronounced 'Soo.'",
+    "Thunder Bay": "City on the north shore of Lake Superior in Northwestern Ontario. Roughly halfway between Toronto and Winnipeg by distance, but culturally closer to the Prairies than to the GTA. Home of Lakehead University.",
+    "Bank Street": "Major north–south arterial running through central Ottawa — from Parliament Hill down through the Glebe and Centretown into the inner suburbs. Civil-service commute corridor, diners, second-hand shops, the city's working spine."
 }>>
 
 <</silently>>
