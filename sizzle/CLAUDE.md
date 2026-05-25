@@ -41,7 +41,7 @@ sizzle/
 │   ├── GREYBOX-ART.md         Art asset checklist for prologue + briefing scope
 │   ├── WRITING-TODOS.md       Open prose-level revisions (FigJam round-trip output)
 │   ├── AVATAR-RESEARCH.md     Offline image-gen stack research (Codex deliverable)
-│   ├── avatar-bakeoff/        ComfyUI workflows + scorecard for the model bakeoff
+│   ├── avatar-bakeoff/        Bakeoff workflows, STATUS, OPTION-2 asset plan, baseline-inputs/ (start at STATUS.md)
 │   ├── WRITING.md             Top-level writing doc pointer
 │   └── ART.md                 Top-level art doc pointer
 ├── build/           Tweego compilation scripts

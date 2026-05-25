@@ -9,7 +9,7 @@ This file is the fast handoff guide for implementation work. Use it alongside:
 - `docs/NPC-handler.md` for Robert Flett's full profile
 - `docs/STORY-TAGS.md` for player-carried narrative flags
 - `docs/WRITING-TODOS.md` for open prose-level revisions captured from FigJam round-trip passes
-- `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows (Codex deliverable)
+- `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows. Start at `docs/avatar-bakeoff/STATUS.md` — it tracks the current pipeline conclusion (direct text-to-image isn't stable enough; pivoted to master-reference + image-edit) and what decisions are still pending. `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` is the production asset checklist (36-53 layers depending on scope) if Option 2 runtime is approved.
 
 ## Current Scope
 
@@ -124,9 +124,11 @@ Most avatar art is still placeholder-only.
 
 ## Known Gaps
 
-- `CC-400 Incident` is still placeholder text with no real incident options yet.
-- The avatar panel still uses placeholder content because the layer art arrays are empty.
+- `CC-400 Incident` is still placeholder text with no real incident options yet. `$player.incitingIncident` exists as a variable; `INTRO-101 Lost in thought` interpolates it (falling back to "the incident") so the prose works either way.
+- The avatar panel currently shows a single composited placeholder PNG (`media/avatar/placeholder-suit.png`) instead of the dashed pattern, painted via CSS in `avatar.css`. This is temporary — the real `<<avatar>>` widget layer arrays are still empty. Remove the `.avatar-abs::after` background-image rule once Codex's layer pipeline lands and the arrays start populating (see `docs/avatar-bakeoff/STATUS.md`).
 - Avatar size/text size styling mismatch is intentionally left alone until avatar implementation work starts.
+- `INTRO-322 Concerns` (refusal/exit branch) and `INTRO-550 Question Toronto` (Northern Ontario reaction) are stubs only — content TBD.
+- The avatar layer-slot model is currently the generic `background`/`body`/`bodyMods`/`underwear`/`clothing`/`foreground` arrays in the `<<avatar>>` widget. Codex's Option 2 proposal would split these into explicit slots (`hairBack`/`hairFront`/`clothingTop`/`clothingBottom`/`shoes`/`expression`/etc.) — decision pending; see `docs/avatar-bakeoff/STATUS.md` and `OPTION-2-ASSET-TODO.md`.
 - There is no gameplay content beyond the end of the prologue.
 
 ## Build
