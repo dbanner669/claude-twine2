@@ -39,6 +39,9 @@ sizzle/
 │   ├── NPC-handler.md         Robert Flett — the player's Branch handler
 │   ├── GREYBOX-WRITING.md     Writing checklist for prologue + briefing scope
 │   ├── GREYBOX-ART.md         Art asset checklist for prologue + briefing scope
+│   ├── WRITING-TODOS.md       Open prose-level revisions (FigJam round-trip output)
+│   ├── AVATAR-RESEARCH.md     Offline image-gen stack research (Codex deliverable)
+│   ├── avatar-bakeoff/        ComfyUI workflows + scorecard for the model bakeoff
 │   ├── WRITING.md             Top-level writing doc pointer
 │   └── ART.md                 Top-level art doc pointer
 ├── build/           Tweego compilation scripts
@@ -52,6 +55,7 @@ sizzle/
 - **Compiler:** Tweego (located at `_tools/tweego/`)
 - **Template:** Based on `twine-sugarcube-template/` in this repo
 - **MCP Server:** Available at `twine-mcp-server/` for programmatic story manipulation
+- **FigJam round-trip:** `twine-mcp-server/src/figjam-sync/` (local HTTP service on `:4747`) + `figjam-sync-plugin/` (Figma desktop dev plugin). Load the story graph into a FigJam board, edit visually, click Export, then ask Claude to interpret `sizzle/.figjam/board-latest.json` against current Twee.
 
 ## Design System
 

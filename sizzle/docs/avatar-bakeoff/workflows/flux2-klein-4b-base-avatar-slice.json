@@ -1,0 +1,153 @@
+{
+  "sizzle_workflow_spec_version": 1,
+  "workflow_name": "flux2-klein-4b-base-avatar-slice",
+  "contender": "FLUX.2 Klein 4B Base",
+  "status": "build-spec; reconcile/export as runnable ComfyUI workflow in installed environment",
+  "canvas": {
+    "width": 1024,
+    "height": 1360,
+    "batch_size": 1
+  },
+  "model": {
+    "loader": "TODO: installed ComfyUI FLUX.2 Klein model loader",
+    "checkpoint_or_diffusion_model": "TODO: FLUX.2 Klein 4B Base filename",
+    "text_encoder": "TODO: Qwen 4B text encoder filename required by installed Flux2 workflow",
+    "vae": "TODO: Flux2 VAE filename"
+  },
+  "loras": [
+    {
+      "slot": "flux2_nsfw_anatomy_lora",
+      "loader": "TODO: FLUX-compatible LoRA loader",
+      "enabled_for_control_pass": false,
+      "enabled_for_lora_pass": true,
+      "test_mode": "one-at-a-time; do not stack",
+      "candidate_names": [
+        "Excellent Full Nude Flux2 Klein 4B by Sarcastic Tofu",
+        "Klein Fixes NSFW"
+      ],
+      "selected_lora_name": "TODO: set per run",
+      "strength_model": 0.65,
+      "strength_clip": 0.65,
+      "fallback_weights": [
+        0.45,
+        0.85
+      ]
+    }
+  ],
+  "positive_prompt_source": "../prompts.md#Base Natural-Language Prompt",
+  "constraint_prompt_source": "../prompts.md#FLUX Negative/Constraint Text",
+  "generation": {
+    "seed": 2309122005,
+    "steps": 28,
+    "guidance": 3.5,
+    "sampler_name": "TODO: Flux2-compatible deterministic sampler from installed workflow",
+    "scheduler": "TODO: Flux2-compatible scheduler from installed workflow",
+    "denoise": 1.0
+  },
+  "required_node_chain": [
+    "FLUX.2 Klein 4B Base model loader",
+    "Qwen/text encoder loader",
+    "Flux2 VAE loader",
+    "FLUX-compatible LoRA loader (toggleable/bypassable)",
+    "Flux2 text conditioning",
+    "Empty latent/image latent at 1024x1360",
+    "Flux2 sampler",
+    "Flux2 decode",
+    "SaveImage RGB",
+    "BiRefNet or equivalent background removal",
+    "SaveImage RGBA",
+    "alpha/mask preview save",
+    "dark/light/Sizzle composite preview saves"
+  ],
+  "output_prefix": "C:/tmp/sizzle-avatar-bakeoff/outputs/flux2-klein-4b-base/{pass}/flux2_klein_4b_base",
+  "passes": [
+    "control",
+    "excellent-full-nude",
+    "klein-fixes-nsfw",
+    "consistency"
+  ],
+  "layer_matrix_source": "../layer-composition-protocol.md#Required Layer Set",
+  "variants": [
+    {
+      "name": "body-light",
+      "seed": 2309122005,
+      "prompt_source": "../prompts.md#Layer Body Light"
+    },
+    {
+      "name": "body-medium",
+      "seed": 2309122006,
+      "prompt_source": "../prompts.md#Layer Body Medium Or Brown"
+    },
+    {
+      "name": "body-dark",
+      "seed": 2309122007,
+      "prompt_source": "../prompts.md#Layer Body Dark"
+    },
+    {
+      "name": "hair-long-straight-black",
+      "seed": 2309122008,
+      "prompt_source": "../prompts.md#Layer Hair Long Straight Black"
+    },
+    {
+      "name": "hair-long-straight-brown",
+      "seed": 2309122009,
+      "prompt_source": "../prompts.md#Layer Hair Long Straight Brown"
+    },
+    {
+      "name": "hair-short-bob-brown",
+      "seed": 2309122010,
+      "prompt_source": "../prompts.md#Layer Hair Short Bob Brown"
+    },
+    {
+      "name": "hair-long-curly-brown",
+      "seed": 2309122011,
+      "prompt_source": "../prompts.md#Layer Hair Long Curly Brown"
+    },
+    {
+      "name": "eyes-blue-green-brown",
+      "seed": 2309122012,
+      "prompt_source": "../prompts.md#Layer Eyes Blue/Green/Brown"
+    },
+    {
+      "name": "top-black-tshirt",
+      "seed": 2309122013,
+      "prompt_source": "../prompts.md#Layer T-Shirt"
+    },
+    {
+      "name": "top-white-blouse",
+      "seed": 2309122014,
+      "prompt_source": "../prompts.md#Layer White Blouse"
+    },
+    {
+      "name": "bottom-dark-jeans",
+      "seed": 2309122015,
+      "prompt_source": "../prompts.md#Layer Dark Jeans"
+    },
+    {
+      "name": "shoes-sneakers",
+      "seed": 2309122016,
+      "prompt_source": "../prompts.md#Layer Sneakers"
+    },
+    {
+      "name": "underwear-neutral",
+      "seed": 2309122017,
+      "prompt_source": "../prompts.md#Layer Neutral Underwear"
+    },
+    {
+      "name": "expression-calm",
+      "seed": 2309122018,
+      "prompt_source": "../prompts.md#Layer Expression Calm"
+    },
+    {
+      "name": "expression-worried-surprised",
+      "seed": 2309122019,
+      "prompt_source": "../prompts.md#Layer Expression Worried/Surprised"
+    },
+    {
+      "name": "tasteful-anatomy-check",
+      "seed": 2309122020,
+      "prompt_source": "../prompts.md#Tasteful Anatomy Variant"
+    }
+  ],
+  "manifest_template": "../manifest-template.json"
+}

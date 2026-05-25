@@ -8,6 +8,8 @@ This file is the fast handoff guide for implementation work. Use it alongside:
 - `docs/GDD.md` for game design and narrative intent
 - `docs/NPC-handler.md` for Robert Flett's full profile
 - `docs/STORY-TAGS.md` for player-carried narrative flags
+- `docs/WRITING-TODOS.md` for open prose-level revisions captured from FigJam round-trip passes
+- `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows (Codex deliverable)
 
 ## Current Scope
 
@@ -98,6 +100,17 @@ Important: `character-creation` takes precedence over `avatar-hidden`, so creati
 - The fake footer text `AUTOSAVE ON` / `QUICK SAVE F5` has been removed.
 - Footer status is now just the save/timestamp block plus the version block.
 
+### FigJam round-trip workflow
+
+The story graph can be loaded into a FigJam board for visual editing and round-tripped back to Twee via Claude interpretation.
+
+- Local sync server lives in `twine-mcp-server/src/figjam-sync/`. Start with `node dist/figjam-sync/index.js` (built) — binds `http://127.0.0.1:4747`. Claude manages this process per the terminal-management memory; don't run it manually.
+- Figma desktop plugin lives in `figjam-sync-plugin/` (dev plugin, import the manifest).
+- **Load story**: plugin fetches `/story-graph.json` and lays out beats, sections, sticky-per-scene, classified connectors, header frame with legend, Act 1 TODO.
+- **Export board**: plugin walks nodes, POSTs to `/board.json`. Lands at `sizzle/.figjam/board-latest.json` (gitignored). Then say "interpret the latest board export" and Claude diffs against current Twee and proposes patches.
+- Sticky text uses arrow markers (`→ "Morning."`) for wiki-link choices so player choices are visually distinct.
+- Convention: stickies the plugin created carry `setPluginData("namespace") = "sizzle-story-sync"`; user-added stickies/connectors have no plugin data and export as concept items.
+
 ## Art Assets Already Added
 
 Robert Flett assets now exist in `media/characters/`:
@@ -154,3 +167,5 @@ Before handing off, another agent should usually read:
 3. `sizzle/docs/GDD.md`
 4. `sizzle/docs/NPC-handler.md`
 5. `sizzle/docs/STORY-TAGS.md`
+6. `sizzle/docs/WRITING-TODOS.md` (open prose-level concerns)
+7. `sizzle/docs/AVATAR-RESEARCH.md` (if avatar work is on the table)

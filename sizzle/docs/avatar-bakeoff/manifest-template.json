@@ -1,0 +1,82 @@
+{
+  "project": "Sizzle",
+  "purpose": "avatar-bakeoff",
+  "run_id": "TODO",
+  "contender": "TODO: sdxl-realvisxl-v5 | flux2-klein-4b-base | flux2-klein-4b-distilled | pony-cyberrealistic",
+  "pass": "TODO: control | lora | consistency",
+  "variant": "TODO: neutral-body | professional-outfit | calm-expression | worried-surprised-expression | tasteful-anatomy-check",
+  "output_files": {
+    "rgb": "TODO",
+    "rgba": "TODO",
+    "alpha_preview": "TODO",
+    "composite_dark": "TODO",
+    "composite_light": "TODO",
+    "composite_sizzle": "TODO"
+  },
+  "model": {
+    "name": "TODO",
+    "architecture": "TODO",
+    "filename": "TODO",
+    "sha256": "TODO",
+    "source_url": "TODO",
+    "license": "TODO"
+  },
+  "vae": {
+    "filename": "TODO",
+    "sha256": "TODO"
+  },
+  "text_encoders": [
+    {
+      "name": "TODO",
+      "filename": "TODO",
+      "sha256": "TODO"
+    }
+  ],
+  "loras": [
+    {
+      "name": "TODO",
+      "filename": "TODO",
+      "sha256": "TODO",
+      "source_url": "TODO",
+      "license": "TODO",
+      "trigger_words": [],
+      "strength_model": 0,
+      "strength_clip": 0
+    }
+  ],
+  "generation": {
+    "positive_prompt": "TODO",
+    "negative_prompt": "TODO",
+    "seed": 2309122005,
+    "width": 1024,
+    "height": 1365,
+    "steps": "TODO",
+    "cfg_or_guidance": "TODO",
+    "sampler": "TODO",
+    "scheduler": "TODO",
+    "denoise": 1.0,
+    "batch_size": 1
+  },
+  "postprocess": {
+    "background_removal": "BiRefNet or equivalent",
+    "alpha_cleanup": "TODO",
+    "composite_backgrounds": [
+      "dark",
+      "light",
+      "sizzle"
+    ]
+  },
+  "runtime": {
+    "comfyui_commit": "TODO",
+    "custom_nodes": [],
+    "python": "TODO",
+    "pytorch": "TODO",
+    "cuda": "TODO",
+    "gpu": "TODO",
+    "driver": "TODO",
+    "precision": "TODO",
+    "attention_backend": "TODO"
+  },
+  "notes": "TODO"
+}
+

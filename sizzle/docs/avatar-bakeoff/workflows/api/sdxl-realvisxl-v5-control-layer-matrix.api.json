@@ -1,0 +1,2040 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "RealVisXL_V5.0_fp16.safetensors"
+    },
+    "_meta": {
+      "title": "Load checkpoint"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "anime, cartoon, illustration, 3d render, plastic skin, glossy fashion shoot, influencer, exaggerated breasts, exaggerated hips, childlike, teen, young-looking, deformed anatomy, extra fingers, missing fingers, bad hands, bad eyes, crossed eyes, asymmetrical face, heavy makeup, modern smartphone, watermark, signature, text, logo, cropped, out of frame, celebrity"
+    },
+    "_meta": {
+      "title": "Negative prompt"
+    }
+  },
+  "10": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and pose, isolated base body sprite for the body runtime layer, adult 27 year old Canadian woman, light skin, natural body proportions, neutral front-facing avatar reference pose, arms relaxed slightly away from torso, hair hidden or pulled away for layer testing, no outer clothing, no jewelry, plain matte grey background for segmentation, body silhouette and face geometry must match the canonical pose guide exactly"
+    },
+    "_meta": {
+      "title": "Positive: 20_body-light"
+    }
+  },
+  "11": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 20_body-light"
+    }
+  },
+  "12": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "11",
+        0
+      ],
+      "seed": 2309122005,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 20_body-light"
+    }
+  },
+  "13": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "12",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 20_body-light"
+    }
+  },
+  "14": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "13",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/01_20_body-light"
+    },
+    "_meta": {
+      "title": "Save RGB: 20_body-light"
+    }
+  },
+  "15": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and pose, isolated base body sprite for the body runtime layer, adult 27 year old Canadian woman, medium brown skin, natural body proportions, neutral front-facing avatar reference pose, arms relaxed slightly away from torso, hair hidden or pulled away for layer testing, no outer clothing, no jewelry, plain matte grey background for segmentation, body silhouette and face geometry must match the canonical pose guide exactly"
+    },
+    "_meta": {
+      "title": "Positive: 20_body-medium"
+    }
+  },
+  "16": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 20_body-medium"
+    }
+  },
+  "17": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "15",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "16",
+        0
+      ],
+      "seed": 2309122006,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 20_body-medium"
+    }
+  },
+  "18": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 20_body-medium"
+    }
+  },
+  "19": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "18",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/02_20_body-medium"
+    },
+    "_meta": {
+      "title": "Save RGB: 20_body-medium"
+    }
+  },
+  "20": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and pose, isolated base body sprite for the body runtime layer, adult 27 year old Canadian woman, dark skin, natural body proportions, neutral front-facing avatar reference pose, arms relaxed slightly away from torso, hair hidden or pulled away for layer testing, no outer clothing, no jewelry, plain matte grey background for segmentation, body silhouette and face geometry must match the canonical pose guide exactly"
+    },
+    "_meta": {
+      "title": "Positive: 20_body-dark"
+    }
+  },
+  "21": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 20_body-dark"
+    }
+  },
+  "22": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "20",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "21",
+        0
+      ],
+      "seed": 2309122007,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 20_body-dark"
+    }
+  },
+  "23": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "22",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 20_body-dark"
+    }
+  },
+  "24": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "23",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/03_20_body-dark"
+    },
+    "_meta": {
+      "title": "Save RGB: 20_body-dark"
+    }
+  },
+  "25": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and head position, isolated hair sprite only, long straight black hair for an adult woman, natural 2005 hairstyle, hair follows the canonical skull, neck, and shoulder guide, no face repainting, no skin repainting, no eye repainting, no clothing repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 30_hair-long-straight-black"
+    }
+  },
+  "26": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 30_hair-long-straight-black"
+    }
+  },
+  "27": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "25",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "26",
+        0
+      ],
+      "seed": 2309122008,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 30_hair-long-straight-black"
+    }
+  },
+  "28": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "27",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 30_hair-long-straight-black"
+    }
+  },
+  "29": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "28",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/04_30_hair-long-straight-black"
+    },
+    "_meta": {
+      "title": "Save RGB: 30_hair-long-straight-black"
+    }
+  },
+  "30": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and head position, isolated hair sprite only, long straight brown hair for an adult woman, natural 2005 hairstyle, hair follows the canonical skull, neck, and shoulder guide, no face repainting, no skin repainting, no eye repainting, no clothing repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 30_hair-long-straight-brown"
+    }
+  },
+  "31": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 30_hair-long-straight-brown"
+    }
+  },
+  "32": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "31",
+        0
+      ],
+      "seed": 2309122009,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 30_hair-long-straight-brown"
+    }
+  },
+  "33": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "32",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 30_hair-long-straight-brown"
+    }
+  },
+  "34": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "33",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/05_30_hair-long-straight-brown"
+    },
+    "_meta": {
+      "title": "Save RGB: 30_hair-long-straight-brown"
+    }
+  },
+  "35": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and head position, isolated hair sprite only, long straight dark blonde hair for an adult woman, natural 2005 hairstyle, hair follows the canonical skull, neck, and shoulder guide, no face repainting, no skin repainting, no eye repainting, no clothing repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 30_hair-long-straight-blonde"
+    }
+  },
+  "36": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 30_hair-long-straight-blonde"
+    }
+  },
+  "37": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "35",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "36",
+        0
+      ],
+      "seed": 2309122010,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 30_hair-long-straight-blonde"
+    }
+  },
+  "38": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "37",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 30_hair-long-straight-blonde"
+    }
+  },
+  "39": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "38",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/06_30_hair-long-straight-blonde"
+    },
+    "_meta": {
+      "title": "Save RGB: 30_hair-long-straight-blonde"
+    }
+  },
+  "40": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and head position, isolated hair sprite only, short brown bob haircut for an adult woman, natural 2005 hairstyle, hair follows the canonical skull, neck, and shoulder guide, no face repainting, no skin repainting, no eye repainting, no clothing repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 30_hair-short-bob-brown"
+    }
+  },
+  "41": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 30_hair-short-bob-brown"
+    }
+  },
+  "42": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "40",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "41",
+        0
+      ],
+      "seed": 2309122011,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 30_hair-short-bob-brown"
+    }
+  },
+  "43": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "42",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 30_hair-short-bob-brown"
+    }
+  },
+  "44": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "43",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/07_30_hair-short-bob-brown"
+    },
+    "_meta": {
+      "title": "Save RGB: 30_hair-short-bob-brown"
+    }
+  },
+  "45": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and head position, isolated hair sprite only, long curly brown hair for an adult woman, natural 2005 hairstyle, hair follows the canonical skull, neck, and shoulder guide, no face repainting, no skin repainting, no eye repainting, no clothing repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 30_hair-long-curly-brown"
+    }
+  },
+  "46": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 30_hair-long-curly-brown"
+    }
+  },
+  "47": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "45",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "46",
+        0
+      ],
+      "seed": 2309122012,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 30_hair-long-curly-brown"
+    }
+  },
+  "48": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "47",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 30_hair-long-curly-brown"
+    }
+  },
+  "49": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "48",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/08_30_hair-long-curly-brown"
+    },
+    "_meta": {
+      "title": "Save RGB: 30_hair-long-curly-brown"
+    }
+  },
+  "50": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated eye colour sprite only, adult female blue irises aligned to canonical eye line, change iris colour only, no eyelid repainting, no skin repainting, no brows, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 35_eyes-blue"
+    }
+  },
+  "51": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 35_eyes-blue"
+    }
+  },
+  "52": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "50",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "51",
+        0
+      ],
+      "seed": 2309122013,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 35_eyes-blue"
+    }
+  },
+  "53": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "52",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 35_eyes-blue"
+    }
+  },
+  "54": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "53",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/09_35_eyes-blue"
+    },
+    "_meta": {
+      "title": "Save RGB: 35_eyes-blue"
+    }
+  },
+  "55": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated eye colour sprite only, adult female green irises aligned to canonical eye line, change iris colour only, no eyelid repainting, no skin repainting, no brows, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 35_eyes-green"
+    }
+  },
+  "56": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 35_eyes-green"
+    }
+  },
+  "57": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "55",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "56",
+        0
+      ],
+      "seed": 2309122014,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 35_eyes-green"
+    }
+  },
+  "58": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "57",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 35_eyes-green"
+    }
+  },
+  "59": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "58",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/10_35_eyes-green"
+    },
+    "_meta": {
+      "title": "Save RGB: 35_eyes-green"
+    }
+  },
+  "60": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated eye colour sprite only, adult female brown irises aligned to canonical eye line, change iris colour only, no eyelid repainting, no skin repainting, no brows, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: 35_eyes-brown"
+    }
+  },
+  "61": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: 35_eyes-brown"
+    }
+  },
+  "62": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "60",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "61",
+        0
+      ],
+      "seed": 2309122015,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: 35_eyes-brown"
+    }
+  },
+  "63": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "62",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: 35_eyes-brown"
+    }
+  },
+  "64": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "63",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/11_35_eyes-brown"
+    },
+    "_meta": {
+      "title": "Save RGB: 35_eyes-brown"
+    }
+  },
+  "65": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and body position, isolated underwear sprite only, neutral practical bra, aligned to canonical bust and torso, no skin baked into the underwear layer, must fit under outer clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: underwear-neutral-bra"
+    }
+  },
+  "66": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: underwear-neutral-bra"
+    }
+  },
+  "67": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "65",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "66",
+        0
+      ],
+      "seed": 2309122016,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: underwear-neutral-bra"
+    }
+  },
+  "68": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "67",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: underwear-neutral-bra"
+    }
+  },
+  "69": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "68",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/12_underwear-neutral-bra"
+    },
+    "_meta": {
+      "title": "Save RGB: underwear-neutral-bra"
+    }
+  },
+  "70": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and body position, isolated underwear sprite only, neutral practical briefs, aligned to canonical waist, hips, and pelvis, no skin baked into the underwear layer, must fit under outer clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: underwear-neutral-briefs"
+    }
+  },
+  "71": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: underwear-neutral-briefs"
+    }
+  },
+  "72": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "70",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "71",
+        0
+      ],
+      "seed": 2309122017,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: underwear-neutral-briefs"
+    }
+  },
+  "73": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "72",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: underwear-neutral-briefs"
+    }
+  },
+  "74": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "73",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/13_underwear-neutral-briefs"
+    },
+    "_meta": {
+      "title": "Save RGB: underwear-neutral-briefs"
+    }
+  },
+  "75": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and torso position, isolated clothing top sprite only, simple fitted dark t-shirt, front-facing, collar aligned to canonical neck, sleeves aligned to canonical shoulders and upper arms, hem aligned to canonical waist, no skin baked into the garment, no underwear baked in, no hair, no face repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: clothing-tops-blackTshirt"
+    }
+  },
+  "76": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: clothing-tops-blackTshirt"
+    }
+  },
+  "77": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "75",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "76",
+        0
+      ],
+      "seed": 2309122018,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: clothing-tops-blackTshirt"
+    }
+  },
+  "78": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "77",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: clothing-tops-blackTshirt"
+    }
+  },
+  "79": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "78",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/14_clothing-tops-blackTshirt"
+    },
+    "_meta": {
+      "title": "Save RGB: clothing-tops-blackTshirt"
+    }
+  },
+  "80": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and torso position, isolated clothing top sprite only, simple white blouse suitable for a 2005 government briefing, front-facing, collar aligned to canonical neck, sleeves aligned to canonical shoulders and upper arms, hem aligned to canonical waist, no skin baked into the garment, no underwear baked in, no hair, no face repainting, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: clothing-tops-whiteBlouse"
+    }
+  },
+  "81": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: clothing-tops-whiteBlouse"
+    }
+  },
+  "82": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "80",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "81",
+        0
+      ],
+      "seed": 2309122019,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: clothing-tops-whiteBlouse"
+    }
+  },
+  "83": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "82",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: clothing-tops-whiteBlouse"
+    }
+  },
+  "84": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "83",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/15_clothing-tops-whiteBlouse"
+    },
+    "_meta": {
+      "title": "Save RGB: clothing-tops-whiteBlouse"
+    }
+  },
+  "85": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and lower body position, isolated clothing bottom sprite only, dark 2005 jeans, waistband aligned to canonical waist, legs aligned to canonical hips and legs, no skin baked into the garment, no shoes baked in, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: clothing-bottoms-darkJeans"
+    }
+  },
+  "86": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: clothing-bottoms-darkJeans"
+    }
+  },
+  "87": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "85",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "86",
+        0
+      ],
+      "seed": 2309122020,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: clothing-bottoms-darkJeans"
+    }
+  },
+  "88": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "87",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: clothing-bottoms-darkJeans"
+    }
+  },
+  "89": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "88",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/16_clothing-bottoms-darkJeans"
+    },
+    "_meta": {
+      "title": "Save RGB: clothing-bottoms-darkJeans"
+    }
+  },
+  "90": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and foot position, isolated shoe sprite only, practical sneakers, soles aligned to canonical foot position, no legs or skin baked into the shoe layer, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: clothing-shoes-sneakers"
+    }
+  },
+  "91": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: clothing-shoes-sneakers"
+    }
+  },
+  "92": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "90",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "91",
+        0
+      ],
+      "seed": 2309122021,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: clothing-shoes-sneakers"
+    }
+  },
+  "93": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "92",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: clothing-shoes-sneakers"
+    }
+  },
+  "94": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "93",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/17_clothing-shoes-sneakers"
+    },
+    "_meta": {
+      "title": "Save RGB: clothing-shoes-sneakers"
+    }
+  },
+  "95": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated mouth expression overlay only, calm neutral adult female mouth, subtle expression change, mouth aligned to canonical mouth box, no skin tone change, no brows, no eyes, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-mouth-calm"
+    }
+  },
+  "96": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-mouth-calm"
+    }
+  },
+  "97": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "95",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "96",
+        0
+      ],
+      "seed": 2309122022,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-mouth-calm"
+    }
+  },
+  "98": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "97",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-mouth-calm"
+    }
+  },
+  "99": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "98",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/18_expression-mouth-calm"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-mouth-calm"
+    }
+  },
+  "100": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated mouth expression overlay only, worried frown adult female mouth, subtle tense expression, mouth aligned to canonical mouth box, no skin tone change, no brows, no eyes, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-mouth-frown"
+    }
+  },
+  "101": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-mouth-frown"
+    }
+  },
+  "102": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "100",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "101",
+        0
+      ],
+      "seed": 2309122023,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-mouth-frown"
+    }
+  },
+  "103": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "102",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-mouth-frown"
+    }
+  },
+  "104": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "103",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/19_expression-mouth-frown"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-mouth-frown"
+    }
+  },
+  "105": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated mouth expression overlay only, surprised slightly open adult female mouth, restrained expression, mouth aligned to canonical mouth box, no skin tone change, no brows, no eyes, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-mouth-open"
+    }
+  },
+  "106": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-mouth-open"
+    }
+  },
+  "107": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "105",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "106",
+        0
+      ],
+      "seed": 2309122024,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-mouth-open"
+    }
+  },
+  "108": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "107",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-mouth-open"
+    }
+  },
+  "109": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "108",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/20_expression-mouth-open"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-mouth-open"
+    }
+  },
+  "110": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated brow expression overlay only, relaxed adult female brows, brows aligned to canonical brow box, no skin tone change, no eyes, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-brows-relaxed"
+    }
+  },
+  "111": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-brows-relaxed"
+    }
+  },
+  "112": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "110",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "111",
+        0
+      ],
+      "seed": 2309122025,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-brows-relaxed"
+    }
+  },
+  "113": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "112",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-brows-relaxed"
+    }
+  },
+  "114": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "113",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/21_expression-brows-relaxed"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-brows-relaxed"
+    }
+  },
+  "115": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated brow expression overlay only, worried adult female brows, brows aligned to canonical brow box, no skin tone change, no eyes, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-brows-worried"
+    }
+  },
+  "116": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-brows-worried"
+    }
+  },
+  "117": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "115",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "116",
+        0
+      ],
+      "seed": 2309122026,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-brows-worried"
+    }
+  },
+  "118": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "117",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-brows-worried"
+    }
+  },
+  "119": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "118",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/22_expression-brows-worried"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-brows-worried"
+    }
+  },
+  "120": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and face position, isolated brow expression overlay only, raised surprised adult female brows, brows aligned to canonical brow box, no skin tone change, no eyes, no mouth, no hair, no clothing, plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: expression-brows-raised"
+    }
+  },
+  "121": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: expression-brows-raised"
+    }
+  },
+  "122": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "120",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "121",
+        0
+      ],
+      "seed": 2309122027,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: expression-brows-raised"
+    }
+  },
+  "123": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "122",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: expression-brows-raised"
+    }
+  },
+  "124": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "123",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/23_expression-brows-raised"
+    },
+    "_meta": {
+      "title": "Save RGB: expression-brows-raised"
+    }
+  },
+  "125": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": [
+        "1",
+        1
+      ],
+      "text": "same locked avatar canvas and body position, isolated body modification sprite only, small subtle scar on adult woman's torso, no skin repainting beyond the scar mark, no hair, no clothing, transparent layer test on plain matte grey background for segmentation"
+    },
+    "_meta": {
+      "title": "Positive: bodyMods-small-scar"
+    }
+  },
+  "126": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1360,
+      "batch_size": 1
+    },
+    "_meta": {
+      "title": "Latent: bodyMods-small-scar"
+    }
+  },
+  "127": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "125",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "126",
+        0
+      ],
+      "seed": 2309122028,
+      "control_after_generate": "fixed",
+      "steps": 32,
+      "cfg": 5.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1.0
+    },
+    "_meta": {
+      "title": "Sample: bodyMods-small-scar"
+    }
+  },
+  "128": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "127",
+        0
+      ],
+      "vae": [
+        "1",
+        2
+      ]
+    },
+    "_meta": {
+      "title": "Decode: bodyMods-small-scar"
+    }
+  },
+  "129": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "128",
+        0
+      ],
+      "filename_prefix": "sizzle-avatar-bakeoff/sdxl-realvisxl-v5/control/24_bodyMods-small-scar"
+    },
+    "_meta": {
+      "title": "Save RGB: bodyMods-small-scar"
+    }
+  }
+}

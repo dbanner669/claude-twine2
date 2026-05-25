@@ -38,3 +38,6 @@ sizzle-daytime-header-check.png
 
 # FigJam sync board dumps (regenerated on demand)
 sizzle/.figjam/
+
+# Claude Design pass — transient unpacked zip, reference only
+.design-pass-figjam/
