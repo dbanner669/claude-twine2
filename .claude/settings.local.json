@@ -45,7 +45,29 @@
       "PowerShell(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\fonts\")",
       "Bash(where codex *)",
       "Bash(codex --help)",
-      "mcp__Claude_in_Chrome__tabs_create_mcp"
+      "mcp__Claude_in_Chrome__tabs_create_mcp",
+      "Bash(curl -s http://127.0.0.1:4747/health)",
+      "Bash(curl -s http://127.0.0.1:4747/story-graph.json -o \"C:\\\\Users\\\\Oculus\\\\AppData\\\\Local\\\\Temp\\\\story-graph-test.json\")",
+      "Read(//c/Users/Oculus/AppData/Local/Temp/**)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s -X POST -H \"Content-Type: application/json\" -d '{\"test\":\"phase1-smoke\",\"passages\":[{\"id\":\"INTRO-100 Briefing\",\"kind\":\"existing\"}]}' http://127.0.0.1:4747/board.json)",
+      "Bash(npm install *)",
+      "Bash(cd \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\twine-mcp-server\" && npm run build 2>&1 | tail -5 && cd ../figjam-sync-plugin && npm run build 2>&1 | tail -5)",
+      "PowerShell($pid4747 = \\(Get-NetTCPConnection -LocalPort 4747 -ErrorAction SilentlyContinue\\).OwningProcess; if \\($pid4747\\) { \"server running on pid $pid4747 -- you'll need to restart it to pick up the displayBody change\" } else { \"no server running\" })",
+      "Bash(node dist/figjam-sync/index.js --port=4748)",
+      "Bash(curl -s http://127.0.0.1:4748/story-graph.json -o \"C:\\\\Users\\\\Oculus\\\\AppData\\\\Local\\\\Temp\\\\story-graph-v2.json\")",
+      "Bash(node dist/figjam-sync/index.js)",
+      "Bash(curl -s http://127.0.0.1:4747/story-graph.json -o \"C:\\\\Users\\\\Oculus\\\\AppData\\\\Local\\\\Temp\\\\sg.json\")",
+      "mcp__56dcbc3a-b8cb-426d-850d-51e949bc65c2__get_figjam",
+      "mcp__56dcbc3a-b8cb-426d-850d-51e949bc65c2__use_figma",
+      "Bash(py -3 -m http.server 8000 --bind 127.0.0.1)",
+      "PowerShell(\"---\")",
+      "PowerShell(\"AvatarMeta passage lookup:\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:4747/health)",
+      "Bash(py -3 -m http.server 8001 --bind 127.0.0.1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://127.0.0.1:8001/output.html)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 4747 -ErrorAction SilentlyContinue)",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1 | Select-Object -Last 20)"
     ]
   }
 }
