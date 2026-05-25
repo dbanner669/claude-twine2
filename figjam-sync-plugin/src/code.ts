@@ -57,22 +57,35 @@ const STICKY_COLORS: Record<string, RGB> = {
   violet: { r: 0.78, g: 0.65, b: 0.92 },
   orange: { r: 0.98, g: 0.74, b: 0.46 },
   dark_gray: { r: 0.55, g: 0.55, b: 0.55 },
+  /* Tan: used for branch-passage stickies per Design item #5. */
+  tan: { r: 0.93, g: 0.78, b: 0.58 },
 };
 
-const BODY_COLOR: RGB = { r: 0.98, g: 0.97, b: 0.93 };
+const CONNECTOR_COLORS = {
+  /* Next beat (linear) — solid black. */
+  next: { r: 0.15, g: 0.15, b: 0.15 },
+  /* Player choice / dialogue option — dashed red. */
+  choice: { r: 0.78, g: 0.28, b: 0.28 },
+  /* Branch / optional side-beat — dashed tan. */
+  branch: { r: 0.55, g: 0.42, b: 0.20 },
+  /* Widget-next (CC tab navigation) — light gray, secondary. */
+  widget: { r: 0.6, g: 0.6, b: 0.6 },
+};
 
 const LAYOUT = {
-  /* Both title and body use FigJam's "wide" sticky width (~320px). */
+  /* FigJam "wide" sticky width (~320px). One sticky per passage. */
   stickyWidth: 320,
-  pairGap: 16,
-  /* Generous gaps so connector labels (link display text, "Continue", etc.)
-     have room to sit between pairs without overlapping the sticky bodies. */
-  layerGap: 140,
-  columnGap: 180,
+  /* Generous gaps so connector labels have room between stickies. All values
+     snap to a 16px grid per Design item #10. */
+  layerGap: 144,
+  columnGap: 176,
   sectionPadding: 80,
-  sectionGap: 360,
-  emptySectionWidth: 440,
-  emptySectionHeight: 600,
+  beatHeaderClearance: 96,
+  beatGap: 64,
+  sectionGap: 320,
+  zoneGap: 240,
+  emptySectionWidth: 480,
+  emptySectionHeight: 640,
   maxChainLength: 5,
 };
 
@@ -104,104 +117,160 @@ figma.ui.onmessage = async (msg: UiMessage) => {
   }
 };
 
+interface LayoutResult {
+  width: number;
+  height: number;
+  stickyByPassage: Map<string, StickyNode>;
+  createdNodes: SceneNode[];
+}
+
 async function loadGraph(graph: StoryGraph): Promise<void> {
-  /* FigJam stickies use the "Inter Medium" font by default; load both weights
-     for title and body stickies and for connector labels. */
+  /* FigJam stickies use Inter; load weights up-front so sticky.text.characters
+     assignments succeed synchronously inside the layout loop. */
   await figma.loadFontAsync({ family: "Inter", style: "Medium" });
   await figma.loadFontAsync({ family: "Inter", style: "Regular" });
 
-  const titleByPassage = new Map<string, StickyNode>();
-  const createdNodes: SceneNode[] = [];
+  /* Pre-compute outgoing wiki-link counts per source passage so we can classify
+     connectors: a source with multiple outgoing wiki edges renders each as a
+     player-choice (dashed red); a single outgoing wiki edge is a linear next
+     beat (solid black). Widget edges and self-loops are excluded from the
+     count. */
+  const outgoingWikiCount = new Map<string, number>();
+  for (const edge of graph.edges) {
+    if (edge.from === edge.to) continue;
+    if (edge.linkType.indexOf("widget-") === 0) continue;
+    outgoingWikiCount.set(edge.from, (outgoingWikiCount.get(edge.from) ?? 0) + 1);
+  }
 
-  /* Layout: sections side by side. Within each section, passages are placed in
-     BFS layers based on longest path from any entry point. Each layer is a row
-     whose Y advances by the actual rendered height of the tallest pair in the
-     previous layer, so long bodies never overlap the next row. */
-  let sectionCursorX = 0;
+  const stickyByPassage = new Map<string, StickyNode>();
+  const createdNodes: SceneNode[] = [];
+  let briefingBottom = 0;
+
+  /* === Top zone: Prologue · Briefing with nested beat sub-sections ===
+
+     Per Design item #6, INTRO is split into Beat 1 (100-199, Diner setup),
+     Beat 2 (200-499, The briefing) and Beat 3 (500+, Closing). Each beat is
+     its own inner section; an outer section wraps them. */
+  const introSection = graph.sections.find((s) => s.id === "act-intro");
+  if (introSection) {
+    const introPassages = graph.passages.filter((p) => sectionIdForPassage(p) === "act-intro");
+    const byBeat = new Map<string, StoryGraphPassage[]>();
+    for (const passage of introPassages) {
+      const beat = beatForIntroPassage(passage.name);
+      if (!beat) continue;
+      let bucket = byBeat.get(beat.id);
+      if (!bucket) {
+        bucket = [];
+        byBeat.set(beat.id, bucket);
+      }
+      bucket.push(passage);
+    }
+
+    const beatIds = ["beat-1", "beat-2", "beat-3"];
+    const outerOriginX = LAYOUT.sectionPadding;
+    const outerOriginY = LAYOUT.sectionPadding;
+    let beatCursorY = outerOriginY + LAYOUT.beatHeaderClearance;
+    let outerMaxRight = outerOriginX + LAYOUT.sectionPadding + LAYOUT.stickyWidth;
+
+    for (const beatId of beatIds) {
+      const beatPassages = byBeat.get(beatId);
+      if (!beatPassages || beatPassages.length === 0) continue;
+      const beatMeta = beatForIntroPassage(beatPassages[0].name)!;
+
+      const innerStickyOriginX = outerOriginX + LAYOUT.sectionPadding * 2;
+      const innerStickyOriginY = beatCursorY + LAYOUT.beatHeaderClearance;
+      const result = await layoutPassagesInBox(beatPassages, graph.edges, innerStickyOriginX, innerStickyOriginY);
+
+      for (const [name, sticky] of result.stickyByPassage) stickyByPassage.set(name, sticky);
+      createdNodes.push(...result.createdNodes);
+
+      const beatWidth = result.width + LAYOUT.sectionPadding * 2;
+      const beatHeight = result.height + LAYOUT.beatHeaderClearance + LAYOUT.sectionPadding;
+      const beatSection = createBeatSection(
+        beatMeta.label,
+        outerOriginX + LAYOUT.sectionPadding,
+        beatCursorY,
+        beatWidth,
+        beatHeight,
+      );
+      createdNodes.push(beatSection);
+
+      beatCursorY += beatHeight + LAYOUT.beatGap;
+      outerMaxRight = Math.max(outerMaxRight, outerOriginX + LAYOUT.sectionPadding + beatWidth);
+    }
+
+    const outerWidth = (outerMaxRight - outerOriginX) + LAYOUT.sectionPadding;
+    const outerHeight = beatCursorY - outerOriginY - LAYOUT.beatGap + LAYOUT.sectionPadding;
+    const outer = createSectionNode(introSection, outerOriginX, outerOriginY, outerWidth, outerHeight);
+    createdNodes.push(outer);
+    briefingBottom = outerOriginY + outerHeight;
+  }
+
+  /* === Bottom zone: all other sections placed below the briefing ===
+
+     Per Design item #2 (partial), Character Creation no longer sits inline
+     beside the narrative — it moves to its own zone below. System and any
+     placeholder sections (Act 1 concept) join it in a left-to-right row. */
+  let bottomCursorX = LAYOUT.sectionPadding;
+  const bottomY = briefingBottom + LAYOUT.zoneGap;
 
   for (const section of graph.sections) {
-    const passagesInSection = graph.passages.filter((passage) => sectionIdForPassage(passage) === section.id);
+    if (section.id === "act-intro") continue;
 
-    if (passagesInSection.length === 0) {
-      /* Empty placeholder (e.g. the Act 1 concept section). Draw an empty
-         section at a default size so users have a target for new stickies. */
-      const sectionNode = createSectionNode(section, sectionCursorX, 0, LAYOUT.emptySectionWidth, LAYOUT.emptySectionHeight);
-      createdNodes.push(sectionNode);
-      sectionCursorX += LAYOUT.emptySectionWidth + LAYOUT.sectionGap;
+    const sectionPassages = graph.passages.filter((p) => sectionIdForPassage(p) === section.id);
+
+    if (sectionPassages.length === 0) {
+      const node = createSectionNode(section, bottomCursorX, bottomY, LAYOUT.emptySectionWidth, LAYOUT.emptySectionHeight);
+      createdNodes.push(node);
+      bottomCursorX += LAYOUT.emptySectionWidth + LAYOUT.sectionGap;
       continue;
     }
 
-    const layerByPassage = bfsLayers(passagesInSection, graph.edges);
-    const layers = groupByLayer(passagesInSection, layerByPassage);
-    /* Compact runs of single-passage layers into shared rows (up to
-       maxChainLength). Branching layers (>1 passage) flush the chain and get
-       their own row. This trims vertical sprawl for long linear stretches
-       (CC's tab chain becomes one wide row; INTRO-100..115 likewise) while
-       leaving real branches visually grouped. */
-    const rows = groupLayersIntoRows(layers, LAYOUT.maxChainLength);
+    const innerStickyOriginX = bottomCursorX + LAYOUT.sectionPadding;
+    const innerStickyOriginY = bottomY + LAYOUT.sectionPadding;
+    const result = await layoutPassagesInBox(sectionPassages, graph.edges, innerStickyOriginX, innerStickyOriginY);
 
-    let rowCursorY = LAYOUT.sectionPadding;
-    let sectionMaxRight = sectionCursorX;
+    for (const [name, sticky] of result.stickyByPassage) stickyByPassage.set(name, sticky);
+    createdNodes.push(...result.createdNodes);
 
-    for (const passagesInRow of rows) {
-      let rowHeight = 0;
-      const rowStartX = sectionCursorX + LAYOUT.sectionPadding;
+    const sectionWidth = result.width + LAYOUT.sectionPadding * 2;
+    const sectionHeight = result.height + LAYOUT.sectionPadding * 2;
+    const node = createSectionNode(section, bottomCursorX, bottomY, sectionWidth, sectionHeight);
+    createdNodes.push(node);
 
-      for (let index = 0; index < passagesInRow.length; index += 1) {
-        const passage = passagesInRow[index];
-        const x = rowStartX + index * (LAYOUT.stickyWidth + LAYOUT.columnGap);
-        const titleY = rowCursorY;
-
-        const titleSticky = await createPassageSticky(passage, "title", x, titleY);
-        const bodyY = titleY + titleSticky.height + LAYOUT.pairGap;
-        const bodySticky = await createPassageSticky(passage, "body", x, bodyY);
-
-        const pairHeight = titleSticky.height + LAYOUT.pairGap + bodySticky.height;
-        if (pairHeight > rowHeight) rowHeight = pairHeight;
-
-        titleByPassage.set(passage.name, titleSticky);
-        createdNodes.push(titleSticky, bodySticky);
-        sectionMaxRight = Math.max(sectionMaxRight, x + LAYOUT.stickyWidth);
-      }
-
-      rowCursorY += rowHeight + LAYOUT.layerGap;
-    }
-
-    const sectionWidth = Math.max(sectionMaxRight - sectionCursorX + LAYOUT.sectionPadding, LAYOUT.stickyWidth + LAYOUT.sectionPadding * 2);
-    const sectionHeight = rowCursorY - LAYOUT.layerGap + LAYOUT.sectionPadding;
-    const sectionNode = createSectionNode(section, sectionCursorX, 0, sectionWidth, sectionHeight);
-    createdNodes.push(sectionNode);
-
-    sectionCursorX += sectionWidth + LAYOUT.sectionGap;
+    bottomCursorX += sectionWidth + LAYOUT.sectionGap;
   }
 
-  /* Inter-passage link connectors — drawn after all stickies exist so both
-     endpoints resolve. Cross-section connectors are fine.
-
-     Widget-back edges are skipped entirely: they're tab-strip "Back" links,
-     not story content, and they double up visually with the next-direction
-     edges. Widget-next edges still render so chain order is visible but
-     unlabeled (the "Continue" label is boilerplate). */
+  /* === Connectors with classification (Design item #4) === */
   for (const edge of graph.edges) {
     if (edge.linkType === "widget-back") continue;
 
-    const source = titleByPassage.get(edge.from);
-    const target = titleByPassage.get(edge.to);
+    const source = stickyByPassage.get(edge.from);
+    const target = stickyByPassage.get(edge.to);
     if (!source || !target) continue;
+
+    const wikiCount = outgoingWikiCount.get(edge.from) ?? 0;
+    const toBranch = isBranchPassage(edge.to);
+    const fromBranch = isBranchPassage(edge.from);
+    const style = classifyEdge(edge, wikiCount, toBranch, fromBranch);
 
     const connector = figma.createConnector();
     connector.connectorStart = { endpointNodeId: source.id, magnet: "AUTO" };
     connector.connectorEnd = { endpointNodeId: target.id, magnet: "AUTO" };
     connector.connectorLineType = "ELBOWED";
-    connector.strokeWeight = 1.5;
+    connector.strokes = [{ type: "SOLID", color: style.color }];
+    if (style.dashPattern.length > 0) {
+      connector.dashPattern = style.dashPattern;
+    }
+    connector.strokeWeight = style.weight;
     connector.setPluginData("kind", "link");
     connector.setPluginData("linkType", edge.linkType);
+    connector.setPluginData("styleKind", style.kind);
     connector.setPluginData("from", edge.from);
     connector.setPluginData("to", edge.to);
     connector.setPluginData("namespace", PLUGIN_NAMESPACE);
 
-    const isWidgetEdge = edge.linkType.indexOf("widget-") === 0;
-    if (!isWidgetEdge && edge.linkText) {
+    if (style.showLabel && edge.linkText) {
       connector.text.characters = truncate(edge.linkText, 50);
       connector.textBackground.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
     }
@@ -209,6 +278,56 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
   }
 
   figma.viewport.scrollAndZoomIntoView(createdNodes);
+}
+
+/* Lay out a slice of passages inside an arbitrary box. Returns the occupied
+   width/height so callers can size their containing section. Layout flow:
+   BFS layering -> row grouping (with chain compaction) -> top-to-bottom rows
+   of stickies whose height is measured after creation so long bodies don't
+   collide with the next row. */
+async function layoutPassagesInBox(
+  passages: StoryGraphPassage[],
+  edges: StoryGraphEdge[],
+  originX: number,
+  originY: number,
+): Promise<LayoutResult> {
+  const stickyByPassage = new Map<string, StickyNode>();
+  const createdNodes: SceneNode[] = [];
+
+  if (passages.length === 0) {
+    return { width: LAYOUT.stickyWidth, height: 0, stickyByPassage, createdNodes };
+  }
+
+  const layerByPassage = bfsLayers(passages, edges);
+  const layers = groupByLayer(passages, layerByPassage);
+  const rows = groupLayersIntoRows(layers, LAYOUT.maxChainLength);
+
+  let rowCursorY = originY;
+  let maxRight = originX;
+
+  for (const passagesInRow of rows) {
+    let rowHeight = 0;
+
+    for (let index = 0; index < passagesInRow.length; index += 1) {
+      const passage = passagesInRow[index];
+      const x = originX + index * (LAYOUT.stickyWidth + LAYOUT.columnGap);
+      const sticky = await createSceneSticky(passage, x, rowCursorY);
+
+      if (sticky.height > rowHeight) rowHeight = sticky.height;
+      stickyByPassage.set(passage.name, sticky);
+      createdNodes.push(sticky);
+      maxRight = Math.max(maxRight, x + LAYOUT.stickyWidth);
+    }
+
+    rowCursorY += rowHeight + LAYOUT.layerGap;
+  }
+
+  return {
+    width: maxRight - originX,
+    height: rowCursorY - originY - LAYOUT.layerGap,
+    stickyByPassage,
+    createdNodes,
+  };
 }
 
 function createSectionNode(section: StoryGraphSection, x: number, y: number, width: number, height: number): SectionNode {
@@ -347,43 +466,138 @@ function groupByLayer(
     .map((layer) => byLayer.get(layer)!);
 }
 
-async function createPassageSticky(
+/* Single sticky per scene per Design item #1. The first line carries the
+   passage name plus chips for time-of-day and branch status (Design #3, #5);
+   subsequent lines are the cleaned prose body. The FigJam author footer is
+   suppressed via authorVisible=false (Design #3). Round-trip identity travels
+   on the sticky's pluginData. */
+async function createSceneSticky(
   passage: StoryGraphPassage,
-  kind: "title" | "body",
   x: number,
   y: number,
 ): Promise<StickyNode> {
   const sticky = figma.createSticky();
+  sticky.isWideWidth = true;
   sticky.x = x;
   sticky.y = y;
+  sticky.authorVisible = false;
 
-  /* Both stickies use the wide width so titles don't wrap on long passage
-     names and pairs share a single column width. */
-  sticky.isWideWidth = true;
+  const branch = isBranchPassage(passage.name);
+  const fillKey = branch ? "tan" : colorForPrefix(passage.prefix);
+  const fill = STICKY_COLORS[fillKey] ?? STICKY_COLORS.light_gray;
+  sticky.fills = [{ type: "SOLID", color: fill }];
+  sticky.text.characters = buildStickyText(passage, branch);
 
-  if (kind === "title") {
-    const fill = STICKY_COLORS[colorForPrefix(passage.prefix)] ?? STICKY_COLORS.light_gray;
-    sticky.fills = [{ type: "SOLID", color: fill }];
-    const tagSuffix = passage.tags.length ? `\n[${passage.tags.join(" ")}]` : "";
-    sticky.text.characters = `${passage.name}${tagSuffix}\n\n${passage.summary}`;
-  } else {
-    sticky.fills = [{ type: "SOLID", color: BODY_COLOR }];
-    sticky.text.characters = passage.displayBody || passage.summary;
-  }
-
-  sticky.setPluginData("kind", kind);
+  sticky.setPluginData("kind", "scene");
   sticky.setPluginData("passageName", passage.name);
   sticky.setPluginData("prefix", passage.prefix);
   sticky.setPluginData("act", passage.act);
   sticky.setPluginData("sourceFile", passage.sourceFile);
   sticky.setPluginData("tags", JSON.stringify(passage.tags));
+  sticky.setPluginData("rawBody", passage.body);
   sticky.setPluginData("namespace", PLUGIN_NAMESPACE);
-  /* Source of truth for round-trip: raw Twee body stored only on body stickies. */
-  if (kind === "body") {
-    sticky.setPluginData("rawBody", passage.body);
-  }
+  if (branch) sticky.setPluginData("branch", "true");
 
   return sticky;
+}
+
+function buildStickyText(passage: StoryGraphPassage, branch: boolean): string {
+  const chips: string[] = [];
+  if (passage.tags.indexOf("daytime") !== -1) chips.push("DAY");
+  if (passage.tags.indexOf("nighttime") !== -1) chips.push("NIGHT");
+  if (branch) chips.push("BRANCH");
+
+  const titleLine = chips.length > 0 ? `${passage.name}  ·  ${chips.join("  ·  ")}` : passage.name;
+  const body = passage.displayBody || passage.summary || "";
+  return `${titleLine}\n\n${body}`;
+}
+
+/* Branch passages follow the convention <PREFIX>-<NUMBER><lowercase>, e.g.
+   INTRO-200a, INTRO-200b. They get a tan tint and a BRANCH chip per Design
+   item #5. */
+function isBranchPassage(name: string): boolean {
+  return /-\d+[a-z]+($|\s)/.test(name);
+}
+
+/* Beat mapping for the Prologue · Briefing section per Design item #6.
+   Boundaries chosen by passage number ranges that match the narrative arc:
+   100s = arrival/setup, 200-499 = the actual briefing dialogue, 500+ =
+   player questions / departure. */
+function beatForIntroPassage(name: string): { id: string; label: string; order: number } | null {
+  const match = name.match(/^INTRO-(\d+)/);
+  if (!match) return null;
+  const n = parseInt(match[1], 10);
+  if (n < 200) return { id: "beat-1", label: "Beat 1 · Diner setup", order: 0 };
+  if (n < 500) return { id: "beat-2", label: "Beat 2 · The briefing", order: 1 };
+  return { id: "beat-3", label: "Beat 3 · Closing", order: 2 };
+}
+
+/* Inner beat sub-section inside the outer Prologue · Briefing wrapper.
+   Slightly warmer / lower-opacity tint than the prefix section so the
+   nesting is visible without competing with the outer section's color. */
+function createBeatSection(label: string, x: number, y: number, width: number, height: number): SectionNode {
+  const node = figma.createSection();
+  node.name = label;
+  node.x = x;
+  node.y = y;
+  node.resizeWithoutConstraints(width, height);
+  node.fills = [{ type: "SOLID", color: { r: 0.95, g: 0.93, b: 0.88 }, opacity: 0.35 }];
+  node.setPluginData("kind", "beat-section");
+  node.setPluginData("namespace", PLUGIN_NAMESPACE);
+  return node;
+}
+
+interface EdgeStyle {
+  kind: "next" | "choice" | "branch" | "widget";
+  color: RGB;
+  dashPattern: number[];
+  weight: number;
+  showLabel: boolean;
+}
+
+/* Connector classification per Design item #4. Precedence: widget < next <
+   branch < choice. Branch edges trump choice so that the "branch" visual
+   wins on a fork into a labelled side passage (INTRO-200 -> INTRO-200a). */
+function classifyEdge(
+  edge: StoryGraphEdge,
+  outgoingWikiCount: number,
+  toIsBranch: boolean,
+  fromIsBranch: boolean,
+): EdgeStyle {
+  if (edge.linkType.indexOf("widget-") === 0) {
+    return {
+      kind: "widget",
+      color: CONNECTOR_COLORS.widget,
+      dashPattern: [3, 6],
+      weight: 1,
+      showLabel: false,
+    };
+  }
+  if (toIsBranch || fromIsBranch) {
+    return {
+      kind: "branch",
+      color: CONNECTOR_COLORS.branch,
+      dashPattern: [6, 6],
+      weight: 1.5,
+      showLabel: true,
+    };
+  }
+  if (outgoingWikiCount > 1) {
+    return {
+      kind: "choice",
+      color: CONNECTOR_COLORS.choice,
+      dashPattern: [8, 6],
+      weight: 1.5,
+      showLabel: true,
+    };
+  }
+  return {
+    kind: "next",
+    color: CONNECTOR_COLORS.next,
+    dashPattern: [],
+    weight: 1.75,
+    showLabel: true,
+  };
 }
 
 function sectionIdForPassage(passage: StoryGraphPassage): string {
