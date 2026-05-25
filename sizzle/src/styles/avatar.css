@@ -150,22 +150,18 @@
 }
 
 .avatar-abs::after {
-  content: "avatar layers\A· base · hair · eyes\A· top · bottom\A· accessory";
-  white-space: pre-wrap;
-  text-align: center;
+  /* Temporary placeholder: a single composited avatar render lives at
+     media/avatar/placeholder-suit.png. Once the layer arrays
+     ($avatar.body, $avatar.hair, etc.) are populated by the avatar
+     pipeline this rule should be removed so real layers show through. */
+  content: "";
   position: absolute;
   inset: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    repeating-linear-gradient(135deg, rgba(184,148,94,0.08) 0 6px, transparent 6px 14px);
+  background-image: url("media/avatar/placeholder-suit.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   border: 1px dashed var(--sz-brass-dim);
-  color: var(--sz-brass-dim);
-  font-family: var(--sz-f-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  padding: 8px;
   pointer-events: none;
 }
 
