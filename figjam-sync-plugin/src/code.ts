@@ -241,7 +241,17 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     bottomCursorX += sectionWidth + LAYOUT.sectionGap;
   }
 
-  /* === Connectors with classification (Design item #4) === */
+  /* === Connectors with classification (Design item #4) ===
+
+     Magnets are picked from the source-vs-target spatial relationship so
+     elbowed lines route OUT of the row through the column gap (RIGHT->LEFT
+     for same-row forward, BOTTOM->TOP for downward, etc.) instead of the
+     AUTO heuristic which often elbowed back through the next sticky.
+
+     Labels on chain-adjacent connectors (source and target in the same row,
+     in adjacent columns) are skipped: the visual proximity already implies
+     the link, and the wiki display text was sitting on top of the next
+     sticky's body. Labels on cross-row / cross-section connectors stay. */
   for (const edge of graph.edges) {
     if (edge.linkType === "widget-back") continue;
 
@@ -253,10 +263,12 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     const toBranch = isBranchPassage(edge.to);
     const fromBranch = isBranchPassage(edge.from);
     const style = classifyEdge(edge, wikiCount, toBranch, fromBranch);
+    const magnets = magnetsForRelativePosition(source, target);
+    const chainAdjacent = isChainAdjacent(source, target);
 
     const connector = figma.createConnector();
-    connector.connectorStart = { endpointNodeId: source.id, magnet: "AUTO" };
-    connector.connectorEnd = { endpointNodeId: target.id, magnet: "AUTO" };
+    connector.connectorStart = { endpointNodeId: source.id, magnet: magnets.start };
+    connector.connectorEnd = { endpointNodeId: target.id, magnet: magnets.end };
     connector.connectorLineType = "ELBOWED";
     connector.strokes = [{ type: "SOLID", color: style.color }];
     if (style.dashPattern.length > 0) {
@@ -270,8 +282,8 @@ async function loadGraph(graph: StoryGraph): Promise<void> {
     connector.setPluginData("to", edge.to);
     connector.setPluginData("namespace", PLUGIN_NAMESPACE);
 
-    if (style.showLabel && edge.linkText) {
-      connector.text.characters = truncate(edge.linkText, 50);
+    if (style.showLabel && edge.linkText && !chainAdjacent) {
+      connector.text.characters = truncate(edge.linkText, 35);
       connector.textBackground.fills = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
     }
     createdNodes.push(connector);
@@ -630,4 +642,44 @@ function colorForPrefix(prefix: string): string {
 function truncate(value: string, max: number): string {
   if (value.length <= max) return value;
   return `${value.slice(0, max - 1)}…`;
+}
+
+/* Pick connector endpoint magnets based on the spatial relationship of the
+   two stickies. Forces the elbowed line to exit the row through the column
+   gap rather than routing through neighbour stickies. */
+type Magnet = "NONE" | "AUTO" | "TOP" | "LEFT" | "BOTTOM" | "RIGHT" | "CENTER";
+
+function magnetsForRelativePosition(
+  source: StickyNode,
+  target: StickyNode,
+): { start: Magnet; end: Magnet } {
+  const sourceCenterY = source.y + source.height / 2;
+  const targetCenterY = target.y + target.height / 2;
+  const sourceCenterX = source.x + source.width / 2;
+  const targetCenterX = target.x + target.width / 2;
+  const dx = targetCenterX - sourceCenterX;
+  const dy = targetCenterY - sourceCenterY;
+  const sameRow = Math.abs(dy) < Math.min(source.height, target.height) / 2;
+
+  if (sameRow) {
+    return dx >= 0
+      ? { start: "RIGHT", end: "LEFT" }
+      : { start: "LEFT", end: "RIGHT" };
+  }
+  return dy > 0
+    ? { start: "BOTTOM", end: "TOP" }
+    : { start: "TOP", end: "BOTTOM" };
+}
+
+/* Two stickies are "chain adjacent" when they sit in the same row and are
+   close enough horizontally that there's no room for a connector label
+   between them. We skip labels in that case (the visual proximity carries
+   the linear-flow meaning) so the label doesn't end up on the next sticky. */
+function isChainAdjacent(source: StickyNode, target: StickyNode): boolean {
+  const sourceCenterY = source.y + source.height / 2;
+  const targetCenterY = target.y + target.height / 2;
+  const sameRow = Math.abs(targetCenterY - sourceCenterY) < Math.min(source.height, target.height) / 2;
+  if (!sameRow) return false;
+  const horizontalGap = Math.abs((target.x) - (source.x + source.width));
+  return horizontalGap < LAYOUT.columnGap * 1.5;
 }
