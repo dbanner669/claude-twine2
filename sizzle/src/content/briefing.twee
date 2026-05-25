@@ -7,11 +7,11 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since the Trudeau government — the first one.  A place on <<term "Bank Street">> south of Gloucester, no sign worth reading, where the booths are brown vinyl and the light is the colour of weak tea.  Half the clientele are civil servants eating before the buildings open, career government workers worried that the minority Liberal parliament might lose a confidence vote.  Nobody looks at you twice, which is the point.
+The diner smells like coffee that's been on the burner since six and bacon grease that's been in the ventilation since before the <<term "Diefenbunker">> was built.  A place on <<term "Bank Street">> south of Gloucester, no sign worth reading, where the booths are brown vinyl and the light is the colour of weak tea.  Half the clientele are civil servants eating before the buildings open, career government workers worried that the minority Liberal parliament might lose a confidence vote.  Nobody looks at you twice, which is the point.
 
-You're early.  You're always early for Robert.
+You're early.  You're always early for Robert.  Mostly because it pisses him off.  He loves you for it though.
 
-[[You sip your coffee and watch the door.|INTRO-101 Lost in thought]]
+[[Sip your coffee.|INTRO-101 Lost in thought]]
 <</page>>
 
 
@@ -24,7 +24,7 @@ You're early.  You're always early for Robert.
 <<page>>\
 The waitress brings coffee without being asked — you've been here before, enough times that she recognizes the booth but not your name.  Her name is Gladys.  You wrap your hands around the mug and watch the door.
 
-Outside, an <<term "OC Transpo">> bus grinds past on <<term "Bank Street" "Bank">>, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that turns the limestone facades the colour of old honey.
+Outside, an <<term "OC Transpo">> bus grinds past on <<term "Bank Street" "Bank">>, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that makes the limestone go yellow.
 
 <<if $player.background eq "RCMP constable">>You used to drink coffee like this at the detachment — institutional, slightly burnt.  The ritual is the same even if the context has shifted.
 <<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.  The stakes are different.
@@ -45,7 +45,7 @@ Outside, an <<term "OC Transpo">> bus grinds past on <<term "Bank Street" "Bank"
 <<page>>\
 <img src="media/characters/robert-flett-diner-entry.png" alt="Robert Flett entering the diner" class="passage-header-image">
 
-Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the <<term "Globe">> that looks like it's already been read.  It's a ridiculous thing to do half a block from the office you both work at.  You smile that he does it anyway.
+Robert Flett arrives at 8:14, which means he was in the neighbourhood by 7:45 and spent the intervening time making sure he wasn't followed.  You know this because he taught you to do the same thing, and because he's carrying a copy of the <<term "Globe">> that looks like it's already been read.  It's a ridiculous thing to do half a block from the office, but it's //because// you're a known regular here — Robert dropping in once doesn't read as a meet.  You smile that he does the newspaper bit anyway.
 
 He doesn't look like a man who tracks the inexplicable for a living.  He looks like a mid-level bureaucrat — brown skin you've long since placed as <<term "Métis">>, hair going grey at the temples, a jacket that's seen better years.  He grew up in <<term "Shield country">> between the <<term "Sault">> and <<term "Thunder Bay">>.
 
@@ -60,7 +60,7 @@ He doesn't look like a man who tracks the inexplicable for a living.  He looks l
 <</silently>>\
 <<header>>\
 <<page>>\
-Working hands, scarred across the knuckles.  You noticed them the first day you met him, two years ago, and you still don't know the story.
+Working hands, scarred across the knuckles.  You noticed them the first day you met him, two years ago, and you still don't know the story.  Especially since you do know the story of how he was an academic at <<term "Lakehead">> and a star grad student at <<term "U of T">>.  But who knows what he's seen in the dark of the woods.
 
 He slides into the booth across from you, sets the <<term "Globe">> on the table, and signals the waitress with a look that somehow communicates both "coffee" and "not yet" about the food.
 
@@ -112,7 +112,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 <</silently>>\
 <<header>>\
 <<page>>\
-He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Barrie that the <<term "Branch">> pretends is a conservation club.
+He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Carp that the <<term "Branch">> pretends is a conservation club.
 
 This is what it was for.
 
@@ -718,9 +718,21 @@ Plucked out of your life as a <<print $player.background || "civilian">>.  Your 
 <</silently>>\
 <<header>>\
 <<page>>\
-//Placeholder · refusal branch.  Explaining you won't do it.  Robert says okay.  Back to the office.  Boring job.  Game over.//
+"I'm not doing it."
 
-//To be written — this is the exit branch when the player declines the assignment.//
+Robert nods once.  Not surprise, not disappointment — just the acknowledgment of a piece of information.
+
+"Understood."
+
+He folds the paper before you've finished the sentence and slides it back into his jacket.  He drinks the rest of his coffee like it's the only thing the morning was for.
+
+"I'll redirect you to the Vandermeer file when you're back at the office.  Foreign-publication review.  Three months out, minimum."
+
+He stands, leaves a tip that's too generous for the bill, and pays at the till.  At the door he turns.
+
+"You did the right thing telling me now."
+
+He doesn't wait for an answer.
 
 [[Begin again|Start]]
 <</page>>
