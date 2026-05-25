@@ -63,8 +63,8 @@ Format: one block per concern, grouped by source passage, newest at the top of e
 ## INTRO-340 Why me
 
 - **Source:** FigJam board export (2026-05-25, second pass)
-  **Status:** open
-  **Concern:** User design note on the board: *"this sequence, or a version of it, feels important, it should be harder to miss."* INTRO-340 currently sits as one optional branch of INTRO-325 No concerns. Player can reach the end of the briefing without ever asking "Why me specifically?" Consider promoting it to a mandatory beat, gating later passages on having visited it, or surfacing the same information through another channel (e.g. Robert volunteers a version of it during INTRO-410 Rules if the player hasn't asked).
+  **Status:** resolved
+  **Concern:** ~~User design note on the board: "this sequence, or a version of it, feels important, it should be harder to miss." INTRO-340 currently sits as one optional branch of INTRO-325 No concerns.~~ Resolved: INTRO-410 Rules now carries a conditional beat (`<<if not hasVisited("INTRO-340 Why me")>>`) where Robert volunteers a condensed version of the why-me framing — "You haven't asked why you" + the small-talent-pool line + the looking-at-coffee-instead-of-you beat. Player who asked early still gets the full INTRO-340 scene; player who skipped past it hears the essential content in Robert's own voice before the briefing closes.
 
 ## Cross-passage notes
 

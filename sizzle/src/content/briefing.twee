@@ -399,6 +399,16 @@ He folds his hands on the table.
 
 "Your job is to be a reliable pair of eyes inside that building."
 
+<<if not hasVisited("INTRO-340 Why me")>>\
+He pauses, then adds — like he's saying it because he should, not because he wants to — "You haven't asked why you."
+
+He doesn't wait for you to answer.
+
+"The assignment requires a credibly attractive woman under thirty who has completed <<term "Branch">> training and can hold a cover.  The talent pool matching those criteria is small.  I want you to have heard that out loud before you walk into that building."
+
+He looks at his coffee instead of at you.
+
+<</if>>\
 <<if not hasVisited("INTRO-300 NYSE details")>>\
 <<link "Tell me more about the NYSE reports.">><<goto "INTRO-500 Question NYSE">><</link>>
 <<else>>\
