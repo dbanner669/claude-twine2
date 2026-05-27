@@ -60,7 +60,7 @@ The active bakeoff phase tests image-edit workflows rather than fresh independen
 Current working setup:
 
 - Local edit derivation: FLUX.2 Klein 4B image edit in ComfyUI.
-- Clothing edit testing: Qwen Image Edit currently looks more promising for garment realism, but still needs strict canvas/alpha/pose validation.
+- Clothing edit testing: Qwen Image Edit 2509 is the leading clothing-fit candidate, especially when fed visual clothing references.
 - Prompting: short natural-language FLUX.2 prompts, no SD/SDXL-style negative prompt lists.
 - Candidate staging: `production-drafts/candidates/v1/`.
 - Body candidates: light, medium, and dark faceless-body layers exist as V1 candidates; greybox uses the medium candidate.
@@ -74,14 +74,15 @@ Recent clothing experiments tested black visual garment masks for a white t-shir
 - The built-in Codex imagegen path is not a production inpaint path. It can make a plausible concept image, but even with a tight guide it may redraw the whole avatar, change scale, and leave extraction residue.
 - The user-provided `mask-test.png` is the best garment guide so far. It is much more coherent than the early Codex masks and should be used as the next reference mask shape.
 - Qwen Image Edit produced the best clothing realism so far, but its first inspected output failed technical acceptance: it used a `576x1536` opaque RGB image, cropped the top of the head, shifted skin/lighting, omitted sneakers, and did not return transparent layers.
+- Qwen Image Edit 2509 is a better candidate. `ComfyUI_00054_.png` fitted a generated Sizzle t-shirt, jeans, and sneakers to the noface body with strong pose preservation. The preferred source is now a `624x1672` padded canvas, so Qwen can output at its native size without later scaling.
 
 Next clothing tests should use:
 
 ```text
-C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png
+C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png
 ```
 
-This image is derived from `baseline-inputs/canonical/alex-noface-blank.png`. After generation, crop the rightmost 53 px back to `523x1536`, restore canonical alpha, and extract only garment pixels.
+This image is derived from `baseline-inputs/canonical/alex-noface-blank.png`. It contains the old `576x1536` padded avatar unchanged at offset `x=24, y=68`. Feed generated clothing reference images into Qwen 2509's optional image inputs, then crop the output back to `576x1536`, crop the rightmost 53 px to `523x1536`, restore canonical alpha, and extract only garment pixels.
 
 ## Avatar Target
 

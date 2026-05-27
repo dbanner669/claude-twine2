@@ -87,12 +87,14 @@ Recent draft folders record the clothing-mask exploration and should not be mist
 - `imagegen-clothing-test/`, `imagegen-clothing-test-v2/`, and `imagegen-clothing-test-v3/` are built-in imagegen concept attempts with increasingly refined visual masks. They demonstrate that this route can suggest clothing, but it does not preserve the source image strongly enough for clean layer extraction.
 - `mask-approval/` contains Codex-generated mask iterations `v4` through `v7`. These are useful process history. The current best guide for the next model test is still the user-supplied `mask-test.png`.
 - `imagegen-clothing-test-user-mask/` is the best built-in imagegen concept attempt because it uses the user mask. It still fails production requirements: the generated figure was rescaled/redrawn and the extracted layers retain residue.
+- `qwen-2509-clothing-test-00054/` records the first strong Qwen Image Edit 2509 clothing-fit test. It includes the original `624x1672` opaque RGB output, a normalized `576x1536` review image, a canonical-width crop, and a report.
+- `qwen-2509-clothing-extract-00055/` contains the first extracted transparent shirt, jeans, and shoe draft layers from a Qwen 2509 clothing-fit output.
 - `comfy-review/` contains review artifacts from Comfy outputs, including skin-tone candidate inspection.
 
 Current clothing test input:
 
 ```text
-C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png
+C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png
 ```
 
-The next accepted clothing candidate must come from a no-crop, no-unmasked-skin-drift edit, then be cropped back to the canonical `523x1536` canvas with alpha restored before extraction.
+The next accepted clothing candidate should use Qwen Image Edit 2509 with standalone garment reference images, then crop back to the canonical `523x1536` canvas with alpha restored before extraction. The Qwen source keeps the old `576x1536` padded avatar unchanged at `x=24, y=68`, so no resize should be needed.

@@ -19,7 +19,7 @@ Current state:
 - Early bakeoff results indicate independently generated text-to-image layers are not consistent enough for production. The current recommended art process is canonical-template editing, controlled local image-edit variants, layer extraction, and crossed composite QA.
 - The explicit avatar asset model is now locked: `background`, `hairBack`, `body`, `nipples`, `genitals`, `bodyMods`, `face`, `eyes`, `underwear`, `clothingBottom`, `clothingTop`, `shoes`, `hairFront`, `expression`, and `overlay`.
 - The first greybox avatar proof is intentionally constrained to medium skin, long straight hair, and blue eyes.
-- Clothing-layer experiments are still draft-only. Qwen Image Edit currently looks more promising than built-in imagegen for garment realism, but no clothing output has passed canvas/alpha/pose QA yet.
+- Clothing-layer experiments are still draft-only. Qwen Image Edit 2509 is now the leading clothing-fit route because it can adapt generated garment reference images to the fixed avatar body, but no clothing output has passed alpha extraction and crossed-composite QA yet.
 - Robert-specific briefing/reference art now exists.
 - Location art remains minimal.
 

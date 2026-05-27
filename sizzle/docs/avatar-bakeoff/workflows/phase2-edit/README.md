@@ -39,6 +39,24 @@ The canonical Sizzle canvas is `523x1536`. That width is not latent-friendly. Th
 
 After a Comfy run, crop the rightmost 53 px to return to the canonical `523x1536` production draft canvas.
 
+## Why 624x1672 For Qwen 2509?
+
+Qwen Image Edit 2509 appears to emit `624x1672` for this workflow. For clothing tests, use:
+
+```text
+sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png
+```
+
+This keeps the `576x1536` padded avatar unchanged and adds transparent padding around it:
+
+```text
+left/right padding: 24 px each
+top/bottom padding: 68 px each
+avatar offset: x=24, y=68
+```
+
+After Qwen generation, crop `x=24, y=68, w=576, h=1536` to recover the old padded canvas. Then crop the rightmost 53 px to return to canonical `523x1536`.
+
 ## Setup
 
 Run from the repo root:
@@ -110,22 +128,35 @@ Use the hair/underwear source for clothing only when intentionally testing occlu
 
 ## Qwen Image Edit Clothing Note
 
-The first inspected Qwen clothing output looked more plausible than the built-in imagegen clothing attempts, but it was not technically acceptable: it cropped the head, changed visible skin/lighting, omitted sneakers, and returned an opaque RGB full render rather than clean transparent layers.
+Qwen Image Edit 2509 is now the leading clothing-fit route. Its useful behavior is not just text-prompted editing: it can take standalone garment reference images and adapt them onto the fixed avatar body.
+
+The earlier Qwen output `ComfyUI_00046_.png` looked more plausible than built-in imagegen but was not technically acceptable: it cropped the head, changed visible skin/lighting, omitted sneakers, and returned an opaque RGB full render rather than clean transparent layers.
+
+The newer Qwen 2509 output `ComfyUI_00054_.png` is much stronger: it fits the referenced Sizzle t-shirt, jeans, and sneakers to the noface body without obvious pose damage. Its output is `624x1672` opaque RGB, so the normalization path is:
+
+```text
+624x1672 Qwen output from the 624x1672 padded source
+-> crop x=24,y=68,w=576,h=1536
+-> crop rightmost 53 px to 523x1536
+-> restore canonical alpha/silhouette from alex-noface-blank.png
+-> extract shirt / jeans / shoes layers
+```
 
 For the next Qwen test:
 
 ```text
-Source: C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png
-Guide mask: C:\Users\Oculus\Documents\ComfyUI\input\mask-test.png
+Source: C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png
+Optional image2/image3: generated clothing reference images
+Fallback guide mask: C:\Users\Oculus\Documents\ComfyUI\input\mask-test.png
 ```
 
 Prompt shape:
 
 ```text
-Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain white fitted t-shirt, dark blue jeans, and simple black sneakers. Do not change any unmasked pixels or redraw the body.
+Put the referenced t-shirt, jeans, and shoes on the figure. Change nothing else about the figure. Keep the placement of the hands and feet pixel-perfect exactly where they are now.
 ```
 
-If the output is `576x1536`, crop the rightmost 53 px before acceptance and restore alpha from `alex-noface-blank.png`.
+Do not accept the output as production merely because it looks aligned. It must still survive alpha restoration, garment extraction, and crossed composites.
 
 ## Prompting
 

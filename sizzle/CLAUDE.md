@@ -42,8 +42,9 @@ sizzle/
 │   ├── WRITING-TODOS.md       Open prose-level revisions (FigJam round-trip output)
 │   ├── AVATAR-RESEARCH.md     Offline image-gen stack research (Codex deliverable)
 │   ├── avatar-bakeoff/        Bakeoff workflows, STATUS, OPTION-2 asset plan, baseline-inputs/ (start at STATUS.md)
-│   ├── WRITING.md             Top-level writing doc pointer
-│   └── ART.md                 Top-level art doc pointer
+│   ├── STYLE-GUIDE.md         Comprehensive writing style guide (voice, mechanics, AI-pitfall watchlist) — source of truth for prose
+│   ├── WRITING.md             Slim index + current writing scope (points at STYLE-GUIDE.md)
+│   └── ART.md                 Slim index + current art scope
 ├── build/           Tweego compilation scripts
 ├── AGENTS.md        Agent handoff guide
 └── CLAUDE.md        This file
@@ -55,7 +56,8 @@ sizzle/
 - **Compiler:** Tweego (located at `_tools/tweego/`)
 - **Template:** Based on `twine-sugarcube-template/` in this repo
 - **MCP Server:** Available at `twine-mcp-server/` for programmatic story manipulation
-- **FigJam round-trip:** `twine-mcp-server/src/figjam-sync/` (local HTTP service on `:4747`) + `figjam-sync-plugin/` (Figma desktop dev plugin). Load the story graph into a FigJam board, edit visually, click Export, then ask Claude to interpret `sizzle/.figjam/board-latest.json` against current Twee.
+- **Story-graph round-trip (primary):** Obsidian Canvas vault at `sizzle/.obsidian-vault/`. Generator script `sizzle/scripts/build-obsidian-canvas.js` writes shadow MD per passage + `story.canvas`; sync-back `sizzle/scripts/build-twee-from-vault.js` (dry-run / `--apply`) writes edits back to `.twee` byte-stably. Obsidian plugin `obsidian-sizzle-plugin/` wraps the scripts and runs a continuous lint pipeline (9 rules: broken refs, unclosed macros, dup passages, orphan passages, undeclared vars, editorial notes + malformed, tag coherence, word count). See `obsidian-sizzle-plugin/README.md` for details.
+- **FigJam round-trip (legacy):** `twine-mcp-server/src/figjam-sync/` (local HTTP service on `:4747`) + `figjam-sync-plugin/` (Figma desktop dev plugin). Replaced by the Obsidian path for routine editing; kept for collaborative whiteboarding.
 
 ## Design System
 
@@ -277,24 +279,27 @@ Skills start at level -4. To display 0-based values (e.g., composure pips), use:
 - **UI design system** — 8 CSS files, 5 font families, complete token system
 
 ### What's placeholder / not yet built
-- **Avatar art/runtime** — `media/avatar/` remains placeholder-only and the runtime image arrays still need the explicit-slot implementation. Current candidate body layers, clothing-mask experiments, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/`; the greybox avatar proof is locked to medium skin, long straight hair, and blue eyes. Clothing tests are still draft-only; Qwen Image Edit is the current promising route if it preserves the noface source crop, pose, alpha, and unmasked skin.
+- **Avatar art/runtime** — `media/avatar/` remains placeholder-only and the runtime image arrays still need the explicit-slot implementation. Current candidate body layers, clothing-mask experiments, Qwen 2509 clothing-fit tests, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/`; the greybox avatar proof is locked to medium skin, long straight hair, and blue eyes. Clothing tests are still draft-only, but Qwen Image Edit 2509 is the current leading route because it can adapt generated garment references to the noface source body.
 - **CC-400 inciting incidents** — placeholder text, no actual options
 - **Hair style swatches** — show dark rectangles (no art yet)
 - **Location/background art** — still sparse; only a small number of location/character images exist so far
 - **NPC roster** — only Robert Flett is profiled
 - **Act 1 content** — INTRO-800 is "End of Prologue" — no gameplay content beyond the briefing
-- **WRITING.md and ART.md** — currently light-weight pointer docs, not full production trackers yet
+- **WRITING.md and ART.md** — intentionally slim index docs that point at the meatier resources (STYLE-GUIDE.md for writing, the bakeoff docs for art). Not aspiring to be full production trackers.
 
 ## Writing Conventions
 
-- **Passage length: 80-120 visible words max.** The player should never have to scroll. One beat per passage — a moment, a reaction, a short dialogue exchange. Break longer scenes into multiple click-through passages. This mirrors the style of Female Agent, where passages are typically 30-80 words. If a passage has conditional variants (background-specific text), count the longest variant, not the total source.
-- **Link text rules:** Link text must always be a complete sentence. No single-word or fragment links embedded in prose. Links can be: (1) player character dialogue (`"What's the risk assessment?"`), (2) narration (`The weight of those words settles over the table.`), or (3) `Continue`. Links must never be dialogue from an NPC — if an NPC is speaking, put their line in the prose and use a narration link or `Continue` to advance.
-- The Branch is never called "supernatural" — they use NYSE ("nigh-see"), "anomalous," "atypical"
-- The Branch has verisimilitude: mundane bureaucracy crossed with CSIS-level secrecy and professionalism
-- Toronto locations should be real and period-accurate to 2005/2006
-- All characters are grounded, fully realized people — no caricatures
-- Writing style: classy thriller fiction, literate, observant, trusts the reader
+**Source of truth: [docs/STYLE-GUIDE.md](docs/STYLE-GUIDE.md).** Read it before writing or revising any prose. The bullets below are quick-reference only — if anything here conflicts with STYLE-GUIDE.md, the style guide wins.
+
+- **Passage length: 80–120 visible words target, 200 hard ceiling.** The player should never have to scroll. One beat per passage. Conditional variants count the longest single render, not the total source.
+- **Link text rules:** Complete sentence, always. Three valid forms: (1) player character dialogue, (2) narration, (3) `Continue`. Never NPC dialogue.
+- The Branch never reaches for "supernatural" / "magic" / "paranormal" — only NYSE ("nigh-see"), "anomalous," "atypical." The dramatic irony is that NYSE is supernatural; the institutional vocabulary refuses to say so.
+- The Branch has verisimilitude: mundane bureaucracy crossed with CSIS-level secrecy and professionalism.
+- Toronto / Ottawa locations: real, period-accurate to 2005/2006. No smartphones, no post-2006 cultural refs.
+- Métis (heritage) and Shield country (geography) are distinct — don't conflate.
+- All characters are grounded, fully realized people — no caricatures.
+- Writing style: literate erotic thriller. Observant, specific, trusts the reader.
 - Erotic content: vivid, physical, written to arouse. Heat is required. Earned heat is hotter.
-- The player character is female, always referred to with she/her pronouns
-- Cover identity is central — NPCs at Sizzle don't know the real player
-- Player character has been at the Branch for two years at game start — trained, not a rookie
+- The player character is female, always referred to with she/her pronouns.
+- Cover identity is central — NPCs at Sizzle don't know the real player.
+- Player character has been at the Branch for two years at game start — trained, not a rookie.

@@ -12,6 +12,11 @@ OUT = ROOT / "docs" / "avatar-bakeoff" / "production-drafts" / "comfy-input"
 
 CANONICAL_SIZE = (523, 1536)
 PADDED_SIZE = (576, 1536)
+QWEN_2509_SIZE = (624, 1672)
+QWEN_2509_OFFSET = (
+    (QWEN_2509_SIZE[0] - PADDED_SIZE[0]) // 2,
+    (QWEN_2509_SIZE[1] - PADDED_SIZE[1]) // 2,
+)
 
 
 def load(name: str) -> Image.Image:
@@ -25,6 +30,13 @@ def pad_right(image: Image.Image, fill=(0, 0, 0, 0)) -> Image.Image:
     padded = Image.new("RGBA", PADDED_SIZE, fill)
     padded.alpha_composite(image, (0, 0))
     return padded
+
+
+def pad_for_qwen_2509(image: Image.Image, fill=(0, 0, 0, 0)) -> Image.Image:
+    padded_576 = pad_right(image, fill)
+    padded_624 = Image.new("RGBA", QWEN_2509_SIZE, fill)
+    padded_624.alpha_composite(padded_576, QWEN_2509_OFFSET)
+    return padded_624
 
 
 def save(image: Image.Image, name: str) -> None:
@@ -88,6 +100,11 @@ def main() -> None:
     }
     for name, image in sources.items():
         save(pad_right(image), name)
+
+    save(
+        pad_for_qwen_2509(noface),
+        "sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png",
+    )
 
     rgba = np.asarray(underwear).astype(np.float32)
     alpha = rgba[..., 3] > 8
@@ -200,7 +217,10 @@ def main() -> None:
     (OUT / "README.txt").write_text(
         "Copy these PNGs into ComfyUI/input before loading the Sizzle Flux2 mask-edit workflow.\n"
         "The canonical 523x1536 images are padded on the right to 576x1536 for FLUX latent compatibility.\n"
-        "After Comfy generation, crop the rightmost 53 px to return to the canonical 523x1536 canvas.\n",
+        "After Comfy generation, crop the rightmost 53 px to return to the canonical 523x1536 canvas.\n"
+        "For Qwen Image Edit 2509 clothing tests, use sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png.\n"
+        "It keeps the 576x1536 padded avatar unchanged at x=24,y=68 inside a 624x1672 canvas.\n"
+        "After Qwen generation, crop x=24,y=68,w=576,h=1536, then crop the rightmost 53 px for canonical 523x1536.\n",
         encoding="utf-8",
     )
 

@@ -1,0 +1,73 @@
+{
+  "method": "Qwen 2509 crop-only extraction. Fourth pass uses low-saturation tight logo ROI to preserve cream shirt logo without sleeve skin fragments.",
+  "source_output": "C:\\Users\\Oculus\\Downloads\\ComfyUI_00055_.png",
+  "source_size": [
+    624,
+    1672
+  ],
+  "qwen_crop_to_576": [
+    24,
+    68,
+    600,
+    1604
+  ],
+  "canonical_size": [
+    523,
+    1536
+  ],
+  "components": {
+    "shirt": [
+      {
+        "area": 79577,
+        "bbox": [
+          86,
+          265,
+          437,
+          595
+        ]
+      }
+    ],
+    "jeans": [
+      {
+        "area": 152305,
+        "bbox": [
+          97,
+          575,
+          421,
+          1258
+        ]
+      }
+    ],
+    "shoes": [
+      {
+        "area": 11180,
+        "bbox": [
+          329,
+          1345,
+          427,
+          1502
+        ]
+      },
+      {
+        "area": 11069,
+        "bbox": [
+          73,
+          1340,
+          165,
+          1501
+        ]
+      }
+    ]
+  },
+  "layers": {
+    "shirt": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-extract-00055\\layers\\tops\\60_black-sizzle-tshirt-qwen2509-00055.png",
+    "jeans": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-extract-00055\\layers\\bottoms\\55_blue-jeans-qwen2509-00055.png",
+    "shoes": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-extract-00055\\layers\\shoes\\65_white-sneakers-qwen2509-00055.png",
+    "combined": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-extract-00055\\layers\\combined\\outfit-qwen2509-00055.png"
+  },
+  "notes": [
+    "Draft extraction only; not promoted to media/avatar.",
+    "Shirt/jeans/shoes are separated into transparent 523x1536 layers.",
+    "White shoes on white background remain the weakest extraction case and should be reviewed over dark UI/checker."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "sizzle-tools",
+  "name": "Sizzle Tools",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Twee ↔ Obsidian round-trip for the Sizzle story project. Rebuild the canvas from .twee source, sync passage edits back to .twee.",
+  "author": "Sizzle dev",
+  "isDesktopOnly": true
+}

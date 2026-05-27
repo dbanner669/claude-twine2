@@ -86,12 +86,18 @@ same locked avatar canvas and lower body position, isolated transparent PNG clot
 same locked avatar canvas and foot position, isolated transparent PNG shoe sprite only, practical sneakers, soles aligned to canonical foot position, no legs or skin baked into the shoe layer, plain matte grey background for segmentation
 ```
 
-## Qwen Clothing Edit Test
+## Qwen 2509 Reference Clothing Fit
 
-Use this for the current Comfy/Qwen shirt, jeans, and sneakers pass with `sizzle_alex_noface_blank_padded_576x1536.png` and the user mask guide.
+Use this for Qwen Image Edit 2509 with `sizzle_alex_noface_blank_padded_576x1536.png` as the avatar source and standalone clothing reference images connected as optional image inputs.
 
 ```text
-Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain white fitted t-shirt, dark blue jeans, and simple black sneakers. Do not change any unmasked pixels or redraw the body.
+Put the referenced t-shirt, jeans, and shoes on the figure. Change nothing else about the figure. Keep the placement of the hands and feet pixel-perfect exactly where they are now.
+```
+
+Longer fallback if the model starts changing the body:
+
+```text
+Put the referenced t-shirt, jeans, and shoes on the figure. Preserve the exact same body pose, blank face, head position, shoulder position, hands, fingers, feet, body silhouette, camera, and lighting. Change only the clothing. Do not redraw the body.
 ```
 
 ## Layer Neutral Underwear

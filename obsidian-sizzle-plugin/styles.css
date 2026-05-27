@@ -1,0 +1,156 @@
+/* -------------------------------------------------------------------------
+ * Sizzle Tools — Obsidian plugin styles
+ * ------------------------------------------------------------------------- */
+
+/* ---- Lint pane ---- */
+
+.sizzle-lint-pane {
+  padding: 8px 10px 16px;
+  font-size: var(--font-ui-small);
+  color: var(--text-normal);
+}
+
+.sizzle-lint-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.sizzle-lint-counts {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sizzle-lint-count.sev-error { color: var(--text-error); font-weight: 600; }
+.sizzle-lint-count.sev-warning { color: var(--text-warning); font-weight: 600; }
+.sizzle-lint-count.sev-note { color: var(--text-accent); font-weight: 600; }
+
+.sizzle-lint-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.sizzle-lint-sev-toggle {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+}
+.sizzle-lint-sev-toggle[data-active="true"] {
+  background: var(--background-primary-alt);
+  color: var(--text-normal);
+  border-color: var(--background-modifier-border-hover);
+}
+.sizzle-lint-sev-toggle[data-active="false"] {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.sizzle-lint-search input {
+  font-size: 11px;
+  padding: 3px 8px;
+  width: 140px;
+  border-radius: 10px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-normal);
+}
+
+.sizzle-lint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sizzle-lint-empty {
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 24px 8px;
+  text-align: center;
+}
+
+.sizzle-lint-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sizzle-lint-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  padding: 2px 4px;
+}
+.sizzle-lint-group-name { font-weight: 600; }
+.sizzle-lint-group-count {
+  background: var(--background-modifier-border);
+  color: var(--text-muted);
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+}
+
+.sizzle-lint-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+.sizzle-lint-row:hover { background: var(--background-modifier-hover); }
+.sizzle-lint-row.sev-error { border-left-color: var(--text-error); }
+.sizzle-lint-row.sev-warning { border-left-color: var(--text-warning); }
+.sizzle-lint-row.sev-note { border-left-color: var(--text-accent); }
+
+.sizzle-lint-dot {
+  font-size: 12px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.sizzle-lint-row.sev-error .sizzle-lint-dot { color: var(--text-error); }
+.sizzle-lint-row.sev-warning .sizzle-lint-dot { color: var(--text-warning); }
+.sizzle-lint-row.sev-note .sizzle-lint-dot { color: var(--text-accent); }
+
+.sizzle-lint-row-main { flex: 1; min-width: 0; }
+
+.sizzle-lint-message {
+  font-size: 12px;
+  color: var(--text-normal);
+  word-break: break-word;
+}
+
+.sizzle-lint-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 1px;
+}
+
+/* ---- Status bar ---- */
+
+.sizzle-statusbar-counts {
+  display: inline-flex;
+  gap: 8px;
+  cursor: pointer;
+}
+.sizzle-statusbar-counts:hover { color: var(--text-normal); }
+
+.sizzle-statusbar-counts .sev-error { color: var(--text-error); }
+.sizzle-statusbar-counts .sev-warning { color: var(--text-warning); }
+.sizzle-statusbar-counts .sev-note { color: var(--text-accent); }

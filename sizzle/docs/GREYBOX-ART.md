@@ -82,7 +82,7 @@ All accepted avatar draft layers must share the canonical `523x1536` transparent
   - Bottom (e.g., slacks or dark jeans)
   - Shoes
   - **Total: 3 clothing sprites**
-  - Current clothing tests are draft-only. Built-in imagegen with visual masks is useful for concept exploration but not production extraction; Qwen Image Edit is the next promising route if it preserves the noface source crop, pose, alpha, and unmasked skin.
+  - Current clothing tests are draft-only. Built-in imagegen with visual masks is useful for concept exploration but not production extraction; Qwen Image Edit 2509 is now the leading route because it can fit generated clothing reference images onto the noface source, pending alpha extraction and crossed-composite QA.
 
 ### Background
 - [ ] **Briefing location background** — diner on Bank Street, Ottawa (Centretown). Brown vinyl booths, weak light, civil-servant crowd. One background image.

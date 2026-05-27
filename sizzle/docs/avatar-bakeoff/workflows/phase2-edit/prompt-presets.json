@@ -44,9 +44,13 @@
     },
     {
       "name": "outfit-white-tshirt-dark-jeans-sneakers",
-      "source": "sizzle_alex_noface_blank_padded_576x1536.png",
-      "mask": "mask-test.png",
-      "positive": "Edit only the black clothing guide regions. Preserve the exact same canvas, crop, scale, front-facing pose, body silhouette, blank face, visible skin, hands, feet, lighting, and background. Add a plain white fitted t-shirt, dark blue jeans, and simple black sneakers. Do not change any unmasked pixels or redraw the body.",
+      "source": "sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png",
+      "mask": "",
+      "reference_images": [
+        "generated-sizzle-tshirt-reference.png",
+        "generated-jeans-shoes-reference.png"
+      ],
+      "positive": "Put the referenced t-shirt, jeans, and shoes on the figure. Change nothing else about the figure. Keep the placement of the hands and feet pixel-perfect exactly where they are now.",
       "filename_prefix": "sizzle-avatar-bakeoff/phase2-edit/qwen/outfit-white-tshirt-dark-jeans-sneakers"
     },
     {

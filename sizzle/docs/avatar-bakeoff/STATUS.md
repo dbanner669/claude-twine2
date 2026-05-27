@@ -24,13 +24,15 @@ This means the bakeoff is now primarily about **pixel-stable editable layers**, 
 
 ## Latest Clothing Edit Finding
 
-The clothing workflow is still not production-ready, but the latest tests clarified the path:
+The clothing workflow has a new leading path:
 
 - Built-in Codex image generation can create useful clothing concept tests, but it does not act like a hard masked inpaint workflow. Even with a good visual mask, it tends to redraw, rescale, or relight the whole avatar. Treat these outputs as concept evidence only, not extractable production layers.
 - Mask quality is decisive. The early Codex clothing masks failed for basic garment geometry. The best mask shape so far is the user-provided `C:\Users\Oculus\Downloads\mask-test.png`, which uses coherent black garment regions for shirt, jeans, and shoes on the same avatar canvas.
 - Qwen Image Edit is currently the most promising clothing-edit direction. The test output `C:\Users\Oculus\Downloads\ComfyUI_00046_.png` produced a plausible white t-shirt and dark jeans, but it failed production gates because it was RGB/opaque `576x1536`, cropped the head at the top, changed skin/lighting, omitted sneakers, and did not preserve canonical alpha.
-- For the next clothing test, use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png` as the source image. It is derived from `baseline-inputs/canonical/alex-noface-blank.png`. If the model requires the user mask, copy/use `C:\Users\Oculus\Documents\ComfyUI\input\mask-test.png` as the visual guide.
-- Accepted clothing outputs must be cropped from padded `576x1536` back to `523x1536` by removing the rightmost 53 px, then restored to the canonical alpha/silhouette before layer extraction.
+- Qwen Image Edit 2509 is now the preferred clothing-fitting candidate. The test output `C:\Users\Oculus\Downloads\ComfyUI_00054_.png` fitted a generated Sizzle t-shirt, jeans, and sneakers onto the noface body without obvious pose damage.
+- The key production advantage of Qwen 2509 is visual clothing references: generate a standalone clothing photo/reference first, feed it as the optional image input, and let Qwen fit it to the avatar.
+- For the next clothing test, use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png` as the source image. It keeps the existing `576x1536` padded avatar unchanged at offset `x=24, y=68` inside Qwen's `624x1672` canvas.
+- Accepted clothing outputs from Qwen 2509 should be cropped, not scaled: crop `x=24, y=68, w=576, h=1536`, then crop the rightmost 53 px to return to the canonical `523x1536` canvas and restore canonical alpha/silhouette before layer extraction.
 
 ## Files Added By This Work
 
@@ -67,6 +69,7 @@ Reference inputs:
 - `production-drafts/imagegen-clothing-test*/` - built-in imagegen clothing-mask experiments; useful for process evidence only.
 - `production-drafts/mask-approval/` - Codex clothing mask iterations; superseded for the next test by the user-supplied mask.
 - `production-drafts/imagegen-clothing-test-user-mask/` - best built-in imagegen clothing concept test using the user mask; still not production-safe because the generator redrew/rescaled the figure.
+- `production-drafts/qwen-2509-clothing-test-00054/` - first promising Qwen Image Edit 2509 clothing-fit review; includes original `624x1672` output and normalized `576x1536`/`523x1536` review files.
 
 ## Current Reference Inputs
 
@@ -113,6 +116,6 @@ For the greybox proof, appearance is locked to one coherent avatar: medium skin,
 - Decide when Option 2 runtime changes should be implemented for the locked explicit layer stack.
 - Continue deriving Comfy inputs and control images from `baseline-inputs/canonical/`, not the older full-frame inputs.
 - Continue V1 greybox production from the faceless medium body, long straight hair, and blue eyes.
-- Continue clothing tests with Qwen Image Edit or another local edit model using the noface padded input and the user mask as guide; reject outputs that crop the head/feet, alter unmasked skin, or fail to produce all requested garments.
+- Continue clothing tests with Qwen Image Edit 2509 using the `624x1672` noface Qwen canvas plus generated clothing reference images; reject outputs that crop the head/feet, alter unmasked skin, fail to produce all requested garments, or cannot survive the `624x1672 -> crop 576x1536 -> crop 523x1536` path.
 - Capture exact local model filenames, hashes, trigger words, and licenses before any scored run.
 - Run crossed composites from `layer-composition-protocol.md` before accepting any asset family.

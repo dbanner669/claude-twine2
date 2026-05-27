@@ -39,5 +39,8 @@ sizzle-daytime-header-check.png
 # FigJam sync board dumps (regenerated on demand)
 sizzle/.figjam/
 
+# Obsidian Canvas prototype vault (regenerated on demand; .obsidian/ is per-user)
+sizzle/.obsidian-vault/
+
 # Claude Design pass — transient unpacked zip, reference only
 .design-pass-figjam/

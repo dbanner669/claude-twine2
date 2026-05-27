@@ -1,0 +1,25 @@
+{
+  "method": "Qwen Image Edit 2509 clothing fit test using noface padded source plus visual clothing reference inputs",
+  "source_output": "C:\\Users\\Oculus\\Downloads\\ComfyUI_00054_.png",
+  "source_size": [
+    624,
+    1672
+  ],
+  "source_pixel_format": "Format24bppRgb",
+  "normalized_size": [
+    576,
+    1536
+  ],
+  "canonical_crop_size": [
+    523,
+    1536
+  ],
+  "scale_x": 0.9230769230769231,
+  "scale_y": 0.9186602870813397,
+  "scale_note": "Non-uniform resize from 624x1672 to 576x1536 appears visually aligned per user inspection; must be QA checked against canonical body and alpha before acceptance.",
+  "processed": {
+    "scaled_576x1536": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-test-00054\\processed\\qwen2509-outfit-scaled-576x1536.png",
+    "canonical_crop_523x1536": "C:\\Users\\Oculus\\My Drive\\Female Agent\\sizzle\\docs\\avatar-bakeoff\\production-drafts\\qwen-2509-clothing-test-00054\\processed\\qwen2509-outfit-canonical-crop-523x1536.png"
+  },
+  "verdict": "Promising clothing-fitting workflow; not yet accepted as transparent layers because output is opaque RGB and needs alpha restoration/extraction QA."
+}

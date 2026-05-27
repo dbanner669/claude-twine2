@@ -153,10 +153,11 @@ Current body production approach:
 Current clothing production approach:
 
 - Start from the noface blank body when testing clothing shape unless a specific hair/underwear occlusion test is intended.
-- For ComfyUI, use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png` as the current source image.
-- Use the user-provided `mask-test.png` style as the garment-region guide: black filled shirt, jeans, and shoe regions on the same avatar pose.
+- For Qwen Image Edit 2509, use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png` as the current source image.
+- Prefer Qwen Image Edit 2509 for clothing fitting. Use optional image inputs for generated clothing reference photos/designs, such as a shirt product image plus jeans/shoes product image.
+- Use the user-provided `mask-test.png` style as a fallback garment-region guide only when the workflow needs a rough shirt/jeans/shoe region.
 - Treat built-in Codex image generation as concept-only for clothing. It does not guarantee hard-mask preservation of unmasked pixels.
-- Treat Qwen Image Edit as the current best clothing-model candidate, pending a successful no-crop, no-skin-drift, all-garments run.
+- Treat Qwen Image Edit 2509 as the current best clothing-model candidate, pending successful alpha extraction and crossed composite QA.
 
 ## Phase 2B: Candidate Model Roles
 
@@ -219,10 +220,12 @@ Edit workflow requirement:
 
 Clothing edit source rule:
 
-- Use `sizzle_alex_noface_blank_padded_576x1536.png` for the next shirt/jeans/shoes tests.
+- Use `sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png` for the next Qwen 2509 shirt/jeans/shoes tests.
 - Do not use the hair/underwear source for the main clothing test unless the goal is specifically to evaluate hair or underwear occlusion.
-- If the edit model outputs `576x1536`, the rightmost 53 px are padding. Crop them away before QA.
+- If Qwen Image Edit 2509 outputs `624x1672`, crop `x=24, y=68, w=576, h=1536` before QA. Do not resize; the avatar should already be at the intended scale.
+- If the edit model outputs `576x1536`, the rightmost 53 px are padding. Crop them away before final canonical QA.
 - Restore the canonical transparent alpha from `alex-noface-blank.png` before extracting clothing layers.
+- For reference-driven clothing, first generate or collect clean standalone garment reference images, then feed those to Qwen 2509 as optional image inputs. This is now preferred over trying to describe every garment detail only in text.
 
 Recommended initial edit settings:
 
@@ -263,6 +266,12 @@ Run each edit from the same approved master.
 - Add sneakers.
 
 For the shirt/jeans/sneakers test, the model prompt should explicitly say that the pose, canvas, crop, body silhouette, blank face, visible skin, lighting, and unmasked regions must remain unchanged. For FLUX.2, phrase this as positive natural language rather than a negative prompt list.
+
+For Qwen 2509 reference-driven clothing, keep the prompt short and direct:
+
+```text
+Put the referenced t-shirt, jeans, and shoes on the figure. Change nothing else about the figure. Keep the placement of the hands and feet pixel-perfect exactly where they are now.
+```
 
 ### Expression Edits
 
@@ -382,6 +391,7 @@ Hard fail:
 - Clothing edit changes unmasked skin tone, lighting, body proportions, or blank-face state.
 - Clothing output omits a requested garment, such as shoes in a full outfit test.
 - Output is only an opaque RGB full render with no recoverable alpha or clean extraction path.
+- Qwen 2509 output cannot be cropped back to `576x1536` and then `523x1536` without visible drift.
 - Extracted layer only works over the image it was edited from.
 - Style drifts toward full photo realism, anime, or adult-site gloss.
 

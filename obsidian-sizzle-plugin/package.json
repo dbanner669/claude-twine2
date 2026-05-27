@@ -1,0 +1,22 @@
+{
+  "name": "obsidian-sizzle-plugin",
+  "version": "0.1.0",
+  "description": "Obsidian plugin: Twee ↔ Canvas round-trip for the Sizzle story project.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "install-to-vault": "node scripts/install-to-vault.mjs"
+  },
+  "keywords": ["obsidian-plugin", "sizzle", "twine"],
+  "author": "Sizzle dev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20",
+    "builtin-modules": "^4.0.0",
+    "esbuild": "^0.24.0",
+    "obsidian": "latest",
+    "tslib": "^2.6.0",
+    "typescript": "^5"
+  }
+}

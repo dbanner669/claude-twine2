@@ -6,9 +6,11 @@ This file is the fast handoff guide for implementation work. Use it alongside:
 
 - `CLAUDE.md` for the broader project and design-system walkthrough
 - `docs/GDD.md` for game design and narrative intent
+- `docs/STYLE-GUIDE.md` for the comprehensive writing style guide — read this before writing or revising any prose
 - `docs/NPC-handler.md` for Robert Flett's full profile
 - `docs/STORY-TAGS.md` for player-carried narrative flags
-- `docs/WRITING-TODOS.md` for open prose-level revisions captured from FigJam round-trip passes
+- `docs/WRITING.md` for the slim writing index + current writing scope
+- `docs/WRITING-TODOS.md` for open prose-level revisions captured from round-trip passes
 - `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows. Start at `docs/avatar-bakeoff/STATUS.md` — it tracks the current pipeline conclusion (direct text-to-image isn't stable enough; pivoted to canonical-template + image-edit). `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` is the current production asset checklist for the locked explicit layer model.
 
 ## Current Scope
@@ -100,16 +102,43 @@ Important: `character-creation` takes precedence over `avatar-hidden`, so creati
 - The fake footer text `AUTOSAVE ON` / `QUICK SAVE F5` has been removed.
 - Footer status is now just the save/timestamp block plus the version block.
 
-### FigJam round-trip workflow
+### Story-graph round-trip workflow (Obsidian Canvas)
 
-The story graph can be loaded into a FigJam board for visual editing and round-tripped back to Twee via Claude interpretation.
+**Primary workflow.** The story graph lives in `sizzle/.obsidian-vault/` as a JSON Canvas file plus one shadow markdown per passage. Edits in Obsidian sync mechanically back to `.twee` source — no AI interpretation step, the round-trip is byte-stable.
 
-- Local sync server lives in `twine-mcp-server/src/figjam-sync/`. Start with `node dist/figjam-sync/index.js` (built) — binds `http://127.0.0.1:4747`. Claude manages this process per the terminal-management memory; don't run it manually.
-- Figma desktop plugin lives in `figjam-sync-plugin/` (dev plugin, import the manifest).
-- **Load story**: plugin fetches `/story-graph.json` and lays out beats, sections, sticky-per-scene, classified connectors, header frame with legend, Act 1 TODO.
-- **Export board**: plugin walks nodes, POSTs to `/board.json`. Lands at `sizzle/.figjam/board-latest.json` (gitignored). Then say "interpret the latest board export" and Claude diffs against current Twee and proposes patches.
-- Sticky text uses arrow markers (`→ "Morning."`) for wiki-link choices so player choices are visually distinct.
-- Convention: stickies the plugin created carry `setPluginData("namespace") = "sizzle-story-sync"`; user-added stickies/connectors have no plugin data and export as concept items.
+Layout: outer `Act` groups (Title / Character Creation / Prologue · Briefing) contain inner `Beat` groups (auto-derived from prefix + hundreds digit; names live in `beats.json` and are editable), which contain horizontally-arrayed passage File-nodes that wrap to multiple rows for long beats.
+
+Scripts (single source of truth, runnable from CLI):
+- `sizzle/scripts/build-obsidian-canvas.js` — Twee → vault. Idempotent. Preserves manually-moved node positions across regenerations (matched by id).
+- `sizzle/scripts/build-twee-from-vault.js` — vault → Twee. Dry-run by default; pass `--apply` to write. Reports per-file diffs and added/dropped passages.
+
+Obsidian plugin at `obsidian-sizzle-plugin/` wraps the scripts so they run from inside Obsidian (command palette) instead of a terminal. Build + install:
+
+```powershell
+cd obsidian-sizzle-plugin
+npm install
+npm run build
+npm run install-to-vault
+```
+
+Then in Obsidian: Settings → Community plugins → Enable "Sizzle Tools". Open the vault at `sizzle/.obsidian-vault/`.
+
+Plugin also runs a **lint pipeline** continuously on shadow MD edits. Sidebar pane + status-bar counts surface diagnostics. Rules (severity in parentheses):
+- `broken-ref` (error) — dead wiki / `<<goto>>` / `<<include>>` / `<<term>>` / image / `<<ccDossierFooter>>` targets
+- `unclosed-macro` (error) — paired-macro stack imbalance
+- `duplicate-passage` (error) — same passage name in >1 file
+- `orphan-passage` (warning) — no incoming references, not on exempt list
+- `undeclared-variable` (warning) — `$var` never `<<set>>` anywhere in `src/`
+- `editorial-note` (note) — `[! directive]` and `[? question]` markers in prose
+- `editorial-note-malformed` (warning) — unclosed `[! ...` / `[? ...`
+- `tag-coherence` (note) — storyTags/kinks/quirks/statusEffects written-but-never-read or read-but-never-written
+- `word-count` (note over 120, warning over 200) — body length over the CLAUDE.md ceiling
+
+Editorial-note convention for prose edits: drop `[! note text]` (directive for Claude) or `[? note text]` (open question) inline in passage body. The `editorial-note` rule surfaces them in the lint pane under their passage — use the Notes filter to isolate.
+
+### FigJam round-trip workflow (legacy)
+
+Still in the repo at `twine-mcp-server/src/figjam-sync/` + `figjam-sync-plugin/`. Replaced by the Obsidian Canvas workflow above for routine editing — the FigJam path required a Node HTTP service, Figma desktop app, and an AI interpretation hop, which Obsidian eliminates. Keep it for collaborative whiteboarding sessions or freeform concept work that benefits from FigJam's UI.
 
 ## Art Assets Already Added
 
@@ -120,7 +149,7 @@ Robert Flett assets now exist in `media/characters/`:
 
 `robert-flett-diner-entry.png` is used at the top of `INTRO-110 Robert arrives`.
 
-Avatar art in `media/avatar/` is still placeholder-only. Current candidate body layers, clothing-mask experiments, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/` until explicitly promoted. The next clothing edit test should use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_padded_576x1536.png` rather than the older hair/underwear source.
+Avatar art in `media/avatar/` is still placeholder-only. Current candidate body layers, clothing-mask experiments, Qwen 2509 clothing-fit tests, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/` until explicitly promoted. The next clothing edit test should use `C:\Users\Oculus\Documents\ComfyUI\input\sizzle_alex_noface_blank_qwen2509_canvas_624x1672.png` plus generated garment reference images rather than the older hair/underwear source.
 
 ## Known Gaps
 
@@ -167,7 +196,8 @@ Before handing off, another agent should usually read:
 1. `sizzle/AGENTS.md`
 2. `sizzle/CLAUDE.md`
 3. `sizzle/docs/GDD.md`
-4. `sizzle/docs/NPC-handler.md`
-5. `sizzle/docs/STORY-TAGS.md`
-6. `sizzle/docs/WRITING-TODOS.md` (open prose-level concerns)
-7. `sizzle/docs/AVATAR-RESEARCH.md` (if avatar work is on the table)
+4. `sizzle/docs/STYLE-GUIDE.md` (if any writing or prose-revision work is on the table)
+5. `sizzle/docs/NPC-handler.md`
+6. `sizzle/docs/STORY-TAGS.md`
+7. `sizzle/docs/WRITING-TODOS.md` (open prose-level concerns)
+8. `sizzle/docs/AVATAR-RESEARCH.md` (if avatar work is on the table)
