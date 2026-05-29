@@ -87,7 +87,8 @@
       "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1; \"Exit: $LASTEXITCODE\")",
       "PowerShell(node -e \"var l=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; console.log\\('2005-09-12 =>', l[new Date\\(2005,8,12\\).getDay\\(\\)]\\); console.log\\('2003-08-14 =>', l[new Date\\(2003,7,14\\).getDay\\(\\)]\\);\")",
       "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1; \"COMPILE EXIT: $LASTEXITCODE\")",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(git commit *)"
     ]
   }
 }
