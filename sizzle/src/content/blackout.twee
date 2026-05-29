@@ -1,4 +1,4 @@
-:: BLK-085 The hottest day of the year
+:: BLK-085 The hottest day of the year [avatar-blk-day]
 <<silently>>
 <<setDate 2003 8 14 "afternoon">>
 <<set $header.location to "THE DANFORTH, TORONTO">>
@@ -18,7 +18,7 @@ The hottest week of the year has saved its worst for today. Thirty degrees, and 
 <</page>>
 
 
-:: BLK-090 Up the Danforth
+:: BLK-090 Up the Danforth [avatar-blk-day]
 <<silently>>
 <<set $header.location to "THE DANFORTH, TORONTO">>
 <<set $header.time to "Thursday afternoon">>
@@ -37,7 +37,7 @@ The strip does its usual August business: Greek diners with awnings out, the sme
 <</page>>
 
 
-:: BLK-095 Somewhere with a fan
+:: BLK-095 Somewhere with a fan [avatar-blk-day]
 <<silently>>
 <<set $header.location to "BAR, THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -52,7 +52,7 @@ You take the room in before you take a seat. Bar on the right, washrooms at the 
 <</page>>
 
 
-:: BLK-100 Last call before dark
+:: BLK-100 Last call before dark [avatar-blk-day]
 <<silently>>
 <<set $header.location to "BAR, THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -73,7 +73,7 @@ The heat comes off you in waves. You're not uncomfortable exactly. You're not mu
 <</page>>
 
 
-:: BLK-105 You don't even smoke
+:: BLK-105 You don't even smoke [avatar-blk-day]
 <<silently>>
 <<set $header.location to "BAR, THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -90,7 +90,7 @@ The bartender doesn't notice. The ceiling fans keep turning.
 <</page>>
 
 
-:: BLK-110 Four-eleven
+:: BLK-110 Four-eleven [avatar-blk-day]
 <<silently>>
 <<set $header.location to "BAR, THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -113,7 +113,7 @@ The bartender looks at the ceiling. Looks at the bottles. Looks at the ceiling a
 <</page>>
 
 
-:: BLK-115 Warm beer and a radio
+:: BLK-115 Warm beer and a radio [avatar-blk-day]
 <<silently>>
 <<set $header.location to "BAR, THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -133,7 +133,7 @@ The bar settles into the strange intimacy of a blackout: lower voices, people lo
 <</page>>
 
 
-:: BLK-120 Walking home in the heat
+:: BLK-120 Walking home in the heat [avatar-blk-day]
 <<silently>>
 <<set $header.location to "THE DANFORTH, TORONTO">>
 <<set $header.time to "Thursday afternoon">>
@@ -150,7 +150,7 @@ Thirty degrees in the shade, and the shade has moved east. There's no hurry beca
 <</page>>
 
 
-:: BLK-125 The city helping itself
+:: BLK-125 The city helping itself [avatar-blk-day]
 <<silently>>
 <<set $header.location to "THE DANFORTH, TORONTO">>
 <<set $header.time to "Thursday afternoon">>
@@ -169,7 +169,7 @@ A man in a dress shirt is directing traffic at a dead intersection. He has no ve
 <</page>>
 
 
-:: BLK-130 The propped door [nobr]
+:: BLK-130 The propped door [nobr avatar-blk-day]
 <<silently>>
 <<set $header.location to "JUST OFF THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -195,7 +195,7 @@ Half a block. Maybe a little more. The sound follows you. Or it doesn't, exactly
 <</page>>
 
 
-:: BLK-135 Crossing the little yard
+:: BLK-135 Crossing the little yard [avatar-blk-day]
 <<silently>>
 <<set $header.location to "WALKUP, JUST OFF THE DANFORTH">>
 <<set $header.time to "Thursday afternoon">>
@@ -212,7 +212,7 @@ Your unease has sharpened. You're not sure when it started.
 <</page>>
 
 
-:: BLK-140 The lobby [nobr]
+:: BLK-140 The lobby [nobr avatar-blk-night]
 <<silently>>
 <<setTime "evening">>
 <<set $header.location to "WALKUP LOBBY">>
@@ -240,7 +240,7 @@ You don't have a framework for it. There's just the dread, the animal certainty 
 <</page>>
 
 
-:: BLK-145 The man who won't go up
+:: BLK-145 The man who won't go up [avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -261,7 +261,7 @@ He goes back inside. You hear his deadbolt.
 <</page>>
 
 
-:: BLK-150 What the dark is doing
+:: BLK-150 What the dark is doing [avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -280,7 +280,7 @@ You don't hear her stop climbing.
 <</page>>
 
 
-:: BLK-155 The sound from above
+:: BLK-155 The sound from above [avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -299,7 +299,7 @@ It isn't the people upstairs that scare you. It's that you want to be one of the
 <</page>>
 
 
-:: BLK-160 The pull [nobr]
+:: BLK-160 The pull [nobr avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -330,7 +330,7 @@ Your foot finds the first stair.
 <</page>>
 
 
-:: BLK-165 Two steps up [nobr]
+:: BLK-165 Two steps up [nobr avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP STAIRWELL">>
 <<set $header.time to "Thursday evening">>
@@ -353,7 +353,7 @@ The want is still there. Saying no didn't make it leave. But your feet are still
 <</page>>
 
 
-:: BLK-170 It's the dark itself [nobr]
+:: BLK-170 It's the dark itself [nobr avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -384,7 +384,7 @@ You don't reason it. There isn't time and the dark is still pulling. Your hand f
 <</page>>
 
 
-:: BLK-175 The matchbook [nobr]
+:: BLK-175 The matchbook [nobr avatar-blk-night]
 <<silently>>
 <<if not $player.flags.blkSkillGranted>>
 <<set $player.skills.streetwise.level += 1>>
@@ -409,7 +409,7 @@ You tear off another match. Your hands won't hold still. If the damp wins, the s
 <</page>>
 
 
-:: BLK-180 One match [nobr]
+:: BLK-180 One match [nobr avatar-blk-night]
 <<silently>>
 <<if not $player.flags.blkInfluenceGranted>>
 <<set $nyse.influence += 1>>
@@ -437,7 +437,7 @@ What do you do with the match?
 <</page>>
 
 
-:: BLK-185 The building exhales
+:: BLK-185 The building exhales [avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP LOBBY">>
 <<set $header.time to "Thursday evening">>
@@ -454,7 +454,7 @@ Nobody comes downstairs. Not yet.
 <</page>>
 
 
-:: BLK-190 Before anyone thanks you
+:: BLK-190 Before anyone thanks you [avatar-blk-night]
 <<silently>>
 <<set $header.location to "WALKUP, JUST OFF THE DANFORTH">>
 <<set $header.time to "Thursday evening">>
@@ -471,7 +471,7 @@ The street has moved on while you were inside. People still walking home, still 
 <</page>>
 
 
-:: BLK-200 The rest of the dark
+:: BLK-200 The rest of the dark [avatar-blk-night]
 <<silently>>
 <<set $header.location to "TORONTO">>
 <<set $header.time to "Thursday evening">>
@@ -488,7 +488,7 @@ The city's dark goes all the way to the horizon. Somewhere in the distance, the 
 <</page>>
 
 
-:: BLK-205 Still out
+:: BLK-205 Still out [avatar-blk-day]
 <<silently>>
 <<advanceDays 1 "morning">>
 <<set $header.location to "TORONTO">>
@@ -508,7 +508,7 @@ There's no word for what happened in there, not one anybody ever gave you. One n
 <</page>>
 
 
-:: BLK-210 Incident report [nobr]
+:: BLK-210 Incident report [nobr avatar-hidden]
 <<silently>>
 <<setDate 2003 8 21 "morning">>
 <<set $header.location to "BRANCH FILE EXTRACT">>
@@ -531,7 +531,7 @@ There's no word for what happened in there, not one anybody ever gave you. One n
 <</page>>
 
 
-:: BLK-215 Recommendation [nobr]
+:: BLK-215 Recommendation [nobr avatar-hidden]
 <<silently>>
 <<set $header.location to "BRANCH FILE EXTRACT">>
 <<set $header.time to "Thursday morning">>
