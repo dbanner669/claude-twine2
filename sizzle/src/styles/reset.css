@@ -107,6 +107,11 @@
   --sz-composed: #6f8c5a;
   --sz-rattled:  #c46b3d;
   --sz-redact:   #0a0807;
+  --sz-status-rattled: #b8443f;
+  --sz-status-shaken:  #c46b3d;
+  --sz-status-steady:  #6f8c5a;
+  --sz-status-cool:    #4f7f9f;
+  --sz-status-ice:     #263f6e;
 
   /* ── Typography ────────────────────────────────────────── */
   --sz-f-display: "Cormorant Garamond", "EB Garamond", Garamond, Georgia, serif;
@@ -147,7 +152,7 @@
 
 /* ── Daytime palette — sunlit-room colorway ──────────────────
    Same typefaces, inverted value hierarchy. Toggled via
-   data-mode="day" on <body>, set by events.js from $date.hour.
+   data-mode="day" on <body>, set by events.js from $date.slot.
    Names mirror night 1-for-1 so all var(--sz-*) references
    swap automatically.
    ──────────────────────────────────────────────────────────── */
@@ -183,6 +188,11 @@ body[data-mode="day"] {
   --sz-composed: #3e5a26;
   --sz-rattled:  #a8421f;
   --sz-redact:   #1a120a;
+  --sz-status-rattled: #8f251f;
+  --sz-status-shaken:  #a8421f;
+  --sz-status-steady:  #3e5a26;
+  --sz-status-cool:    #245f7d;
+  --sz-status-ice:     #173a68;
 }
 
 

@@ -1,4 +1,4 @@
-:: INTRO-100 Briefing [daytime]
+:: INTRO-100 Briefing [daytime history-root]
 <<silently>>
 <<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
@@ -27,9 +27,9 @@ The waitress brings coffee without being asked — you've been here before, enou
 Outside, an <<term "OC Transpo">> bus grinds past on <<term "Bank Street" "Bank">>, throwing diesel haze across the sidewalk.  September in Ottawa.  Still warm, but the light has changed — that particular quality of autumn sun that makes the limestone go yellow.
 
 <<if $player.background eq "RCMP constable">>You used to drink coffee like this at the detachment — institutional, slightly burnt.  The ritual is the same even if the context has shifted.
-<<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.  The stakes are different.
+<<elseif $player.background eq "CSIS analyst">>You used to meet sources in places like this.  The tradecraft is the same.
 <<elseif $player.background eq "grad student">>There's a woman two booths over eating eggs alone and staring at nothing.  The part of your brain that studied behavioural patterns can't stop reading the room.  You look away.  Not a case study.
-<<else>>Two years ago you wouldn't have known what to look for in a diner — the exits, the sightlines, the two men at the counter reading the same section of the Citizen.  Training changes how you see a room.
+<<else>>Two years ago you wouldn't have known what to look for in a diner — the exits, the sightlines, the two men at the counter reading the same section of the Citizen.
 <</if>>
 
 [[Continue|INTRO-110 Robert arrives]]
@@ -62,7 +62,7 @@ He doesn't look like a man who tracks the inexplicable for a living.  He looks l
 <<page>>\
 Working hands, scarred across the knuckles.  You noticed them the first day you met him, two years ago, and you still don't know the story.  Especially since you do know the story of how he was an academic at <<term "Lakehead">> and a star grad student at <<term "U of T">>.  But who knows what he's seen in the dark of the woods.
 
-He slides into the booth across from you, sets the <<term "Globe">> on the table, and signals the waitress with a look that somehow communicates both "coffee" and "not yet" about the food.
+He slides into the booth across from you, sets the <<term "Globe">> on the table, and catches the waitress's eye.  Coffee.  No food yet.
 
 "Morning," he says.
 
@@ -80,7 +80,7 @@ He slides into the booth across from you, sets the <<term "Globe">> on the table
 <<page>>\
 He gives you a look and a smile.  "Well fuck you too, junior."  He takes the coffee from the waitress, adds one cream, stirs it exactly three times.  Same as always.
 
-He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
+No folder this time, no laptop.  Robert looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
 
 "I have an assignment for you," he says.  "Your first sustained field placement."
 
@@ -97,7 +97,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 <<page>>\
 He nods.  Takes the coffee from the waitress, adds one cream, stirs it exactly three times.  Same as always.
 
-He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
+No folder this time, no laptop.  Robert looks at you for a moment with that particular expression he gets when he's about to tell you something he's been thinking about for a while.
 
 "I have an assignment for you," he says.  "Your first sustained field placement."
 
@@ -112,7 +112,7 @@ He doesn't reach for a folder.  He doesn't open a laptop.  He just looks at you 
 <</silently>>\
 <<header>>\
 <<page>>\
-He pauses to let that land.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Carp that the <<term "Branch">> pretends is a conservation club.
+He pauses.  Two years of training, two years of reading case files and attending seminars on <<term "NYSE">> classification protocols and learning to shoot at a range in Carp that the <<term "Branch">> pretends is a conservation club.
 
 This is what it was for.
 
@@ -168,7 +168,7 @@ Robert turns his coffee mug a quarter rotation.  He does this when he's choosing
 
 Another pause.  "Ass fisting," he says dryly.
 
-You raise an eyebrow.  He gets an imp-like glimmer in his eye.  He's giving you shit.
+You raise an eyebrow.  He almost grins.  He's giving you shit.
 
 "The escalation is the signature."
 
@@ -204,7 +204,7 @@ He meets your eyes.  "Which is why we need primary observation."
 <</silently>>\
 <<header>>\
 <<page>>\
-He almost smiles.  Almost.  The corners of his mouth do something that in another man might be amusement.
+He almost smiles.  Almost.
 
 "Straight to operational.  Good."  He shifts in the booth, leaning forward slightly — the shift from briefing officer to handler.
 
@@ -242,13 +242,13 @@ He leans back.
 <</silently>>\
 <<header>>\
 <<page>>\
-You say it flat.  Not a question, not a judgment — just the words, sitting there between you on the table like the sugar dispenser.
+You say it flat.  The words sit between you on the table.
 
 Robert doesn't blink.  "A swingers club.  Members-only, well-established, well-regarded within its community.  Not a front.  A functioning club with a real membership, real events, real —" he pauses — "activities.  That is the operational environment."
 
 There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the kitchen, someone drops a plate and swears in Greek.
 
-[["I don't have any concerns.  Walk me through it."|INTRO-325 No concerns]]
+[["Walk me through it."|INTRO-325 No concerns]]
 [["I'm not doing it."|INTRO-322 Concerns]]
 <</page>>
 
@@ -262,8 +262,8 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 <<page>>\
 "The assignment is intelligence-gathering in a sexually explicit environment," Robert says.  "That is what it is.  The <<term "NYSE">> element is why it's Branch instead of Vice.  If you have concerns about the nature of the work, this is the time to raise them."
 
-<<if $player.background eq "grad student">>You wrote a thesis chapter on environments like this — the social dynamics, the consent frameworks, the group psychology.  Studying it is one thing.  Working inside it is something else.
-<<elseif $player.background eq "unemployed after university">>You've been in places like this.  Not as an agent — as a person.  That's a different kind of knowledge, and it's sitting in your chest right now doing something complicated.
+<<if $player.background eq "grad student">>You wrote a thesis chapter on environments like this — the social dynamics, the consent frameworks, the group psychology.
+<<elseif $player.background eq "unemployed after university">>You've been in places like this.  Not as an agent — as a person.  That's a different kind of knowledge.
 <</if>>
 
 [["No concerns.  Walk me through it."|INTRO-400 Apartment]]
@@ -279,7 +279,7 @@ There's a silence.  The waitress passes with a pot of coffee.  Somewhere in the 
 <</silently>>\
 <<header>>\
 <<page>>\
-Robert is quiet for a moment.  It's a different quiet than his briefing pauses — less structured, more considered.
+Robert is quiet for a moment.  It's a different quiet than his briefing pauses.
 
 "We don't know," he says.  And then, because he's Robert: "The <<term "Branch">> has classified the source as undetermined.  Current working hypotheses include an individual or individuals with anomalous capabilities, an environmental factor, or a combination."
 
@@ -300,14 +300,22 @@ He picks up his coffee, looks at it, puts it back down.
 <<page>>\
 "Something or someone that's generating the effect.  Finding that focal point is part of what you'll be looking for."
 
-<<if $player.skills.academic.level gte 0>>You catch the shift.  //In my experience.//  Robert has seen cases like this before.  He was going to say something from that experience, and then he put the government language back on.
+<<skillCheck "Academic" "2d6" $player.skills.academic.level 8>>
+<<success>>
+You catch the shift.  //In my experience.//  Robert has seen cases like this before.  He was going to say something from that experience, and then he put the government language back on.
 
 You file that away.
-<</if>>
 
 "But that's secondary to primary observation," he says, back on firm procedural ground.  "Your first priority is establishing cover and reporting what you see.  Don't go looking for the source.  Let the picture come to you."
 
 [["Understood.  Walk me through the operational setup."|INTRO-400 Apartment]]
+<<failure>>
+Whatever Robert almost said disappears back into the briefing.  You can feel the gap in the answer, but not what was behind it.
+
+"But that's secondary to primary observation," he says, back on firm procedural ground.  "Your first priority is establishing cover and reporting what you see.  Don't go looking for the source.  Let the picture come to you."
+
+[["Understood.  Walk me through the operational setup."|INTRO-400 Apartment]]
+<</skillCheck>>
 <</page>>
 
 
@@ -318,7 +326,7 @@ You file that away.
 <</silently>>\
 <<header>>\
 <<page>>\
-Robert's expression doesn't change, but something behind it shifts — a microsecond of something that isn't discomfort, exactly, but might be its professional cousin.
+Robert's expression doesn't change, but something behind it shifts — a microsecond of professional discomfort.
 
 "The assignment requires a credibly attractive woman under thirty who has completed <<term "Branch">> <<term "NYSE">> training and can sustain a cover identity in a high-pressure social environment."  He says this like he's reading it from a personnel form.  "The talent pool matching those criteria is small."
 
@@ -341,7 +349,7 @@ You've known Robert a while now.  This is maybe the first time you can remember 
 
 <<if $player.background eq "grad student">>You studied persuasion and influence for two years.  You know when someone is framing a limited choice as a compliment.  Right now, Robert is not saying: //and I don't have anyone else.//
 <<elseif $player.background eq "RCMP constable">>Three years of reading people on traffic stops and domestic calls taught you when someone is leaving something out.  Robert means everything he just said.  He also means something he didn't say.
-<<else>>There's a gap between his list of qualifications and his actual answer, and you can feel the shape of it.  The truth is simpler: the Branch doesn't have many options, and you're the best one.
+<<else>>You read the obvious answer around his list of qualifications.  The Branch doesn't have many options, and you're the best one.
 <</if>>
 
 "I wouldn't send you if I didn't think you could do it," he adds.  Quieter.  Not government anymore — Robert.
@@ -357,7 +365,7 @@ You've known Robert a while now.  This is maybe the first time you can remember 
 <</silently>>\
 <<header>>\
 <<page>>\
-Robert reaches into his jacket — not a folder, just a single sheet of paper folded twice.  He unfolds it on the table between the coffee mugs.  An address, a phone number, a short list in his careful handwriting.
+Robert reaches into his jacket and pulls out a single sheet of paper, folded twice.  He unfolds it on the table between the coffee mugs.  An address, a phone number, a short list in his careful handwriting.
 
 "Operational details," he says, and now he's all handler.
 
@@ -400,7 +408,7 @@ He folds his hands on the table.
 "Your job is to be a reliable pair of eyes inside that building."
 
 <<if not hasVisited("INTRO-340 Why me")>>\
-He pauses, then adds — like he's saying it because he should, not because he wants to — "You haven't asked why you."
+He pauses.  "You haven't asked why you."
 
 He doesn't wait for you to answer.
 
@@ -453,7 +461,7 @@ He looks at his coffee instead of at you.
 <<page>>\
 "Can you tell me more about the <<term "NYSE">> indicators?"
 
-Robert takes a slow breath — the particular care he takes when bridging the gap between what the Branch knows and what it means.
+Robert takes a slow breath — the particular care he takes when Branch language has to carry weight it wasn't designed for.
 
 "The pattern is escalation.  Members attending for six months or more show measurable personality shifts.  Progressive disinhibition.  Altered risk assessment.  And in several cases, desires that the subjects themselves describe as foreign.  'Not like me.'  That's a direct quote from an asset's notes."
 
@@ -520,16 +528,25 @@ The pause is longer than usual.  Long enough that the waitress refills both your
 
 "No," he says.  "This is the Branch's first direct intelligence operation targeting Sizzle."
 
-You wait.  Robert is a man who uses silence, but he also respects when someone uses it back.
+You wait.
 
 "We considered it eighteen months ago.  The operational profile at the time didn't justify the risk.  It does now."
 
-<<if $player.skills.composure.level gte 0>>He's telling the truth, but it's not the whole truth.  He's deciding whether to tell you the rest now or later.  He decides on later.
-<</if>>
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 9>>
+<<success>>
+He's telling the truth, but it's not the whole truth.  He's deciding whether to tell you the rest now or later.  He decides on later.
 
-"You'll be the first.  No playbook.  That's a disadvantage and an advantage."
+"You'll be the first.  No playbook."
 
 [[Continue|INTRO-410 Rules]]
+<<failure>>
+You hear the answer and the careful pause after it.  If there is more behind the words, Robert keeps it locked down.
+
+"You'll be the first.  No playbook."
+
+[[Continue|INTRO-410 Rules]]
+<</skillCheck>>
 <</page>>
 
 
@@ -542,11 +559,11 @@ You wait.  Robert is a man who uses silence, but he also respects when someone u
 <<page>>\
 Robert folds the paper and slides it across the table to you.  "Wednesday, 10 AM, the office.  Full ops briefing, documents, keys."
 
-He picks up his coffee and finishes it in one long pull — a practical man finishing a practical beverage.
+He picks up his coffee and finishes it in one long pull.
 
 And then there's a moment.
 
-Not a dramatic one.  Just a small hitch in Robert's efficiency.  He puts the mug down and his hand stays on it for a beat too long, and he looks at you, and his expression is exactly the same as it always is, except —
+Just a small hitch in Robert's efficiency.  He puts the mug down and his hand stays on it for a beat too long, and he looks at you, and his expression is exactly the same as it always is, except —
 
 [[Continue|INTRO-610 Reading Robert]]
 <</page>>
@@ -557,36 +574,28 @@ Not a dramatic one.  Just a small hitch in Robert's efficiency.  He puts the mug
 <<set $header.location to "Diner, Bank Street, Ottawa">>
 <<set $header.time to "Monday morning">>
 /* Skill check: can the player read Robert's unease? */
-<<set _checkSkill to $player.skills.composure.level>>
-<<set _checkDifficulty to 1>>
-<<rollDice "2d6">>
-<<set _checkResult to _diceResult + _checkSkill>>
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <</silently>>\
 <<header>>\
 <<page>>\
-<<if _checkResult gte _checkDifficulty>>\
+<<skillCheck "Composure" "2d6" _checkSkill 5>>
+<<success>>
 <<set $briefing.readRobert to true>>\
 Except it isn't.
 
-You've sat across from this man in dozens of briefings.  You've learned his rhythms — the pauses, the mug rotations, the way he deploys silence like punctuation.  You know his resting face.
+You've sat across from this man in dozens of briefings.  You've learned his rhythms — the pauses, the mug rotations, the way he uses silence.  You know his resting face.
 
 And right now, under the steady professional surface, Robert Flett is worried.  Not about the operation.  He's worried about //you//.
 
-<<addNotification "Composure check: passed.  You read Robert's concern.">>
-
 [["You're worried about me."|INTRO-620 Called out]]
 [[Say nothing.  Let it pass.|INTRO-700 Outside]]
-<<else>>\
+<<failure>>
 Except — you're not sure.  There's something there, in the way he's holding the mug, but you can't quite read it.  Two years of training and you still can't always crack Robert Flett.
-
-The man is a closed system.
-
-<<addNotification "Composure check: failed.">>
 
 Whatever it was, it passes.  He releases the mug and straightens in the booth.
 
 [[Continue|INTRO-700 Outside]]
-<</if>>
+<</skillCheck>>
 <</page>>
 
 
@@ -598,7 +607,7 @@ Whatever it was, it passes.  He releases the mug and straightens in the booth.
 <</silently>>\
 <<header>>\
 <<page>>\
-His eyes meet yours.  For a second — less than a second — the handler isn't there.  Just Robert, a man in his late forties who has been doing this work for longer than you've been out of school, looking at someone he trained and feeling the specific weight of what that means.
+His eyes meet yours.  For a second — less than a second — the handler isn't there.  Just Robert, a man in his late forties who has been doing this work since before you were in high school, looking at someone he trained.
 
 "I selected you for this assignment because you're the most qualified candidate available," he says.  And it's true.
 
@@ -621,7 +630,7 @@ Two words.  He doesn't elaborate.  He doesn't need to.
 <<page>>\
 The waitress comes by and asks if they want anything else.  Robert says no thank you and reaches for his wallet.
 
-The moment is over.  It existed for exactly as long as it needed to, and now it's filed in the space between professional and personal where Robert keeps the things he can't put in reports.
+The moment is over.  It existed for exactly as long as it needed to.
 
 [[Continue|INTRO-700 Outside]]
 <</page>>
@@ -651,11 +660,11 @@ September sun on limestone.  Ottawa being unremarkably, specifically itself.
 <</silently>>\
 <<header>>\
 <<page>>\
-Robert stands on the sidewalk, hands in his jacket pockets.  He looks east, then west — not for threats, just an old habit, the way a northern man checks the weather by looking at the sky.
+Robert stands on the sidewalk, hands in his jacket pockets.  He glances east, then west.  Old habit.
 
 "Wednesday," he says.  "Ten o'clock.  Bring ID photos — two passport-style, one casual."
 
-<<if $briefing.readRobert>>He pauses.  Looks at you one more time with an expression that's almost — not quite — the one from the diner.  Then he straightens his shoulders and puts the handler back on.
+<<if $briefing.readRobert>>He pauses.  Looks at you one more time with an expression that's almost the one from the diner.  Then he straightens his shoulders and puts the handler back on.
 
 <</if>>"And <<playerRealName>>?"
 
@@ -674,7 +683,7 @@ You wait.
 <</silently>>\
 <<header>>\
 <<page>>\
-He turns south, toward the office.  You watch him go — a man in an unremarkable jacket disappearing into the perfectly ordinary Monday morning, on his way back to a building where the paperwork includes things that shouldn't exist.
+He turns south, toward the office.  You watch him go — a man in an unremarkable jacket disappearing into the perfectly ordinary Monday morning.
 
 <<if $briefing.calledOut>>He's worried about you.  You're a little worried about you too.  But not enough to walk away — not after two years of getting ready for exactly this.
 <<elseif $briefing.readRobert>>He's worried about you.  You wish you could tell him not to be.  But that would require a certainty you don't have.
@@ -720,11 +729,11 @@ Plucked out of your life as a <<print $player.background || "civilian">>.  Your 
 <<page>>\
 "I'm not doing it."
 
-Robert nods once.  Not surprise, not disappointment — just the acknowledgment of a piece of information.
+Robert nods once.
 
 "Understood."
 
-He folds the paper before you've finished the sentence and slides it back into his jacket.  He drinks the rest of his coffee like it's the only thing the morning was for.
+He folds the paper before you've finished the sentence and slides it back into his jacket.  He finishes his coffee in two long pulls.
 
 "I'll redirect you to the Vandermeer file when you're back at the office.  Foreign-publication review.  Three months out, minimum."
 

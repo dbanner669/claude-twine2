@@ -26,14 +26,20 @@
 - [x] **Background selection guardrail** — done. Player cannot continue without making a selection.
 
 ### CC-400 The Incident
-- [ ] **Inciting incident options** — this is the biggest remaining writing task in character creation. Each option needs:
-  - A title (short, evocative)
-  - A 2-4 sentence description of what happened
-  - Implied effect on starting `$nyse.influence` (higher or lower)
-  - Any trait or quirk granted
-  - Why this brought the player to the Branch's attention
-- [ ] Estimate: 3-5 incident options for v1 (full game may have more)
-- [ ] **NEEDS USER INPUT** — incident concepts need to be brainstormed/approved
+- [ ] **Playable inciting incident sequences** — this is the biggest remaining writing task in character creation. The selected direction is four full playable August 2003 origin sequences:
+  - `the Toronto Blackout`
+  - `the Dark of Manitoulin`
+  - `the Woman with the Pale Eyes`
+  - `Wet Dog Smell`
+- [ ] Each sequence needs:
+  - A compact selectable title/entry point
+  - Background-specific setup text where needed
+  - A playable scene arc with escalation, observation, and intervention
+  - Erotic NYSE charge that is part of the danger, not detachable spice
+  - A clear recruitment-worthy action by the player character
+  - Aftermath/recruitment bridge that can set `$player.incitingIncident`
+  - Possible later hooks for `$nyse.influence`, `storyTags`, composure texture, and Robert relationship texture
+- [ ] Current design source: `docs/INCIDENTPLAN.md`
 
 ### CC-500 Summary
 - [x] Table layout — done
@@ -68,6 +74,7 @@
 - [x] "Why me?" branch — Robert's clinical assessment + human moment
 - [x] Source discussion — "We don't know" + Robert's near-slip about personal experience
 - [x] Skill-gated observation (academic check on Robert's word choice)
+- [x] Player-facing roll UI — check waits for player click, animates dice, then reveals pass/fail text.
 
 ### INTRO-400 through INTRO-530 (Operational Details + Questions)
 - [x] Apartment, reporting schedule, extraction protocol
@@ -77,9 +84,11 @@
   - Risk assessment ("Moderate to high")
   - Previous agents ("You'll be the first")
 - [x] Composure-gated observation on "previous agents" answer
+- [x] Player-facing roll UI — check waits for player click, animates dice, then reveals pass/fail text.
 
 ### INTRO-600 through INTRO-630 (The Subtext)
 - [x] Composure skill check to read Robert's unease — pass/fail variants
+- [x] Player-facing roll UI — check waits for player click, animates dice, then reveals pass/fail text.
 - [x] "You're worried about me" dialogue option (if check passed)
 - [x] Robert's "But yes" moment — the handler/human duality
 - [x] Notification system integration (toast messages for check results)
@@ -96,10 +105,11 @@
 
 - [x] **StoryTitle** — "Sizzle"
 - [ ] **Header navigation labels** — review: "MENU", "Character", "Saves", "Settings" — do these need renaming for tone?
-- [ ] **Character sheet labels** — review section headers
+- [x] **Character sheet labels** — updated to distinguish Baseline Composure from Current Composure.
 - [x] **Notification text** — skill check toasts working ("Composure check: passed/failed")
-- [x] **Footer helper text cleanup** — done. Fake autosave/quicksave copy removed.
-- [ ] **Settings labels** — "Avatar Size", "Text Size" — fine as-is or rename?
+- [x] **Header status badge** — tied to Current Composure by default, with `$header.status` available as a passage-specific override.
+- [x] **Footer helper text cleanup** — done. Fake autosave/quicksave copy and misleading `SAVED` label removed. Footer now renders `$date` as `Month D, YYYY · Slot`, plus the hard-coded greybox version label.
+- [x] **Settings cleanup** — inactive `Avatar Size` and `Text Size` controls are hidden for now; `Avatar Visible` remains in the menu.
 
 ---
 
@@ -112,7 +122,7 @@ Reference the GDD Section 10 (Tone & Content Guidelines) during all writing. Key
 - The Branch is professional and institutional — not a caricature.
 - Robert Flett's voice: precise, unhurried, dry. See `docs/NPC-handler.md`.
 - The player character has interiority. We hear her thoughts.
-- No erotic content in the greybox — but the tension of the assignment should be present.
+- Erotic content may appear in the new CC-400 origin sequences. Treat it as compromised NYSE evidence and danger, not detachable titillation. The existing 2005 briefing remains non-erotic but sexually charged by subject matter.
 - Period details: this is September 2005. Small touches, not overdone.
 - 80-120 visible words per passage max. One beat per passage.
 
@@ -125,13 +135,13 @@ Reference the GDD Section 10 (Tone & Content Guidelines) during all writing. Key
 | CC screen text polish | 5 screens | 4 | 1 (CC-200 flavor text) |
 | Background descriptions | 4 | 4 | 0 |
 | Skill bonuses per background | 4 | 4 | 0 |
-| Inciting incident options | 3-5 | 0 | **3-5 (NEEDS USER INPUT)** |
+| Playable inciting incident sequences | 4 | 0 | **4 selected; need full sequence design and implementation** |
 | Briefing scene passages | 23 | 23 | 0 |
 | Dialogue branches | ~15 | ~15 | 0 |
 | Skill check variants | 3 | 3 | 0 |
-| UI text review | ~5 items | 3 | 2 |
-| **Total** | | | **~7 items remaining** |
+| UI text review | ~5 items | 4 | 1 |
+| **Total** | | | **~6 items remaining** |
 
 ### Critical path
 
-The only blocking item is **CC-400 inciting incidents** — these need concept brainstorming with the user before writing can proceed.
+The main blocking item is **CC-400 inciting incidents**. The four concepts are selected and documented in `docs/INCIDENTPLAN.md`; the next step is fleshing them out into playable sequences, then implementing the chosen structure.

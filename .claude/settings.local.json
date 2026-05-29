@@ -80,7 +80,14 @@
       "Bash(git -C \"C:/Users/Oculus/My Drive/Female Agent\" status)",
       "Bash(ls -la obsidian-sizzle-plugin/.gitignore)",
       "Bash(cat obsidian-sizzle-plugin/.gitignore)",
-      "Bash(du -sh obsidian-sizzle-plugin/node_modules)"
+      "Bash(du -sh obsidian-sizzle-plugin/node_modules)",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8080/output.html)",
+      "PowerShell($conn = Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue; if \\($conn\\) { Stop-Process -Id $conn.OwningProcess -Force; \"Stopped PID $\\($conn.OwningProcess\\)\" } else { \"No process on 8080\" })",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1; \"Exit: $LASTEXITCODE\")",
+      "PowerShell(node -e \"var l=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; console.log\\('2005-09-12 =>', l[new Date\\(2005,8,12\\).getDay\\(\\)]\\); console.log\\('2003-08-14 =>', l[new Date\\(2003,7,14\\).getDay\\(\\)]\\);\")",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1; \"COMPILE EXIT: $LASTEXITCODE\")",
+      "Bash(git check-ignore *)"
     ]
   }
 }

@@ -14,7 +14,8 @@
 
 <<widget "header">><<nobr>>
 /* Renders the location/time header bar above passage text.
-   Set $header.location, $header.time, $header.weather, $header.status before calling. */
+   Set $header.location, $header.time, $header.weather before calling.
+   Optional $header.status overrides the automatic Current Composure badge. */
 <<if $header.location>>
 <div id="header-bar">
     <div class="header-left">
@@ -23,9 +24,26 @@
     </div>
     <div class="header-right">
       <<if $header.status>>
-        <span class="header-status">· <<print $header.status>></span>
+        <<print '<span class="header-status --custom">· ' + $header.status + '</span>'>>
       <<else>>
-        <span class="header-status">· COMPOSED</span>
+        <<set _currentComposure to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+        <<if _currentComposure lte 0>>
+          <<set _statusLabel to "RATTLED">>
+          <<set _statusClass to "--rattled">>
+        <<elseif _currentComposure is 1>>
+          <<set _statusLabel to "SHAKEN">>
+          <<set _statusClass to "--shaken">>
+        <<elseif _currentComposure lte 4>>
+          <<set _statusLabel to "STEADY">>
+          <<set _statusClass to "--steady">>
+        <<elseif _currentComposure lte 6>>
+          <<set _statusLabel to "COOL & COLLECTED">>
+          <<set _statusClass to "--cool">>
+        <<else>>
+          <<set _statusLabel to "ICE VEINS">>
+          <<set _statusClass to "--ice">>
+        <</if>>
+        <<print '<span class="header-status ' + _statusClass + '">· ' + _statusLabel + '</span>'>>
       <</if>>
       <<if $header.weather>>
         <span class="header-weather"><<print $header.weather>></span>
@@ -78,12 +96,14 @@
 <<set _ccBackLabel to (typeof _args[3] !== 'undefined') ? _args[3] : "Back">>
 <<set _ccNextLabel to (typeof _args[4] !== 'undefined') ? _args[4] : "Continue">>
 <<set _ccNextDisabledLabel to (typeof _args[5] !== 'undefined') ? _args[5] : "">>
+<<set _ccBackText to "← " + _ccBackLabel>>
+<<set _ccNextText to _ccNextLabel + " →">>
 <div class="cc-dossier-footer">
-  <div><<if _ccBack>><<link "← " + _ccBackLabel>><<goto _ccBack>><</link>><</if>></div>
+  <div><<if _ccBack>><<link _ccBackText>><<goto _ccBack>><</link>><</if>></div>
   <span class="step-counter">STEP <<print String(_ccStep).padStart(2, '0')>> / 05</span>
   <div>
     <<if _ccNext>>
-      <<link _ccNextLabel + " →">><<goto _ccNext>><</link>>
+      <<link _ccNextText>><<goto _ccNext>><</link>>
     <<elseif _ccNextDisabledLabel>>
       <span class="cc-next-disabled"><<print _ccNextDisabledLabel>></span>
     <</if>>

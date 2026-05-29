@@ -10,24 +10,26 @@ Sizzle is a literate erotic thriller. Second person, present, female PC. Toronto
 
 - [STYLE-GUIDE.md](STYLE-GUIDE.md) — the comprehensive style guide. Voice, mechanics, erotic-content rules, AI-pitfall watchlist, character-voice profiles, mandatory checks, annotated reference passages. **Start here for any writing or revision question.**
 - [GDD.md](GDD.md) — narrative design, structure, mechanics intent.
+- [INCIDENTPLAN.md](INCIDENTPLAN.md) — current CC-400 incident plan: selected origin incidents, NYSE grammar, background integrations, risks, and playable-sequence direction.
 - [NPC-handler.md](NPC-handler.md) — Robert Flett's full character profile.
 - [STORY-TAGS.md](STORY-TAGS.md) — `storyTags`, `quirks`, `kinks` reference.
 - [WRITING-TODOS.md](WRITING-TODOS.md) — open prose-level revisions (running log).
 - [GREYBOX-WRITING.md](GREYBOX-WRITING.md) — prologue + briefing writing checklist.
+- [EDITORIAL-SWEEP.md](EDITORIAL-SWEEP.md) — process template for running a style-guide audit against existing prose. Worked example: [STYLE-AUDIT-2026-05-26.md](STYLE-AUDIT-2026-05-26.md).
 
 ## Current Writing Scope
 
 Playable greybox prose covers:
 
 - Main menu
-- Character creation: `CC-100` through `CC-500` (with `CC-400` still a placeholder; see below)
+- Character creation: `CC-100` through `CC-500` (with `CC-400` still a source placeholder; see below)
 - Briefing / prologue: `INTRO-100` through `INTRO-800 End`
 
 Approximate scale: ~30 prologue passages, full branching dialogue, skill-check variants, four background variants throughout.
 
 ## Current Writing Gaps
 
-- **`CC-400 Incident`** — still placeholder text. No real inciting-incident options exist yet. `$player.incitingIncident` is read by `INTRO-101` via fallback ("the incident") so the prose works either way until real options land.
+- **`CC-400 Incident`** — still placeholder text in source. The selected direction is four full playable August 2003 origin sequences: `the Toronto Blackout`, `the Dark of Manitoulin`, `the Woman with the Pale Eyes`, and `Wet Dog Smell`. `$player.incitingIncident` is read by `INTRO-101` via fallback ("the incident") so the prose works either way until implementation lands. See [INCIDENTPLAN.md](INCIDENTPLAN.md).
 - **`INTRO-322 Concerns`** — refusal branch is functional but minimal.
 - **`INTRO-550 Question Toronto`** — Northern Ontario reaction stub; explicit `//To be written.//` marker in source.
 - **Act 1 onward** — no playable content yet beyond the prologue. STYLE-GUIDE.md sets the rules forward; no Act 1 prose exists to apply them to.

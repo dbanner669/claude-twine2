@@ -151,7 +151,7 @@
   </div>
   <div class="cc-bg-card">
     <<if $player.background eq "CSIS analyst">><span class="selected-tag">SELECTED</span><</if>>
-    <<link '<span class="card-title">CSIS Analyst</span><span class="card-blurb">Intelligence analysis in Ottawa. You read reports, cross-referenced data, identified patterns no one else saw. You were never in the field — you were the person the field reported to. Your mind works in systems.</span><span class="card-perks"><span class="perk">+ Agent +2</span><span class="perk">+ Academic +1</span><span class="perk">+ Composure +1</span></span>'>>
+    <<link '<span class="card-title">CSIS Analyst</span><span class="card-blurb">Intelligence analysis in Ottawa. You read reports, cross-referenced data, identified patterns no one else saw. You were never in the field — you were the person the field reported to.</span><span class="card-perks"><span class="perk">+ Agent +2</span><span class="perk">+ Academic +1</span><span class="perk">+ Composure +1</span></span>'>>
       <<set $player.background to "CSIS analyst">>
       <<goto "CC-300 Background">>
     <</link>>
@@ -182,6 +182,53 @@
 :: CC-400 Incident [avatar-hidden character-creation nighttime nobr]
 <<silently>>
 <<if not $player.background>><<goto "CC-300 Background">><</if>>
+/* Rebuild derived skill state from the current creation choices.
+   Background is locked at CC-300, always upstream of this passage, so this
+   runs here (before any inciting-incident flashback) rather than at CC-500.
+   That lets a flashback grant skills with a plain += that survives to the
+   summary. Resetting first means revisiting after a background change never
+   stacks. */
+<<set _skillNames to ["academic","agent","athlete","confrontation","charmer","streetwise","composure","sexology"]>>
+<<for _i to 0; _i lt _skillNames.length; _i++>>
+    <<set $player.skills[_skillNames[_i]].level to 0>>
+    <<set $player.skills[_skillNames[_i]].xp to 0>>
+    <<set $player.skills[_skillNames[_i]].specialities to []>>
+<</for>>
+/* Rebuild background-derived story tags from the current choices. */
+<<set _backgroundStoryTags to ["Northern Ontario", "City Dweller", "Lived in Toronto"]>>
+<<for _i to 0; _i lt _backgroundStoryTags.length; _i++>>
+    <<if $player.storyTags.includes(_backgroundStoryTags[_i])>>
+        <<set $player.storyTags.delete(_backgroundStoryTags[_i])>>
+    <</if>>
+<</for>>
+/* Apply skill bonuses based on background */
+<<switch $player.background>>
+<<case "RCMP constable">>
+    <<set $player.skills.confrontation.level += 2>>
+    <<set $player.skills.composure.level += 1>>
+    <<set $player.skills.athlete.level += 1>>
+    <<set $player.storyTags.pushUnique("Northern Ontario")>>
+<<case "CSIS analyst">>
+    <<set $player.skills.agent.level += 2>>
+    <<set $player.skills.academic.level += 1>>
+    <<set $player.skills.composure.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
+<<case "grad student">>
+    <<set $player.skills.academic.level += 2>>
+    <<set $player.skills.charmer.level += 1>>
+    <<set $player.skills.sexology.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
+    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
+<<case "unemployed after university">>
+    <<set $player.skills.streetwise.level += 1>>
+    <<set $player.skills.sexology.level += 1>>
+    <<set $player.skills.composure.level += 1>>
+    <<set $player.storyTags.pushUnique("City Dweller")>>
+    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
+<</switch>>
+/* Branch training: two years adds baseline competence */
+<<set $player.skills.agent.level += 1>>
+<<set $player.skills.composure.level += 1>>
 <</silently>>
 <<ccTabStrip 4>>
 <div class="cc-dossier">
@@ -223,49 +270,13 @@
 <<if not $player.codename>>
     <<set $player.codename to setup.codenames.random()>>
 <</if>>
-/* Rebuild derived skill state from the current creation choices.
-   This summary screen can be revisited, so bonuses must never stack. */
-<<set _skillNames to ["academic","agent","athlete","confrontation","charmer","streetwise","composure","sexology"]>>
-<<for _i to 0; _i lt _skillNames.length; _i++>>
-    <<set $player.skills[_skillNames[_i]].level to -4>>
-    <<set $player.skills[_skillNames[_i]].xp to 0>>
-    <<set $player.skills[_skillNames[_i]].specialities to []>>
-<</for>>
-/* Rebuild background-derived story tags from the current choices. */
-<<set _backgroundStoryTags to ["Northern Ontario", "City Dweller", "Lived in Toronto"]>>
-<<for _i to 0; _i lt _backgroundStoryTags.length; _i++>>
-    <<if $player.storyTags.includes(_backgroundStoryTags[_i])>>
-        <<set $player.storyTags.delete(_backgroundStoryTags[_i])>>
-    <</if>>
-<</for>>
-/* Apply skill bonuses based on background */
-<<switch $player.background>>
-<<case "RCMP constable">>
-    <<set $player.skills.confrontation.level += 2>>
-    <<set $player.skills.composure.level += 1>>
-    <<set $player.skills.athlete.level += 1>>
-    <<set $player.storyTags.pushUnique("Northern Ontario")>>
-<<case "CSIS analyst">>
-    <<set $player.skills.agent.level += 2>>
-    <<set $player.skills.academic.level += 1>>
-    <<set $player.skills.composure.level += 1>>
-    <<set $player.storyTags.pushUnique("City Dweller")>>
-<<case "grad student">>
-    <<set $player.skills.academic.level += 2>>
-    <<set $player.skills.charmer.level += 1>>
-    <<set $player.skills.sexology.level += 1>>
-    <<set $player.storyTags.pushUnique("City Dweller")>>
-    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
-<<case "unemployed after university">>
-    <<set $player.skills.streetwise.level += 1>>
-    <<set $player.skills.sexology.level += 1>>
-    <<set $player.skills.composure.level += 1>>
-    <<set $player.storyTags.pushUnique("City Dweller")>>
-    <<set $player.storyTags.pushUnique("Lived in Toronto")>>
-<</switch>>
-/* Branch training: two years adds baseline competence */
-<<set $player.skills.agent.level += 1>>
-<<set $player.skills.composure.level += 1>>
+/* Skill, story-tag, and training rebuild now happens at CC-400 (before any
+   inciting-incident flashback) so flashback grants survive to this screen.
+   Baseline Composure is finalized here, after the flashback, so an incident
+   composure grant flows into the durable baseline.
+   Current Composure starts at baseline and can move independently during play. */
+<<set $player.baselineComposure to $player.skills.composure.level>>
+<<set $player.currentComposure to $player.baselineComposure>>
 <</silently>>
 <<ccTabStrip 5>>
 <div class="cc-dossier">

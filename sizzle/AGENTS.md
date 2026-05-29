@@ -9,8 +9,10 @@ This file is the fast handoff guide for implementation work. Use it alongside:
 - `docs/STYLE-GUIDE.md` for the comprehensive writing style guide — read this before writing or revising any prose
 - `docs/NPC-handler.md` for Robert Flett's full profile
 - `docs/STORY-TAGS.md` for player-carried narrative flags
+- `docs/INCIDENTPLAN.md` for the selected CC-400 playable origin incidents and their current design notes
 - `docs/WRITING.md` for the slim writing index + current writing scope
 - `docs/WRITING-TODOS.md` for open prose-level revisions captured from round-trip passes
+- `docs/UI-TODOS.md` for deferred interface/accessibility follow-up items
 - `docs/AVATAR-RESEARCH.md` + `docs/avatar-bakeoff/` for the offline image-gen stack research and ComfyUI bakeoff workflows. Start at `docs/avatar-bakeoff/STATUS.md` — it tracks the current pipeline conclusion (direct text-to-image isn't stable enough; pivoted to canonical-template + image-edit). `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md` is the current production asset checklist for the locked explicit layer model.
 
 ## Current Scope
@@ -99,8 +101,61 @@ Important: `character-creation` takes precedence over `avatar-hidden`, so creati
 ### Header/footer state
 
 - Daytime header styling now uses the same darker bronze-brown family as the avatar meta strip.
+- The in-passage header status badge derives from Current Composure unless `$header.status` is set explicitly.
+- History arrows are disabled when SugarCube cannot move in that direction; do not call `Engine.backward()` / `Engine.forward()` directly from UI without checking history state.
+- Add `history-root` to story boundary passages where the header back arrow should stay disabled even if SugarCube has prior character-creation/history entries.
+- The avatar metadata card is bottom-anchored; the dotted avatar frame is vertically centered in the flexible space above it.
+- The Settings dialog currently exposes only working controls. `Avatar Visible` stays visible; `Avatar Size` and `Text Size` are intentionally hidden until they affect the current layout.
 - The fake footer text `AUTOSAVE ON` / `QUICK SAVE F5` has been removed.
-- Footer status is now just the save/timestamp block plus the version block.
+- The misleading `SAVED` label has been removed; footer status renders `$date` as `Month D, YYYY · Slot`.
+- The footer version is hard-coded in `src/story/interface.twee` as `v 0.1.0`. It is a greybox build label, not an implemented release/versioning system.
+
+### Time helpers
+
+`$date` uses a coarse `slot` field instead of clock minutes. Current slots are `earlyMorning`, `morning`, `noon`, `afternoon`, `evening`, `night`, and `laterNight`; labels and day-mode slots live in `setup.timeSlotLabels` and `setup.dayModeSlots`.
+
+JS-backed SugarCube helpers (implemented in `src/scripts/macros.js`):
+
+- `<<setTime "evening">>` — set only `$date.slot`
+- `<<setDate 2005 9 12 "morning">>` — set date plus slot
+- `<<advanceTime>>` / `<<advanceTime 2>>` — advance one or more slots, rolling `laterNight` into the next day
+- `<<advanceDays 1 "morning">>` — advance calendar days and reset the slot
+
+Authored scene-entry passages set explicit time with `<<setDate>>` / `<<setTime>>`; routine actions advance time with `<<advanceTime>>`. `dayOfWeek` is recomputed from the calendar date on every change. Crossing into a new calendar day (`<<advanceTime>>` rollover or `<<advanceDays>>`) resets Current Composure to Baseline; explicit date/time sets do not. Formatters are exposed as `setup.formatDate` / `setup.formatSlot`.
+
+### Composure state
+
+Composure is split into:
+
+- `$player.baselineComposure` — stable value established during character creation from `$player.skills.composure.level`
+- `$player.currentComposure` — volatile value used by live composure checks and avatar pips
+
+Use the helper macros in passages: `<<resetComposure>>`, `<<setCurrentComposure 2>>`, and `<<adjustComposure -1>>`. These clamp to `setup.composureMin` / `setup.composureMax`.
+
+Header status mapping:
+
+- Current Composure 0 or lower: `RATTLED` (red)
+- Current Composure 1: `SHAKEN` (orange)
+- Current Composure 2-4: `STEADY` (green)
+- Current Composure 5-6: `COOL & COLLECTED` (blue)
+- Current Composure 7 or higher: `ICE VEINS` (dark blue)
+
+### Player-facing skill checks
+
+Use `<<skillCheck>>` for visible rolls. It renders a roll panel, waits for player input, animates the dice, settles briefly, and only then reveals the success/failure payload.
+
+Pattern:
+
+```twee
+<<skillCheck "Composure" "2d6" _checkSkill 8>>
+<<success>>
+Success text and onward links.
+<<failure>>
+Failure text and onward links.
+<</skillCheck>>
+```
+
+Place continuation links inside both result branches. `<<rollDice>>` still exists as a low-level instant dice helper, but visible checks should not use it by default.
 
 ### Story-graph round-trip workflow (Obsidian Canvas)
 
@@ -153,7 +208,7 @@ Avatar art in `media/avatar/` is still placeholder-only. Current candidate body 
 
 ## Known Gaps
 
-- `CC-400 Incident` is still placeholder text with no real incident options yet. `$player.incitingIncident` exists as a variable; `INTRO-101 Lost in thought` interpolates it (falling back to "the incident") so the prose works either way.
+- `CC-400 Incident` is still placeholder text in source, but the selected direction is four full playable August 2003 origin sequences. See `docs/INCIDENTPLAN.md`. `$player.incitingIncident` exists as a variable; `INTRO-101 Lost in thought` interpolates it (falling back to "the incident") so the prose works either way until implementation lands.
 - The avatar panel currently shows a single composited placeholder PNG (`media/avatar/placeholder-suit.png`) instead of the dashed pattern, painted via CSS in `avatar.css`. This is temporary — the real `<<avatar>>` widget layer arrays are still empty. Remove the `.avatar-abs::after` background-image rule once Codex's layer pipeline lands and the arrays start populating (see `docs/avatar-bakeoff/STATUS.md`).
 - Avatar size/text size styling mismatch is intentionally left alone until avatar implementation work starts.
 - `INTRO-322 Concerns` (refusal/exit branch) and `INTRO-550 Question Toronto` (Northern Ontario reaction) are stubs only — content TBD.
@@ -200,4 +255,5 @@ Before handing off, another agent should usually read:
 5. `sizzle/docs/NPC-handler.md`
 6. `sizzle/docs/STORY-TAGS.md`
 7. `sizzle/docs/WRITING-TODOS.md` (open prose-level concerns)
-8. `sizzle/docs/AVATAR-RESEARCH.md` (if avatar work is on the table)
+8. `sizzle/docs/UI-TODOS.md` (deferred UI/accessibility items)
+9. `sizzle/docs/AVATAR-RESEARCH.md` (if avatar work is on the table)

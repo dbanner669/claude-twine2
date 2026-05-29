@@ -18,8 +18,9 @@
 <div class="stat-bar">
   <span class="stat-label">Composure</span>
   <div class="pips">
-    <<set _compLevel to Math.max(0, $player.skills.composure.level + 4)>>
-    <<set _compMax to 7>>
+    <<set _compMax to setup.composureMax || 7>>
+    <<set _compCurrent to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+    <<set _compLevel to Math.max(0, Math.min(_compMax, _compCurrent))>>
     <<for _i to 0; _i lt _compMax; _i++>>
       <<if _i lt _compLevel>>
         <div class="pip --on"></div>
@@ -34,5 +35,7 @@
 
 :: FooterStatus
 <<nobr>>
-SAVED · <<print String($date.day).padStart(2,'0')>> <<print ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][$date.month - 1]>> · <<print String($date.hour).padStart(2,'0')>>:<<print String(Math.floor(Math.random()*60)).padStart(2,'0')>>
+<<set _monthName to (setup.monthNames && setup.monthNames[$date.month - 1]) ? setup.monthNames[$date.month - 1] : "September">>
+<<set _slotLabel to (setup.timeSlotLabels && setup.timeSlotLabels[$date.slot]) ? setup.timeSlotLabels[$date.slot] : "Morning">>
+<<print _monthName>> <<print $date.day>>, <<print $date.year>> · <<print _slotLabel>>
 <</nobr>>

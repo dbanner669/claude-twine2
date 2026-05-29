@@ -1,9 +1,9 @@
 :: StoryInterface
 <div id="game">
   <header id="header">
-    <span class="wordmark">Sizzle</span>
+    <button type="button" class="wordmark dropdown-toggle" data-target="#logo-dropdown">Sizzle</button>
     <div class="header-divider"></div>
-    <a href="#" data-target="#logo-dropdown" class="dropdown-toggle">
+    <a href="#" data-target="#logo-dropdown" class="dropdown-toggle menu-toggle">
       <span class="menu-label">MENU</span>
     </a>
     <div id="logo-dropdown" class="dropdown-content">

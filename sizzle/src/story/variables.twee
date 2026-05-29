@@ -53,6 +53,8 @@
     personalBio: [],
     achievements: [],
     skills: {},
+    baselineComposure: 0,
+    currentComposure: 0,
     isWearing: [],
     piercings: [],
     tattoos: [],
@@ -64,7 +66,8 @@
     noseShape: "Celestial",
     mouthShape: "Cupid",
     arousal: 0,
-    incitingIncident: ""
+    incitingIncident: "",
+    flags: {}
 }>>
 
 /* Cover identity — the persona used inside Sizzle
@@ -76,12 +79,22 @@
 }>>
 <<set $player.codename to "">>
 
+/* $player.flags — namespace for one-shot guard latches (booleans).
+   Used to make a skill grant / event fire exactly once even if its passage
+   is re-entered as a fresh moment. Pattern:
+       <<if not $player.flags.blkSkillGranted>>
+           <<set $player.skills.composure.level += 1>>
+           <<set $player.flags.blkSkillGranted to true>>
+       <</if>>
+   One boolean per grantable moment (blkSkillGranted, manSkillGranted, ...).
+   Reading an unset flag returns undefined (falsy), so no pre-seeding needed. */
+
 /* Skill initialization
    Skills: academic, agent, athlete, confrontation, charmer,
            streetwise, composure, sexology */
 <<set _skillNames to ["academic","agent","athlete","confrontation","charmer","streetwise","composure","sexology"]>>
 <<for _i to 0; _i lt _skillNames.length; _i++>>
-    <<set $player.skills[_skillNames[_i]] to {level: -4, xp: 0, specialities: []}>>
+    <<set $player.skills[_skillNames[_i]] to {level: 0, xp: 0, specialities: []}>>
 <</for>>
 
 /* ============================================================
@@ -91,8 +104,8 @@
     year: 2005,
     month: 9,
     day: 12,
-    hour: 8,
-    dayOfWeek: "Monday"
+    dayOfWeek: "Monday",
+    slot: "morning"
 }>>
 
 <<set $sizzle to {
@@ -161,6 +174,25 @@
     "Wolf", "Cobra", "Eagle", "Fox", "Panther"]>>
 
 <<set setup.complexions to ["light", "medium", "dark"]>>
+
+<<set setup.monthNames to ["January","February","March","April","May","June","July","August","September","October","November","December"]>>
+
+<<set setup.timeSlots to ["earlyMorning","morning","noon","afternoon","evening","night","laterNight"]>>
+
+<<set setup.timeSlotLabels to {
+    earlyMorning: "Early morning",
+    morning: "Morning",
+    noon: "Noon",
+    afternoon: "Afternoon",
+    evening: "Evening",
+    night: "Night",
+    laterNight: "Later Night"
+}>>
+
+<<set setup.dayModeSlots to ["earlyMorning","morning","noon","afternoon"]>>
+
+<<set setup.composureMin to 0>>
+<<set setup.composureMax to 7>>
 
 <<set setup.glossary to {
     "NYSE": "Not Yet Scientifically Explained",

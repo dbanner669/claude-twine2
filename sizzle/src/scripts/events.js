@@ -39,7 +39,7 @@ $(document).on(":passagedisplay", function () {
   /* Day/night mode — set on <body> so CSS custom property
      overrides cascade to all descendants AND body pseudo-elements.
      Passage tags override: "daytime" forces day, "nighttime" forces night.
-     Otherwise determined by $date.hour (6–17 = day, 18–5 = night). */
+     Otherwise determined by $date.slot. */
   var psg2 = Story.get(State.passage);
   var tags = (psg2 && psg2.tags) ? psg2.tags : [];
   var mode;
@@ -49,8 +49,12 @@ $(document).on(":passagedisplay", function () {
   } else if (tags.indexOf("nighttime") !== -1) {
     mode = "night";
   } else {
-    var hour = State.variables.date ? State.variables.date.hour : 12;
-    mode = (hour >= 6 && hour < 18) ? "day" : "night";
+    var date = State.variables.date || {};
+    var slot = date.slot || "noon";
+    var daySlots = (typeof setup !== "undefined" && setup.dayModeSlots)
+      ? setup.dayModeSlots
+      : ["earlyMorning", "morning", "noon", "afternoon"];
+    mode = daySlots.indexOf(slot) !== -1 ? "day" : "night";
   }
 
   document.body.setAttribute("data-mode", mode);

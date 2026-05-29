@@ -62,7 +62,7 @@ The fact that the Sizzle situation is happening in Toronto — as far south as t
 
 ### The player's relationship to the Branch
 
-The player was a government employee in another capacity (chosen during character creation) before being recruited. They were identified because of an inciting incident (also chosen during character creation) that brought them to the Branch's attention. They are new to this world. The Branch is their employer, their lifeline, and possibly not telling them everything.
+The player was a government employee in another capacity (chosen during character creation) before being recruited. They were identified because of an inciting incident selected during character creation and played as an August 2003 origin sequence; that event brought them to the Branch's attention. They are new to this world. The Branch is their employer, their lifeline, and possibly not telling them everything.
 
 ---
 
@@ -134,7 +134,7 @@ The player is not immune. As they spend more time at Sizzle, they experience the
 
 The reason the Branch chose the player for this assignment is practical, not mystical. They need a believably attractive woman under 30 who is decently trained and can credibly get a job at — and blend into — an upscale swingers club. The Branch's talent pool that fits those criteria is small. The player character has been at the Branch for two years at game start: she's completed training, she understands NYSE classification, she's been briefed on cases. She is not a rookie. But this is her first major field assignment, and nothing in training fully prepares you for sustained undercover work.
 
-The inciting incident (chosen during character creation) explains why the player is at the Branch at all — it's the event that brought her to their attention and led to her recruitment two years prior. It may suggest an additional resistance or affinity (or both) to NYSE phenomena, but that is secondary to the mundane personnel reason she got this specific assignment.
+The inciting incident selected during character creation explains why the player is at the Branch at all. It is planned as a playable August 2003 origin sequence: the event that brought her to their attention and led to her recruitment two years prior. It may suggest an additional resistance, affinity, vulnerability, or scar around NYSE phenomena, but that is secondary to the mundane personnel reason she got this specific assignment.
 
 ---
 
@@ -154,7 +154,7 @@ The inciting incident (chosen during character creation) explains why the player
 | Name | CC-100 | First name and surname. Used for real identity. |
 | Appearance | CC-200 | Skin tone (3), hair colour (3), hair style (3), eye colour (3). Drives avatar sprite selection. |
 | Pre-Branch background | CC-300 | What the player was doing before the Branch recruited them. Four options: RCMP constable, CSIS analyst, grad student (psychology), unemployed after university. Influences starting skill levels and can assign background-derived story tags. |
-| Inciting incident | CC-400 | Why the Branch recruited them. May grant a trait, establish backstory, and determine relationship to NYSE phenomena. |
+| Inciting incident | CC-400 | Why the Branch recruited them. Planned as a selectable playable August 2003 origin sequence; may grant a trait, establish backstory, and determine relationship to NYSE phenomena. |
 | Cover identity | *In-game* | The persona used inside Sizzle. Not defined during character creation — developed a few passages into the main story, possibly partially assigned by the Branch and partially crafted by the player. |
 
 ### Skills
@@ -167,15 +167,24 @@ The inciting incident (chosen during character creation) explains why the player
 | Confrontation | Physical and psychological intimidation. Fighting, but also standing your ground, calling someone's bluff, staring someone down, projecting threat. The spectrum from a hard stare to a thrown punch. |
 | Charmer | Social manipulation, persuasion, seduction, reading people. |
 | Streetwise | Street smarts, criminal knowledge, reading situations, knowing the city. |
-| Composure | Emotional control, resisting influence, maintaining cover under pressure. Particularly important against NYSE effects. |
+| Composure | Emotional control, resisting influence, maintaining cover under pressure. Particularly important against NYSE effects. Split mechanically into Baseline Composure and Current Composure. |
 | Sexology | Knowledge of sexual culture, practices, etiquette, and terminology. The skill that determines whether you can pass as someone who belongs at Sizzle. At low levels: basic vocabulary (dom/sub, safe words). At higher levels: etiquette, technique, subculture knowledge (what poppers do, how a play party is structured, the difference between a lifestyle club and a hookup bar). This skill has natural progression tiers that mirror the club's access levels. |
 
-Skills start at -4 and are modified by the player's pre-Branch background choice. Composure is the key defensive skill against the club's supernatural influence. Sexology is the key social skill for operating inside Sizzle.
+Skills start at 0 and are modified by the player's pre-Branch background choice. Composure is the key defensive skill against the club's supernatural influence. Sexology is the key social skill for operating inside Sizzle.
+
+Composure has two mechanical values:
+
+- **Baseline Composure** is the durable character-created value. It is established from background choice and Branch training, and should rarely change.
+- **Current Composure** is the live value used for moment-to-moment composure checks. It can rise and fall during scenes, under stress, arousal, NYSE pressure, fatigue, relief, or successful self-regulation. At the beginning of a new day it resets to Baseline Composure.
+
+The in-passage header badge reflects Current Composure by default: 0 or lower is **Rattled** (red), 1 is **Shaken** (orange), 2-4 is **Steady** (green), 5-6 is **Cool & Collected** (blue), and 7 or higher is **Ice Veins** (dark blue). Individual passages may override the badge when a specific story status is more useful.
 
 ### Key state variables
 
 - `$player.cover` — the cover identity used inside Sizzle (defined in-story, not during creation)
 - `$player.arousal` — current arousal level (0-3), influenced by encounters and NYSE effects
+- `$player.baselineComposure` — durable composure value established during character creation
+- `$player.currentComposure` — volatile composure value used for live composure checks and the header/avatar UI
 - `$player.storyTags` — **array** of persistent narrative flags tied to backstory or later story developments. Used for dialogue checks, situational recognition, gating, and remembered history.
 - `$player.statusEffects` — **array** of active temporary modifiers, supports multiple simultaneous effects (e.g., ["Caffeinated", "Flustered", "Influenced"]). Effects are added/removed as situations change.
 - `$player.kinks` — **array** of character preferences, accumulated during play based on choices. Multiple kinks can be active simultaneously and influence available options and NPC reactions.
@@ -220,7 +229,9 @@ As the game progresses and the player establishes themselves — builds relation
 
 ### Passage of time
 
-Time advances through player choices, not in real-time. Each major action (going to a location, having a conversation, attending an event) advances the clock. The `$date` variable tracks the current date and time. Certain events are date-gated — things happen on specific nights, seasons change, the investigation has a tempo.
+Time advances through player choices, not in real-time. Each major action (going to a location, having a conversation, attending an event) advances the clock. The `$date` variable tracks the current date and a coarse time-of-day slot. Certain events are date-gated — things happen on specific nights, seasons change, the investigation has a tempo.
+
+Implementation treats time as authored slots rather than literal minutes. Scene-entry passages set an explicit date/time slot; routine actions advance to the next slot. Helper macros `<<setTime>>`, `<<setDate>>`, `<<advanceTime>>`, and `<<advanceDays>>` (in `src/scripts/macros.js`) provide this, so passages do not manipulate `$date` fields by hand.
 
 ---
 
@@ -249,13 +260,16 @@ NPCs have individual relationship tracks. Relationships are built through conver
 
 ### Skill Checks
 
-Skill checks use the `<<rollDice>>` macro. The pattern:
+Player-facing skill checks use the `<<skillCheck>>` macro. The pattern:
 
 1. A situation requires a check (e.g., composure check when confronted, charmer check when flirting for information).
-2. Roll NdS + skill modifier vs. difficulty threshold.
-3. Pass/fail determines the outcome, with narrative consequences.
+2. The passage shows a visible roll panel and waits for the player to click.
+3. Dice animate for a short beat, settle on the final total, and compare NdS + skill modifier vs. difficulty threshold.
+4. Only then does the passage reveal success or failure text, with narrative consequences.
 
 Checks are not purely random — skill level meaningfully shifts the odds. A skilled charmer will reliably succeed at easy social challenges but still sweat the hard ones.
+
+Composure checks use **Current Composure**, not Baseline Composure. Baseline describes the character's durable capacity; Current describes how steady she is right now.
 
 ### Arousal
 
@@ -278,7 +292,7 @@ Two hidden variables drive the supernatural mechanics. Neither is visible to the
 
 - **Not displayed** to the player. The player feels the effects without seeing a number.
 - **Goes up and down**, but does not decay naturally. If left alone, it stays where it is. Reducing influence requires active player choices (specific actions, not just time away from the club).
-- **Starting value** is determined by the inciting incident chosen during character creation. Some backgrounds start influence higher, some lower. This is the only effect of the player's "resistance" — it sets the starting position, not the rate of gain or loss.
+- **Starting value** is determined by the inciting incident selected during character creation and may be refined by how exposed the player character is during the playable origin sequence. This is the only effect of the player's "resistance" — it sets the starting position, not the rate of gain or loss.
 - **High influence effects:**
   - Altered choices — new options appear (temptations, impulses), some cautious options may be locked or feel less natural.
   - Altered perception — the narration itself becomes less reliable. Descriptions shift in tone, details the player noticed before may be missed or distorted.
@@ -292,7 +306,7 @@ Two hidden variables drive the supernatural mechanics. Neither is visible to the
 
 ### Time & Calendar
 
-The `$date` object tracks year, month, day, hour, and day of week. Time matters:
+The `$date` object tracks year, month, day, day of week, and a coarse time-of-day slot. The live slot vocabulary is `earlyMorning`, `morning`, `noon`, `afternoon`, `evening`, `night`, and `laterNight`; UI labels render as `Early morning`, `Morning`, `Noon`, `Afternoon`, `Evening`, `Night`, and `Later Night`. The footer renders this as `Month D, YYYY · Slot` (for example, `September 12, 2005 · Morning`). Time matters:
 
 - Sizzle operates on specific nights (not every night).
 - Certain events happen on specific dates.
@@ -306,7 +320,7 @@ The `$date` object tracks year, month, day, hour, and day of week. Time matters:
 ### Act structure
 
 **Prologue: Recruitment**
-- Character creation (name, appearance, background, inciting incident).
+- Character creation (name, appearance, background, inciting incident), including a playable origin sequence for the selected incident.
 - The player's recruitment to the Branch two years prior is established. She's trained, not green.
 - Assignment briefing: this is the mission, this is what we know, this is what we need.
 
@@ -385,8 +399,8 @@ The greybox covers the **Prologue** and the **briefing** (the opening beat of Ac
 
 **What's in v1:**
 
-- Character creation (all 5 screens functional: name, appearance, background, inciting incident, summary)
-- The player's recruitment context is established (two years at the Branch, trained, not green)
+- Character creation (name, appearance, background, inciting incident, summary), plus a playable origin sequence for the selected incident
+- The player's recruitment context is established through the August 2003 incident sequence and the later briefing context (two years at the Branch, trained, not green)
 - Branch briefing scene: the handler, the assignment, what's known about Sizzle, what the player is being asked to do
 - At least one skill check (likely composure or academic during the briefing)
 - The tone is established — the Branch's institutional texture, the writing style, the player character's interiority
@@ -397,8 +411,8 @@ The greybox covers the **Prologue** and the **briefing** (the opening beat of Ac
 - Arrival in Toronto / Queen West (that's Act 1 proper)
 - Sizzle interior or any club gameplay
 - NPC relationships (beyond the handler)
-- Erotic content
-- NYSE effects
+- Sizzle club erotic content
+- Ongoing Sizzle NYSE effects beyond the origin incident
 - Day/night cycle
 - Avatar system beyond character creation (no clothing changes, location backgrounds)
 - Multiple endings
@@ -406,4 +420,4 @@ The greybox covers the **Prologue** and the **briefing** (the opening beat of Ac
 
 ### Success criteria for v1
 
-A new player can create a character, meet their handler, receive a briefing that establishes the world and the mission, and finish feeling like they understand the tone of the game, the nature of the Branch, and what they're about to walk into. The writing should make them want to keep going.
+A new player can create a character, play the event that brought her to the Branch's attention, meet her handler, receive a briefing that establishes the world and the mission, and finish feeling like they understand the tone of the game, the nature of the Branch, and what they're about to walk into. The writing should make them want to keep going.

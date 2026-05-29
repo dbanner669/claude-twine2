@@ -43,7 +43,10 @@ sizzle/
 │   ├── AVATAR-RESEARCH.md     Offline image-gen stack research (Codex deliverable)
 │   ├── avatar-bakeoff/        Bakeoff workflows, STATUS, OPTION-2 asset plan, baseline-inputs/ (start at STATUS.md)
 │   ├── STYLE-GUIDE.md         Comprehensive writing style guide (voice, mechanics, AI-pitfall watchlist) — source of truth for prose
+│   ├── EDITORIAL-SWEEP.md     Process template for running a style-guide audit against existing prose (Stage 0–4 workflow)
+│   ├── STYLE-AUDIT-YYYY-MM-DD.md  Per-sweep audit reports (first: STYLE-AUDIT-2026-05-26.md against the greybox)
 │   ├── WRITING.md             Slim index + current writing scope (points at STYLE-GUIDE.md)
+│   ├── UI-TODOS.md            Deferred interface/accessibility follow-up list
 │   └── ART.md                 Slim index + current art scope
 ├── build/           Tweego compilation scripts
 ├── AGENTS.md        Agent handoff guide
@@ -105,9 +108,23 @@ Mode is set per-passage by `events.js`:
 
 | Passage tag | Effect |
 |-------------|--------|
-| `daytime` | Forces day mode regardless of `$date.hour` |
-| `nighttime` | Forces night mode regardless of `$date.hour` |
-| *(neither)* | Auto-detect: hour 6–17 = day, 18–5 = night |
+| `daytime` | Forces day mode regardless of `$date.slot` |
+| `nighttime` | Forces night mode regardless of `$date.slot` |
+| `history-root` | Disables the header back arrow on story boundary passages, e.g. the first assignment card after character creation |
+| *(neither)* | Auto-detect: `earlyMorning`, `morning`, `noon`, `afternoon` = day; `evening`, `night`, `laterNight` = night |
+
+### Time Helpers
+
+Time uses a canonical `$date.slot` instead of clock minutes. JS-backed SugarCube helpers in `src/scripts/macros.js` drive it — do not hand-edit `$date` fields in passages:
+
+| Helper | Purpose |
+|--------|---------|
+| `<<setTime "evening">>` | Set only `$date.slot` |
+| `<<setDate 2005 9 12 "morning">>` | Set full date plus slot |
+| `<<advanceTime>>` / `<<advanceTime 2>>` | Advance one or more slots, rolling `laterNight` into the next day |
+| `<<advanceDays 1 "morning">>` | Advance calendar days and reset the slot |
+
+These live in `src/scripts/macros.js`, backed by shared helpers (`sizzleFormatDate` / `sizzleFormatSlot`, exposed on the `setup` namespace as `setup.formatDate` / `setup.formatSlot`, plus `sizzleSetSlot`, `sizzleSetFullDate`, `sizzleAdvanceSlot`, and `sizzleAdvanceDays`). `$date.dayOfWeek` is recomputed from the calendar date on every change. Scene-entry passages use explicit `<<setDate ...>>` or `<<setTime ...>>`; routine player actions use `<<advanceTime>>`. Crossing into a new calendar day — via `<<advanceTime>>` rollover or `<<advanceDays>>` — resets Current Composure to Baseline; explicit `<<setDate>>` / `<<setTime>>` do not.
 
 ### Avatar Visibility & Header Bar
 
@@ -115,10 +132,24 @@ The in-passage header bar is rendered by the `<<header>>` widget. Set these vari
 
 - `$header.location` — uppercase location text (e.g., "Diner, Bank Street, Ottawa")
 - `$header.time` — italic time display (e.g., "Monday morning")
-- `$header.status` — status badge text (defaults to "COMPOSED" if not set)
+- `$header.status` — optional status badge override. If unset, the badge derives from Current Composure.
 - `$header.weather` — optional weather text
 
-The avatar panel (left column) shows automatically on `scene` mode passages. The `AvatarMeta` passage (in `caption.twee`) renders the identity block and composure bar via `data-passage` attribute. The `FooterStatus` passage renders the save/time display in the footer. The fake autosave/quicksave helper text has been removed from the UI.
+Default header status mapping:
+
+| Current Composure | Badge | Color |
+|-------------------|-------|-------|
+| 0 or lower | `RATTLED` | Red |
+| 1 | `SHAKEN` | Orange |
+| 2-4 | `STEADY` | Green |
+| 5-6 | `COOL & COLLECTED` | Blue |
+| 7 or higher | `ICE VEINS` | Dark blue |
+
+The avatar panel (left column) shows automatically on `scene` mode passages. The dotted avatar frame is centered within the flexible space above the metadata block; the `AvatarMeta` passage (in `caption.twee`) renders the bottom-anchored identity block and composure bar via `data-passage` attribute. The Settings dialog currently exposes only live controls: `Avatar Visible` remains available, while inactive `Avatar Size` and `Text Size` controls are intentionally hidden until they are wired to the current responsive layout.
+
+The `FooterStatus` passage renders the current in-game date/time as `Month D, YYYY · Slot` from `$date`. The fake autosave/quicksave helper text and misleading `SAVED` label have been removed from the UI.
+
+The footer version label is currently hard-coded in `src/story/interface.twee` as `v 0.1.0`. Treat it as a greybox build label until a real release/versioning policy exists.
 
 ### Glossary Terms
 
@@ -187,7 +218,7 @@ Follows PREFIX-NUMBER convention from the template:
 | Confrontation | Physical and psychological intimidation, standing your ground |
 | Charmer | Social manipulation, persuasion, seduction, reading people |
 | Streetwise | Street smarts, criminal knowledge, reading situations |
-| Composure | Emotional control, resisting influence, maintaining cover (key NYSE defense) |
+| Composure | Emotional control, resisting influence, maintaining cover (key NYSE defense). Split into durable Baseline Composure and volatile Current Composure for live checks/status. |
 | Sexology | Knowledge of sexual culture, practices, etiquette, terminology (key Sizzle skill) |
 
 ## Key Variables
@@ -202,6 +233,9 @@ Follows PREFIX-NUMBER convention from the template:
 - `$player.statusEffects` — array of active temporary modifiers (supports multiple)
 - `$player.kinks` — array of preferences (accumulated during play)
 - `$player.quirks` — array of personality traits (supports multiple)
+- `$player.baselineComposure` — durable composure value established during character creation
+- `$player.currentComposure` — volatile composure value used for live composure checks and avatar pips
+- `$player.flags` — namespace for one-shot boolean guard latches; ensures a skill grant / event fires exactly once even if its passage is re-entered as a fresh moment (e.g. `$player.flags.blkSkillGranted`)
 
 ### Sizzle
 - `$sizzle.suspicion` — how suspicious the club is of the player
@@ -213,7 +247,9 @@ Follows PREFIX-NUMBER convention from the template:
 - `$nyse.power` — player's developing abilities (dormant early game)
 
 ### World
-- `$date` — in-game date/time tracking (starts September 2005)
+- `$date` — in-game date/time tracking (starts September 12, 2005, morning). Fields: `year`, `month`, `day`, `dayOfWeek`, `slot`.
+
+Current time slots are `earlyMorning`, `morning`, `noon`, `afternoon`, `evening`, `night`, and `laterNight`. Labels live in `setup.timeSlotLabels`; day/night palette auto-detection uses `setup.dayModeSlots`.
 
 ## SugarCube Gotchas (Read Before Editing)
 
@@ -255,32 +291,60 @@ Opening a `<div>` in one widget and closing it in another fails — the browser 
 
 Without `nobr`, SugarCube converts blank lines between macros/HTML to `<br>` tags, breaking layout. Add `nobr` to the tag list of any passage with complex HTML structure (character creation, UI-heavy passages).
 
-### 5. Composure level calculation
+### 5. Baseline vs Current Composure
 
-Skills start at level -4. To display 0-based values (e.g., composure pips), use:
+Skills start at level 0. During character creation, `$player.skills.composure.level` is copied into `$player.baselineComposure`, and `$player.currentComposure` starts at that baseline.
+
+Live checks and avatar pips should read Current Composure:
 ```
-<<set _compLevel to Math.max(0, $player.skills.composure.level + 4)>>
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 ```
+
+Use the helper macros instead of hand-editing the fields:
+
+| Macro | Effect |
+|-------|--------|
+| `<<resetComposure>>` | Set Current Composure back to Baseline Composure |
+| `<<setCurrentComposure 2>>` | Set Current Composure directly, clamped to the configured range |
+| `<<adjustComposure -1>>` | Nudge Current Composure up or down, clamped to the configured range |
+
+The header status badge derives from Current Composure unless `$header.status` is explicitly set for a passage-specific override.
+
+### 6. Player-facing rolls use `<<skillCheck>>`
+
+Use `<<skillCheck>>` for visible checks. It renders a roll panel, waits for the player to click the roll button, animates the dice, settles on the final total, then reveals only the success or failure payload. Put any post-check continuation links inside both result branches so the player cannot skip the roll.
+
+```twee
+<<skillCheck "Composure" "2d6" _checkSkill 8>>
+<<success>>
+Success text and onward links.
+<<failure>>
+Failure text and onward links.
+<</skillCheck>>
+```
+
+`<<rollDice>>` remains available as a low-level instant roller, but it should not be used for player-facing checks unless there is a specific reason to hide the roll interaction.
 
 ## Current Project Status
 
 ### What's built and working
 - **Main menu** — centered title page with night mode, single "Begin" link
-- **Character creation (5 steps)** — full dossier-style flow with tab strip, option grids with `:has()` selection, background cards, redacted incident file, summary table, signature block, and background-selection guardrails
+- **Character creation (5 steps)** — full dossier-style flow with tab strip, option grids with `:has()` selection, background cards, redacted incident placeholder, summary table, signature block, and background-selection guardrails
 - **Derived-state rebuilds** — `CC-500` recalculates skill bonuses and background-derived story tags from scratch on revisit instead of stacking
 - **Briefing scene (INTRO-100 through INTRO-800)** — ~30 passages, complete prologue with branching dialogue, skill checks, background-specific variants
 - **Glossary hover terms** — `<<term>>` widget and tooltip styling are live, currently used for `NYSE`
 - **Robert briefing art** — `media/characters/robert-flett-diner-entry.png` is placed at the top of `INTRO-110`, with a matching reference sheet in `media/characters/robert-flett-reference-sheet.png`
 - **Avatar panel** — placeholder frame, identity block (name/kicker), composure pip bar
-- **Header bar** — location, time, status badge, weather
-- **Footer** — save timestamp and version
+- **Header bar** — location, time, Current Composure status badge, weather, guarded history arrows
+- **Footer** — canonical date/time display from `$date` and hard-coded greybox version (`v 0.1.0`)
 - **Day/night mode** — full CSS palette swap with atmosphere overlays
+- **Time helpers** — `<<setTime>>` / `<<setDate>>` / `<<advanceTime>>` / `<<advanceDays>>` macros drive `$date`; the footer clock and day/night palette react automatically, and day-crossings reset Current Composure to Baseline
 - **Day-mode header polish** — daytime header now uses the darker bronze-brown UI family instead of a lighter mismatched bar
 - **UI design system** — 8 CSS files, 5 font families, complete token system
 
 ### What's placeholder / not yet built
 - **Avatar art/runtime** — `media/avatar/` remains placeholder-only and the runtime image arrays still need the explicit-slot implementation. Current candidate body layers, clothing-mask experiments, Qwen 2509 clothing-fit tests, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/`; the greybox avatar proof is locked to medium skin, long straight hair, and blue eyes. Clothing tests are still draft-only, but Qwen Image Edit 2509 is the current leading route because it can adapt generated garment references to the noface source body.
-- **CC-400 inciting incidents** — placeholder text, no actual options
+- **CC-400 inciting incidents** — placeholder text in source, but the selected direction is four full playable August 2003 origin sequences documented in `docs/INCIDENTPLAN.md`: `the Toronto Blackout`, `the Dark of Manitoulin`, `the Woman with the Pale Eyes`, and `Wet Dog Smell`
 - **Hair style swatches** — show dark rectangles (no art yet)
 - **Location/background art** — still sparse; only a small number of location/character images exist so far
 - **NPC roster** — only Robert Flett is profiled

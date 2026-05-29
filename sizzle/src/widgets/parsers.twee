@@ -61,7 +61,7 @@
 <<set _termKey to _args[0]>>
 <<set _termLabel to (typeof _args[1] !== 'undefined') ? _args[1] : _termKey>>
 <<if setup.glossary and setup.glossary[_termKey]>>
-<span class="glossary-term" tabindex="0">
+<span class="glossary-term" tabindex="0" onmouseenter="window.SizzleGlossary && window.SizzleGlossary.show(this)" onmouseleave="window.SizzleGlossary && window.SizzleGlossary.hide()" onfocus="window.SizzleGlossary && window.SizzleGlossary.show(this)" onblur="window.SizzleGlossary && window.SizzleGlossary.hide()">
     <span class="glossary-label"><<print _termLabel>></span>
     <span class="glossary-tooltip"><<print setup.glossary[_termKey]>></span>
 </span>
@@ -89,16 +89,11 @@ she/her
    ------------------------------------------------------------ */
 
 <<widget "currentDate">><<nobr>>
-<<set _months to ["January","February","March","April","May","June","July","August","September","October","November","December"]>>
-<<print $date.dayOfWeek>>, <<print _months[$date.month - 1]>> <<print $date.day>>, <<print $date.year>>
+<<set _monthName to (setup.monthNames && setup.monthNames[$date.month - 1]) ? setup.monthNames[$date.month - 1] : "September">>
+<<print _monthName>> <<print $date.day>>, <<print $date.year>>
 <</nobr>><</widget>>
 
 <<widget "currentTime">><<nobr>>
-<<if $date.hour lt 12>>
-    <<print $date.hour>>:00 AM
-<<elseif $date.hour eq 12>>
-    12:00 PM
-<<else>>
-    <<print $date.hour - 12>>:00 PM
-<</if>>
+<<set _slotLabel to (setup.timeSlotLabels && setup.timeSlotLabels[$date.slot]) ? setup.timeSlotLabels[$date.slot] : "Morning">>
+<<print _slotLabel>>
 <</nobr>><</widget>>

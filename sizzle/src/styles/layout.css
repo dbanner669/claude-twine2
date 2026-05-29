@@ -62,6 +62,16 @@
   transform: rotate(-1deg);
   display: inline-block;
   border-bottom: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#header .wordmark:hover,
+#header .wordmark:focus-visible {
+  color: #f07880;
 }
 
 /* Header divider pip */
@@ -123,6 +133,20 @@
 }
 #ui-bar-history button:hover {
   background: var(--sz-ink-4);
+}
+
+#ui-bar-history button:disabled,
+#ui-bar-history button[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: default;
+  color: var(--sz-cream-faint);
+  background: transparent;
+  border-color: var(--sz-rule-cool);
+}
+
+#ui-bar-history button:disabled:hover,
+#ui-bar-history button[aria-disabled="true"]:hover {
+  background: transparent;
 }
 
 /* Turn counter between history buttons */
@@ -202,6 +226,7 @@
   padding: var(--sz-s-8) var(--sz-s-10);
   overflow-y: auto;
   position: relative;
+  z-index: 10;
 }
 
 /* Center passage content on menu/cover screens (single-column layout) */
@@ -399,12 +424,37 @@ body[data-mode="day"] #footer {
 }
 
 .header-status {
+  --header-status-color: var(--sz-status-steady);
   font-family: var(--sz-f-ui);
   font-size: 11px;
   letter-spacing: 0.18em;
-  color: var(--sz-composed);
+  color: var(--header-status-color);
   padding: 4px 10px;
-  border: 1px solid rgba(111,140,90,0.4);
+  border: 1px solid color-mix(in srgb, var(--header-status-color) 55%, transparent);
+}
+
+.header-status.--rattled {
+  --header-status-color: var(--sz-status-rattled);
+}
+
+.header-status.--shaken {
+  --header-status-color: var(--sz-status-shaken);
+}
+
+.header-status.--steady {
+  --header-status-color: var(--sz-status-steady);
+}
+
+.header-status.--cool {
+  --header-status-color: var(--sz-status-cool);
+}
+
+.header-status.--ice {
+  --header-status-color: var(--sz-status-ice);
+}
+
+.header-status.--custom {
+  --header-status-color: var(--sz-status-steady);
 }
 
 .header-weather {
@@ -412,4 +462,137 @@ body[data-mode="day"] #footer {
   font-size: 11px;
   letter-spacing: 0.18em;
   color: var(--sz-cream-faint);
+}
+
+
+/* --- SugarCube system dialogs: restart, saves, settings ------ */
+#ui-overlay {
+  background: rgba(8,5,4,0.72);
+  backdrop-filter: blur(2px);
+}
+
+#ui-dialog:not(.dialog-character-sheet) {
+  background: var(--sz-ink-2);
+  color: var(--sz-cream);
+  border: 1px solid var(--sz-rule-strong);
+  box-shadow: var(--sz-shadow-dialog);
+  font-family: var(--sz-f-body);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-titlebar {
+  min-height: 54px;
+  padding: 14px 18px;
+  background: var(--sz-ink);
+  border-bottom: 1px solid var(--sz-rule);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-title {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+  font-weight: 500;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-close {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--sz-rule);
+  background: var(--sz-ink-3);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  line-height: 1;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-close:hover {
+  border-color: var(--sz-brass);
+  color: var(--sz-cream);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body {
+  padding: 24px;
+  background: var(--sz-ink-2);
+  color: var(--sz-cream-soft);
+  line-height: 1.55;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body h1,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body h2,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body h3 {
+  font-family: var(--sz-f-display);
+  color: var(--sz-cream);
+  font-style: italic;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body button,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body .button,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body input[type="button"],
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body input[type="submit"] {
+  min-height: 34px;
+  padding: 8px 14px;
+  border: 1px solid var(--sz-brass-dim);
+  background: var(--sz-ink-3);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body button:hover,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body .button:hover,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body input[type="button"]:hover,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body input[type="submit"]:hover {
+  background: var(--sz-ink-4);
+  border-color: var(--sz-brass);
+  color: var(--sz-cream);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body button:disabled,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body .button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body ul.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sz-s-4);
+  padding: 0;
+  margin: var(--sz-s-6) 0 0;
+  list-style: none;
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body label {
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sz-brass);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body select,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body input,
+#ui-dialog:not(.dialog-character-sheet) #ui-dialog-body textarea {
+  background-color: var(--sz-ink-3);
+  color: var(--sz-cream);
+  border-color: var(--sz-rule);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #saves-list,
+#ui-dialog:not(.dialog-character-sheet) .saves-list,
+#ui-dialog:not(.dialog-character-sheet) #settings {
+  display: grid;
+  gap: var(--sz-s-4);
+}
+
+#ui-dialog:not(.dialog-character-sheet) #saves-list > *,
+#ui-dialog:not(.dialog-character-sheet) .saves-list > *,
+#ui-dialog:not(.dialog-character-sheet) #settings > * {
+  border-color: var(--sz-rule);
+}
+
+body[data-mode="day"] #ui-overlay {
+  background: rgba(50,32,14,0.38);
 }

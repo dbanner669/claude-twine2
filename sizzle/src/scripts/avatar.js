@@ -1,8 +1,8 @@
 /* ============================================================
    AVATAR SETTINGS
-   Registers SugarCube settings for avatar size, text size,
-   and avatar visibility. These add entries to the Settings
-   dialog that players can adjust.
+   Registers SugarCube settings for avatar visibility. Avatar
+   size and text size controls are intentionally hidden until
+   those settings are wired to the current responsive layout.
    ============================================================ */
 
 function initAvatarSize() {
@@ -81,8 +81,6 @@ function initAvatarVisible() {
 }
 
 function initAvatar() {
-  initAvatarSize();
-  initTextSize();
   initAvatarVisible();
 }
 

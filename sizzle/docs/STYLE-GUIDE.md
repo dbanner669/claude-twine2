@@ -422,6 +422,14 @@ Default register is fun, sharp, self-aware. The player character has an active s
 
 **If the text claims something is funny ("she laughed," "he chuckled"), the preceding line must actually be funny.** "She said, and everyone laughed" doesn't make the line funny — it claims it is. If you can't articulate the mechanism (wordplay, irony, deflation, absurdity), the joke doesn't work. Either write a line that earns the reaction, or cut the reaction.
 
+### 10.5 The Player Can Be Funny; the Situation Isn't
+
+The player character's wit is a constant — dry, sardonic, gallows-wry, a woman who copes through clipped, mordant observation. But the *events* are not jokes. An NYSE incident, the anomaly at its centre, and above all the people caught in it are never played for laughs.
+
+- **Her humour is characterization and a relief valve, never a punchline at a victim's expense.** She can be funny *about* her own fear, her own predicament, the absurdity of what she's looking at. She is not funny *at* the people the anomaly has reduced.
+- **The victims are people, not a joke.** Adults under NYSE compulsion — degraded, objectified, doing things they would never choose — are rendered with humanity that surfaces the moment the influence breaks. The humiliation is theirs; it reads as horror, not as comic spectacle or the reader's entertainment. (Extends §11.8: characters stay whole, even background victims.)
+- The comedy and the horror can share a scene without undercutting each other. Her voice stays sharp *because* the thing she's narrating is genuinely bad. The silence where a joke would normally go is itself a signal.
+
 ---
 
 ## 11. Erotic Content and Sex Scenes
@@ -491,6 +499,37 @@ Words like *slick, heat, pulse, throb, wet* accumulate invisibly in sex scenes. 
 "Something" is the wrong word when the writer is dodging specificity. "Something uncomfortable in her chest" is lazy — name it or show it.
 
 The distinction matters more in Sizzle than in baseline erotica because NYSE produces real uncategorizable experiences. Both legitimate uses and lazy uses will appear. Audit by asking: *if the character could name this, would she?* If yes, name it. If no, leave it as "something" — and the reader registers the reach toward language that doesn't quite fit.
+
+### 11.12 The Player Character Is Sex-Positive
+
+In every background and every situation, the player character is at least somewhat sex-positive. This is load-bearing for the erotic-horror material: when she's frightened during an eroticized NYSE event, her fear is the *compulsion* — overwritten will, contamination, bodies answering before minds agree — never that sex or kink is disgusting.
+
+- **Never write her dread as prudishness.** She is not scared because strangers are having sex, or because an act is transgressive. She is scared because something is making people do things they did not choose, and it is reaching for her too.
+- This holds across all four inciting incidents and all of Sizzle. A version of the character who recoils from sex *itself* breaks the premise.
+
+### 11.13 Sell the Dread, Don't Police the Heat
+
+When erotic content overlaps with horror — NYSE compulsion, contamination, overwritten consent — the writer's job is to make the *horror* land. Sell the dread: the wrongness of compromised will, the violation of agency, the humiliation done *to* people.
+
+- **Do not write defensively to suppress or "correct for" arousal.** If the explicit material also reads as charged to a given reader, that's their interpretation and it is fine. We are not writing it for that, but we do not need to correct for the negative.
+- **Aim at the dread; don't aim away from the heat.** Don't pad a horror-erotic scene with reassurances that it "isn't sexy," and don't hedge the explicitness to keep the horror "safely" grotesque. The horror just has to be the load-bearing feeling underneath; the heat is allowed to sit on top of it.
+- This is a whole-game rule, sharpest in the NYSE incidents but true wherever influence and consent are in tension (cf. §11.6, §11.7). It pairs with §11.1 — *don't tame it* — and with §13.5: the dread comes from the situation, not from authorial editorializing.
+
+### 11.14 Explicit by Default; the HUMAN-DRAFT Fallback
+
+*(Also recorded in [INCIDENTPLAN.md](INCIDENTPLAN.md) for the incident-drafting workflow; kept here because it governs how any explicit beat gets drafted.)*
+
+- **Write explicit beats explicitly by default.** Per §11.1, the drafting agent renders sexual and grotesque material at full register without being asked twice. Don't pre-soften, don't gesture, don't leave the heat for "later."
+- **The `%%% HUMAN-DRAFT %%%` block is a fallback only.** Drop it in *solely* if the drafting agent itself judges a specific beat to need more explicitness than it can comfortably write — never pre-placed, never mandated. When used, keep the surrounding beat structure, links, and variable hooks intact so the passage still compiles and flows; only the explicit prose is left for the human.
+
+  ```
+  /* %%% HUMAN-DRAFT %%%
+     <passage id> — <what the beat depicts, one line>.
+     Intent: <explicit content + the feeling it must land>. ~N words.
+     %%% END %%% */
+  ```
+
+- **State the explicit specifics in the design/plan, not euphemisms.** When a design note can only gesture ("a humiliating arrangement," "does something degraded") instead of naming what is depicted, that vagueness propagates straight into the prose — and it pinpoints exactly the beat a human may need to draft. Name the act in the plan so the prose doesn't inherit the fog.
 
 ---
 
@@ -597,6 +636,7 @@ Documented patterns where AI-assisted writing goes wrong. Watch for all of them.
 - **Sneaking smartphones, group chats, or post-2006 references into 2005 Toronto.** §4.1.
 - **Letting cover-identity NPCs know real-player information.** §12.3.
 - **Resolving NYSE moments with narrator certainty.** The player character can be afraid she's being influenced; the narrator should not confirm she is. Subjective stays subjective.
+- **Policing the heat.** Writing defensively around eroticized horror — narrator reassurances that a scene "isn't sexy," explicitness hedged to keep the horror "safe," the PC's fear framed as distaste for sex. Sell the dread instead, and let her sex-positivity hold. See §11.12–11.13.
 
 ### 13.6 Escalation and Pacing Problems
 
@@ -744,4 +784,6 @@ When in doubt:
 - **Specificity beats generic.** Carp, not "a rural range." The mug stirred three times, not "his familiar gesture."
 - **Bureaucratic voice over wonder voice** for NYSE. Always.
 - **Heat is required.** Earned heat is hotter.
+- **Sell the dread, don't police the heat.** Make the horror land; don't write to suppress arousal.
+- **The PC can be funny; the situation never is.** Her wit, never the victims, carries the comedy.
 - **Living document.** When this guide doesn't cover a case, write the rule into it.

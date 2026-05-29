@@ -151,6 +151,27 @@
   transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
 }
 
+.glossary-tooltip-overlay {
+  position: fixed;
+  min-width: 12rem;
+  max-width: min(22rem, 75vw);
+  padding: 10px 12px;
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule-strong);
+  box-shadow: var(--sz-shadow-card);
+  color: var(--sz-cream);
+  font-family: var(--sz-f-ui);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+  z-index: 1000;
+}
+
 .glossary-tooltip::after {
   content: "";
   position: absolute;
@@ -162,11 +183,34 @@
   border-color: var(--sz-ink-3) transparent transparent transparent;
 }
 
+.glossary-tooltip-overlay::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: var(--tooltip-arrow-left, 50%);
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--sz-ink-3) transparent transparent transparent;
+}
+
+.glossary-tooltip-overlay.--below::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent var(--sz-ink-3) transparent;
+}
+
 .glossary-term:hover .glossary-tooltip,
 .glossary-term:focus-visible .glossary-tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+}
+
+html.glossary-tooltip-active .glossary-term:hover .glossary-tooltip,
+html.glossary-tooltip-active .glossary-term:focus-visible .glossary-tooltip {
+  opacity: 0;
+  visibility: hidden;
 }
 
 body[data-mode="day"] .glossary-label {
@@ -184,8 +228,22 @@ body[data-mode="day"] .glossary-tooltip {
   color: #ecdcb8;
 }
 
+body[data-mode="day"] .glossary-tooltip-overlay {
+  background: var(--sz-ink-4);
+  border-color: rgba(40,25,10,0.28);
+  color: #ecdcb8;
+}
+
 body[data-mode="day"] .glossary-tooltip::after {
   border-color: var(--sz-ink-4) transparent transparent transparent;
+}
+
+body[data-mode="day"] .glossary-tooltip-overlay::after {
+  border-color: var(--sz-ink-4) transparent transparent transparent;
+}
+
+body[data-mode="day"] .glossary-tooltip-overlay.--below::after {
+  border-color: transparent transparent var(--sz-ink-4) transparent;
 }
 
 
@@ -219,6 +277,130 @@ body[data-mode="day"] .glossary-tooltip::after {
 .dialogue.--player .line {
   color: var(--sz-cream);
   border-left-color: var(--sz-brass);
+}
+
+
+/* --- Skill check roll block ---------------------------------- */
+.skill-check {
+  max-width: 38em;
+  margin: var(--sz-s-7) 0;
+  padding: var(--sz-s-5);
+  border: 1px solid var(--sz-rule-strong);
+  background: color-mix(in srgb, var(--sz-ink-2) 82%, transparent);
+  box-shadow: inset 0 1px 0 rgba(184,148,94,0.08);
+}
+
+.skill-check-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sz-s-5);
+  margin-bottom: var(--sz-s-4);
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.skill-check-label {
+  color: var(--sz-brass);
+}
+
+.skill-check-target {
+  color: var(--sz-cream-faint);
+}
+
+.skill-check-dice {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) auto auto auto auto;
+  align-items: center;
+  gap: var(--sz-s-3);
+  min-height: 38px;
+  padding: var(--sz-s-3) var(--sz-s-4);
+  margin-bottom: var(--sz-s-4);
+  background: var(--sz-ink-3);
+  border: 1px solid var(--sz-rule);
+  font-family: var(--sz-f-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--sz-cream-soft);
+}
+
+.skill-check-total {
+  min-width: 2ch;
+  color: var(--sz-cream);
+  text-align: right;
+}
+
+.skill-check-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 14px;
+  border: 1px solid var(--sz-brass-dim);
+  background: var(--sz-ink-3);
+  color: var(--sz-brass);
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.skill-check-button:hover:not(:disabled) {
+  border-color: var(--sz-brass);
+  color: var(--sz-cream);
+  background: var(--sz-ink-4);
+}
+
+.skill-check-button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.skill-check[data-state="rolling"] .skill-check-dice {
+  border-color: var(--sz-brass);
+  box-shadow: 0 0 18px rgba(184,148,94,0.12);
+}
+
+.skill-check[data-state="rolling"] .skill-check-total {
+  color: var(--sz-brass-glow);
+}
+
+.skill-check-outcome {
+  margin-top: var(--sz-s-4);
+  font-family: var(--sz-f-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.skill-check.--success {
+  border-color: color-mix(in srgb, var(--sz-composed) 65%, transparent);
+}
+
+.skill-check.--success .skill-check-outcome {
+  color: var(--sz-composed);
+}
+
+.skill-check.--failure {
+  border-color: color-mix(in srgb, var(--sz-rattled) 65%, transparent);
+}
+
+.skill-check.--failure .skill-check-outcome {
+  color: var(--sz-rattled);
+}
+
+.skill-check-reveal {
+  margin-top: var(--sz-s-5);
+}
+
+.skill-check-reveal:empty {
+  display: none;
+}
+
+body[data-mode="day"] .skill-check {
+  background: color-mix(in srgb, var(--sz-ink-3) 52%, transparent);
 }
 
 
@@ -423,6 +605,14 @@ body[data-mode="day"] .glossary-tooltip::after {
   width: 280px;
   justify-content: center;
   text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.page-main-menu .decisions a::after {
+  position: absolute;
+  right: 0;
+  margin-left: 0;
 }
 
 

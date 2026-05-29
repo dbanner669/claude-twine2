@@ -45,10 +45,22 @@
     <h3>Skills</h3>
     <<for _skillName, _skill range $player.skills>>
       <div class="skill-row">
-        <span class="skill-name">_skillName</span>
+        <<if _skillName is "composure">>
+          <span class="skill-name">Baseline Composure</span>
+        <<else>>
+          <span class="skill-name">_skillName</span>
+        <</if>>
         <span class="skill-level">Level: <<print _skill.level>></span>
         <span class="skill-xp">XP: <<print _skill.xp>></span>
       </div>
+      <<if _skillName is "composure">>
+      <<set _currentComposure to (typeof $player.currentComposure === "number") ? $player.currentComposure : _skill.level>>
+      <div class="skill-row">
+        <span class="skill-name">Current Composure</span>
+        <span class="skill-level">Value: <<print _currentComposure>></span>
+        <span class="skill-xp">Resets daily</span>
+      </div>
+      <</if>>
     <</for>>
   </div>
 
