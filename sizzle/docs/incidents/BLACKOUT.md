@@ -1,6 +1,9 @@
 # CC-400 Origin Sequence — The Toronto Blackout
 
-*Playable-sequence design doc. Planning only — no final passage prose here. Parent: [INCIDENTPLAN.md](../INCIDENTPLAN.md). Voice/rules: [STYLE-GUIDE.md](../STYLE-GUIDE.md).*
+*Playable-sequence design doc. Parent: [INCIDENTPLAN.md](../INCIDENTPLAN.md). Voice/rules: [STYLE-GUIDE.md](../STYLE-GUIDE.md).*
+
+> **Status: Implemented — pending first-play review.**
+> Source: `sizzle/src/content/blackout.twee` (26 passages, BLK-085–BLK-215). CC-400 incident selection wired. Hooks confirmed in compiled output: `$nyse.influence`, `$player.flags.blkSkillGranted`, `$player.flags.blkClimbed`, `$player.flags.blkInfluenceGranted`, `$player.incitingIncident`, date restore before CC-500. Three remaining incidents remain "Coming Soon" in CC-400.
 
 ---
 

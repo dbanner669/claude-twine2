@@ -341,10 +341,11 @@ Failure text and onward links.
 - **Time helpers** — `<<setTime>>` / `<<setDate>>` / `<<advanceTime>>` / `<<advanceDays>>` macros drive `$date`; the footer clock and day/night palette react automatically, and day-crossings reset Current Composure to Baseline
 - **Day-mode header polish** — daytime header now uses the darker bronze-brown UI family instead of a lighter mismatched bar
 - **UI design system** — 8 CSS files, 5 font families, complete token system
+- **BLK inciting-incident flashback** — 26 passages (`BLK-085` through `BLK-215`), scene mode, avatar visible. Toronto Blackout origin sequence with four background variants, three skill checks, convergent choices, `$nyse.influence` grant (base +1 / climb +2 cap), skill grant (Composure / Academic / Streetwise by play pattern), and Branch report bridge to CC-500. CC-400 incident selection wired; three remaining incidents are "Coming Soon" stubs. **Status: complete, pending first-play review.**
 
 ### What's placeholder / not yet built
 - **Avatar art/runtime** — `media/avatar/` remains placeholder-only and the runtime image arrays still need the explicit-slot implementation. Current candidate body layers, clothing-mask experiments, Qwen 2509 clothing-fit tests, and workflow outputs live under `docs/avatar-bakeoff/production-drafts/`; the greybox avatar proof is locked to medium skin, long straight hair, and blue eyes. Clothing tests are still draft-only, but Qwen Image Edit 2509 is the current leading route because it can adapt generated garment references to the noface source body.
-- **CC-400 inciting incidents** — placeholder text in source, but the selected direction is four full playable August 2003 origin sequences documented in `docs/INCIDENTPLAN.md`: `the Toronto Blackout`, `the Dark of Manitoulin`, `the Woman with the Pale Eyes`, and `Wet Dog Smell`
+- **CC-400 inciting incidents** — `the Toronto Blackout` is implemented and pending first-play review (`blackout.twee`, BLK-085–BLK-215). The other three (`the Dark of Manitoulin`, `the Woman with the Pale Eyes`, `Wet Dog Smell`) remain design-doc only with "Coming Soon" stubs in CC-400. See `docs/INCIDENTPLAN.md` and `docs/incidents/`.
 - **Hair style swatches** — show dark rectangles (no art yet)
 - **Location/background art** — still sparse; only a small number of location/character images exist so far
 - **NPC roster** — only Robert Flett is profiled
