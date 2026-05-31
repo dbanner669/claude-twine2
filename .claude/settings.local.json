@@ -97,7 +97,8 @@
       "mcp__Claude_in_Chrome__javascript_tool",
       "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='python.exe' OR Name='py.exe'\" | Where-Object { $_.CommandLine -match 'http.server' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force; \"stopped PID $\\($_.ProcessId\\)\" })",
       "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" rev-parse --abbrev-ref HEAD)",
-      "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" status --porcelain)"
+      "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" status --porcelain)",
+      "PowerShell(node sizzle/scripts/build-obsidian-canvas.js)"
     ]
   }
 }

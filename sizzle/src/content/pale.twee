@@ -1,0 +1,480 @@
+:: PALE-085 A reason to be in Ottawa [avatar-pale-night nighttime]
+<<silently>>
+<<setDate 2003 8 18 "evening">>
+<<set $header.location to "DOWNTOWN OTTAWA">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-085 A reason to be in Ottawa — Table-setting: why she is in Ottawa by background, small business of the day, ordinary dry interior voice, no wrongness yet.
+   Intent: structural placeholder only; draft later from PALE.md §2/§3. ~90 words.
+   %%% END %%% */
+
+[[The weather breaks before you reach shelter.|PALE-090 The sky opens up]]
+<</page>>
+
+
+:: PALE-090 The sky opens up [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "DOWNTOWN OTTAWA">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-090 The sky opens up — Table-setting: hard summer storm, sheeting water, umbrellas turning inside out, mundane scramble for dry cover.
+   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
+   %%% END %%% */
+
+[[The nearest dry doorway is a hotel lobby.|PALE-095 Into the lobby]]
+<</page>>
+
+
+:: PALE-095 Into the lobby [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-095 Into the lobby — Table-setting: normal wet-evening lobby hum, check-in line, dripping coats, brass and warm light, weather complaints.
+   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
+   %%% END %%% */
+
+[[You cross out of the rain.|PALE-100 Out of the rain]]
+<</page>>
+
+
+:: PALE-100 Out of the rain [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-100 Out of the rain — Opening: lobby proper, downpour at the glass, crossing toward elevators/desk as the normal hum starts to feel uneven.
+   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
+   %%% END %%% */
+
+[[You notice the corner where the noise drops.|PALE-105 The quiet corner]]
+<</page>>
+
+
+:: PALE-105 The quiet corner [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-105 The quiet corner — Setup: an alcove/lounge off the main flow where the noise drops and people are too still.
+   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
+   %%% END %%% */
+
+[[You look from cover.|PALE-110 Too orderly]]
+<</page>>
+
+
+:: PALE-110 Too orderly [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-110 Too orderly — Closer read: calm but wrong arrangement, posed silent people waiting; she does not understand it yet.
+   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
+   %%% END %%% */
+
+[[At the centre, there is a woman.|PALE-115 Pale eyes]]
+<</page>>
+
+
+:: PALE-115 Pale eyes [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-115 Pale eyes — First sight: woman seated and served, ordinary except for pale wrong eyes and flatness; instinct keeps PC from meeting her gaze.
+   Intent: structural placeholder only; draft later from PALE.md §2/§4. ~90 words.
+   %%% END %%% */
+
+[[You watch what she does.|PALE-120 The rule]]
+<</page>>
+
+
+:: PALE-120 The rule [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-120 The rule — She watches the woman speak to someone and sees absolute obedience; mechanism is eye contact plus word.
+   Intent: structural placeholder only; includes low Agent/Academic rule-read check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to Math.max($player.skills.agent.level, $player.skills.academic.level)>>
+<<skillCheck "Agent / Academic" "2d6" _checkSkill 7>>
+<<success>>
+<<set $player.flags.paleRuleRead to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-120 success — She names the precondition cleanly: it is the eyes.
+   Intent: structural placeholder only; possible Agent skill texture later.
+   %%% END %%% */
+
+[[You adjust your angle.|PALE-125 The mirror]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-120 failure — She gets the rule a half-step too slowly, through a near-brush with the gaze.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You adjust your angle before it catches you.|PALE-125 The mirror]]
+<</skillCheck>>
+<</page>>
+
+
+:: PALE-125 The mirror [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-125 The mirror — Choice: use a reflective surface for more information at real reflected-gaze risk, or stay with cover and glimpses.
+   Intent: structural placeholder only; mirror is useful but dangerous, not a safe cheat. ~90 words.
+   %%% END %%% */
+
+<span id="pale-125-choices">
+<div class="choices">
+<div class="choice"><<link "You use the mirror.">><<replace "#pale-125-choices">>
+/* %%% HUMAN-DRAFT %%%
+   PALE-125 mirror branch — She gets a cleaner view, with the danger that reflected eye contact counts.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[The arrangement comes into focus.|PALE-130 The arrangement]]
+<</replace>><</link>></div>
+<div class="choice"><<link "You stay with cover and glimpses.">><<replace "#pale-125-choices">>
+/* %%% HUMAN-DRAFT %%%
+   PALE-125 cover branch — She pieces the scene together more slowly from angles and sightlines.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[The arrangement comes into focus piece by piece.|PALE-130 The arrangement]]
+<</replace>><</link>></div>
+</div>
+</span>
+<</page>>
+
+
+:: PALE-130 The arrangement [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-130 The arrangement — Full explicit tableau: one naked man on all fours as footrest, a kneeling person feeding cut fruit, a rigid erect man used as an umbrella stand, others arranged mid-act as furniture, blank-faced and silent.
+   Intent: structural placeholder only; horror is commanded obedience and humiliation done to victims, not prudishness. ~110 words.
+   %%% END %%% */
+
+[[You make yourself not look up.|PALE-135 Don't look up]]
+<</page>>
+
+
+:: PALE-135 Don't look up [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-135 Don't look up — Near-miss: the woman's gaze sweeps and PC has to break sightline; the pull of being noticed.
+   Intent: structural placeholder only; includes moderate Composure/Agent check to stay unseen. ~90 words.
+   %%% END %%% */
+
+<<set _composureSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<set _checkSkill to Math.max(_composureSkill, $player.skills.agent.level)>>
+<<skillCheck "Composure / Agent" "2d6" _checkSkill 8>>
+<<success>>
+<<set $player.flags.paleUnseen to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-135 success — She breaks sightline in time.
+   Intent: structural placeholder only; possible Agent skill texture later.
+   %%% END %%% */
+
+[[You stay low and think.|PALE-140 She can't just walk out]]
+<<failure>>
+<<set $player.flags.paleGazeGrazed to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-135 failure — The gaze grazes her, not a full lock, but close enough that being addressed becomes a physical threat.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[You duck out of it and think.|PALE-140 She can't just walk out]]
+<</skillCheck>>
+<</page>>
+
+
+:: PALE-140 She can't just walk out [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-140 She can't just walk out — Choice: slip away or stop it; convergent because leaving crosses open floor or she cannot leave people like this.
+   Intent: structural placeholder only; draft later from PALE.md §5. ~90 words.
+   %%% END %%% */
+
+<span id="pale-140-choices">
+<div class="choices">
+<div class="choice"><<link "You try to slip away.">><<replace "#pale-140-choices">>
+/* %%% HUMAN-DRAFT %%%
+   PALE-140 slip branch — The open floor exposes her or she turns back because she cannot unsee it.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You look for the loophole instead.|PALE-145 The loophole]]
+<</replace>><</link>></div>
+<div class="choice">[[You decide to stop it.|PALE-145 The loophole]]</div>
+</div>
+</span>
+<</page>>
+
+
+:: PALE-145 The loophole [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-145 The loophole — Insight: she cannot out-stare or out-argue the rule, but a committed action already in motion can outpace the command latency.
+   Intent: structural placeholder only; includes low Academic/Streetwise check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to Math.max($player.skills.academic.level, $player.skills.streetwise.level)>>
+<<skillCheck "Academic / Streetwise" "2d6" _checkSkill 7>>
+<<success>>
+<<set $player.flags.paleLoopholeReasoned to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-145 success — She reasons the latency and physical irreversibility cleanly.
+   Intent: structural placeholder only; possible Academic skill grant later.
+   %%% END %%% */
+
+[[You need something heavy.|PALE-150 Something heavy]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-145 failure — She does not reason it formally; instinct/desperation puts the same plan in her hands.
+   Intent: structural placeholder only; outcome unchanged.
+   %%% END %%% */
+
+[[You need something heavy.|PALE-150 Something heavy]]
+<</skillCheck>>
+<</page>>
+
+
+:: PALE-150 Something heavy [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-150 Something heavy — Cosmetic arming and positioning choice: fire extinguisher, lobby chair, luggage cart, or brass stanchion from a blind angle.
+   Intent: structural placeholder only; all options create a heavy thing already in motion. ~90 words.
+   %%% END %%% */
+
+[[You take the fire extinguisher.|PALE-155 The point of no return]]
+[[You take a lobby chair.|PALE-155 The point of no return]]
+[[You use the luggage cart.|PALE-155 The point of no return]]
+[[You take the brass stanchion.|PALE-155 The point of no return]]
+<</page>>
+
+
+:: PALE-155 The point of no return [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-155 The point of no return — Intervention: she commits to the swing while not looking at the woman; the irreversible instant begins.
+   Intent: structural placeholder only; draft later from PALE.md §2/§6. ~90 words.
+   %%% END %%% */
+
+[[The woman looks up.|PALE-160 "STOP."]]
+<</page>>
+
+
+:: PALE-160 "STOP." [nobr avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-160 "STOP." — The gaze finds her and the command lands; she knows she must obey, but the blow is already past recall.
+   Intent: structural placeholder only; includes high spine Composure check. The blow lands regardless. ~100 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 9>>
+<<success>>
+<<set $player.flags.paleCommandHeld to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-160 success — The command barely catches the edge of her and the follow-through is clean.
+   Intent: structural placeholder only; possible Composure skill texture later.
+   %%% END %%% */
+
+[[Momentum carries through.|PALE-165 Impact]]
+<<failure>>
+<<set $player.flags.paleCommandBitten to true>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-160 failure — The command lands like iron and she nearly freezes, but the object is already unrecallable and connects anyway.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[Momentum carries through anyway.|PALE-165 Impact]]
+<</skillCheck>>
+<</page>>
+
+
+:: PALE-165 Impact [nobr avatar-pale-night nighttime]
+<<silently>>
+<<if not $player.flags.paleInfluenceGranted>>
+    <<set _paleInfluence to 1>>
+    <<if $player.flags.paleGazeGrazed or $player.flags.paleCommandBitten>>
+        <<set _paleInfluence to 2>>
+    <</if>>
+    <<set $nyse.influence += _paleInfluence>>
+    <<set $player.flags.paleInfluenceGranted to true>>
+<</if>>
+<<if not $player.flags.paleSkillGranted>>
+    <<if $player.flags.paleUnseen or $player.flags.paleRuleRead>>
+        <<set $player.skills.agent.level += 1>>
+    <<elseif $player.flags.paleLoopholeReasoned>>
+        <<set $player.skills.academic.level += 1>>
+    <<elseif $player.flags.paleCommandHeld>>
+        <<set $player.skills.composure.level += 1>>
+    <<else>>
+        <<set $player.skills.confrontation.level += 1>>
+    <</if>>
+    <<set $player.flags.paleSkillGranted to true>>
+<</if>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-165 Impact — The blow connects, the woman drops, the flat voice stops, and silence sits under the rain.
+   Intent: structural placeholder only; guarded NYSE influence and skill grant fire here. ~90 words.
+   %%% END %%% */
+
+[[The room comes back to itself.|PALE-170 The room comes back]]
+<</page>>
+
+
+:: PALE-170 The room comes back [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "HOTEL LOUNGE ALCOVE">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-170 The room comes back — Commanded victims release: umbrella clatters, fruit spills, people cover themselves or weep; personhood returns.
+   Intent: structural placeholder only; draft later from PALE.md §7. ~90 words.
+   %%% END %%% */
+
+[[The wrong people arrive too quickly.|PALE-175 They were already coming]]
+<</page>>
+
+
+:: PALE-175 They were already coming [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA HOTEL LOBBY">>
+<<set $header.time to "Monday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-175 They were already coming — Anonymous calm responders, not hotel security and not Ottawa police, take the woman; PC clocks organized, practiced, pre-positioned Branch apparatus without learning its name.
+   Intent: structural placeholder only; no in-person Robert. ~100 words.
+   %%% END %%% */
+
+[[They tell you to go home.|PALE-180 The drive home]]
+<</page>>
+
+
+:: PALE-180 The drive home [avatar-pale-night nighttime]
+<<silently>>
+<<set $header.location to "OTTAWA">>
+<<set $header.time to "Monday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   PALE-180 The drive home — Interior scar: bodily memory of one second of absolute obedience, another person's sentence becoming true inside her.
+   Intent: structural placeholder only; hidden-world fear, no narrow phobia. ~90 words.
+   %%% END %%% */
+
+[[Days later, the file exists.|PALE-200 Field report]]
+<</page>>
+
+
+:: PALE-200 Field report [nobr avatar-hidden]
+<<silently>>
+<<setDate 2003 8 22 "morning">>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Friday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-200 Field report — Branch containment/occurrence extract: pale-eyed female subject, verbal compliance vector documented but not explained, records removed, one coherent witness logged.
+   Intent: structural placeholder only; clinical NYSE voice. ~100 words.
+   %%% END %%% */
+
+[[You turn the page.|PALE-205 Recommendation]]
+<</page>>
+
+
+:: PALE-205 Recommendation [nobr avatar-hidden]
+<<silently>>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Friday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   PALE-205 Recommendation — Flett recommendation: witness decoded a live compliance hazard and defeated it by committing past recall rather than resisting.
+   Intent: structural placeholder only; bridge to CC-500 and set inciting incident. ~100 words.
+   %%% END %%% */
+
+<<link "The file closes." "CC-500 Summary">>
+<<set $player.incitingIncident to "the Woman with the Pale Eyes">>
+<<setDate 2005 9 12 "morning">>
+<</link>>
+<</page>>

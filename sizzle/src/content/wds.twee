@@ -1,0 +1,459 @@
+:: WDS-085 The last stretch of highway [avatar-wds-night nighttime]
+<<silently>>
+<<setDate 2003 8 20 "evening">>
+<<set $header.location to "ONTARIO HIGHWAY">>
+<<set $header.time to "Wednesday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-085 The last stretch of highway — Table-setting: evening drive, why she is alone on this road by background, radio, heat off asphalt, vacancy sign buzzing.
+   Intent: structural placeholder only; draft later from WDS.md §2/§3. ~90 words.
+   %%% END %%% */
+
+[[The vacancy sign wins.|WDS-090 Checking in]]
+<</page>>
+
+
+:: WDS-090 Checking in [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "ROADSIDE MOTEL">>
+<<set $header.time to "Wednesday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-090 Checking in — Table-setting: clerk, key on diamond fob, smell of the room, working ice machine, handwritten COYOTE SIGHTINGS notice that plants dog spray.
+   Intent: structural placeholder only; draft later from WDS.md §2/§10. ~90 words.
+   %%% END %%% */
+
+[[You take the room for the night.|WDS-095 Settling in for the night]]
+<</page>>
+
+
+:: WDS-095 Settling in for the night [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "ROADSIDE MOTEL ROOM">>
+<<set $header.time to "Wednesday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-095 Settling in for the night — Table-setting: bad TV through thin wall, vending-machine snack, ordinary loneliness of a roadside motel, lights out.
+   Intent: structural placeholder only; draft later from WDS.md §2. ~90 words.
+   %%% END %%% */
+
+[[Night settles over the motel.|WDS-100 Two hundred clicks from anywhere]]
+<</page>>
+
+
+:: WDS-100 Two hundred clicks from anywhere [avatar-wds-night nighttime]
+<<silently>>
+<<setTime "laterNight">>
+<<set $header.location to "ROADSIDE MOTEL ROOM">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-100 Two hundred clicks from anywhere — Dead middle of the night: she surfaces from sleep, vending-machine glow through curtains, gravel, highway hum.
+   Intent: structural placeholder only; draft later from WDS.md §2. ~90 words.
+   %%% END %%% */
+
+[[Something is outside.|WDS-105 Something outside]]
+<</page>>
+
+
+:: WDS-105 Something outside [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "ROADSIDE MOTEL ROOM">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-105 Something outside — Wrong sound in the lot; she goes to window/door; doors open that should not be, movement on gravel.
+   Intent: structural placeholder only; draft later from WDS.md §2. ~90 words.
+   %%% END %%% */
+
+[[You look toward the ice machine.|WDS-110 The ice machine]]
+<</page>>
+
+
+:: WDS-110 The ice machine [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-110 The ice machine — First wrong image: a woman by the vending/ice machine, glassy and blank, methodically trying to force a cold soda can into herself without arousal or distress.
+   Intent: structural placeholder only; degraded unsafe compulsion, horror is a person reduced below safety. ~90 words.
+   %%% END %%% */
+
+[[The whole court is wrong.|WDS-115 The whole court]]
+<</page>>
+
+
+:: WDS-115 The whole court [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-115 The whole court — Wider view: guests on gravel undressing, swaying, drawn toward each other and the dark lot edge; ordinary people gone behind the eyes.
+   Intent: structural placeholder only; draft later from WDS.md §2. ~90 words.
+   %%% END %%% */
+
+[[Then you smell it.|WDS-120 The smell]]
+<</page>>
+
+
+:: WDS-120 The smell [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-120 The smell — First dose: wet dog, rut, oily animal smell; her body answers and judgment starts to dull.
+   Intent: structural placeholder only; includes low Composure check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 7>>
+<<success>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-120 success — She stays clear enough to keep reading.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You look for the source.|WDS-125 At the edge of the light]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-120 failure — The fog rolls harder and she is slower, more exposed, but still moving.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You force yourself to look for the source.|WDS-125 At the edge of the light]]
+<</skillCheck>>
+<</page>>
+
+
+:: WDS-125 At the edge of the light [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-125 At the edge of the light — Source: huge over-haired nude figure moving on all fours/low lope, oversized engorged penis dripping pre-ejaculate, gut certainty it is not naturally a man.
+   Intent: structural placeholder only; frightening, animal, excessive, contaminating; not clean werewolf lore. ~100 words.
+   %%% END %%% */
+
+[[You track what changes around it.|WDS-130 The smell is doing it]]
+<</page>>
+
+
+:: WDS-130 The smell is doing it [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-130 The smell is doing it — Insight: dose tracks distance; it comes off the creature/source; it is airborne.
+   Intent: structural placeholder only; includes low Academic/Streetwise vector check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to Math.max($player.skills.academic.level, $player.skills.streetwise.level)>>
+<<skillCheck "Academic / Streetwise" "2d6" _checkSkill 7>>
+<<success>>
+<<set $player.flags.wdsVectorReasoned to true>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-130 success — She reasons the vector: the smell is the variable and exposure control is the move.
+   Intent: structural placeholder only; possible Academic skill grant later.
+   %%% END %%% */
+
+[[Your own body is still breathing it.|WDS-135 Her own body]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-130 failure — She gets there by luck/instinct a beat later, noticing she thinks more clearly turned away.
+   Intent: structural placeholder only; outcome unchanged.
+   %%% END %%% */
+
+[[Your own body is still breathing it.|WDS-135 Her own body]]
+<</skillCheck>>
+<</page>>
+
+
+:: WDS-135 Her own body [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-135 Her own body — The musk works on her: clothes wrong on skin, fear quieting, dangerous pull toward others; not immune.
+   Intent: structural placeholder only; includes moderate Composure check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 8>>
+<<success>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-135 success — She holds and keeps moving.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You decide what kind of person you are in this lot.|WDS-140 Run or stay]]
+<<failure>>
+<<set $player.flags.wdsDeepFailed to true>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-135 failure — She drifts a step toward the others, starts to pull at her own collar, then catches herself.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[You catch yourself and decide what kind of person you are in this lot.|WDS-140 Run or stay]]
+<</skillCheck>>
+<</page>>
+
+
+:: WDS-140 Run or stay [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-140 Run or stay — Choice: bolt for the car and save herself, or stay and get the guests clear; convergent because she turns back.
+   Intent: structural placeholder only; draft later from WDS.md §5. ~90 words.
+   %%% END %%% */
+
+<span id="wds-140-choices">
+<div class="choices">
+<div class="choice"><<link "You run for the car.">><<replace "#wds-140-choices">>
+/* %%% HUMAN-DRAFT %%%
+   WDS-140 run branch — She gets to the car and cannot leave the guests to what will happen by morning.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You go back with your face covered.|WDS-145 Something over her face]]
+<</replace>><</link>></div>
+<div class="choice">[[You stay and get them clear.|WDS-145 Something over her face]]</div>
+</div>
+</span>
+<</page>>
+
+
+:: WDS-145 Something over her face [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-145 Something over her face — Exposure control choice: wet towel, shirt, or ice-bucket water; it helps partly because the musk is oily and leaking through.
+   Intent: structural placeholder only; all choices create a partial filter. ~90 words.
+   %%% END %%% */
+
+[[You soak a towel under the tap.|WDS-150 What she's got]]
+[[You soak your shirt.|WDS-150 What she's got]]
+[[You use the ice-bucket water.|WDS-150 What she's got]]
+<</page>>
+
+
+:: WDS-150 What she's got [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-150 What she's got — Arming choice: dog spray is core because of coyote warnings; secondary tool can be car horn/headlights, fire extinguisher, or tire iron.
+   Intent: structural placeholder only; dog spray is legal/non-lethal and not bear spray. ~90 words.
+   %%% END %%% */
+
+[[You pair the spray with the car horn and headlights.|WDS-155 Driving them back]]
+[[You pair the spray with the fire extinguisher.|WDS-155 Driving them back]]
+[[You keep the tire iron in your other hand.|WDS-155 Driving them back]]
+<</page>>
+
+
+:: WDS-155 Driving them back [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-155 Driving them back — Awful practical triage: she sprays affected guests to break fixation and herd them toward rooms, hurting victims to save them.
+   Intent: structural placeholder only; must read awful-but-necessary, never cool. ~90 words.
+   %%% END %%% */
+
+[[The source is still at the edge of the light.|WDS-160 Driving it off]]
+<</page>>
+
+
+:: WDS-160 Driving it off [nobr avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-160 Driving it off — Close range with the creature/source while half-dosed; she sprays it.
+   Intent: structural placeholder only; includes high spine Composure/Confrontation check. It recoils regardless. ~100 words.
+   %%% END %%% */
+
+<<set _composureSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<set _checkSkill to Math.max(_composureSkill, $player.skills.confrontation.level)>>
+<<skillCheck "Composure / Confrontation" "2d6" _checkSkill 9>>
+<<success>>
+<<set $player.flags.wdsSpineHeld to true>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-160 success — She holds through musk and fear and gets the spray off cleanly.
+   Intent: structural placeholder only; possible Composure skill grant later.
+   %%% END %%% */
+
+[[It breaks away from the light.|WDS-165 Into the dark]]
+<<failure>>
+<<set $player.flags.wdsSpineFailed to true>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-160 failure — She nearly goes under at arm's length, but gets the can up and fires anyway; it recoils.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[It breaks away from the light anyway.|WDS-165 Into the dark]]
+<</skillCheck>>
+<</page>>
+
+
+:: WDS-165 Into the dark [nobr avatar-wds-night nighttime]
+<<silently>>
+<<if not $player.flags.wdsInfluenceGranted>>
+    <<set _wdsInfluence to 2>>
+    <<if $player.flags.wdsDeepFailed or $player.flags.wdsSpineFailed>>
+        <<set _wdsInfluence to 3>>
+    <</if>>
+    <<set $nyse.influence += _wdsInfluence>>
+    <<set $player.flags.wdsInfluenceGranted to true>>
+<</if>>
+<<if not $player.flags.wdsSkillGranted>>
+    <<if $player.flags.wdsVectorReasoned>>
+        <<set $player.skills.academic.level += 1>>
+    <<elseif $player.flags.wdsSpineHeld>>
+        <<set $player.skills.composure.level += 1>>
+    <<else>>
+        <<set $player.skills.streetwise.level += 1>>
+    <</if>>
+    <<set $player.flags.wdsSkillGranted to true>>
+<</if>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-165 Into the dark — The creature/source recoils, breaks, and runs beyond the highway light into the trees; the lot goes quiet except for vending buzz.
+   Intent: structural placeholder only; guarded NYSE influence and skill grant fire here. ~90 words.
+   %%% END %%% */
+
+[[The guests begin coming back.|WDS-170 Coming back]]
+<</page>>
+
+
+:: WDS-170 Coming back [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "MOTEL COURT">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-170 Coming back — Guests surface sick, ashamed, half-dressed, missing time; ice-machine woman weeps; PC is clearest and still half-dosed.
+   Intent: structural placeholder only; draft later from WDS.md §7. ~90 words.
+   %%% END %%% */
+
+[[Someone has to make the call.|WDS-175 Someone has to call this in]]
+<</page>>
+
+
+:: WDS-175 Someone has to call this in [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "ROADSIDE MOTEL">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-175 Someone has to call this in — Practical tail: call/statement that will not cohere, trace evidence of fur/prints/musk on her clothes.
+   Intent: structural placeholder only; draft later from WDS.md §7. ~90 words.
+   %%% END %%% */
+
+[[The smell does not wash out cleanly.|WDS-180 She can still smell it]]
+<</page>>
+
+
+:: WDS-180 She can still smell it [avatar-wds-night nighttime]
+<<silently>>
+<<set $header.location to "ROADSIDE MOTEL">>
+<<set $header.time to "Wednesday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   WDS-180 She can still smell it — Interior scar: contamination fear, something can get into people through air and make the body answer before the mind agrees.
+   Intent: structural placeholder only; hidden-world fear, no narrow phobia. ~90 words.
+   %%% END %%% */
+
+[[Days later, the file has a smell in it.|WDS-200 Occurrence report]]
+<</page>>
+
+
+:: WDS-200 Occurrence report [nobr avatar-hidden]
+<<silently>>
+<<setDate 2003 8 25 "morning">>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Monday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-200 Occurrence report — Branch extract: large unidentified bipedal subject, atypical airborne/olfactory influence vector, morphology/odour/effects documented not named, trace evidence, one coherent witness.
+   Intent: structural placeholder only; clinical NYSE voice, no werewolf certification. ~100 words.
+   %%% END %%% */
+
+[[You turn the page.|WDS-205 Recommendation]]
+<</page>>
+
+
+:: WDS-205 Recommendation [nobr avatar-hidden]
+<<silently>>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Monday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   WDS-205 Recommendation — Flett recommendation: witness identified an invisible vector and used exposure-control measures while under heavy physiological influence.
+   Intent: structural placeholder only; bridge to CC-500 and set inciting incident. ~100 words.
+   %%% END %%% */
+
+<<link "The file closes." "CC-500 Summary">>
+<<set $player.incitingIncident to "Wet Dog Smell">>
+<<setDate 2005 9 12 "morning">>
+<</link>>
+<</page>>

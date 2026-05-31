@@ -1,0 +1,490 @@
+:: MAN-085 The long drive up [avatar-man-day daytime]
+<<silently>>
+<<setDate 2003 8 16 "afternoon">>
+<<set $header.location to "HIGHWAY NORTH">>
+<<set $header.time to "Saturday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-085 The long drive up — Table-setting normality: leaving home/the city behind, the highway north, the radio, decompression, and why she is headed to Manitoulin with background-variant shading.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2/§3. ~90 words.
+   %%% END %%% */
+
+[[The road keeps going north.|MAN-090 Onto the island]]
+<</page>>
+
+
+:: MAN-090 Onto the island [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "MANITOULIN APPROACH">>
+<<set $header.time to "Saturday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-090 Onto the island — Table-setting: crossing over by bridge or ferry, concrete ordinary Manitoulin tourist texture, no wrongness yet.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
+   %%% END %%% */
+
+[[You cross onto the island.|MAN-095 A stop on the rock]]
+<</page>>
+
+
+:: MAN-095 A stop on the rock [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "MANITOULIN ISLAND">>
+<<set $header.time to "Saturday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-095 A stop on the rock — Table-setting: gas station/general store/coffee, small-town quiet, heat coming off the Shield, last fully normal beat.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
+   %%% END %%% */
+
+[[You get back on the road.|MAN-100 The island road]]
+<</page>>
+
+
+:: MAN-100 The island road [avatar-man-day daytime]
+<<silently>>
+<<setTime "evening">>
+<<set $header.location to "MANITOULIN BACK ROAD">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-100 The island road — Opening: dusk on a Manitoulin back road, heat going off the rock, driving toward the lakehouse turn.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
+   %%% END %%% */
+
+[[You follow the road toward the water.|MAN-105 Dead in the water]]
+<</page>>
+
+
+:: MAN-105 Dead in the water [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "MANITOULIN BACK ROAD">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-105 Dead in the water — Setup: the car dies; the lakehouse below has lit windows, music, too many cars, and southern Ontario money pretending to be a cottage.
+   Intent: structural placeholder only; include background-variant eyes from MANITOULIN.md §3. ~90 words.
+   %%% END %%% */
+
+[[The house has lights and probably a phone.|MAN-110 Nobody answers]]
+<</page>>
+
+
+:: MAN-110 Nobody answers [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE DRIVE">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-110 Nobody answers — Escalation: up the drive on foot, sounds she cannot place yet, a couple on the lawn oblivious, and her call gets no response; the interruption rule has failed.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
+   %%% END %%% */
+
+[[You keep going up the drive.|MAN-115 The front door]]
+<</page>>
+
+
+:: MAN-115 The front door [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE FRONT DOOR">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-115 The front door — Threshold: she needs a phone; foyer with coats, sandals, catering tray, and the frenzy audible past the hall. RCMP route reads it procedurally.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2/§3. ~90 words.
+   %%% END %%% */
+
+[[You step inside.|MAN-120 The great room]]
+<</page>>
+
+
+:: MAN-120 The great room [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE GREAT ROOM">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-120 The great room — First full sight: bodies and sex, but the wrongness is that nobody registers a stranger in the room.
+   Intent: structural placeholder only; no finished prose. Draft later from MANITOULIN.md §2 and sex-positivity rule. ~90 words.
+   %%% END %%% */
+
+[[You make someone look at you.|MAN-125 Look at me]]
+<</page>>
+
+
+:: MAN-125 Look at me [nobr avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE GREAT ROOM">>
+<<set $header.time to "Saturday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-125 Look at me — She addresses someone directly and gets a face that looks through her.
+   Intent: structural placeholder only; includes a low Composure check to keep her head under the look-through. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 7>>
+<<success>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-125 success — She stays clinical and keeps reading the scene.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You keep reading the room.|MAN-130 Party favours]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-125 failure — The indifference rattles her and leaves her slower to orient, but she keeps moving.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You force yourself to keep reading.|MAN-130 Party favours]]
+<</skillCheck>>
+<</page>>
+
+
+:: MAN-130 Party favours [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE GREAT ROOM">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-130 Party favours — Reveal seed: printout taped to the wall, dollar-store candles, chalk diagram half-smudged underfoot, catering and kitsch; this started as a dare.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
+   %%% END %%% */
+
+[[You move deeper into the house.|MAN-135 The kitchen]]
+<</page>>
+
+
+:: MAN-135 The kitchen [avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE KITCHEN">>
+<<set $header.time to "Saturday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-135 The kitchen — Deeper: her own body begins answering, the low pull starts, and the behaviour begins to make a horrible kind of sense.
+   Intent: structural placeholder only; keep influence subjective per STYLE-GUIDE §13.5. ~90 words.
+   %%% END %%% */
+
+[[You reach the back hall.|MAN-140 Forward or back]]
+<</page>>
+
+
+:: MAN-140 Forward or back [nobr avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE BACK HALL">>
+<<set $header.time to "Saturday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-140 Forward or back — Choice: push toward the back of the house/water or try to leave; convergent, because forward is the only way to stop it.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §5. ~90 words.
+   %%% END %%% */
+
+<span id="man-140-choices">
+<div class="choices">
+<div class="choice">[[You push toward the water.|MAN-145 The sunroom]]</div>
+<div class="choice"><<link "You try to leave.">><<replace "#man-140-choices">>
+/* %%% HUMAN-DRAFT %%%
+   MAN-140 leave branch — She tries to back out, but the house/pull/logic turns her around; she grasps that the source is ahead.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You turn back toward the water.|MAN-145 The sunroom]]
+<</replace>><</link>></div>
+</div>
+</span>
+<</page>>
+
+
+:: MAN-145 The sunroom [nobr avatar-man-day daytime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE SUNROOM">>
+<<set $header.time to "Saturday evening">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-145 The sunroom — Explicit tableau: clustered guests on floor/furniture, several partners to a person, oral and penetrative sex in view, blank-faced and indifferent; she catches herself drawn toward it.
+   Intent: structural placeholder only; includes a moderate Composure check not to join here. ~100 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 8>>
+<<success>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-145 success — She holds and moves on.
+   Intent: structural placeholder only; texture branch, outcome unchanged.
+   %%% END %%% */
+
+[[You get through the sunroom doors.|MAN-150 Out the back]]
+<<failure>>
+<<set $player.flags.manSunroomFailed to true>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-145 failure — She lingers, half-steps or reaches toward the tableau, then catches herself; this is a deep-immersion exposure beat.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[You pull yourself through the sunroom doors.|MAN-150 Out the back]]
+<</skillCheck>>
+<</page>>
+
+
+:: MAN-150 Out the back [avatar-man-night nighttime]
+<<silently>>
+<<setTime "night">>
+<<set $header.location to "LAKEHOUSE BACK LAWN">>
+<<set $header.time to "Saturday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-150 Out the back — Through the doors: lawn sloping to the North Channel, full dark, stars and torchlight, dock visible as the centre.
+   Intent: structural placeholder only; night palette begins here per MANITOULIN.md §2/§9. ~90 words.
+   %%% END %%% */
+
+[[You go down toward the dock.|MAN-155 The dock]]
+<</page>>
+
+
+:: MAN-155 The dock [avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-155 The dock — Focal point: five-point chalk marking and cheap candles on the boards, ringed by the densest explicit concentration of the frenzy; the compulsion's logic nearly completes in her head.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~100 words.
+   %%% END %%% */
+
+[[You reach the centre of it.|MAN-160 Almost]]
+<</page>>
+
+
+:: MAN-160 Almost [nobr avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-160 Almost — The closest she comes to joining; she understands why and part of her wants to.
+   Intent: structural placeholder only; includes the high spine Composure check. Failure means near-surrender, not fail state. ~100 words.
+   %%% END %%% */
+
+<<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 9>>
+<<success>>
+<<set $player.flags.manFocalHeld to true>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-160 success — She keeps herself at the focal point.
+   Intent: structural placeholder only; possible Composure skill grant later.
+   %%% END %%% */
+
+[[You look for the thing holding it together.|MAN-165 The pattern is the thing]]
+<<failure>>
+<<set $player.flags.manFocalFailed to true>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-160 failure — She begins to join, then the physical fact of the marking and the wrongness of compulsion snap her back toward action.
+   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
+   %%% END %%% */
+
+[[Your hand finds the marking under you.|MAN-165 The pattern is the thing]]
+<</skillCheck>>
+<</page>>
+
+
+:: MAN-165 The pattern is the thing [nobr avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-165 The pattern is the thing — Insight: break the marking, break the compulsion; reasoned structure versus raw survival instinct.
+   Intent: structural placeholder only; includes low Academic/Streetwise check. ~90 words.
+   %%% END %%% */
+
+<<set _checkSkill to Math.max($player.skills.academic.level, $player.skills.streetwise.level)>>
+<<skillCheck "Academic / Streetwise" "2d6" _checkSkill 7>>
+<<success>>
+<<set $player.flags.manStructureReasoned to true>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-165 success — She reasons that the marking is the anchor and ruining it stops the event.
+   Intent: structural placeholder only; possible Academic skill grant later.
+   %%% END %%% */
+
+[[You ruin the pattern.|MAN-170 Break the circle]]
+<<failure>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-165 failure — She does not reason it cleanly; instinct drives her to wreck the pattern anyway.
+   Intent: structural placeholder only; outcome unchanged.
+   %%% END %%% */
+
+[[You wreck what is under your hands.|MAN-170 Break the circle]]
+<</skillCheck>>
+<</page>>
+
+
+:: MAN-170 Break the circle [nobr avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-170 Break the circle — Cosmetic intervention choice: drag a foot through chalk, kick candles, haul a deck chair across it, or pour cooler melt over it; all ruin the pattern.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §5/§6. ~90 words.
+   %%% END %%% */
+
+[[You drag your foot through the chalk.|MAN-175 Cut wire]]
+[[You kick the candles apart.|MAN-175 Cut wire]]
+[[You haul a chair across the marking.|MAN-175 Cut wire]]
+[[You pour melted ice over the diagram.|MAN-175 Cut wire]]
+<</page>>
+
+
+:: MAN-175 Cut wire [nobr avatar-man-night nighttime]
+<<silently>>
+<<if not $player.flags.manInfluenceGranted>>
+    <<set _manInfluence to 2>>
+    <<if $player.flags.manSunroomFailed or $player.flags.manFocalFailed>>
+        <<set _manInfluence to 3>>
+    <</if>>
+    <<set $nyse.influence += _manInfluence>>
+    <<set $player.flags.manInfluenceGranted to true>>
+<</if>>
+<<if not $player.flags.manSkillGranted>>
+    <<if $player.flags.manFocalHeld>>
+        <<set $player.skills.composure.level += 1>>
+    <<elseif $player.flags.manStructureReasoned>>
+        <<set $player.skills.academic.level += 1>>
+    <<else>>
+        <<set $player.skills.confrontation.level += 1>>
+    <</if>>
+    <<set $player.flags.manSkillGranted to true>>
+<</if>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-175 Cut wire — Collapse: sudden silence, music too loud then off, compulsion dropping like a cut wire.
+   Intent: structural placeholder only; guarded NYSE influence and skill grant fire here. ~90 words.
+   %%% END %%% */
+
+[[The party surfaces around you.|MAN-180 Surfacing]]
+<</page>>
+
+
+:: MAN-180 Surfacing [avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "PRIVATE DOCK">>
+<<set $header.time to "Saturday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-180 Surfacing — People come back cold, naked, ashamed, missing time; humanity returns through details like rings, glasses, weeping. She is the only one clear.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §7. ~90 words.
+   %%% END %%% */
+
+[[Someone has to make the call.|MAN-185 Someone has to call this in]]
+<</page>>
+
+
+:: MAN-185 Someone has to call this in [avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "LAKEHOUSE">>
+<<set $header.time to "Saturday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-185 Someone has to call this in — Practical tail: civilian finds a phone and gives a statement that will not hold together; RCMP starts shaping an impossible report for OPP/her detachment.
+   Intent: structural placeholder only; include background-variant report route from MANITOULIN.md §3/§7. ~90 words.
+   %%% END %%% */
+
+[[You leave with the report unfinished in your head.|MAN-190 The drive back]]
+<</page>>
+
+
+:: MAN-190 The drive back [avatar-man-night nighttime]
+<<silently>>
+<<set $header.location to "MANITOULIN ISLAND">>
+<<set $header.time to "Saturday night">>
+<</silently>>\
+<<header>>\
+<<page>>\
+/* %%% HUMAN-DRAFT %%%
+   MAN-190 The drive back — Interior scar: leaving or waiting for dawn on the rock; the hidden-world fear, not a narrow phobia.
+   Intent: structural placeholder only; draft later from MANITOULIN.md §7/§8. ~90 words.
+   %%% END %%% */
+
+[[A week later, the file has a number.|MAN-200 Occurrence report]]
+<</page>>
+
+
+:: MAN-200 Occurrence report [nobr avatar-hidden]
+<<silently>>
+<<setDate 2003 8 23 "morning">>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Saturday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-200 Occurrence report — Branch report document: RCMP/general police source, five-point marking documented but not certified, witnesses with missing time, one coherent account.
+   Intent: structural placeholder only; clinical NYSE voice, no mechanism explanation. ~100 words.
+   %%% END %%% */
+
+[[You turn the page.|MAN-205 Recommendation]]
+<</page>>
+
+
+:: MAN-205 Recommendation [nobr avatar-hidden]
+<<silently>>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Saturday morning">>
+<</silently>>
+<<header>>
+<<page>>
+/* %%% HUMAN-DRAFT %%%
+   MAN-205 Recommendation — Recruitment recommendation signed Flett: subject stayed functional inside a live event long enough to interrupt it; recommends contact.
+   Intent: structural placeholder only; bridge to CC-500 and set inciting incident. ~100 words.
+   %%% END %%% */
+
+<<link "The file closes." "CC-500 Summary">>
+<<set $player.incitingIncident to "the Dark of Manitoulin">>
+<<setDate 2005 9 12 "morning">>
+<</link>>
+<</page>>

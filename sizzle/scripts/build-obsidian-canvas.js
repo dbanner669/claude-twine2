@@ -14,6 +14,9 @@
  *   beats.json                — Editable beat-name manifest. Generated on first
  *                                run from prefix + hundreds-digit; re-read on
  *                                subsequent runs. Edit beat names freely.
+ *                                Any prefix the manifest doesn't claim is
+ *                                auto-grouped into its own act named after the
+ *                                prefix (passages kept together, number order).
  *   README.md                 — short orientation note.
  *
  * This is one-way (Twee → vault). Sync-back lives in build-twee-from-vault.js
@@ -58,6 +61,10 @@ const EDGE_COLOR = {
   include: "6",
   "widget-next": "5",
 };
+
+/* Palette cycled for auto-grouped acts (prefixes the manifest doesn't cover).
+   Ordered for visual variety between adjacent acts. */
+const AUTO_COLOR_CYCLE = ["6", "2", "4", "1", "3", "5"];
 
 /* Node sizes — tuned for 4–5 nodes per row inside a beat group. */
 const NODE_W = 640;
@@ -182,14 +189,12 @@ function defaultBeatsManifest() {
           { id: "intro-8", name: "Beat 8 · End of prologue", matchPrefix: "INTRO", matchHundreds: 8 },
         ],
       },
-      {
-        id: "unsorted",
-        name: "Unsorted",
-        color: "6",
-        beats: [{ id: "unassigned", name: "Unassigned passages", matchAny: true }],
-      },
     ],
   };
+  /* Note: passages whose prefix matches no act/beat above are auto-grouped
+     into their own act (named after the prefix) at layout time. No manual
+     "Unsorted" catch-all is needed. Add an explicit act/beat here to give a
+     prefix a friendlier name or split it into multiple beats. */
 }
 
 async function loadOrInitBeatsManifest() {
@@ -252,8 +257,10 @@ async function loadExistingPositions() {
 }
 
 function assignBeat(record, manifest) {
-  /* Returns { act, beat } or null. Explicit passages list wins, then
-     prefix+hundreds, then prefix-only, then matchAny. */
+  /* Explicit manifest matching only: passages list wins, then prefix+hundreds,
+     then prefix-only. Returns { act, beat } or null. Unmatched records are
+     auto-grouped by prefix in buildLayout. (Legacy `matchAny` beats are
+     ignored — auto-grouping replaces the old single Unsorted catch-all.) */
   for (const act of manifest.acts) {
     for (const beat of act.beats) {
       if (beat.passages && beat.passages.includes(record.passage.name)) {
@@ -270,11 +277,6 @@ function assignBeat(record, manifest) {
           return { act, beat };
         }
       }
-    }
-  }
-  for (const act of manifest.acts) {
-    for (const beat of act.beats) {
-      if (beat.matchAny) return { act, beat };
     }
   }
   return null;
@@ -327,6 +329,31 @@ function buildLayout(records, manifest) {
     bucketByKey.get(key).records.push(r);
   }
 
+  /* Auto-group everything the manifest didn't claim: one synthetic act per
+     prefix, a single beat each (keep-together), appended after the manifest
+     acts in the order each prefix first appears in the record list. */
+  const autoActs = [];
+  const autoActById = new Map();
+  for (const r of unassigned) {
+    const actId = `auto:${r.prefix}`;
+    let act = autoActById.get(actId);
+    if (!act) {
+      const bucket = { act: null, beat: { id: r.prefix, name: r.prefix }, records: [] };
+      act = { id: actId, name: r.prefix, auto: true, _bucket: bucket };
+      bucket.act = act;
+      autoActById.set(actId, act);
+      autoActs.push(act);
+      buckets.push(bucket);
+    }
+    act._bucket.records.push(r);
+  }
+  /* Colour synthetic acts: honour PREFIX_COLOR when the prefix is known,
+     otherwise cycle the auto palette so adjacent acts read as distinct. */
+  let autoColorCursor = 0;
+  for (const act of autoActs) {
+    act.color = PREFIX_COLOR[act.name] || AUTO_COLOR_CYCLE[autoColorCursor++ % AUTO_COLOR_CYCLE.length];
+  }
+
   /* Sort passages inside each bucket by numeric suffix. */
   for (const bucket of buckets) {
     bucket.records.sort((a, b) => {
@@ -337,8 +364,9 @@ function buildLayout(records, manifest) {
     });
   }
 
-  /* Group by act in manifest order. */
-  const actSequence = manifest.acts
+  /* Group by act: manifest acts first (manifest order), then auto-grouped acts
+     (first-appearance order). */
+  const actSequence = [...manifest.acts, ...autoActs]
     .map((act) => ({
       act,
       beats: buckets.filter((bk) => bk.act.id === act.id),
@@ -381,7 +409,16 @@ function buildLayout(records, manifest) {
         height: beatH,
         color: act.color,
       });
-      for (const n of nodes) passageLayouts.push(n);
+      const beatGroupId = `beat:${act.id}:${bucket.beat.id}`;
+      for (const n of nodes) {
+        /* File-node tint: known prefixes keep their PREFIX_COLOR; auto-grouped
+           prefixes inherit their synthetic act's colour. */
+        n.color = PREFIX_COLOR[n.record.prefix] || act.color;
+        /* Stamp the owning beat-group so position-preservation can tell whether
+           a node changed groups since the last regeneration. */
+        n.beatGroupId = beatGroupId;
+        passageLayouts.push(n);
+      }
       beatY += beatH + BEAT_GAP_Y;
     }
     const actHeight = beatY - actY - BEAT_GAP_Y + ACT_PAD_BOT;
@@ -397,7 +434,7 @@ function buildLayout(records, manifest) {
     cursorY = actY + actHeight + ACT_GAP_Y;
   }
 
-  return { actLayouts, beatLayouts, passageLayouts, unassigned };
+  return { actLayouts, beatLayouts, passageLayouts, autoPrefixes: autoActs.map((a) => a.name) };
 }
 
 function emitNodes({ actLayouts, beatLayouts, passageLayouts }, existingPositions, stats) {
@@ -453,19 +490,27 @@ function emitNodes({ actLayouts, beatLayouts, passageLayouts }, existingPosition
   for (const pl of passageLayouts) {
     const r = pl.record;
     const filename = safeFilename(r.passage.name) + ".md";
-    const color = PREFIX_COLOR[r.prefix];
-    nodes.push(
-      applyPreservation({
-        id: r.passage.name,
-        type: "file",
-        file: `passages/${filename}`,
-        x: pl.x,
-        y: pl.y,
-        width: NODE_W,
-        height: NODE_H,
-        ...(color ? { color } : {}),
-      }),
-    );
+    const color = pl.color || PREFIX_COLOR[r.prefix];
+    const node = {
+      id: r.passage.name,
+      type: "file",
+      file: `passages/${filename}`,
+      x: pl.x,
+      y: pl.y,
+      width: NODE_W,
+      height: NODE_H,
+      ...(color ? { color } : {}),
+    };
+    /* Preserve a hand-moved position only when the node's current beat group
+       also existed in the previous canvas. If the node changed groups (newly
+       auto-grouped, or its beat was renamed), re-flow it into the fresh layout
+       slot instead of stranding it at its old coordinates. */
+    if (pl.beatGroupId && existingPositions.has(pl.beatGroupId)) {
+      applyPreservation(node);
+    } else {
+      stats.fresh += 1;
+    }
+    nodes.push(node);
   }
   return nodes;
 }
@@ -559,6 +604,10 @@ as acts → beats → passages.
   \`beats.json\` — edit them freely, names update on regeneration.
 - **Passages** (file nodes): the actual scenes, laid out left-to-right
   within each beat, wrapping to multiple rows for long beats.
+- **Auto-grouped acts**: any passage whose prefix isn't covered by a manifest
+  rule gets its own act named after the prefix (e.g. \`PALE\`, \`BLK\`), with all
+  of that prefix's passages kept together in number order. Add a named act/beat
+  to \`beats.json\` to give the prefix a friendlier name or split it into beats.
 
 ## Files
 
@@ -665,8 +714,8 @@ async function main() {
   if (orphanedIds.length > 0) {
     console.log(`  ${orphanedIds.length} orphaned position(s) dropped: ${orphanedIds.slice(0, 5).join(", ")}${orphanedIds.length > 5 ? ", ..." : ""}`);
   }
-  if (layout.unassigned.length > 0) {
-    console.log(`  WARNING: ${layout.unassigned.length} unassigned passages: ${layout.unassigned.map((r) => r.passage.name).join(", ")}`);
+  if (layout.autoPrefixes && layout.autoPrefixes.length > 0) {
+    console.log(`  auto-grouped ${layout.autoPrefixes.length} unmatched prefix(es) into their own act(s): ${layout.autoPrefixes.join(", ")}`);
   }
 }
 

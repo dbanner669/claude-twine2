@@ -6,12 +6,12 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-The hottest week of the year has saved its worst for today. Thirty degrees, and the humidity is doing its own work on top. Nobody's moving faster than they have to, and most are moving slower than that.
+The hottest week of the year has saved its worst for today. Thirty degrees, and the humidity on top. Whoever said Canada was cold never came to Toronto in the middle of the summer.  Nobody's moving faster than they have to.
 
-<<if $player.background eq "RCMP constable">>Three days of policing-conference sessions downtown, too many people and not enough sky. The afternoon panel let out early and you turned east without deciding to.
-<<elseif $player.background eq "CSIS analyst">>An intelligence-analysis forum, the afternoon panel done by three. You'd been in meetings since eight and the Danforth felt like the right direction, which was reason enough.
-<<elseif $player.background eq "grad student">>You'd brought a stack of readings and the idea of marking them in the shade somewhere. You managed two pages before the heat made concentration feel optional.
-<<else>>No particular reason to be on the Danforth. No particular reason to be much of anywhere, these days.
+<<if $player.background eq "RCMP constable">>You've spent three days at a policing-conference downtown and seen too many people and not enough sky. The afternoon session let out early, and you and the other attendees under 30 — all three of you — turned east without deciding to. You all needed a beer, and The Danforth was as good a place as any to get one.
+<<elseif $player.background eq "CSIS analyst">>You've spent three days at an intelligence-analysis forum in the city, and thankfully the afternoon panel was done by three. You'd been in meetings since seven and you heard there were good Greek restaurants on The Danforth, but all you can muster the energy for is a beer.
+<<elseif $player.background eq "grad student">>You'd brought a stack of assignments to East Lynn Park and the idea of marking them in the shade somewhere. You managed two pages before the heat made concentration feel optional.  You need a beer.
+<<else>>No particular reason to be on The Danforth. No particular reason to be much of anywhere, these days. You need a beer.
 <</if>>
 
 [[The bar is half a block ahead, and it almost certainly has a fan.|BLK-090 Up the Danforth]]
@@ -25,11 +25,11 @@ The hottest week of the year has saved its worst for today. Thirty degrees, and 
 <</silently>>\
 <<header>>\
 <<page>>\
-The strip does its usual August business: Greek diners with awnings out, the smell of souvlaki from the ventilation, a fruit stand with its crates going soft in the heat, a kid on a bike clipping the parked cars. The 504 streetcar runs past, overhead wire humming, in no more hurry than anyone else.
+The strip does its usual August business: Greek diners with awnings out, the smell of souvlaki from the ventilation, a fruit stand with its crates going soft in the heat, a kid on a bike clipping the parked cars. The 504 streetcar runs past, overhead wire humming, in no more hurry than anyone else.  Less if you're being honest.
 
-<<if $player.background eq "RCMP constable">>You read it the way you read a quiet patrol: nothing wrong, but you note the exits anyway. Habit.
-<<elseif $player.background eq "CSIS analyst">>You clock patterns without meaning to. Who's moving fast, who's stopped. The reflex doesn't switch off just because you're off the clock.
-<<elseif $player.background eq "grad student">>Ordinary Thursday afternoon. The street gives you nothing to study.
+<<if $player.background eq "RCMP constable">>There are so many people around. The <<term "Sault" "Soo">> isn't tiny by any means, but it's a whole different beast from Toronto. It feels overwhelming.
+<<elseif $player.background eq "CSIS analyst">>You clock patterns without meaning to. Who's moving fast, who's stopped. You wonder if becoming an analyst has somehow fundamentally broken you.
+<<elseif $player.background eq "grad student">>Ordinary Thursday afternoon. The street gives you an excuse to ignore your grading.
 <<else>>Nobody's in a hurry. That suits you.
 <</if>>
 
@@ -44,7 +44,7 @@ The strip does its usual August business: Greek diners with awnings out, the sme
 <</silently>>\
 <<header>>\
 <<page>>\
-The door swings shut behind you and the heat drops about five degrees. Not cool, but survivable. The bar is a low-lit room: vinyl stools, a mirror behind the bottles, two ceiling fans doing their best. A handful of people. The bartender gives you the nod. Older, moustache, a towel over his shoulder.
+The door swings shut behind you and the heat drops about five degrees. Not cool, but survivable. It takes your eyes a few moments to adjust, but when they do you can see the bar is a low-lit room: vinyl stools, a mirror behind the bottles, two ceiling fans doing their best. A handful of people. The bartender gives you the nod. Older, but still a hipster with a moustache.
 
 You take the room in before you take a seat. Bar on the right, washrooms at the back, the patio door propped open to the lane. Cool enough that you could sit here a while.
 
@@ -59,12 +59,12 @@ You take the room in before you take a seat. Bar on the right, washrooms at the 
 <</silently>>\
 <<header>>\
 <<page>>\
-Beer in front of you, cold enough that the glass is sweating.
+Quickly you get a beer in front of you, and it's cold enough that the glass is sweating. Perfect.
 
-<<if $player.background eq "RCMP constable">>Two other constables from the conference are at the end of the bar, Robichaud and someone from Sudbury. You're half listening. After three days of seminar rooms, the silence of your own thoughts is welcome.
-<<elseif $player.background eq "CSIS analyst">>You're alone, which is what you wanted. The analysts from the forum are back at the hotel writing their summary notes. You are not.
+<<if $player.background eq "RCMP constable">>Two other younger constables from the conference are at the end of the bar, Robichaud and someone from Sudbury. You're half listening. After three days of seminar rooms, the silence of your own thoughts is welcome.
+<<elseif $player.background eq "CSIS analyst">>You're alone, which is what you wanted. The analysts from the forum are back at the hotel writing their summary notes. Fuck that.  It's too hot for notes.
 <<elseif $player.background eq "grad student">>Your thesis notes are open on the table, barely touched. Too hot to read at home, and the bar at least has beer, so here you are, approximately working.
-<<else>>One beer, slowly. Money's the reason; nursing it long enough that the afternoon can count as lunch. You're in no hurry.
+<<else>>One beer, slowly. You're pretending this is lunch and pretending that you aren't a few weeks away from missing rent. Maybe the bar is hiring.
 <</if>>
 
 The heat comes off you in waves. You're not uncomfortable exactly. You're not much of anything, right now.
@@ -80,11 +80,9 @@ The heat comes off you in waves. You're not uncomfortable exactly. You're not mu
 <</silently>>\
 <<header>>\
 <<page>>\
-There's a book of matches on the bar, the bar's own, advertising nothing, a logo you'll forget. You pick it up. Turn it over. Put it in your pocket.
+There's a book of matches on the bar, the bar's own, a logo you'll forget. You pick it up. Turn it over. Put it in your pocket.
 
 You don't smoke. You don't know why you did that.
-
-The bartender doesn't notice. The ceiling fans keep turning.
 
 [[The afternoon goes on.|BLK-110 Four-eleven]]
 <</page>>
@@ -101,7 +99,7 @@ The bartender doesn't notice. The ceiling fans keep turning.
 
 The ceiling fans stop.
 
-The cooler behind the bar makes a sound like a question and then makes no sound at all. The radio cuts. The neon beer sign above the mirror goes dark. Outside, through the patio door, the traffic light at the corner cycles off and stays off.
+The cooler behind the bar makes a death rattle and then makes no sound at all. The radio cuts. The neon beer sign above the mirror goes dark. Outside, through the patio door, the traffic light at the corner cycles off and stays off.
 
 Somebody at the bar says: "Did you just —"
 
@@ -120,13 +118,13 @@ The bartender looks at the ceiling. Looks at the bottles. Looks at the ceiling a
 <</silently>>\
 <<header>>\
 <<page>>\
-The bartender finds a candle behind the bar, the half-used emergency kind, and lights it. Someone's transistor radio coughs static, then a voice that won't commit to much: not just the block, not just the neighbourhood. Bigger than that. The man holding it keeps working the dial like the next station will say something better.
+The bartender finds a candle behind the bar, the half-used emergency kind, and lights it. Someone's transistor radio coughs static, then a voice that won't commit to much: not just the block, not just the neighbourhood.
 
 The bar settles into the strange intimacy of a blackout: lower voices, people looking at each other differently.
 
-<<if $player.background eq "RCMP constable">>Robichaud's talking about the walk back to the hotel; the Sudbury constable's with him. You stay for one more. Somebody should keep an eye on a dark room full of warm beer and bored strangers, off the clock or not, and tonight that's you. You're the last one out.
-<<elseif $player.background eq "CSIS analyst">>You do the arithmetic the radio won't. Every light on the strip died on the same instant. Not a blown transformer, not a line down in a storm; something let go a long way upstream of here. Whatever it is, it's well above your pay grade, and it won't be fixed before your beer's warm. You settle up and go.
-<<else>>You settle up and leave when the beer gets warm.
+<<if $player.background eq "RCMP constable">>Robichaud's talking about the walk back to the hotel; the Sudbury constable's with him. You stay for one more.  You stick around with the offhand hope that the power will be back on after another beer and you can avoid the two-hour walk in the heat back downtown.  Or maybe Robichaud's just annoying and you think he's trying to get in your pants.  Maybe on a day when it isn't so hot.
+<<elseif $player.background eq "CSIS analyst">>Even if the radio won't say it, you know the score. Every light on the strip died on the same instant. Not a blown transformer, not a line down in a storm; something let go a long way upstream of here. Whatever it is, it's well above your pay grade, and it won't be fixed before all the beer here is warm. You settle up and go.
+<<else>>You settle up and leave before the beer gets warm.
 <</if>>
 
 [[Outside, the city is waiting.|BLK-120 Walking home in the heat]]
@@ -140,9 +138,9 @@ The bar settles into the strange intimacy of a blackout: lower voices, people lo
 <</silently>>\
 <<header>>\
 <<page>>\
-The TTC is dead: no streetcars, no signals, no buses. The whole city is on foot, moving in the same direction, which is home. You join it.
+The <<term "TTC">> is dead: no streetcars, no subway, not even buses. The whole city is on foot, moving in the same direction, which is home. You join it.
 
-Out here the dark is almost sociable. Stranger than a normal evening, and friendlier than it ought to be. People are talking to each other at intersections. Someone has walked their car into the middle of the road to wave traffic through.
+Out here the dark is downright sociable. Stranger than a normal evening, and friendlier than it ought to be. People are talking to each other at intersections. Someone has walked their car into the middle of the road to wave traffic through.  Some dude is playing a guitar on a corner.
 
 Thirty degrees in the shade, and the shade has moved east. There's no hurry because there's no other option. You walk.
 
@@ -159,10 +157,10 @@ Thirty degrees in the shade, and the shade has moved east. There's no hurry beca
 <<page>>\
 A man in a dress shirt is directing traffic at a dead intersection. He has no vest, no authority, and excellent hand signals. A restaurant owner is carrying chairs out to the sidewalk so the people walking by have somewhere to sit. Three neighbours are on a stoop sharing something from a bag, chips maybe, watching the foot traffic like it's a parade.
 
-<<if $player.background eq "RCMP constable">>You note who's calm, who's useful, who's going to be a problem by midnight if the power stays out.
-<<elseif $player.background eq "CSIS analyst">>You read the crowd the way the job taught you. This isn't panic; it's novelty. Novelty shifts.
+<<if $player.background eq "RCMP constable">>You note who's calm, who's useful, who's going to be a problem by midnight if the power stays out. It's honestly far more chill than you would have expected from the big city.
+<<elseif $player.background eq "CSIS analyst">>You read the crowd the way the job taught you. Everyone seems chill. You aren't worried about it being a problem.
 <<elseif $player.background eq "grad student">>Your thesis is about coercive persuasion, but this is its opposite: a crowd that has made a collective decision to not fall apart.
-<<else>>You've walked through worse. This isn't worse.
+<<else>>You've walked through worse. This feels more like a party than a panic.
 <</if>>
 
 [[The walk continues.|BLK-130 The propped door]]
@@ -176,9 +174,11 @@ A man in a dress shirt is directing traffic at a dead intersection. He has no ve
 <</silently>>
 <<header>>
 <<page>>
-The walkup is three stories, ten or twelve units, there since the fifties and not interested in changing. The street-side door is propped open with a brick. Through the gap comes sound.
+You head up a side street to find some better shade. A few blocks in, a <<term "walkup">> catches your eye. The front door is open.
 
-Not ordinary building sound. Not a TV through a wall, not a neighbour's argument. Something lower and sustained. A moan that lands wrong in your chest before your head has caught up with why.
+The walkup is three stories, ten or twelve units, built in the 1940s or 1950s and maintained ... moderately. The street-side door is propped open with a brick. Through the gap comes sound.
+
+Not ordinary building sound. Not a TV through a wall, not a neighbour's argument. Something lower and sustained. A sensual moan that lands wrong in your chest before your head has caught up with why.
 
 You stop.
 
@@ -204,7 +204,7 @@ Half a block. Maybe a little more. The sound follows you. Or it doesn't, exactly
 <<page>>\
 Between the sidewalk and the door there's a small concrete yard: a bike against the railing, a planter dried out from the week, a scorch mark where someone used to barbecue. Normal. All of it normal.
 
-The screen door is propped too, an inner door beyond it standing ajar. Through the gap: a dim hallway, the suggestion of a mailbox row, and the smell of someone's dinner gone cold on a stove.
+Through the gap: a dim hallway, the suggestion of a mailbox row, and the smell of someone's dinner gone cold on a stove.
 
 Your unease has sharpened. You're not sure when it started.
 
@@ -222,14 +222,14 @@ Your unease has sharpened. You're not sure when it started.
 <<page>>
 The lobby is a short hallway: mailboxes on one wall, a fire extinguisher on the other, emergency lighting running off its battery pack in a dim orange arc. The smell: stale carpet, old cooking, heat that has been indoors too long.
 
-The stairwell at the end of the hall is dark.
+The stairwell at the end of the hall is dark. Too dark.
 
-Not dark the way the rest of the city is dark. Darker. The emergency light reaches the bottom stair and stops, and what's beyond that point is a different quality of dark entirely. Your skin knows it before you do.
+It's not dark the way the rest of the city is dark. Darker. The light from outside reaches the bottom stair and stops, and what's beyond that point is a different quality of dark entirely. A darkness that's almost physical.
 
 <<set _checkSkill to Math.max($player.skills.composure.level, $player.skills.streetwise.level)>>
 <<skillCheck "Composure / Streetwise" "2d6" _checkSkill 7>>
 <<success>>
-It's not the power being out. You've been walking through powerless dark all evening and none of it felt like this. The stairwell light should be on. It always has been. Now it's off, and what's standing in for it is wrong.
+It's not the power being out. You've been walking through powerless dark all evening and none of it felt like this. You look up and see that this stairwell has been illuminated by a broad lobby light. Probably been bathed in light for years. Maybe that light was keeping something away.
 
 [[You step further into the lobby.|BLK-145 The man who won't go up]]
 <<failure>>
@@ -247,17 +247,15 @@ You don't have a framework for it. There's just the dread, the animal certainty 
 <</silently>>\
 <<header>>\
 <<page>>\
-He's in the doorway of the ground-floor unit: a heavy man in his fifties, undershirt, forearms on the door frame, watching the stairwell the way you are. He doesn't seem surprised to see you.
+A heavy-set man in his fifties pokes his head out from a first floor unit, watching the stairwell the way you are.
 
-"Don't go up," he says. Not a warning exactly. More like someone announcing a fact.
+"Don't go up," he says. Not a warning; more like someone announcing a fact.
 
-You ask if he knows what's happening.
-
-He's quiet for a moment. "Light's been on since I moved in. Five years. Never went out." He nods toward the stairwell. "Now it has."
+<<linkreplace "You ask if he knows what's happening.">>He's quiet for a moment. "Light's been on since I moved in. Five years. Never went out." He nods toward the stairwell. "Now it has."
 
 He goes back inside. You hear his deadbolt.
 
-[[You stand in the lobby with that.|BLK-150 What the dark is doing]]
+[[You stand in the lobby with that.|BLK-150 What the dark is doing]]<</linkreplace>>
 <</page>>
 
 
@@ -268,13 +266,13 @@ He goes back inside. You hear his deadbolt.
 <</silently>>\
 <<header>>\
 <<page>>\
-The woman comes down from the second floor; you hear the door, then her on the stairs. Mid-thirties, a sundress, one strap slipping off her shoulder. She's looking up the stairwell, not at you.
+The woman comes out from a doorway right next to the stairwell; you hear the door, then her on the stairs. Mid-thirties, a sundress, one strap slipping off her shoulder. She's looking up the stairwell, not at you.
 
-She's also undoing the dress as she walks.
+She's also undoing the dress as she walks. It slips off her body by the time she reaches the edge of the light. She's naked underneath. 
 
-Not in a hurry. Not afraid. Attending to something. Her expression is calm in a way that is completely wrong. She passes you without registering you exist, and climbs into the dark above the bottom stair.
+She didn't even register that you were there, and now she's climbing into the dark above completely nude.
 
-You don't hear her stop climbing.
+As she disappears into the darkness you hear her footsteps continue up.
 
 [[You watch the dark where she went.|BLK-155 The sound from above]]
 <</page>>

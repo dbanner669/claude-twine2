@@ -259,20 +259,26 @@
           <<goto "BLK-085 The hottest day of the year">>
         <</link>>
       </div>
-      <div class="cc-bg-card" style="opacity:0.4;pointer-events:none;position:relative">
-        <span class="stamp" style="position:absolute;top:8px;right:8px;font-size:9px;transform:rotate(4deg)">Coming Soon</span>
-        <span class="card-title">The Dark of Manitoulin</span>
-        <span class="card-blurb">August 2003. A lakehouse on Manitoulin Island. A ritual that was not supposed to work.</span>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "the Dark of Manitoulin">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">The Dark of Manitoulin</span><span class="card-blurb">August 2003. A lakehouse on Manitoulin Island. A ritual that was not supposed to work.</span>'>>
+          <<set $player.incitingIncident to "the Dark of Manitoulin">>
+          <<goto "MAN-085 The long drive up">>
+        <</link>>
       </div>
-      <div class="cc-bg-card" style="opacity:0.4;pointer-events:none;position:relative">
-        <span class="stamp" style="position:absolute;top:8px;right:8px;font-size:9px;transform:rotate(-3deg)">Coming Soon</span>
-        <span class="card-title">The Woman with the Pale Eyes</span>
-        <span class="card-blurb">August 2003. A hotel lobby in Ottawa. Heavy rain. Wrong eyes.</span>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "the Woman with the Pale Eyes">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">The Woman with the Pale Eyes</span><span class="card-blurb">August 2003. A hotel lobby in Ottawa. Heavy rain. Wrong eyes.</span>'>>
+          <<set $player.incitingIncident to "the Woman with the Pale Eyes">>
+          <<goto "PALE-085 A reason to be in Ottawa">>
+        <</link>>
       </div>
-      <div class="cc-bg-card" style="opacity:0.4;pointer-events:none;position:relative">
-        <span class="stamp" style="position:absolute;top:8px;right:8px;font-size:9px;transform:rotate(2deg)">Coming Soon</span>
-        <span class="card-title">Wet Dog Smell</span>
-        <span class="card-blurb">August 2003. A roadside motel. Something in the dark outside.</span>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "Wet Dog Smell">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">Wet Dog Smell</span><span class="card-blurb">August 2003. A roadside motel. Something in the dark outside.</span>'>>
+          <<set $player.incitingIncident to "Wet Dog Smell">>
+          <<goto "WDS-085 The last stretch of highway">>
+        <</link>>
       </div>
     </div>
   </div>
