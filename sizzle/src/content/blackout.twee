@@ -1,0 +1,555 @@
+:: BLK-085 The hottest day of the year [avatar-blk-day]
+<<silently>>
+<<setDate 2003 8 14 "afternoon">>
+<<set $header.location to "THE DANFORTH, TORONTO">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The hottest week of the year has saved its worst for today. Thirty degrees, and the humidity on top. Whoever said Canada was cold never came to Toronto in the middle of the summer.  Nobody's moving faster than they have to.
+
+<<if $player.background eq "RCMP constable">>You've spent three days at a policing-conference downtown and seen too many people and not enough sky. The afternoon session let out early, and you and the other attendees under 30 — all three of you — turned east without deciding to. You all needed a beer, and The Danforth was as good a place as any to get one.
+<<elseif $player.background eq "CSIS analyst">>You've spent three days at an intelligence-analysis forum in the city, and thankfully the afternoon panel was done by three. You'd been in meetings since seven and you heard there were good Greek restaurants on The Danforth, but all you can muster the energy for is a beer.
+<<elseif $player.background eq "grad student">>You'd brought a stack of assignments to East Lynn Park and the idea of marking them in the shade somewhere. You managed two pages before the heat made concentration feel optional.  You need a beer.
+<<else>>No particular reason to be on The Danforth. No particular reason to be much of anywhere, these days. You need a beer.
+<</if>>
+
+[[The bar is half a block ahead, and it almost certainly has a fan.|BLK-090 Up the Danforth]]
+<</page>>
+
+
+:: BLK-090 Up the Danforth [avatar-blk-day]
+<<silently>>
+<<set $header.location to "THE DANFORTH, TORONTO">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The strip does its usual August business: Greek diners with awnings out, the smell of souvlaki from the ventilation, a fruit stand with its crates going soft in the heat, a kid on a bike clipping the parked cars. The 504 streetcar runs past, overhead wire humming, in no more hurry than anyone else.  Less if you're being honest.
+
+<<if $player.background eq "RCMP constable">>There are so many people around. The <<term "Sault" "Soo">> isn't tiny by any means, but it's a whole different beast from Toronto. It feels overwhelming.
+<<elseif $player.background eq "CSIS analyst">>You clock patterns without meaning to. Who's moving fast, who's stopped. You wonder if becoming an analyst has somehow fundamentally broken you.
+<<elseif $player.background eq "grad student">>Ordinary Thursday afternoon. The street gives you an excuse to ignore your grading.
+<<else>>Nobody's in a hurry. That suits you.
+<</if>>
+
+[[The bar's door is a few steps ahead, and through the glass it looks mercifully dark.|BLK-095 Somewhere with a fan]]
+<</page>>
+
+
+:: BLK-095 Somewhere with a fan [avatar-blk-day]
+<<silently>>
+<<set $header.location to "BAR, THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The door swings shut behind you and the heat drops about five degrees. Not cool, but survivable. It takes your eyes a few moments to adjust, but when they do you can see the bar is a low-lit room: vinyl stools, a mirror behind the bottles, two ceiling fans doing their best. A handful of people. The bartender gives you the nod. Older, but still a hipster with a moustache.
+
+You take the room in before you take a seat. Bar on the right, washrooms at the back, the patio door propped open to the lane. Cool enough that you could sit here a while.
+
+[[You settle in.|BLK-100 Last call before dark]]
+<</page>>
+
+
+:: BLK-100 Last call before dark [avatar-blk-day]
+<<silently>>
+<<set $header.location to "BAR, THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Quickly you get a beer in front of you, and it's cold enough that the glass is sweating. Perfect.
+
+<<if $player.background eq "RCMP constable">>Two other younger constables from the conference are at the end of the bar, Robichaud and someone from Sudbury. You're half listening. After three days of seminar rooms, the silence of your own thoughts is welcome.
+<<elseif $player.background eq "CSIS analyst">>You're alone, which is what you wanted. The analysts from the forum are back at the hotel writing their summary notes. Fuck that.  It's too hot for notes.
+<<elseif $player.background eq "grad student">>Your thesis notes are open on the table, barely touched. Too hot to read at home, and the bar at least has beer, so here you are, approximately working.
+<<else>>One beer, slowly. You're pretending this is lunch and pretending that you aren't a few weeks away from missing rent. Maybe the bar is hiring.
+<</if>>
+
+The heat comes off you in waves. You're not uncomfortable exactly. You're not much of anything, right now.
+
+[[You stay a while.|BLK-105 You don't even smoke]]
+<</page>>
+
+
+:: BLK-105 You don't even smoke [avatar-blk-day]
+<<silently>>
+<<set $header.location to "BAR, THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+There's a book of matches on the bar, the bar's own, a logo you'll forget. You pick it up. Turn it over. Put it in your pocket.
+
+You don't smoke. You don't know why you did that.
+
+[[The afternoon goes on.|BLK-110 Four-eleven]]
+<</page>>
+
+
+:: BLK-110 Four-eleven [avatar-blk-day]
+<<silently>>
+<<set $header.location to "BAR, THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+4:11 p.m.
+
+The ceiling fans stop.
+
+The cooler behind the bar makes a death rattle and then makes no sound at all. The radio cuts. The neon beer sign above the mirror goes dark. Outside, through the patio door, the traffic light at the corner cycles off and stays off.
+
+Somebody at the bar says: "Did you just —"
+
+Somebody else says: "Yeah."
+
+The bartender looks at the ceiling. Looks at the bottles. Looks at the ceiling again.
+
+[[Nobody moves for a moment.|BLK-115 Warm beer and a radio]]
+<</page>>
+
+
+:: BLK-115 Warm beer and a radio [avatar-blk-day]
+<<silently>>
+<<set $header.location to "BAR, THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The bartender finds a candle behind the bar, the half-used emergency kind, and lights it. Someone's transistor radio coughs static, then a voice that won't commit to much: not just the block, not just the neighbourhood.
+
+The bar settles into the strange intimacy of a blackout: lower voices, people looking at each other differently.
+
+<<if $player.background eq "RCMP constable">>Robichaud's talking about the walk back to the hotel; the Sudbury constable's with him. You stay for one more.  You stick around with the offhand hope that the power will be back on after another beer and you can avoid the two-hour walk in the heat back downtown.  Or maybe Robichaud's just annoying and you think he's trying to get in your pants.  Maybe on a day when it isn't so hot.
+<<elseif $player.background eq "CSIS analyst">>Even if the radio won't say it, you know the score. Every light on the strip died on the same instant. Not a blown transformer, not a line down in a storm; something let go a long way upstream of here. Whatever it is, it's well above your pay grade, and it won't be fixed before all the beer here is warm. You settle up and go.
+<<else>>You settle up and leave before the beer gets warm.
+<</if>>
+
+[[Outside, the city is waiting.|BLK-120 Walking home in the heat]]
+<</page>>
+
+
+:: BLK-120 Walking home in the heat [avatar-blk-day]
+<<silently>>
+<<set $header.location to "THE DANFORTH, TORONTO">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The <<term "TTC">> is dead: no streetcars, no subway, not even buses. The whole city is on foot, moving in the same direction, which is home. You join it.
+
+Out here the dark is downright sociable. Stranger than a normal evening, and friendlier than it ought to be. People are talking to each other at intersections. Someone has walked their car into the middle of the road to wave traffic through.  Some dude is playing a guitar on a corner.
+
+Thirty degrees in the shade, and the shade has moved east. There's no hurry because there's no other option. You walk.
+
+[[The walk will take a while.|BLK-125 The city helping itself]]
+<</page>>
+
+
+:: BLK-125 The city helping itself [avatar-blk-day]
+<<silently>>
+<<set $header.location to "THE DANFORTH, TORONTO">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+A man in a dress shirt is directing traffic at a dead intersection. He has no vest, no authority, and excellent hand signals. A restaurant owner is carrying chairs out to the sidewalk so the people walking by have somewhere to sit. Three neighbours are on a stoop sharing something from a bag, chips maybe, watching the foot traffic like it's a parade.
+
+<<if $player.background eq "RCMP constable">>You note who's calm, who's useful, who's going to be a problem by midnight if the power stays out. It's honestly far more chill than you would have expected from the big city.
+<<elseif $player.background eq "CSIS analyst">>You read the crowd the way the job taught you. Everyone seems chill. You aren't worried about it being a problem.
+<<elseif $player.background eq "grad student">>Your thesis is about coercive persuasion, but this is its opposite: a crowd that has made a collective decision to not fall apart.
+<<else>>You've walked through worse. This feels more like a party than a panic.
+<</if>>
+
+[[The walk continues.|BLK-130 The propped door]]
+<</page>>
+
+
+:: BLK-130 The propped door [nobr avatar-blk-day]
+<<silently>>
+<<set $header.location to "JUST OFF THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>
+<<header>>
+<<page>>
+You head up a side street to find some better shade. A few blocks in, a <<term "walkup">> catches your eye. The front door is open.
+
+The walkup is three stories, ten or twelve units, built in the 1940s or 1950s and maintained ... moderately. The street-side door is propped open with a brick. Through the gap comes sound.
+
+Not ordinary building sound. Not a TV through a wall, not a neighbour's argument. Something lower and sustained. A sensual moan that lands wrong in your chest before your head has caught up with why.
+
+You stop.
+
+<span id="blk-130-choices">
+<div class="choices">
+<div class="choice">[[You push the door open a little wider and look in.|BLK-135 Crossing the little yard]]</div>
+<div class="choice"><<link "You keep walking.">><<replace "#blk-130-choices">>
+Half a block. Maybe a little more. The sound follows you. Or it doesn't, exactly, but the memory of it does, and it won't shake loose. At the corner your feet slow before you do. You look back. The door is still propped. Whatever that sound was is still wrong.
+
+[[You cross back to the propped door.|BLK-135 Crossing the little yard]]
+<</replace>><</link>></div>
+</div>
+</span>
+<</page>>
+
+
+:: BLK-135 Crossing the little yard [avatar-blk-day]
+<<silently>>
+<<set $header.location to "WALKUP, JUST OFF THE DANFORTH">>
+<<set $header.time to "Thursday afternoon">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Between the sidewalk and the door there's a small concrete yard: a bike against the railing, a planter dried out from the week, a scorch mark where someone used to barbecue. Normal. All of it normal.
+
+Through the gap: a dim hallway, the suggestion of a mailbox row, and the smell of someone's dinner gone cold on a stove.
+
+Your unease has sharpened. You're not sure when it started.
+
+[[You go inside.|BLK-140 The lobby]]
+<</page>>
+
+
+:: BLK-140 The lobby [nobr avatar-blk-night]
+<<silently>>
+<<setTime "evening">>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+The lobby is a short hallway: mailboxes on one wall, a fire extinguisher on the other, emergency lighting running off its battery pack in a dim orange arc. The smell: stale carpet, old cooking, heat that has been indoors too long.
+
+The stairwell at the end of the hall is dark. Too dark.
+
+It's not dark the way the rest of the city is dark. Darker. The light from outside reaches the bottom stair and stops, and what's beyond that point is a different quality of dark entirely. A darkness that's almost physical.
+
+<<set _checkSkill to Math.max($player.skills.composure.level, $player.skills.streetwise.level)>>
+<<skillCheck "Composure / Streetwise" "2d6" _checkSkill 7>>
+<<success>>
+It's not the power being out. You've been walking through powerless dark all evening and none of it felt like this. You look up and see that this stairwell has been illuminated by a broad lobby light. Probably been bathed in light for years. Maybe that light was keeping something away.
+
+[[You step further into the lobby.|BLK-145 The man who won't go up]]
+<<failure>>
+You don't have a framework for it. There's just the dread, the animal certainty that something at the top of those stairs is not what it should be. You feel it in your throat before anywhere else.
+
+[[You step further into the lobby.|BLK-145 The man who won't go up]]
+<</skillCheck>>
+<</page>>
+
+
+:: BLK-145 The man who won't go up [avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+A heavy-set man in his fifties pokes his head out from a first floor unit, watching the stairwell the way you are.
+
+"Don't go up," he says. Not a warning; more like someone announcing a fact.
+
+<<linkreplace "You ask if he knows what's happening.">>He's quiet for a moment. "Light's been on since I moved in. Five years. Never went out." He nods toward the stairwell. "Now it has."
+
+He goes back inside. You hear his deadbolt.
+
+[[You stand in the lobby with that.|BLK-150 What the dark is doing]]<</linkreplace>>
+<</page>>
+
+
+:: BLK-150 What the dark is doing [avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The woman comes out from a doorway right next to the stairwell; you hear the door, then her on the stairs. Mid-thirties, a sundress, one strap slipping off her shoulder. She's looking up the stairwell, not at you.
+
+She's also undoing the dress as she walks. It slips off her body by the time she reaches the edge of the light. She's naked underneath. 
+
+She didn't even register that you were there, and now she's climbing into the dark above completely nude.
+
+As she disappears into the darkness you hear her footsteps continue up.
+
+[[You watch the dark where she went.|BLK-155 The sound from above]]
+<</page>>
+
+
+:: BLK-155 The sound from above [avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+From above: sounds you can't mistake. Not one person's sounds. Several.
+
+A shape moves across the top of the stairwell, a silhouette pressed against another, mouths finding each other in the dark. Gone before you've fixed on it.
+
+You're warm. Not from the heat. Warm between your legs, a low pulse that quickens with the sounds above.
+
+It isn't the people upstairs that scare you. It's that you want to be one of them.
+
+[[You haven't moved.|BLK-160 The pull]]
+<</page>>
+
+
+:: BLK-160 The pull [nobr avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+The dark at the top of the stairs wants you in it. You know it the way you know a glass is full before you lift it. Your body is already braced. Part of you is ready to go. Not the same part that makes decisions.
+
+Your feet haven't moved. Yet.
+
+<<set _checkSkill to $player.skills.composure.level>>
+<<skillCheck "Composure" "2d6" _checkSkill 8>>
+<<success>>
+<<if not $player.flags.blkSkillGranted>>
+<<set $player.skills.composure.level += 1>>
+<<set $player.flags.blkSkillGranted to true>>
+<</if>>
+<<set $player.flags.blkClimbed to false>>
+Your feet stay. The want is real. You're not pretending it isn't. But the part that decides is holding at the line, watching the rest of you strain toward the dark like it belongs to someone else.
+
+[[You hold your position.|BLK-165 Two steps up]]
+<<failure>>
+<<set $player.flags.blkClimbed to true>>
+Your foot finds the first stair.
+
+[[You take a step.|BLK-165 Two steps up]]
+<</skillCheck>>
+<</page>>
+
+
+:: BLK-165 Two steps up [nobr avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP STAIRWELL">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+<<if $player.flags.blkClimbed>>
+Two steps up. Maybe three. The dark on the stairs is thicker than the lobby dark, and warmer, and the moment you crossed the bottom stair the want changed. Louder. More definite. Something that was background noise a breath ago, now with your name on it.
+
+Your hand is around the matchbook in your pocket.
+
+You don't know if you put it there on purpose. You know you've stopped.
+<<else>>
+You don't go. Some part of you that's been keeping score without your knowledge draws the line here, at the bottom stair, and holds it.
+
+The want is still there. Saying no didn't make it leave. But your feet are still where you left them, and that counts for something.
+<</if>>
+
+[[You turn your attention to the dark itself.|BLK-170 It's the dark itself]]
+<</page>>
+
+
+:: BLK-170 It's the dark itself [nobr avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+The man downstairs said the light had been on for five years.
+
+A stairwell light that's run five years straight goes out the second the city loses power. Whatever it was holding back is loose now in the dark it left. Not a person. Not a smell. Not something that was up there before the power died.
+
+The dark is the thing.
+
+<<set _checkSkill to $player.skills.academic.level>>
+<<skillCheck "Academic" "2d6" _checkSkill 7>>
+<<success>>
+<<if not $player.flags.blkSkillGranted>>
+<<set $player.skills.academic.level += 1>>
+<<set $player.flags.blkSkillGranted to true>>
+<</if>>
+You reason it through, which is what you do. If the light keeps the dark manageable, introducing light interrupts whatever the dark has become. Practical. Testable. Your hand is already moving.
+
+[[You think of the matchbook.|BLK-175 The matchbook]]
+<<failure>>
+You don't reason it. There isn't time and the dark is still pulling. Your hand finds the matchbook before the thought does.
+
+[[Your hand closes around the matchbook.|BLK-175 The matchbook]]
+<</skillCheck>>
+<</page>>
+
+
+:: BLK-175 The matchbook [nobr avatar-blk-night]
+<<silently>>
+<<if not $player.flags.blkSkillGranted>>
+<<set $player.skills.streetwise.level += 1>>
+<<set $player.flags.blkSkillGranted to true>>
+<</if>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+The matchbook in your hand. You don't smoke. There is no reason you should have this.
+
+You tear off a match and strike it against the strip.
+
+Nothing. The head skids and crumbles. The match is damp from the heat. Your hands too, probably.
+
+Above you, sounds. The dark is patient.
+
+You tear off another match. Your hands won't hold still. If the damp wins, the stairwell stays dark and whatever's up there gets you too.
+
+[[You strike.|BLK-180 One match]]
+<</page>>
+
+
+:: BLK-180 One match [nobr avatar-blk-night]
+<<silently>>
+<<if not $player.flags.blkInfluenceGranted>>
+<<set $nyse.influence += 1>>
+<<if $player.flags.blkClimbed>>
+<<set $nyse.influence += 1>>
+<</if>>
+<<set $player.flags.blkInfluenceGranted to true>>
+<</if>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>
+<<header>>
+<<page>>
+It catches.
+
+A small orange flame, not much bigger than a thumbnail. The stairwell eases the way a held breath eases. The wrong dark pulls back, not all at once, more like something withdrawing. The want in your body steps down, then down again.
+
+Above you, the sounds change. Confusion where a moment ago there was none. Someone says, distantly: "What — where —"
+
+What do you do with the match?
+
+[[You hold it up as high as your arm reaches.|BLK-185 The building exhales]]
+[[You find a hallway votive on the window ledge and light it.|BLK-185 The building exhales]]
+[[You fold a flyer from the mailbox rack into a torch and light it.|BLK-185 The building exhales]]
+<</page>>
+
+
+:: BLK-185 The building exhales [avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP LOBBY">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+From above: footsteps that are not the blank-faced climbing kind. Hesitation. A man's voice saying "oh god" in a way that sounds like waking up.
+
+Then more of it. The sounds of people who don't know how they got where they're standing. The specific shame of not knowing why your clothes are undone, or where your phone is, or who the stranger next to you is.
+
+Nobody comes downstairs. Not yet.
+
+[[You don't wait to be seen.|BLK-190 Before anyone thanks you]]
+<</page>>
+
+
+:: BLK-190 Before anyone thanks you [avatar-blk-night]
+<<silently>>
+<<set $header.location to "WALKUP, JUST OFF THE DANFORTH">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+You back out the way you came in. Across the lobby, past the mailboxes, through the screen door, across the little yard. The threshold you refused to cross upward is the one you now cross outward. You don't look back.
+
+The match has burned down to your fingers. You drop it on the concrete.
+
+The street has moved on while you were inside. People still walking home, still directing traffic, still sharing chips on stoops. They don't know anything happened. Thirty metres away something did, something you can't name, and the street never felt it.
+
+[[You keep moving.|BLK-200 The rest of the dark]]
+<</page>>
+
+
+:: BLK-200 The rest of the dark [avatar-blk-night]
+<<silently>>
+<<set $header.location to "TORONTO">>
+<<set $header.time to "Thursday evening">>
+<</silently>>\
+<<header>>\
+<<page>>\
+The walk home takes more than two hours. You don't try to make sense of it. Not out loud, not to the strangers walking beside you, not even to yourself. Whatever that was, it doesn't come apart into reasons.
+
+There was something wrong in that stairwell. You stopped it. You don't smoke, and you were carrying matches.
+
+The city's dark goes all the way to the horizon. Somewhere in the distance, the odd pink cast of emergency lighting where the hospitals are keeping their generators running.
+
+[[You get home sometime after nine.|BLK-205 Still out]]
+<</page>>
+
+
+:: BLK-205 Still out [avatar-blk-day]
+<<silently>>
+<<advanceDays 1 "morning">>
+<<set $header.location to "TORONTO">>
+<<set $header.time to "Friday morning">>
+<</silently>>\
+<<header>>\
+<<page>>\
+Friday morning and the power is still out.
+
+The city has settled into it: people on front porches with coffee, radio news through open windows, the intersection nearest your place managed by the same man in the reflective vest who showed up last night and hasn't left. Ontario Hydro says probably today. Ontario Hydro said probably yesterday too.
+
+You haven't told anyone about the walkup. You won't.
+
+There's no word for what happened in there, not one anybody ever gave you. One night on the Danforth doesn't change that.
+
+[[A week passes.|BLK-210 Incident report]]
+<</page>>
+
+
+:: BLK-210 Incident report [nobr avatar-hidden]
+<<silently>>
+<<setDate 2003 8 21 "morning">>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Thursday morning">>
+<</silently>>
+<<header>>
+<<page>>
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(-8deg)">Classified</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Incident File · 03-DAN-0814 · Extract</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>INCIDENT DATE: 2003.08.14. Flagged from TPS unusual-occurrence log 2003.08.18.</p>
+<p>Complaint received re: disturbance, <span class="redact" style="width:110px"></span> Danforth Avenue East, approx. 18:30 hrs. Responding officer: no evidence. Residents, upper floors: disoriented, no recall 16:15–19:00 hrs. No injuries. No charges.</p>
+<p>CCTV obtained 2003.08.20. Subject (F, approx. 25–30) approaches building, hesitates at threshold approx. 45 sec., enters lobby, introduces <span class="redact" style="width:80px"></span> light source into stairwell, departs approx. 3 min. later. Subject does not return to frame.</p>
+<p>Building maintenance records: stairwell fixture confirmed operational continuously, min. <span class="redact" style="width:50px"></span> years prior to incident date. Classification: <span style="color:var(--sz-brass);font-style:italic">pending review</span>.</p>
+</div>
+</div>
+
+[[You turn the page.|BLK-215 Recommendation]]
+<</page>>
+
+
+:: BLK-215 Recommendation [nobr avatar-hidden]
+<<silently>>
+<<set $header.location to "BRANCH FILE EXTRACT">>
+<<set $header.time to "Thursday morning">>
+<</silently>>
+<<header>>
+<<page>>
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(5deg)">Eyes Only</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Recruitment Recommendation · R. Flett · 2003.08.21</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>Re: <span class="redact" style="width:130px"></span> (subject, file 03-DAN-0814).</p>
+<p>Event classification: NYSE. Focal condition, environmental vector, single-structure scope. Resolved before we arrived, by the subject, with a book of matches.</p>
+<p>Subject behaviour on CCTV: approaches, holds at the threshold some forty-five seconds, goes inside, puts light into the stairwell, and leaves. No panic. No call to emergency services. She doesn't wait to be seen. By chance or otherwise, she was carrying the one thing the condition could not tolerate.</p>
+<p>Recommend contact inside thirty days. She is field-eligible, pending evaluation. What we look for is not nerve, and it is not immunity. It is the person who keeps seeing straight after the situation stops making sense, and then does the next plain thing. The footage is three minutes of exactly that.</p>
+<p style="margin-top:14px">— R. Flett, Branch</p>
+</div>
+</div>
+
+<<link "The file closes." "CC-500 Summary">>
+<<set $player.incitingIncident to "the Toronto Blackout">>
+<<setDate 2005 9 12 "morning">>
+<</link>>
+<</page>>

@@ -58,4 +58,20 @@ $(document).on(":passagedisplay", function () {
   }
 
   document.body.setAttribute("data-mode", mode);
+
+  /* Per-phase avatar placeholder image. A passage tag swaps the CSS
+     placeholder (--sz-avatar-img on #avatar cascades to .avatar-abs::after);
+     with no tag the property is cleared and CSS falls back to the default
+     composite placeholder, so the briefing and all other scenes are
+     unchanged. Used by the BLK Blackout flashback (day vs night phase). */
+  var avatarEl = document.getElementById("avatar");
+  if (avatarEl) {
+    if (tags.indexOf("avatar-blk-night") !== -1) {
+      avatarEl.style.setProperty("--sz-avatar-img", 'url("media/avatar/blackout-night.png")');
+    } else if (tags.indexOf("avatar-blk-day") !== -1) {
+      avatarEl.style.setProperty("--sz-avatar-img", 'url("media/avatar/blackout-day.png")');
+    } else {
+      avatarEl.style.removeProperty("--sz-avatar-img");
+    }
+  }
 });

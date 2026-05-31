@@ -164,7 +164,9 @@
   content: "";
   position: absolute;
   inset: 10px;
-  background-image: url("media/avatar/placeholder-suit.png");
+  /* Per-phase override via --sz-avatar-img (set in events.js from a
+     passage tag); falls back to the default composite placeholder. */
+  background-image: var(--sz-avatar-img, url("media/avatar/placeholder-suit.png"));
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

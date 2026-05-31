@@ -252,15 +252,42 @@
   </div>
   <div>
     <div class="eyebrow" style="margin-bottom:14px">What do you remember?</div>
-    /* TODO: Replace with actual inciting incident options.
-       Each option should set $player.incitingIncident and
-       potentially $nyse.influence starting value. */
-    <div style="font-family:var(--sz-f-body);font-size:15px;font-style:italic;color:var(--sz-cream-faint);line-height:1.6">
-      Memory recovery pending.
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "the Toronto Blackout">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">The Toronto Blackout</span><span class="card-blurb">Thursday, August 14, 2003. The night the lights went out, you were the one who lit a match.</span>'>>
+          <<goto "BLK-085 The hottest day of the year">>
+        <</link>>
+      </div>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "the Dark of Manitoulin">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">The Dark of Manitoulin</span><span class="card-blurb">August 2003. A lakehouse on Manitoulin Island. A ritual that was not supposed to work.</span>'>>
+          <<set $player.incitingIncident to "the Dark of Manitoulin">>
+          <<goto "MAN-085 The long drive up">>
+        <</link>>
+      </div>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "the Woman with the Pale Eyes">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">The Woman with the Pale Eyes</span><span class="card-blurb">August 2003. A hotel lobby in Ottawa. Heavy rain. Wrong eyes.</span>'>>
+          <<set $player.incitingIncident to "the Woman with the Pale Eyes">>
+          <<goto "PALE-085 A reason to be in Ottawa">>
+        <</link>>
+      </div>
+      <div class="cc-bg-card">
+        <<if $player.incitingIncident eq "Wet Dog Smell">><span class="selected-tag">SELECTED</span><</if>>
+        <<link '<span class="card-title">Wet Dog Smell</span><span class="card-blurb">August 2003. A roadside motel. Something in the dark outside.</span>'>>
+          <<set $player.incitingIncident to "Wet Dog Smell">>
+          <<goto "WDS-085 The last stretch of highway">>
+        <</link>>
+      </div>
     </div>
   </div>
 </div>
-<<ccDossierFooter 4 "CC-300 Background" "CC-500 Summary">>
+<<if $player.incitingIncident>>
+  <<ccDossierFooter 4 "CC-300 Background" "CC-500 Summary">>
+<<else>>
+  <<ccDossierFooter 4 "CC-300 Background" "" "Back" "Continue" "Select an incident first">>
+<</if>>
 </div>
 
 

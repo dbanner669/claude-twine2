@@ -88,7 +88,17 @@
       "PowerShell(node -e \"var l=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; console.log\\('2005-09-12 =>', l[new Date\\(2005,8,12\\).getDay\\(\\)]\\); console.log\\('2003-08-14 =>', l[new Date\\(2003,7,14\\).getDay\\(\\)]\\);\")",
       "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1; \"COMPILE EXIT: $LASTEXITCODE\")",
       "Bash(git check-ignore *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\_tools\\\\tweego\\\\tweego.exe\" -o \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\output.html\" \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\\\\sizzle\\\\src\\\\\" 2>&1)",
+      "Bash(python -m http.server 3001)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/output.html)",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/; \"exit code: $LASTEXITCODE\")",
+      "PowerShell(Start-Process -FilePath \"py\" -ArgumentList \"-3\",\"-m\",\"http.server\",\"8000\",\"--bind\",\"127.0.0.1\" -WorkingDirectory \"sizzle\" -WindowStyle Hidden; Start-Sleep -Seconds 2; try { \\(Invoke-WebRequest -Uri \"http://127.0.0.1:8000/output.html\" -UseBasicParsing -TimeoutSec 5\\).StatusCode } catch { \"ERR: $_\" })",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='python.exe' OR Name='py.exe'\" | Where-Object { $_.CommandLine -match 'http.server' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force; \"stopped PID $\\($_.ProcessId\\)\" })",
+      "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" rev-parse --abbrev-ref HEAD)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" status --porcelain)",
+      "PowerShell(node sizzle/scripts/build-obsidian-canvas.js)"
     ]
   }
 }

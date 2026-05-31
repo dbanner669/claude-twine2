@@ -13,6 +13,8 @@ The current direction is that each incident becomes a full playable flashback/pr
 
 > **The per-incident docs are canonical where they diverge from the incident notes below.** This file's per-incident sections (§Incident 1–4) are the original ideation source; the four `incidents/*.md` docs supersede them on any point of detail (beat maps, specifics, geography, the spray used, explicitness, time/palette, etc.).
 
+**Blackout implementation status:** `the Toronto Blackout` is implemented and pending first-play review (`sizzle/src/content/blackout.twee`, BLK-085–BLK-215, CC-400 wired). The other three incidents remain design-doc only.
+
 Cross-cutting decisions established during the Blackout pass (apply to all four unless a doc says otherwise): per-incident passage prefixes (`BLK`/`MAN`/`PALE`/`WDS`); avatar visible during flashbacks; convergent branching (choices/checks change texture, scar, and an earned +1 skill — never the outcome); +1 skill grants written as plain set-once `+=` and made durable by relocating the destructive skill rebuild from CC-500 to the top of CC-400 (upstream of the flashback) — no `skillMods` array or tracking layer; no incident-specific storyTags that are 1:1 derivable from `$player.incitingIncident`; rich length (~18–22 passages, plus two or three short table-setting passages before the opener). Starting `$nyse.influence` values are now locked — see **Locked `$nyse.influence` Calibration** below.
 
 ### Cross-cutting tonal rules (whole-game)

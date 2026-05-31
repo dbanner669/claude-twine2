@@ -25,11 +25,11 @@ Playable greybox prose covers:
 - Character creation: `CC-100` through `CC-500` (with `CC-400` still a source placeholder; see below)
 - Briefing / prologue: `INTRO-100` through `INTRO-800 End`
 
-Approximate scale: ~30 prologue passages, full branching dialogue, skill-check variants, four background variants throughout.
+Approximate scale: ~30 prologue passages + 26 BLK flashback passages, full branching dialogue, skill-check variants, four background variants throughout.
 
 ## Current Writing Gaps
 
-- **`CC-400 Incident`** — still placeholder text in source. The selected direction is four full playable August 2003 origin sequences: `the Toronto Blackout`, `the Dark of Manitoulin`, `the Woman with the Pale Eyes`, and `Wet Dog Smell`. `$player.incitingIncident` is read by `INTRO-101` via fallback ("the incident") so the prose works either way until implementation lands. See [INCIDENTPLAN.md](INCIDENTPLAN.md).
+- **`CC-400 Incident` — Toronto Blackout: ✓ implemented, pending review.** `sizzle/src/content/blackout.twee`, BLK-085–BLK-215. The three remaining incidents (`the Dark of Manitoulin`, `the Woman with the Pale Eyes`, `Wet Dog Smell`) are "Coming Soon" stubs in CC-400; their playable-sequence design docs live in [docs/incidents/](incidents/). See [INCIDENTPLAN.md](INCIDENTPLAN.md).
 - **`INTRO-322 Concerns`** — refusal branch is functional but minimal.
 - **`INTRO-550 Question Toronto`** — Northern Ontario reaction stub; explicit `//To be written.//` marker in source.
 - **Act 1 onward** — no playable content yet beyond the prologue. STYLE-GUIDE.md sets the rules forward; no Act 1 prose exists to apply them to.
