@@ -129,9 +129,9 @@ The light breaks the darkness enough to collapse the effect. The act should feel
 
 ### Evidence and Branch Attention
 
-The Branch first flags the incident through an unusual police report, then obtains CCTV.
+The Branch first flags the incident through an unusual police report, then obtains a ground-floor resident's camcorder tape (the power was out, so no CCTV; the resident filmed her without her noticing).
 
-The CCTV shows the player character entering or approaching the building, hesitating at the threshold, introducing light into the stairwell, and leaving. The footage lets the Branch identify and track her.
+The tape shows the player character entering the lobby, hesitating at the stairwell threshold, introducing light, and leaving. The footage lets the Branch identify and track her.
 
 Robert contacts her about a week later.
 

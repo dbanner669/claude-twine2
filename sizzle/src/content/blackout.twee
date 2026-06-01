@@ -178,7 +178,7 @@ You head up a side street to find some better shade. A few blocks in, a <<term "
 
 The walkup is three stories, ten or twelve units, built in the 1940s or 1950s and maintained ... moderately. The street-side door is propped open with a brick. Through the gap comes sound.
 
-Not ordinary building sound. Not a TV through a wall, not a neighbour's argument. Something lower and sustained. A sensual moan that lands wrong in your chest before your head has caught up with why.
+Not ordinary building sound. Not a TV through a wall, not a neighbour's argument. Something lower and sustained. A sensual moan that lands wrong in your chest.
 
 You stop.
 
@@ -206,7 +206,7 @@ Between the sidewalk and the door there's a small concrete yard: a bike against 
 
 Through the gap: a dim hallway, the suggestion of a mailbox row, and the smell of someone's dinner gone cold on a stove.
 
-Your unease has sharpened. You're not sure when it started.
+Normal. Yet your unease has sharpened.
 
 [[You go inside.|BLK-140 The lobby]]
 <</page>>
@@ -249,7 +249,7 @@ You don't have a framework for it. There's just the dread, the animal certainty 
 <<page>>\
 A heavy-set man in his fifties pokes his head out from a first floor unit, watching the stairwell the way you are.
 
-"Don't go up," he says. Not a warning; more like someone announcing a fact.
+"Don't go up," he says.
 
 <<linkreplace "You ask if he knows what's happening.">>He's quiet for a moment. "Light's been on since I moved in. Five years. Never went out." He nods toward the stairwell. "Now it has."
 
@@ -266,7 +266,7 @@ He goes back inside. You hear his deadbolt.
 <</silently>>\
 <<header>>\
 <<page>>\
-The woman comes out from a doorway right next to the stairwell; you hear the door, then her on the stairs. Mid-thirties, a sundress, one strap slipping off her shoulder. She's looking up the stairwell, not at you.
+The woman comes out from a doorway right next to the stairwell; you hear the door, then her on the stairs. She's in her mid-thirties, wearing a sundress, one strap slipping off her shoulder. She's looking up the stairwell, not at you.
 
 She's also undoing the dress as she walks. It slips off her body by the time she reaches the edge of the light. She's naked underneath. 
 
@@ -285,13 +285,13 @@ As she disappears into the darkness you hear her footsteps continue up.
 <</silently>>\
 <<header>>\
 <<page>>\
-From above: sounds you can't mistake. Not one person's sounds. Several.
+From above: sounds you can't mistake. Not one person's sounds. Several. They are very clearly fucking. Loudly. Groups of them. In the dark.
 
-A shape moves across the top of the stairwell, a silhouette pressed against another, mouths finding each other in the dark. Gone before you've fixed on it.
+A shape moves across the top of the stairwell, a silhouette pressed against another, mouths finding each other in the dark.
 
-You're warm. Not from the heat. Warm between your legs, a low pulse that quickens with the sounds above.
+You're warm and not from the heat. A low pulse that quickens between your legs with the sounds above.
 
-It isn't the people upstairs that scare you. It's that you want to be one of them.
+Whatever is up those stairs terrifies you. You're also sure something deep within you wants to go up there.
 
 [[You haven't moved.|BLK-160 The pull]]
 <</page>>
@@ -304,7 +304,7 @@ It isn't the people upstairs that scare you. It's that you want to be one of the
 <</silently>>
 <<header>>
 <<page>>
-The dark at the top of the stairs wants you in it. You know it the way you know a glass is full before you lift it. Your body is already braced. Part of you is ready to go. Not the same part that makes decisions.
+The dark wants you in it. Part of you is ready to go.
 
 Your feet haven't moved. Yet.
 
@@ -316,7 +316,7 @@ Your feet haven't moved. Yet.
 <<set $player.flags.blkSkillGranted to true>>
 <</if>>
 <<set $player.flags.blkClimbed to false>>
-Your feet stay. The want is real. You're not pretending it isn't. But the part that decides is holding at the line, watching the rest of you strain toward the dark like it belongs to someone else.
+Your feet stay. The want is real, but the part of you that decides is holding at the line, watching the rest of you strain toward the dark.
 
 [[You hold your position.|BLK-165 Two steps up]]
 <<failure>>
@@ -340,11 +340,11 @@ Two steps up. Maybe three. The dark on the stairs is thicker than the lobby dark
 
 Your hand is around the matchbook in your pocket.
 
-You don't know if you put it there on purpose. You know you've stopped.
+You don't know if you put it there on purpose. You stop taking steps.
 <<else>>
-You don't go. Some part of you that's been keeping score without your knowledge draws the line here, at the bottom stair, and holds it.
+You don't go. Some part of you draws the line here, at the bottom stair, and holds it.
 
-The want is still there. Saying no didn't make it leave. But your feet are still where you left them, and that counts for something.
+The want is still there. But you hold.
 <</if>>
 
 [[You turn your attention to the dark itself.|BLK-170 It's the dark itself]]
@@ -358,11 +358,9 @@ The want is still there. Saying no didn't make it leave. But your feet are still
 <</silently>>
 <<header>>
 <<page>>
-The man downstairs said the light had been on for five years.
+The man downstairs said the light had been on for five years. Maybe it was holding something back.
 
-A stairwell light that's run five years straight goes out the second the city loses power. Whatever it was holding back is loose now in the dark it left. Not a person. Not a smell. Not something that was up there before the power died.
-
-The dark is the thing.
+A thing in the dark. Maybe the dark itself is a thing.
 
 <<set _checkSkill to $player.skills.academic.level>>
 <<skillCheck "Academic" "2d6" _checkSkill 7>>
@@ -393,15 +391,15 @@ You don't reason it. There isn't time and the dark is still pulling. Your hand f
 <</silently>>
 <<header>>
 <<page>>
-The matchbook in your hand. You don't smoke. There is no reason you should have this.
+The matchbook in your hand. You don't smoke.
 
 You tear off a match and strike it against the strip.
 
-Nothing. The head skids and crumbles. The match is damp from the heat. Your hands too, probably.
+Nothing. The head skids and crumbles.
 
-Above you, sounds. The dark is patient.
+Above you, sounds. An ecstatic scream. The sound of wet flesh pounding into more wet flesh. The dark is patient.
 
-You tear off another match. Your hands won't hold still. If the damp wins, the stairwell stays dark and whatever's up there gets you too.
+You tear off another match.
 
 [[You strike.|BLK-180 One match]]
 <</page>>
@@ -423,7 +421,7 @@ You tear off another match. Your hands won't hold still. If the damp wins, the s
 <<page>>
 It catches.
 
-A small orange flame, not much bigger than a thumbnail. The stairwell eases the way a held breath eases. The wrong dark pulls back, not all at once, more like something withdrawing. The want in your body steps down, then down again.
+A small orange flame, not much bigger than a thumbnail. The stairwell eases the way a held breath eases. The dark recoils, like a predator that saw an opportunity and exposed too much of itself. It skitters away. Gone. Forever? For now at least. The want in your body steps down, then down again.
 
 Above you, the sounds change. Confusion where a moment ago there was none. Someone says, distantly: "What — where —"
 
@@ -442,7 +440,7 @@ What do you do with the match?
 <</silently>>\
 <<header>>\
 <<page>>\
-From above: footsteps that are not the blank-faced climbing kind. Hesitation. A man's voice saying "oh god" in a way that sounds like waking up.
+From above: footsteps that are not the blank-faced climbing kind. Hesitation. A man's voice saying "oh god" in a way that does NOT sound ecstatic.
 
 Then more of it. The sounds of people who don't know how they got where they're standing. The specific shame of not knowing why your clothes are undone, or where your phone is, or who the stranger next to you is.
 
@@ -459,11 +457,11 @@ Nobody comes downstairs. Not yet.
 <</silently>>\
 <<header>>\
 <<page>>\
-You back out the way you came in. Across the lobby, past the mailboxes, through the screen door, across the little yard. The threshold you refused to cross upward is the one you now cross outward. You don't look back.
+You back out the way you came in. Across the lobby, past the mailboxes, through the screen door, across the little yard. You don't look back.
 
 The match has burned down to your fingers. You drop it on the concrete.
 
-The street has moved on while you were inside. People still walking home, still directing traffic, still sharing chips on stoops. They don't know anything happened. Thirty metres away something did, something you can't name, and the street never felt it.
+The street has moved on while you were inside. People still walking home, still directing traffic, still sharing chips on stoops. Normal. They don't know anything happened. Thirty metres away something was banished away, something you can't name, and the street never felt it.
 
 [[You keep moving.|BLK-200 The rest of the dark]]
 <</page>>
@@ -476,11 +474,11 @@ The street has moved on while you were inside. People still walking home, still 
 <</silently>>\
 <<header>>\
 <<page>>\
-The walk home takes more than two hours. You don't try to make sense of it. Not out loud, not to the strangers walking beside you, not even to yourself. Whatever that was, it doesn't come apart into reasons.
+<<if $player.background eq "RCMP constable" or $player.background eq "CSIS analyst">>The walk back to your hotel takes more than two hours.<<else>>The walk takes more than two hours, until you make it to your friend Genevieve's downtown condo to crash.<</if>> You don't try to make sense of it. You try to resync with the strangers walking beside you, the people who seem to be having a party despite having their evening ruined.
 
-There was something wrong in that stairwell. You stopped it. You don't smoke, and you were carrying matches.
+There was something wrong in that stairwell. You stopped it with those matches you shouldn't have had.
 
-The city's dark goes all the way to the horizon. Somewhere in the distance, the odd pink cast of emergency lighting where the hospitals are keeping their generators running.
+In the distance you can see the odd skyscraper or two with their lights on. Little twinkling points in the black of night.
 
 [[You get home sometime after nine.|BLK-205 Still out]]
 <</page>>
@@ -496,11 +494,9 @@ The city's dark goes all the way to the horizon. Somewhere in the distance, the 
 <<page>>\
 Friday morning and the power is still out.
 
-The city has settled into it: people on front porches with coffee, radio news through open windows, the intersection nearest your place managed by the same man in the reflective vest who showed up last night and hasn't left. Ontario Hydro says probably today. Ontario Hydro said probably yesterday too.
+The city has settled into it: people on front porches with coffee, radio news through open windows, <<if $player.background eq "RCMP constable" or $player.background eq "CSIS analyst">>the intersection outside your hotel still a mess<<else>>the intersection below Genevieve's building still a mess<</if>>. The radio reports Ontario Hydro saying power will probably be back today. Ontario Hydro said probably yesterday too.
 
-You haven't told anyone about the walkup. You won't.
-
-There's no word for what happened in there, not one anybody ever gave you. One night on the Danforth doesn't change that.
+You haven't told anyone about the walkup.
 
 [[A week passes.|BLK-210 Incident report]]
 <</page>>
@@ -520,7 +516,7 @@ There's no word for what happened in there, not one anybody ever gave you. One n
 <div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
 <p>INCIDENT DATE: 2003.08.14. Flagged from TPS unusual-occurrence log 2003.08.18.</p>
 <p>Complaint received re: disturbance, <span class="redact" style="width:110px"></span> Danforth Avenue East, approx. 18:30 hrs. Responding officer: no evidence. Residents, upper floors: disoriented, no recall 16:15–19:00 hrs. No injuries. No charges.</p>
-<p>CCTV obtained 2003.08.20. Subject (F, approx. 25–30) approaches building, hesitates at threshold approx. 45 sec., enters lobby, introduces <span class="redact" style="width:80px"></span> light source into stairwell, departs approx. 3 min. later. Subject does not return to frame.</p>
+<p>Recording obtained 2003.08.20: handheld camcorder footage from a ground-floor resident, taped through the outage on battery. Subject (F, approx. 25–30) enters lobby, hesitates at the stairwell threshold approx. 45 sec., introduces <span class="redact" style="width:80px"></span> light source, departs approx. 3 min. later. Subject does not return to frame.</p>
 <p>Building maintenance records: stairwell fixture confirmed operational continuously, min. <span class="redact" style="width:50px"></span> years prior to incident date. Classification: <span style="color:var(--sz-brass);font-style:italic">pending review</span>.</p>
 </div>
 </div>
@@ -542,7 +538,7 @@ There's no word for what happened in there, not one anybody ever gave you. One n
 <div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
 <p>Re: <span class="redact" style="width:130px"></span> (subject, file 03-DAN-0814).</p>
 <p>Event classification: NYSE. Focal condition, environmental vector, single-structure scope. Resolved before we arrived, by the subject, with a book of matches.</p>
-<p>Subject behaviour on CCTV: approaches, holds at the threshold some forty-five seconds, goes inside, puts light into the stairwell, and leaves. No panic. No call to emergency services. She doesn't wait to be seen. By chance or otherwise, she was carrying the one thing the condition could not tolerate.</p>
+<p>Subject behaviour, per the ground-floor resident's camcorder: enters the lobby, holds at the threshold some forty-five seconds, brings up a light, and leaves. No panic. No call to emergency services. She does not wait to be seen. What she misses is the resident in his doorway with the camcorder, which is the only reason we have her at all. By chance or otherwise, she was carrying the one thing the condition could not tolerate.</p>
 <p>Recommend contact inside thirty days. She is field-eligible, pending evaluation. What we look for is not nerve, and it is not immunity. It is the person who keeps seeing straight after the situation stops making sense, and then does the next plain thing. The footage is three minutes of exactly that.</p>
 <p style="margin-top:14px">— R. Flett, Branch</p>
 </div>

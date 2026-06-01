@@ -108,6 +108,20 @@ When a passage is told badly, the fix is to show it better — not to cut the co
 
 After every revision, check: is any character info, plot setup, or reader signal from the original now missing? If yes, it goes back in — delivered better.
 
+### 3.7 Clarity Is Not Explanation — the Referent Test
+
+The most common show/tell mistake isn't *too much* description. It's confusing *clarifying the literal event* with *explaining its meaning*.
+
+- **Clarity is showing, and it's always allowed — even under maximal restraint.** Detail that lets the reader perceive what happened — seen, heard, felt — is showing. "A *sensual* moan" disambiguates the literal sound (sex, not grief); "in a way that does *not* sound ecstatic" is an audible contrast the reader can hear. Restraint that leaves the reader unable to parse the scene isn't restraint — it's a withheld plot.
+- **Explanation is naming the meaning the reader could infer** — worst when dressed as imagery with no perceivable referent. "the 'oh god' sounded like *waking up*" fails: waking up has no sound. It describes nothing; it labels what the moment *meant*.
+- **Exception — telling in her voice is showing her mind.** Stating an interpretation outright is fine *when it's unmistakably the player character's own read* — the sense she's making of it in the moment. Then you're not glossing the scene for the reader; you're showing her interiority (§3.5), and it lands as provisional — her best guess, which she can be wrong about (§13.5), not the narrator certifying fact. Use **sparingly**, and only where her working-it-out is itself the beat. *"Maybe the dark itself is a thing"* passes — she's reaching for an explanation she doesn't have. A narrator stating *"the dark was a predatory anomaly"* does not.
+- **The test:** *can I point to the concrete thing it names — what it literally looks / sounds / feels like (or, for the exception, that it's her thinking it)?* If yes, keep it. If it only asserts an interpretation in the narrator's mouth, it's a gloss wearing imagery; cut it. Negatives, adjectives, and similes each pass or fail on this — not on their grammar.
+- **Hunt the "[show] → [gloss]" shape.** A concrete beat followed by a sentence explaining what it meant: *"A moan that lands wrong in your chest → before your head has caught up with why."* Keep the show; cut the coda.
+
+**Corollary for the NYSE incidents:** implication beats depiction (the reader shouldn't see upstairs) — but the implication still has to be *legible*. Add the minimum literal clarity for the reader to grasp what the restraint is gesturing at. That **enhances** dread; it doesn't dilute it. A scene the reader can't parse isn't atmospheric, it's broken.
+
+*Worked example: the Toronto Blackout (BLK) sequence revision — the cuts that removed "[show]→[gloss]" codas and the added clarity on the dark and the upstairs sounds (which kept the implication intact while making it parsable).*
+
 ---
 
 ## 4. Setting Fidelity
@@ -770,6 +784,10 @@ Always write down the meaning of the original before drafting its replacement.
 ### 16.9 Don't Restate Other Docs — Link Them
 
 This guide is the synthesis layer. GDD, NPC-handler, STORY-TAGS, CLAUDE.md, AGENTS.md own their content. When this guide needs a fact from them, link it. When the linked doc changes, this guide doesn't have to.
+
+### 16.10 Don't Write to Demonstrate Compliance
+
+Never write — or keep — a line in order to show that the prose is following the guide. The guide is satisfied by the prose being *right*, not by the prose visibly gesturing at the rule. Keeping "no word for what happened… a language that doesn't have it" *to signpost* that the player character lacks the Branch vocabulary she'll learn later is the anti-pattern: if she shouldn't use the jargon, just don't use it — never add a line announcing the absence. Signposting your own adherence is itself a tell (it's additive editorializing, §13.1). If you can't justify a line on its own merits to the reader, it doesn't earn its place because it satisfies a rule.
 
 ---
 
