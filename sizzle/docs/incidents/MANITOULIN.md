@@ -2,6 +2,8 @@
 
 *Playable-sequence design doc. Planning only — no final passage prose here. Parent: [INCIDENTPLAN.md](../INCIDENTPLAN.md). Voice/rules: [STYLE-GUIDE.md](../STYLE-GUIDE.md). Template sibling: [BLACKOUT.md](BLACKOUT.md).*
 
+> **Editorial markers (for the writer + the review agent).** Drop `[! directive]` inline in the passage prose for an action the review agent should take — e.g. `[! add keyword floatie]` (wrap the term with `<<term>>`), `[! needs background versions]` (add an `<<if $player.background>>` branch), `[! hide until clicked]` (a `<<linkreplace>>` reveal). Use `[? open question]` for things only the human can answer — the agent surfaces these and never guesses. The agent resolves and removes `[! ]` markers during a pass; `[? ]` markers stay until answered. Full convention: [STYLE-GUIDE.md §14.3](../STYLE-GUIDE.md); the lint pipeline flags both (see AGENTS.md).
+
 ---
 
 ## 0. Design Spine (read first)
