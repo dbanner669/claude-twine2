@@ -6,10 +6,15 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-085 A reason to be in Ottawa — Table-setting: why she is in Ottawa by background, small business of the day, ordinary dry interior voice, no wrongness yet.
-   Intent: structural placeholder only; draft later from PALE.md §2/§3. ~90 words.
-   %%% END %%% */
+Ottawa goes home at five and takes the sidewalks with it. By evening the government blocks are quiet enough to hear your own footsteps, and the day's heat is still coming up off the stone. Over the river, the sky has spent the last hour stacking up something green-black and serious.
+
+<<if $player.background eq "RCMP constable">>Three days of a policing conference at the Château Laurier, and tonight you finally got out for a dinner that wasn't banquet chicken. Worth it. The hotel's a few blocks back, and you're full and slow and in no hurry.
+<<elseif $player.background eq "CSIS analyst">>An all-day interdepartmental session in one of the Château Laurier's meeting rooms: slide carousels, weak coffee, a binder you signed for and will sign back in tomorrow. You stayed at the reception exactly as long as politeness required. Home is a twenty-minute walk, most of it pretty.
+<<elseif $player.background eq "grad student">>You promised yourself one real trip before the thesis ate the rest of the summer, and Ottawa in August is keeping its end: the gallery this morning, the canal this afternoon, a hotel room nicer than you can strictly justify. You've decided not to think about the Visa bill until September.
+<<else>>You booked this trip in March, back when you had a job. The room at the Château Laurier was non-refundable. So here you are: unemployed, on vacation out of spite, walking back to the nicest hotel you'll ever sleep in.
+<</if>>
+
+The first drops come down fat enough to feel personal.
 
 [[The weather breaks before you reach shelter.|PALE-090 The sky opens up]]
 <</page>>
@@ -22,12 +27,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-090 The sky opens up — Table-setting: hard summer storm, sheeting water, umbrellas turning inside out, mundane scramble for dry cover.
-   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
-   %%% END %%% */
+The sky doesn't bother with a warning. One fat drop, two, and then the whole thing comes down at once, a white roar of water that turns Rideau Street into a riverbed.
 
-[[The nearest dry doorway is a hotel lobby.|PALE-095 Into the lobby]]
+Half a block ahead an umbrella goes inside out, and its owner gives up on it without breaking stride. Awnings fill. An <<term "OC Transpo">> bus sighs past, windows fogged solid.
+
+You run, one arm up over your head like that's ever helped anyone, the rain finding the back of your collar anyway.
+
+[[The nearest dry doorway is the hotel's.|PALE-095 Into the lobby]]
 <</page>>
 
 
@@ -38,10 +44,9 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-095 Into the lobby — Table-setting: normal wet-evening lobby hum, check-in line, dripping coats, brass and warm light, weather complaints.
-   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
-   %%% END %%% */
+The doorman has given up sorting arrivals into anything orderly. You come through in a knot of strangers, everyone dripping, everyone laughing the way people laugh when the weather has made fools of the whole street at once.
+
+Inside is brass and warm light and the smell of wet wool. A check-in line three deep. A bellhop towelling down a luggage cart. Somewhere behind the columns a piano keeps at it, mostly drowned out. The rain is a long held note against the glass, and the crowded lobby hums along underneath it, ordinary as a Monday.
 
 [[You cross out of the rain.|PALE-100 Out of the rain]]
 <</page>>
@@ -54,10 +59,11 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-100 Out of the rain — Opening: lobby proper, downpour at the glass, crossing toward elevators/desk as the normal hum starts to feel uneven.
-   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
-   %%% END %%% */
+The storm has settled in to stay. Half the lobby is waiting it out with you: wet couples by the windows, a man arguing gently with the concierge about a taxi that isn't coming.
+
+<<if $player.background eq "CSIS analyst">>Home is twenty minutes of open sky away. Not in this.<<else>>Your room is upstairs, but the evening doesn't feel finished, and your shoes are already ruined.<</if>> A drink, then. The lounge is off the back of the lobby, past the elevators, and a wingback chair beats standing here dripping on the marble.
+
+Crossing toward it, somewhere between the front desk and the elevators, the lobby's hum goes uneven on you. Nothing you could point to. Yet.
 
 [[You notice the corner where the noise drops.|PALE-105 The quiet corner]]
 <</page>>
@@ -70,10 +76,11 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-105 The quiet corner — Setup: an alcove/lounge off the main flow where the noise drops and people are too still.
-   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
-   %%% END %%% */
+The lounge opens off the back of the lobby through a wide arch, and you're three steps from it when you place what's bothering you. Sound. There isn't any.
+
+The lobby behind you is all storm-talk and luggage wheels and the piano. Past the arch: nothing. No conversation, no glasses, no newspaper. Lounges are never silent. Even empty ones have a clock.
+
+Through the arch you can make out armchairs, unlit lamps, curtains drawn to the floor. Hard to say if anyone's in there at all.
 
 [[You look from cover.|PALE-110 Too orderly]]
 <</page>>
@@ -86,12 +93,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-110 Too orderly — Closer read: calm but wrong arrangement, posed silent people waiting; she does not understand it yet.
-   Intent: structural placeholder only; draft later from PALE.md §2. ~90 words.
-   %%% END %%% */
+This quiet corner behind the lobby is strange. There should be more people here.
 
-[[At the centre, there is a woman.|PALE-115 Pale eyes]]
+The room is banked with tall windows, every one curtained to the floor, what's left of the evening only getting in at the edges. The rain against the glass makes a wall of soft noise.
+
+As far as you can tell, the only person in the dark room is a woman seated by the grand fireplace at the back.
+
+[[Move toward the woman.|PALE-115 Pale eyes]]
 <</page>>
 
 
@@ -102,10 +110,9 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-115 Pale eyes — First sight: woman seated and served, ordinary except for pale wrong eyes and flatness; instinct keeps PC from meeting her gaze.
-   Intent: structural placeholder only; draft later from PALE.md §2/§4. ~90 words.
-   %%% END %%% */
+As you move toward the woman, something deep in your gut feels wrong. You know you can't look at her. And she can. not. know. you're. there.
+
+You glance at her from the corner of your eye. She has arranged herself on a high-backed chair near the fireplace. Her feet are up on something. You realize that there are more people around her.
 
 [[You watch what she does.|PALE-120 The rule]]
 <</page>>
@@ -118,28 +125,23 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-120 The rule — She watches the woman speak to someone and sees absolute obedience; mechanism is eye contact plus word.
-   Intent: structural placeholder only; includes low Agent/Academic rule-read check. ~90 words.
-   %%% END %%% */
+She's about to speak to someone beside her chair. First she crooks one finger and waits, and waits, until the person's face comes up to hers.
+
+"Crawl out of the room and get me another coffee."
+
+A woman in a hotel uniform drops to her hands and knees and goes, fast, like it's a race, through a service door on the far wall. A swing of kitchen light, a clatter of dishes, gone. Her expression, in the half-second you had it, was nothing at all.
 
 <<set _checkSkill to Math.max($player.skills.agent.level, $player.skills.academic.level)>>
 <<skillCheck "Agent / Academic" "2d6" _checkSkill 7>>
 <<success>>
 <<set $player.flags.paleRuleRead to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-120 success — She names the precondition cleanly: it is the eyes.
-   Intent: structural placeholder only; possible Agent skill texture later.
-   %%% END %%% */
+She waited. That's what you saw: she didn't speak until the staffer looked at her. The order rode the look. It's the eyes.
+
+[[You adjust your angle before her eyes catch you.|PALE-125 The mirror]]
+<<failure>>
+However she's doing it, you didn't catch it. A word, and a grown woman went to the floor like it was her own idea. You're missing the part that matters.
 
 [[You adjust your angle.|PALE-125 The mirror]]
-<<failure>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-120 failure — She gets the rule a half-step too slowly, through a near-brush with the gaze.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
-
-[[You adjust your angle before it catches you.|PALE-125 The mirror]]
 <</skillCheck>>
 <</page>>
 
@@ -151,26 +153,23 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-125 The mirror — Choice: use a reflective surface for more information at real reflected-gaze risk, or stay with cover and glimpses.
-   Intent: structural placeholder only; mirror is useful but dangerous, not a safe cheat. ~90 words.
-   %%% END %%% */
+What you have is slivers: a shoulder, the woman's hand, her feet up on something that breathes. You need the whole room, and you need it without walking into it.
+
+There's a mirror. Gilt-framed, tall as a door, hung over the sideboard on the lobby side of the arch, and angled to hold most of the alcove in one piece.
+
+Something in you is certain the glass cuts both ways. If you can see her eyes in it, her eyes can see yours.
 
 <span id="pale-125-choices">
 <div class="choices">
 <div class="choice"><<link "You use the mirror.">><<replace "#pale-125-choices">>
-/* %%% HUMAN-DRAFT %%%
-   PALE-125 mirror branch — She gets a cleaner view, with the danger that reflected eye contact counts.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+You ease along the sideboard and let the glass do the looking.
+
+It's all there at once, small and complete: the chair, the people arranged around it, the stillness. Then her head turns a degree, and your stomach drops, and the pale eyes pass across the mirror without catching, a lighthouse sweeping past a boat it doesn't know about.
 
 [[The arrangement comes into focus.|PALE-130 The arrangement]]
 <</replace>><</link>></div>
 <div class="choice"><<link "You stay with cover and glimpses.">><<replace "#pale-125-choices">>
-/* %%% HUMAN-DRAFT %%%
-   PALE-125 cover branch — She pieces the scene together more slowly from angles and sightlines.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+You stay in the seam between curtain and arch and build the room a glimpse at a time: a bare shoulder, a kneeling back, the woman's hand rising and falling at her mouth. Slow work. Each look costs seconds, and buys you inches.
 
 [[The arrangement comes into focus piece by piece.|PALE-130 The arrangement]]
 <</replace>><</link>></div>
@@ -186,10 +185,17 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-130 The arrangement — Full explicit tableau: one naked man on all fours as footrest, a kneeling person feeding cut fruit, a rigid erect man used as an umbrella stand, others arranged mid-act as furniture, blank-faced and silent.
-   Intent: structural placeholder only; horror is commanded obedience and humiliation done to victims, not prudishness. ~110 words.
-   %%% END %%% */
+The footrest is a man. Naked, on all fours, her stockinged heels crossed on the small of his back. His glasses are still on. He's hard, flushed dark, and no part of him moves.
+
+Beside the chair a younger woman kneels with a dish of cut melon, naked except for a conference lanyard, lifting a piece to the woman's mouth, waiting, lifting the next. Her nipples are stiff, and her thighs, where she kneels, are wet.
+
+On the other side a man stands at attention in half a suit, trousers pooled at his ankles, cock rigid, her closed umbrella hooked over it, still dripping rain onto the carpet.
+
+Behind the chair, a man and a woman stopped mid-fuck over the arm of a sofa, him buried in her to the root, both faces slack, eyes on nothing.
+
+No ropes. No one holding anyone down. Just a seated woman, and people arranged around her like furniture that breathes.
+
+You still haven't looked at her face.
 
 [[You make yourself not look up.|PALE-135 Don't look up]]
 <</page>>
@@ -202,28 +208,21 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-135 Don't look up — Near-miss: the woman's gaze sweeps and PC has to break sightline; the pull of being noticed.
-   Intent: structural placeholder only; includes moderate Composure/Agent check to stay unseen. ~90 words.
-   %%% END %%% */
+The woman's head begins to turn. Not at a sound. Not at you. A slow sweep of the room, the way a searchlight doesn't need a reason.
+
+Your eyes want to come up and meet it. That's the part that scares you: being looked at pulls, and something in you wants to answer.
 
 <<set _composureSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <<set _checkSkill to Math.max(_composureSkill, $player.skills.agent.level)>>
 <<skillCheck "Composure / Agent" "2d6" _checkSkill 8>>
 <<success>>
 <<set $player.flags.paleUnseen to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-135 success — She breaks sightline in time.
-   Intent: structural placeholder only; possible Agent skill texture later.
-   %%% END %%% */
+You put your eyes on the carpet, flatten into the curtain's shadow, and count. Four. Five. When you risk the angle again, her face is turned away and her hand is out for the next piece of fruit.
 
 [[You stay low and think.|PALE-140 She can't just walk out]]
 <<failure>>
 <<set $player.flags.paleGazeGrazed to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-135 failure — The gaze grazes her, not a full lock, but close enough that being addressed becomes a physical threat.
-   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
-   %%% END %%% */
+You're half a beat slow. The sweep crosses the space where you are and something snags, the way a nail catches a sleeve. Not a lock. The edge of it only. But for that half-second your whole body leans toward being seen, and you have to drag yourself back behind the curtain.
 
 [[You duck out of it and think.|PALE-140 She can't just walk out]]
 <</skillCheck>>
@@ -237,18 +236,18 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-140 She can't just walk out — Choice: slip away or stop it; convergent because leaving crosses open floor or she cannot leave people like this.
-   Intent: structural placeholder only; draft later from PALE.md §5. ~90 words.
-   %%% END %%% */
+Out, then. The thought arrives sounding like a plan: back through the arch, across the lobby, gone, and let tomorrow decide what tonight was.
+
+Except the arch is in her line, and the lobby is forty feet of bright, open marble.
+
+And there are the people. The glasses. The lanyard. All evening the lobby has walked past that arch without noticing, and if it hasn't noticed by now, nobody is coming.
 
 <span id="pale-140-choices">
 <div class="choices">
 <div class="choice"><<link "You try to slip away.">><<replace "#pale-140-choices">>
-/* %%% HUMAN-DRAFT %%%
-   PALE-140 slip branch — The open floor exposes her or she turns back because she cannot unsee it.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+You make it two steps toward the arch before the math does itself: ten seconds in her line of sight, and a word travels faster than you do.
+
+You come back into the shadow. There's no version of leaving that doesn't pass through her eyes.
 
 [[You look for the loophole instead.|PALE-145 The loophole]]
 <</replace>><</link>></div>
@@ -265,26 +264,21 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-145 The loophole — Insight: she cannot out-stare or out-argue the rule, but a committed action already in motion can outpace the command latency.
-   Intent: structural placeholder only; includes low Academic/Streetwise check. ~90 words.
-   %%% END %%% */
+It has to end here, then, and none of the normal endings apply. You can't argue with her. You can't shout for help without volunteering whoever comes running. You can't even look at her long enough to aim.
+
+One try. Blind. Think.
 
 <<set _checkSkill to Math.max($player.skills.academic.level, $player.skills.streetwise.level)>>
 <<skillCheck "Academic / Streetwise" "2d6" _checkSkill 7>>
 <<success>>
 <<set $player.flags.paleLoopholeReasoned to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-145 success — She reasons the latency and physical irreversibility cleanly.
-   Intent: structural placeholder only; possible Academic skill grant later.
-   %%% END %%% */
+The staffer. The woman waited for her eyes before she spoke, and even then there was a gap, half a breath between the word and the body obeying. So the command needs two things: her eyes on you, and a moment to take hold.
+
+A swing that's already falling gives her neither. Start it from behind her chair, where she can't see you. By the time she can, it has to be too late to stop. Too late for her, and too late for you.
 
 [[You need something heavy.|PALE-150 Something heavy]]
 <<failure>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-145 failure — She does not reason it formally; instinct/desperation puts the same plan in her hands.
-   Intent: structural placeholder only; outcome unchanged.
-   %%% END %%% */
+You never do work it out, not in words, not in anything you could explain afterward. Your body skips to the end: it wants something heavy in your hands, and it wants you behind that chair, where she can't see you. The plan arrives whole, from somewhere below thinking, and you go with it.
 
 [[You need something heavy.|PALE-150 Something heavy]]
 <</skillCheck>>
@@ -298,10 +292,11 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-150 Something heavy — Cosmetic arming and positioning choice: fire extinguisher, lobby chair, luggage cart, or brass stanchion from a blind angle.
-   Intent: structural placeholder only; all options create a heavy thing already in motion. ~90 words.
-   %%% END %%% */
+The lounge and the lobby between them offer a short inventory.
+
+A fire extinguisher in its bracket beside the service door, red and fat and heavier than it looks. A side chair by the writing desk, oak, liftable. The bellhop's luggage cart, abandoned mid-lobby with someone's garment bag still on it. A brass stanchion by the arch, top-heavy as a sledgehammer.
+
+And one blind lane: along the curtains, behind the wing of her chair, where the high back will hold her eyes off you until you're inside arm's reach.
 
 [[You take the fire extinguisher.|PALE-155 The point of no return]]
 [[You take a lobby chair.|PALE-155 The point of no return]]
@@ -317,10 +312,15 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-155 The point of no return — Intervention: she commits to the swing while not looking at the woman; the irreversible instant begins.
-   Intent: structural placeholder only; draft later from PALE.md §2/§6. ~90 words.
-   %%% END %%% */
+You pick a point on the back of her chair, shoulder height, and you don't look anywhere else.
+
+The lane along the curtains is six steps. You take them slow, weight settling before each one, the weight in your hands the only thing in the world. The rain keeps its noise up. Under it, close now, the small wet sound of chewing on the other side of the wingback.
+
+Last step. You set your feet the way you'd set them on ice.
+
+Both arms. Up.
+
+You are already swinging.
 
 [[The woman looks up.|PALE-160 "STOP."]]
 <</page>>
@@ -333,27 +333,28 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-160 "STOP." — The gaze finds her and the command lands; she knows she must obey, but the blow is already past recall.
-   Intent: structural placeholder only; includes high spine Composure check. The blow lands regardless. ~100 words.
-   %%% END %%% */
+Something gives you away. Air, shadow, the creak of your own grip; you'll never know what.
+
+Her face comes around the wing of the chair. Her eyes find yours, pale as milk in water, and her mouth opens without any hurry at all.
+
+"STOP."
 
 <<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <<skillCheck "Composure" "2d6" _checkSkill 9>>
 <<success>>
 <<set $player.flags.paleCommandHeld to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-160 success — The command barely catches the edge of her and the follow-through is clean.
-   Intent: structural placeholder only; possible Composure skill texture later.
-   %%% END %%% */
+The word lands somewhere your ears have nothing to do with, and it is true the way gravity is true: you must stop.
+
+But the swing stopped being yours half a second ago. There's nothing left in it for you to take back. Your arms aren't asking.
 
 [[Momentum carries through.|PALE-165 Impact]]
 <<failure>>
 <<set $player.flags.paleCommandBitten to true>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-160 failure — The command lands like iron and she nearly freezes, but the object is already unrecallable and connects anyway.
-   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
-   %%% END %%% */
+The word closes around you like a hand. And you stop. Everything that's still yours stops: breath, thought, grip.
+
+The swing isn't yours anymore. It finishes without you.
+
+For one impossible second, you are a thing that obeys, all the way down. You understand the footrest completely.
 
 [[Momentum carries through anyway.|PALE-165 Impact]]
 <</skillCheck>>
@@ -387,10 +388,11 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-165 Impact — The blow connects, the woman drops, the flat voice stops, and silence sits under the rain.
-   Intent: structural placeholder only; guarded NYSE influence and skill grant fire here. ~90 words.
-   %%% END %%% */
+The sound is heavier than you expected, and quieter. One deep thud. The coffee cup rings against its saucer.
+
+She goes sideways out of the chair and doesn't put her hands out. The carpet takes her with a sound like a dropped coat.
+
+Quiet, then. Rain, your own blood in your ears, nothing else. You can't remember deciding to stop swinging.
 
 [[The room comes back to itself.|PALE-170 The room comes back]]
 <</page>>
@@ -403,10 +405,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-170 The room comes back — Commanded victims release: umbrella clatters, fruit spills, people cover themselves or weep; personhood returns.
-   Intent: structural placeholder only; draft later from PALE.md §7. ~90 words.
-   %%% END %%% */
+The umbrella hits the floor first.
+
+Then the man it was hanging from gasps, one long ragged pull of air, and grabs for his waistband. The kneeling woman looks at the dish in her hands as if it has just appeared there, sets it down, and starts to shake. Behind the chair a woman's voice says "off, off, get off," and there's the fast, fumbling sound of two people coming apart.
+
+The footrest man crawls two steps, stops, and folds down onto the carpet with his glasses still on, crying without any noise.
+
+Nobody looks at the woman on the floor. Nobody looks at you.
 
 [[The wrong people arrive too quickly.|PALE-175 They were already coming]]
 <</page>>
@@ -419,26 +424,30 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-175 They were already coming — Anonymous calm responders, not hotel security and not Ottawa police, take the woman; PC clocks organized, practiced, pre-positioned Branch apparatus without learning its name.
-   Intent: structural placeholder only; no in-person Robert. ~100 words.
-   %%% END %%% */
+They come through the lobby arch and the service door at the same time, six of them, in plain suits, with laminated cards that say something that isn't police. Nobody runs. Two go to the woman on the floor, one to each of the others, voices low and kind and completely unsurprised.
 
-[[They tell you to go home.|PALE-180 The drive home]]
+Nobody called them. There wasn't time; the lobby out there is still arguing about taxis. But they come in already knowing where the woman is and which doors need watching, and they get to you last, as if you've already been sorted.
+
+A woman your mother's age asks you four quiet questions, all of them the right ones, and writes nothing down.
+
+[[They tell you to go home.|PALE-180 The way home]]
 <</page>>
 
 
-:: PALE-180 The drive home [avatar-pale-night nighttime]
+:: PALE-180 The way home [avatar-pale-night nighttime]
 <<silently>>
 <<set $header.location to "OTTAWA">>
 <<set $header.time to "Monday night">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   PALE-180 The drive home — Interior scar: bodily memory of one second of absolute obedience, another person's sentence becoming true inside her.
-   Intent: structural placeholder only; hidden-world fear, no narrow phobia. ~90 words.
-   %%% END %%% */
+<<if $player.background eq "CSIS analyst">>The storm has worn itself out by the time you're halfway home, and the streets have that rinsed, emptied look. You walk the whole way without meeting a single pair of eyes, and you only notice you're doing it at your own front door.<<else>>Your room is four floors up. You share the elevator with a couple still laughing about the rain, and you watch the brass doors the whole ride, and you don't know you're avoiding their eyes until they get out.<</if>>
+
+In bed, you keep arriving at the same half-second and stopping. Not the swing. Not the woman folding onto the carpet. The word. STOP, and everything in you agreeing.
+
+For one second, another person's sentence was the truest thing in your body.
+
+You leave the bathroom light on. You don't look at the mirror.
 
 [[Days later, the file exists.|PALE-200 Field report]]
 <</page>>
@@ -452,10 +461,16 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-200 Field report — Branch containment/occurrence extract: pale-eyed female subject, verbal compliance vector documented but not explained, records removed, one coherent witness logged.
-   Intent: structural placeholder only; clinical NYSE voice. ~100 words.
-   %%% END %%% */
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(-8deg)">Classified</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Incident File · 03-OTT-0818 · Extract</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>INCIDENT DATE: 2003.08.18. Occurrence report, Ottawa duty element, filed 2003.08.19.</p>
+<p>Response to <span class="redact" style="width:110px"></span>, downtown Ottawa, 21:40 hrs. Interval, alert to arrival: four minutes. Subject (F, age indeterminate) secured without resistance, unconscious on arrival, transferred to <span class="redact" style="width:80px"></span>. Ocular presentation consistent with file <span class="redact" style="width:60px"></span>.</p>
+<p>Verbal compliance influence documented in effects only; mechanism not explained. Affected persons: nine. Treated on site, released. Recall absent or fragmentary. Hotel records for the evening removed; registry page substituted.</p>
+<p>One civilian witness retains complete recall. Interviewed on site, released pending assessment. See attached recommendation. Classification: <span style="color:var(--sz-brass);font-style:italic">pending review</span>.</p>
+</div>
+</div>
 
 [[You turn the page.|PALE-205 Recommendation]]
 <</page>>
@@ -468,10 +483,17 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   PALE-205 Recommendation — Flett recommendation: witness decoded a live compliance hazard and defeated it by committing past recall rather than resisting.
-   Intent: structural placeholder only; bridge to CC-500 and set inciting incident. ~100 words.
-   %%% END %%% */
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(5deg)">Eyes Only</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Recruitment Recommendation · R. Flett · 2003.08.22</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>Re: <span class="redact" style="width:130px"></span> (witness, file 03-OTT-0818).</p>
+<p>Event classification: NYSE. Subject-anchored, verbal compliance vector. The duty element did the containment; the resolving was done before they reached the lounge, by the witness, with the nearest heavy thing she could lift.</p>
+<p>Witness behaviour, per debrief and her own account: she worked out the operating condition from cover, kept her eyes to herself for the better part of half an hour, and committed to a swing she could not call back before the subject could tell her to stop. The subject did tell her to stop. The swing was already past arguing with.</p>
+<p>She did not resist the order. I am not persuaded that resisting it was available, to her or to anyone. She beat its timing, and timing can be trained. She survived a direct command on a technicality; I would not plan on that luck twice. Recommend contact inside thirty days. Field-eligible, pending evaluation.</p>
+<p style="margin-top:14px">— R. Flett, Branch</p>
+</div>
+</div>
 
 <<link "The file closes." "CC-500 Summary">>
 <<set $player.incitingIncident to "the Woman with the Pale Eyes">>
