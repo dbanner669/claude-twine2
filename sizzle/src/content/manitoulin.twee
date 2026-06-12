@@ -1,17 +1,18 @@
 :: MAN-085 The long drive up [avatar-man-day daytime]
 <<silently>>
 <<setDate 2003 8 16 "afternoon">>
-<<set $header.location to "HIGHWAY NORTH">>
+<<set $header.location to "THE HIGHWAY">>
 <<set $header.time to "Saturday afternoon">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-085 The long drive up — Table-setting normality: leaving home/the city behind, the highway north, the radio, decompression, and why she is headed to Manitoulin with background-variant shading.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2/§3. ~90 words.
-   %%% END %%% */
+The two-lane unspools through granite cuts and black spruce, the heat shimmering off the asphalt ahead. You need this vacation.
 
-[[The road keeps going north.|MAN-090 Onto the island]]
+<<if $player.background eq "RCMP constable">>A year grinding through a junior posting out of the <<term "Sault">>, and this is the first real break you've taken since you started.<<elseif $player.background eq "CSIS analyst">>A year grinding at a junior analyst's desk in Ottawa, and this is the first real break you've taken since you started.<<elseif $player.background eq "grad student">>A year buried in your master's thesis at York, and your supervisor finally told you to disappear for a week before you came apart. Your mom's cousin's uncle owns a cottage out here, and through the vagaries of extended family you've got it to yourself, which is just as well: the rental car has already eaten most of your vacation budget.<<else>>A year out of school with no job and too much time. Your mom's cousin's uncle owns a cottage out here, though, and through the vagaries of extended family you've got it to yourself for the week, which is just as well: the rental car has already eaten most of your budget.<</if>>
+
+Hopefully you can find the place before dark.
+
+[[The road keeps going toward the island.|MAN-090 Onto the island]]
 <</page>>
 
 
@@ -22,12 +23,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-090 Onto the island — Table-setting: crossing over by bridge or ferry, concrete ordinary Manitoulin tourist texture, no wrongness yet.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
-   %%% END %%% */
+The swing bridge at Little Current is a single lane of old green steel. You wait while it pivots shut behind a sailboat, then bump across onto the island proper.
 
-[[You cross onto the island.|MAN-095 A stop on the rock]]
+<<if $player.background eq "RCMP constable">>You've crossed it before, up this way on the job. It still feels like driving onto the edge of the map.<<else>>WELCOME TO MANITOULIN, says the sign, WORLD'S LARGEST FRESHWATER ISLAND. You've never been this far up the province.<</if>>
+
+The town thins out fast. Bush and rock and the lake flashing blue through the trees, a gas bar with a hand-lettered sign for nightcrawlers. An ordinary north-country Saturday.
+
+[[The island opens up ahead of you.|MAN-095 A stop on the rock]]
 <</page>>
 
 
@@ -38,10 +40,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-095 A stop on the rock — Table-setting: gas station/general store/coffee, small-town quiet, heat coming off the Shield, last fully normal beat.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
-   %%% END %%% */
+The general store has two gas pumps, a chest freezer of bait, and a pot of coffee that's been on the burner since morning. You fill the tank and buy the coffee anyway.
+
+Heat comes off the granite lot in slow waves. A kid on the step works at a freezie and watches you like you're the most interesting thing to happen all day. Maybe you are.
+
+<<if $player.background eq "RCMP constable">>You ask the woman at the till about the road out to the lake. "Quiet, mostly," she says. "Except the new crowd. City money." She says it the way you'd note a smell.<<else>>You ask the woman at the till for the lake road. She points with her whole hand and tells you to watch for deer at dusk.<</if>>
+
+Back into the heat. Tank full, the light going long and gold.
 
 [[You get back on the road.|MAN-100 The island road]]
 <</page>>
@@ -55,163 +60,181 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-100 The island road — Opening: dusk on a Manitoulin back road, heat going off the rock, driving toward the lakehouse turn.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
-   %%% END %%% */
+Pavement gives out to gravel, and gravel gives out to two ruts with a crown of grass down the middle. Cottage roads. You crawl along watching for your turnoff, the lake somewhere off to your left behind a wall of cedar.
+
+The day's heat is lifting off the rock now, the first cool breath of evening coming up out of the bush. Mosquitoes find the open window. You roll it up.
+
+The place you're after is down here somewhere, small and quiet and yours for the week.
 
 [[You follow the road toward the water.|MAN-105 Dead in the water]]
 <</page>>
 
 
-:: MAN-105 Dead in the water [avatar-man-day daytime]
+:: MAN-105 Dead in the water [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "MANITOULIN BACK ROAD">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-105 Dead in the water — Setup: the car dies; the lakehouse below has lit windows, music, too many cars, and southern Ontario money pretending to be a cottage.
-   Intent: structural placeholder only; include background-variant eyes from MANITOULIN.md §3. ~90 words.
-   %%% END %%% */
+As the road winds deeper into the forest the sun drops below the trees and leaves the world in blue dusk. The lakeshore still shows through the trunks to your left, the last of the light going off it.
+
+Then a loud POP, and the pedal under your foot sinks to the floor. You stand on the brakes, which thankfully still work, and coast onto the shoulder as the dashboard lights flicker and die. The engine ticks. The bush goes quiet.
+
+<<if $player.background eq "RCMP constable">>Fuck. You should have taken her in before the trip. This is what deferred maintenance gets you.<<else>>Fuck. This is what you get for going with the budget rental place.<</if>>
+
+Off through the trees there are voices, and up toward the water a cottage with its lights blazing into the dark.
+
+<<if $player.background eq "RCMP constable" or $player.background eq "CSIS analyst">>You should have listened to your boss and bought a <<term "cell phone">>.<<else>>You should have listened to your friend Genevieve and bought a <<term "cell phone">>. But the damn things cost a fortune.<</if>>
 
 [[The house has lights and probably a phone.|MAN-110 Nobody answers]]
 <</page>>
 
 
-:: MAN-110 Nobody answers [avatar-man-day daytime]
+:: MAN-110 Nobody answers [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE DRIVE">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-110 Nobody answers — Escalation: up the drive on foot, sounds she cannot place yet, a couple on the lawn oblivious, and her call gets no response; the interruption rule has failed.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
-   %%% END %%% */
+
+As you make your way toward the cottage on the lake you're struck by how HUGE it is. Cottage is the wrong word for this palatial new-money mansion. Three stories, with a fully kitted-out boathouse down past the lawn.
+
+"Hello? My car broke down, could I use a phone?" you yell from the path up to the front door. There are people moving behind the drapes. Lots of them.
+
+"FUCK MY ASS RAW! FUCK IT RAW!!!" a voice screams out from inside.
+
+Well. Okay then. But you need that fucking phone.
 
 [[You keep going up the drive.|MAN-115 The front door]]
 <</page>>
 
 
-:: MAN-115 The front door [avatar-man-day daytime]
+:: MAN-115 The front door [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE FRONT DOOR">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-115 The front door — Threshold: she needs a phone; foyer with coats, sandals, catering tray, and the frenzy audible past the hall. RCMP route reads it procedurally.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2/§3. ~90 words.
-   %%% END %%% */
+You knock and wait a full minute before knocking again. You can see people behind those curtains. A lot of people. They //must// have heard you.
+
+You knock a third time, louder, harder. The door pops open. It wasn't locked, or even properly shut.
+
+Inside is a foyer full of coats and kicked-off sandals and shoes, enough for several dozen people. Shadows move in the hallway ahead of you, and from a room to your right come wet, rhythmic sounds.
+
+<<if $player.background eq "RCMP constable">>You count without meaning to. Exits, doors, how many pairs of shoes. The job doesn't switch off because you're on holiday.<<elseif $player.background eq "CSIS analyst">>Thirty pairs of shoes by the door and not one person answering it. The arithmetic of that sits wrong.<<elseif $player.background eq "grad student">>Thirty pairs of shoes and nobody coming to the door. Every model of crowd behaviour you know says someone should have.<<else>>Thirty pairs of shoes, and not one person willing to cross a room to a knocking door. You've been to enough parties, even the "good" ones, to know that's off.<</if>>
 
 [[You step inside.|MAN-120 The great room]]
 <</page>>
 
 
-:: MAN-120 The great room [avatar-man-day daytime]
+:: MAN-120 The great room [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE GREAT ROOM">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-120 The great room — First full sight: bodies and sex, but the wrongness is that nobody registers a stranger in the room.
-   Intent: structural placeholder only; no finished prose. Draft later from MANITOULIN.md §2 and sex-positivity rule. ~90 words.
-   %%% END %%% */
+You were pretty sure there were people fucking in here, but the //scale// of it is impressive.
+
+Stepping into the sprawling great room, warm air thick with cedar and sweat and cum hits your nose. At least twenty bodies writhe across plush rugs and leather couches by the massive stone fireplace.
+
+A woman on all fours takes two men at once while fingering another woman. Nearby, a man is bound and edged relentlessly as a circle of guests watches and strokes.
+
+On one side you can see the curtains that blocked your view before. On the other floor-to-ceiling windows highlight the moonlit lake.
+
+"Hello? Anyone?"
+
+They ignore you.
 
 [[You make someone look at you.|MAN-125 Look at me]]
 <</page>>
 
 
-:: MAN-125 Look at me [nobr avatar-man-day daytime]
+:: MAN-125 Look at me [nobr avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE GREAT ROOM">>
 <<set $header.time to "Saturday evening">>
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-125 Look at me — She addresses someone directly and gets a face that looks through her.
-   Intent: structural placeholder only; includes a low Composure check to keep her head under the look-through. ~90 words.
-   %%% END %%% */
+You tiptoe around the tangle of limbs toward a muscular man fiercely railing a moaning woman from behind, her breasts swinging with each deep thrust.
+
+“Hey! Excuse me!” you call out, voice rising.
+
+He doesn’t even glance your way. Frustrated, you slap him hard across the face. Nothing. He just grunts and keeps pounding into her harder, completely lost in the rhythm.
 
 <<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <<skillCheck "Composure" "2d6" _checkSkill 7>>
 <<success>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-125 success — She stays clinical and keeps reading the scene.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+You step back and make yourself watch it cold. That is deeply fucking weird. You hit him hard enough to hurt and got nothing, not a flinch. The whole room is locked into the same thing, wherever they've all gone. Some distant part of you notes that you aren't panicking, and hopes that's a good sign.
 
-[[You keep reading the room.|MAN-130 Party favours]]
+[[You keep looking around.|MAN-130 Party favours]]
 <<failure>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-125 failure — The indifference rattles her and leaves her slower to orient, but she keeps moving.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+Heart hammering, you stumble back, face burning. This isn’t right. No one even flinched. A cold shiver runs down your spine—what the hell is this place?
 
-[[You force yourself to keep reading.|MAN-130 Party favours]]
+[[You force yourself to keep looking around.|MAN-130 Party favours]]
 <</skillCheck>>
 <</page>>
 
 
-:: MAN-130 Party favours [avatar-man-day daytime]
+:: MAN-130 Party favours [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE GREAT ROOM">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-130 Party favours — Reveal seed: printout taped to the wall, dollar-store candles, chalk diagram half-smudged underfoot, catering and kitsch; this started as a dare.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~90 words.
-   %%% END %%% */
+On your way through, the details start adding up wrong. A folding catering table with a sterno tray gone cold. Plastic champagne flutes. A glitter banner that reads FORBIDDEN ISLAND.
+
+Taped to the wall by the fireplace is a printout: a diagram, five lines meeting in a star, the kind of thing you'd pull off a website at two in the morning. Someone's chalked the same shape onto the floorboards, half scuffed away now under all the moving feet. Dollar-store tealights ring it.
+
+A party trick. Somebody printed off a diagram and lit some candles for a laugh, the way you'd run a séance at a sleepover.
+
+Nobody's laughing now.
 
 [[You move deeper into the house.|MAN-135 The kitchen]]
 <</page>>
 
 
-:: MAN-135 The kitchen [avatar-man-day daytime]
+:: MAN-135 The kitchen [avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE KITCHEN">>
 <<set $header.time to "Saturday evening">>
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-135 The kitchen — Deeper: her own body begins answering, the low pull starts, and the behaviour begins to make a horrible kind of sense.
-   Intent: structural placeholder only; keep influence subjective per STYLE-GUIDE §13.5. ~90 words.
-   %%% END %%% */
+
+You slip past the great room and into the kitchen.
+
+The air is heavier here, thick with the smell of sweat, spilled wine, and sex. Two women are bent over the granite island while a man takes one from behind and fingers the other; another couple fucks slowly against the fridge, her leg hooked high around his hip. Their faces are slack, eyes half-lidded.
+
+Heat blooms low in your belly, uninvited. Your nipples tighten against your shirt. For one disorienting second it almost makes sense.
+
+You catch yourself breathing faster. //What the fuck is wrong with me?//
 
 [[You reach the back hall.|MAN-140 Forward or back]]
 <</page>>
 
 
-:: MAN-140 Forward or back [nobr avatar-man-day daytime]
+:: MAN-140 Forward or back [nobr avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE BACK HALL">>
 <<set $header.time to "Saturday evening">>
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-140 Forward or back — Choice: push toward the back of the house/water or try to leave; convergent, because forward is the only way to stop it.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §5. ~90 words.
-   %%% END %%% */
+The pull is stronger now, a low insistent tug behind your sternum. Ahead, through the French doors, you can see the lawn sloping down toward the dark water. Behind you, the front entrance and the promise of escape.
+
+You hesitate, heart hammering.
 
 <span id="man-140-choices">
 <div class="choices">
 <div class="choice">[[You push toward the water.|MAN-145 The sunroom]]</div>
 <div class="choice"><<link "You try to leave.">><<replace "#man-140-choices">>
-/* %%% HUMAN-DRAFT %%%
-   MAN-140 leave branch — She tries to back out, but the house/pull/logic turns her around; she grasps that the source is ahead.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+You turn sharply, aiming for the front door and the cool night air beyond it. Your feet carry you back through the great room, past the indifferent bodies, but something catches in your mind. Something is wrong here. Something you need to fix.
 
 [[You turn back toward the water.|MAN-145 The sunroom]]
 <</replace>><</link>></div>
@@ -220,33 +243,36 @@
 <</page>>
 
 
-:: MAN-145 The sunroom [nobr avatar-man-day daytime]
+:: MAN-145 The sunroom [nobr avatar-man-night nighttime]
 <<silently>>
 <<set $header.location to "LAKEHOUSE SUNROOM">>
 <<set $header.time to "Saturday evening">>
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-145 The sunroom — Explicit tableau: clustered guests on floor/furniture, several partners to a person, oral and penetrative sex in view, blank-faced and indifferent; she catches herself drawn toward it.
-   Intent: structural placeholder only; includes a moderate Composure check not to join here. ~100 words.
-   %%% END %%% */
+You step through the French doors into the sunroom.
+
+Half a dozen guests are tangled together across the floor and low couches. A woman on all fours moans into a man’s cock. Beside them, a man lies on his back as two women ride him—one on his face, the other sinking down onto his shaft in slow, rolling movements. A third woman kneels between another couple, licking and sucking wherever her mouth can reach. Blank, dreamy expressions. No one looks at you.
+
+Heat floods your body. Your clit throbs in time with their rhythm. God, it looks good. Why not just walk over, drop to your knees, let them use you too? It would feel so right…
+
+Your thighs press together involuntarily. The thought feels dangerously reasonable.
 
 <<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <<skillCheck "Composure" "2d6" _checkSkill 8>>
 <<success>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-145 success — She holds and moves on.
-   Intent: structural placeholder only; texture branch, outcome unchanged.
-   %%% END %%% */
+The images keep pulling at you: the slick sounds, the rolling hips, the shameless tangle of bodies. But you force your eyes away and keep moving. Your legs feel heavy, reluctant, but they obey.
+
+No doubt it looks fun. But something here is //clearly// wrong.
+
+You slip past the sunroom and push through the back doors into the cool night air, heart pounding.
 
 [[You get through the sunroom doors.|MAN-150 Out the back]]
 <<failure>>
 <<set $player.flags.manSunroomFailed to true>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-145 failure — She lingers, half-steps or reaches toward the tableau, then catches herself; this is a deep-immersion exposure beat.
-   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
-   %%% END %%% */
+You take an involuntary half-step forward, one hand already reaching toward the nearest body, the other slipping into your shorts. Heat surges through you, thick and liquid. For a dizzying moment it feels right to walk over, to kneel, to let yourself be pulled into the warm, mindless rhythm with them.
+
+You yank your hand out of your panties. They're wet. Shame and arousal twist together in your gut as you force yourself onward, legs unsteady.
 
 [[You pull yourself through the sunroom doors.|MAN-150 Out the back]]
 <</skillCheck>>
@@ -261,10 +287,14 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-150 Out the back — Through the doors: lawn sloping to the North Channel, full dark, stars and torchlight, dock visible as the centre.
-   Intent: structural placeholder only; night palette begins here per MANITOULIN.md §2/§9. ~90 words.
-   %%% END %%% */
+
+You push through the back doors and the night air hits in a shock, cool and sharp, laced with pine and lake water.
+
+The lawn slopes gently down toward the North Channel, black and star-pricked, no city glow anywhere. Torchlight flickers along the dock at the bottom, casting long, wavering shadows across the grass.
+
+The pull in your chest is stronger out here, almost physical now. Down at the end of the dock you can see the densest knot of bodies, moving together in the firelight.
+
+Your pulse throbs between your legs.
 
 [[You go down toward the dock.|MAN-155 The dock]]
 <</page>>
@@ -277,10 +307,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-155 The dock — Focal point: five-point chalk marking and cheap candles on the boards, ringed by the densest explicit concentration of the frenzy; the compulsion's logic nearly completes in her head.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §2. ~100 words.
-   %%% END %%% */
+The dock boards creak under your feet. At the far end, a five-point chalk marking glows faintly in the dark, a cold light the candles can't account for. Photoluminescent, you tell yourself. The glow-in-the-dark kind kids buy. You don't quite believe it. Around it, the frenzy is thickest.
+
+A half-dozen bodies move in a slow, heaving knot. A woman straddles one man reverse-cowgirl, riding his cock with wet, rhythmic slaps. Beside them, two men jerk off with their eyes closed. A woman lies spread beneath another man, legs locked around his waist as he thrusts into her. Blank, blissful faces. Slick skin. The air is heavy with the sounds and smells of sex.
+
+It looks so god. damn. inviting.
+
+Your pussy aches. Your mind tilts dangerously toward surrender.
 
 [[You reach the centre of it.|MAN-160 Almost]]
 <</page>>
@@ -293,27 +326,30 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-160 Almost — The closest she comes to joining; she understands why and part of her wants to.
-   Intent: structural placeholder only; includes the high spine Composure check. Failure means near-surrender, not fail state. ~100 words.
-   %%% END %%% */
+At the centre of everything is the marking: five lines of chalk meeting in a rough star, half-smudged already by bare heels and spilled wax. Cheap tealights gutter in a loose ring around it. The air smells of citronella and sweat and something thicker.
 
 <<set _checkSkill to (typeof $player.currentComposure === "number") ? $player.currentComposure : $player.skills.composure.level>>
 <<skillCheck "Composure" "2d6" _checkSkill 9>>
 <<success>>
 <<set $player.flags.manFocalHeld to true>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-160 success — She keeps herself at the focal point.
-   Intent: structural placeholder only; possible Composure skill grant later.
-   %%% END %%% */
+You plant your feet on the warm dock boards and //refuse//.
+
+The pull is still there—thick, sweet, perfectly reasonable in your own head. But you grip the railing hard enough that the wood bites your palms. The tableau around the marking keeps moving: slick skin, rolling hips, low moans rising into the night air.
+
+It would be so easy to step in.
+
+But you don’t.
+
+Your eyes stay fixed on the chalk lines at the centre of it all.
 
 [[You look for the thing holding it together.|MAN-165 The pattern is the thing]]
 <<failure>>
 <<set $player.flags.manFocalFailed to true>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-160 failure — She begins to join, then the physical fact of the marking and the wrongness of compulsion snap her back toward action.
-   Intent: structural placeholder only; grants +1 incident influence later, outcome unchanged.
-   %%% END %%% */
+The pull wins for a moment. Your knees buckle. You sink down, one hand reaching toward the nearest body: a woman on her back, legs spread, taking a thick cock. You thumb her nipple. She doesn't look at you.
+
+A candle tips, hot wax spilling across your knuckles. The contact jolts through you. The compulsion is suddenly visible.
+
+You yank your hand back, gasping.
 
 [[Your hand finds the marking under you.|MAN-165 The pattern is the thing]]
 <</skillCheck>>
@@ -327,26 +363,17 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-165 The pattern is the thing — Insight: break the marking, break the compulsion; reasoned structure versus raw survival instinct.
-   Intent: structural placeholder only; includes low Academic/Streetwise check. ~90 words.
-   %%% END %%% */
+You’re still on your knees at the edge of the marking, heart hammering, skin flushed and oversensitive, but your mind is fighting for traction again.
 
 <<set _checkSkill to Math.max($player.skills.academic.level, $player.skills.streetwise.level)>>
 <<skillCheck "Academic / Streetwise" "2d6" _checkSkill 7>>
 <<success>>
 <<set $player.flags.manStructureReasoned to true>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-165 success — She reasons that the marking is the anchor and ruining it stops the event.
-   Intent: structural placeholder only; possible Academic skill grant later.
-   %%% END %%% */
+The chalk lines. The candles. Everything in the room — the bodies, the moans, the need — radiating out from this stupid little diagram like it’s the centre of the universe. It started as a party trick. Dollar-store crap. A dare. And somehow it worked. You stare at the five-pointed smear under your hand. Break the pattern, break the hold.
 
 [[You ruin the pattern.|MAN-170 Break the circle]]
 <<failure>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-165 failure — She does not reason it cleanly; instinct drives her to wreck the pattern anyway.
-   Intent: structural placeholder only; outcome unchanged.
-   %%% END %%% */
+No epiphany. Just a raw, animal surge: //this thing is doing this to me, to all of them—get rid of it.// You don’t need to understand how. You just need it gone.
 
 [[You wreck what is under your hands.|MAN-170 Break the circle]]
 <</skillCheck>>
@@ -360,10 +387,11 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-170 Break the circle — Cosmetic intervention choice: drag a foot through chalk, kick candles, haul a deck chair across it, or pour cooler melt over it; all ruin the pattern.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §5/§6. ~90 words.
-   %%% END %%% */
+Your hand is flat on the chalk. The lines are just lines, powder and grit, already smearing where you've leaned into them.
+
+It would take so little. A scuff, a kick, anything that turns the shape into not-a-shape.
+
+The heat is still in you, the pull, the part that wants to lie down in the middle of it and stop fighting. You use the other part. The one that decides things.
 
 [[You drag your foot through the chalk.|MAN-175 Cut wire]]
 [[You kick the candles apart.|MAN-175 Cut wire]]
@@ -397,10 +425,13 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-175 Cut wire — Collapse: sudden silence, music too loud then off, compulsion dropping like a cut wire.
-   Intent: structural placeholder only; guarded NYSE influence and skill grant fire here. ~90 words.
-   %%% END %%% */
+The shape comes apart and the whole world lurches.
+
+For one second the music is suddenly enormous, some bright stupid pop song that's been playing this entire time and that you never once heard. Then it cuts out mid-chorus, like a plug pulled from a wall.
+
+And the room lets go.
+
+You feel it leave you first. The heat, the pull, the lovely reasonable wanting, gone between one breath and the next. Around you the sounds change. A moan falters. Someone says "what" in a small, lost voice. All around you, hands go still on skin.
 
 [[The party surfaces around you.|MAN-180 Surfacing]]
 <</page>>
@@ -413,10 +444,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-180 Surfacing — People come back cold, naked, ashamed, missing time; humanity returns through details like rings, glasses, weeping. She is the only one clear.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §7. ~90 words.
-   %%% END %%% */
+They come up like divers, all at once and too fast.
+
+A man sits back on his heels, blinking, and you watch him notice his own nakedness, then the stranger beneath him, then the dark all around. His mouth opens and nothing comes out.
+
+It happens everywhere at once. People peeling apart, reaching for clothes that aren't near them, saying names that turn out to be the wrong names. A woman with her reading glasses still on and nothing else. A wedding ring on a hand that is holding the wrong hand.
+
+Nobody looks at you. For a different reason now. They can't look at anyone.
 
 [[Someone has to make the call.|MAN-185 Someone has to call this in]]
 <</page>>
@@ -429,12 +463,11 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-185 Someone has to call this in — Practical tail: civilian finds a phone and gives a statement that will not hold together; RCMP starts shaping an impossible report for OPP/her detachment.
-   Intent: structural placeholder only; include background-variant report route from MANITOULIN.md §3/§7. ~90 words.
-   %%% END %%% */
+There's a <<term "cordless phone">> in the kitchen, on the counter by the cold catering trays. You stand holding it while the dial tone hums.
 
-[[You leave with the report unfinished in your head.|MAN-190 The drive back]]
+<<if $player.background eq "RCMP constable">>You identify yourself to the operator, give the road, ask for an ambulance and the <<term "OPP">>. Then you start doing the thing the job trained you for: building it into a report, in your head, while you wait. Twenty-odd adults. No injuries you can see. No crime you can name. Cause of incident, you'd have to leave blank. You'll be leaving it blank for a long time.<<else>>You tell the operator there's been an emergency, people hurt, you don't know how to say it. You give the road. When she asks what happened you open your mouth and there's nothing in it but the dial tone of your own head. None of this is going to hold together. You know that already.<</if>>
+
+[[There's nothing more you can do here.|MAN-190 The drive back]]
 <</page>>
 
 
@@ -445,10 +478,13 @@
 <</silently>>\
 <<header>>\
 <<page>>\
-/* %%% HUMAN-DRAFT %%%
-   MAN-190 The drive back — Interior scar: leaving or waiting for dawn on the rock; the hidden-world fear, not a narrow phobia.
-   Intent: structural placeholder only; draft later from MANITOULIN.md §7/§8. ~90 words.
-   %%% END %%% */
+You give your statement twice, to two different officers, and neither time does it come out sounding like anything that could have happened. Eventually someone puts you in the back of a cruiser to run you back to town. Your dead car can wait for daylight and a tow.
+
+Out the window the bush goes by black and endless. The thing that keeps coming back isn't the bodies or the chalk or the crying. It's how close you came. How reasonable it felt. How a person can step into something like that and never once decide to.
+
+I just wanted to use the fucking phone.
+
+You'll think that a lot, after. It stops being funny early.
 
 [[A week later, the file has a number.|MAN-200 Occurrence report]]
 <</page>>
@@ -462,10 +498,16 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-200 Occurrence report — Branch report document: RCMP/general police source, five-point marking documented but not certified, witnesses with missing time, one coherent account.
-   Intent: structural placeholder only; clinical NYSE voice, no mechanism explanation. ~100 words.
-   %%% END %%% */
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(-8deg)">Classified</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Incident File · 03-MAN-0816 · Extract</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>INCIDENT DATE: 2003.08.16. <<if $player.background eq "RCMP constable">>Flagged from an off-duty RCMP member's occurrence report, filed through <span class="redact" style="width:90px"></span> detachment 2003.08.18.<<else>>Flagged from OPP general occurrence log, <span class="redact" style="width:70px"></span> detachment, 2003.08.18.<</if>></p>
+<p>LOCATION: private residence, <span class="redact" style="width:130px"></span>, Manitoulin Island. Twenty-three adults on scene. No fatalities. No injuries consistent with assault. No charges laid.</p>
+<p>WITNESSES (22): no coherent recall of a period of approx. <span class="redact" style="width:40px"></span> hours. Reports of a "party," embarrassment, waking undressed. Statements do not corroborate one another, or the scene.</p>
+<p>WITNESS (1): full and consistent recall. Describes a five-point figure marked in chalk on the dock, ringed with candles, and its deliberate disruption. Figure photographed and logged. No determination as to function. Classification: <span style="color:var(--sz-brass);font-style:italic">pending review</span>.</p>
+</div>
+</div>
 
 [[You turn the page.|MAN-205 Recommendation]]
 <</page>>
@@ -478,10 +520,17 @@
 <</silently>>
 <<header>>
 <<page>>
-/* %%% HUMAN-DRAFT %%%
-   MAN-205 Recommendation — Recruitment recommendation signed Flett: subject stayed functional inside a live event long enough to interrupt it; recommends contact.
-   Intent: structural placeholder only; bridge to CC-500 and set inciting incident. ~100 words.
-   %%% END %%% */
+<div style="background:var(--sz-ink-3);border:1px solid var(--sz-rule);padding:28px;position:relative;margin-top:8px">
+<span class="stamp" style="position:absolute;top:14px;right:14px;transform:rotate(5deg)">Eyes Only</span>
+<div class="eyebrow --brick" style="margin-bottom:14px">Recruitment Recommendation · R. Flett · 2003.08.23</div>
+<div style="font-family:var(--sz-f-mono);font-size:12px;line-height:1.8;color:var(--sz-cream-soft)">
+<p>Re: <span class="redact" style="width:130px"></span> (subject, file 03-MAN-0816).</p>
+<p>Event classification: NYSE. Focal condition, marked locus, residence-scale scope. Active when the subject arrived. Ended when she broke the marking.</p>
+<p>Twenty-three people in that house and the subject is the only one who can tell us what happened in it. She walked in looking for a telephone, went all the way to the centre of an event that had taken everyone else, felt it begin to take her, and ruined it anyway. By her own account she nearly didn't. I find the account more convincing for that.</p>
+<p>Recommend contact inside thirty days. She is field-eligible, pending evaluation. The quality is not immunity. Nobody in that house was immune, and neither was she. It is staying able to see the shape of a thing while it works on you, and then wrecking the shape. That is rarer than nerve, and it is what we are short of.</p>
+<p style="margin-top:14px">— R. Flett, Branch</p>
+</div>
+</div>
 
 <<link "The file closes." "CC-500 Summary">>
 <<set $player.incitingIncident to "the Dark of Manitoulin">>
