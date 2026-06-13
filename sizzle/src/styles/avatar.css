@@ -54,7 +54,7 @@
   justify-self: center;
   width: min(
     calc(100% - var(--sz-avatar-pad) * 2),
-    calc((100vh - 54px - 28px - 122px - var(--sz-avatar-pad) * 2) / 2)
+    calc((var(--sz-stage-h) - 54px - 28px - 122px - var(--sz-avatar-pad) * 2) / 2)
   );
   aspect-ratio: 1 / 2;
   border: 1px dashed var(--sz-brass-dim);

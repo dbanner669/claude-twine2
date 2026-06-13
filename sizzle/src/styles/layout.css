@@ -13,13 +13,19 @@
     "header  header"
     "avatar  passage"
     "footer  footer";
-  height: 100vh;
-  min-height: 600px;
-  /* Cap width relative to text size so UI doesn't stretch on ultra-wide screens.
-     rem-based: scales with browser zoom / text-size setting. */
-  max-width: 90rem;   /* ~1440px at 16px base */
-  margin-left: auto;
-  margin-right: auto;
+  /* Fixed-proportion stage: a 1920×992 design canvas, uniformly
+     scaled to fit the window (ui-scale.js keeps --sz-scale current).
+     Wider window → bars at the sides; taller → bars top and bottom.
+     Browser zoom cancels out of the scale, so the frame never moves;
+     only the text tokens (× --zoom, reset.css) respond to zoom. */
+  width: var(--sz-stage-w);
+  height: var(--sz-stage-h);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--sz-scale));
+  transform-origin: center center;
+  background: var(--sz-ink);
 }
 
 /* Hide avatar on cover / creation passages via data-screen attr.
@@ -377,9 +383,9 @@ body[data-mode="day"] #footer {
 }
 
 
-/* Keep game content above atmosphere overlays */
+/* Keep game content above atmosphere overlays
+   (positioning lives in the stage block at the top of this file) */
 #game {
-  position: relative;
   z-index: 2;
 }
 

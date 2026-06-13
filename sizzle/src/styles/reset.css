@@ -74,6 +74,25 @@
 
 
 :root {
+  /* ── Fixed-proportion stage ────────────────────────────────
+     The whole UI renders on a 1920×992 design canvas (#game)
+     that scales uniformly to fit the window — pillarboxed when
+     the window is wider, letterboxed when taller. See layout.css.
+
+     --sz-scale  canvas scale = min(innerW/1920, innerH/992).
+                 Kept current by ui-scale.js; the calc() below is
+                 the pre-JS fallback. Browser zoom shrinks the CSS
+                 viewport and the scale with it, so the stage's
+                 physical size and proportions never change.
+     --zoom      browser-zoom factor relative to first load,
+                 set by ui-scale.js from devicePixelRatio.
+                 Multiplied into the text tokens below, so Ctrl+/-
+                 resizes reading text inside the unmoving frame. */
+  --sz-stage-w: 1920px;
+  --sz-stage-h: 992px;
+  --sz-scale: min(calc(100vw / 1920px), calc(100vh / 992px));
+  --zoom: 1;
+
   /* ── Color ─────────────────────────────────────────────── */
 
   /* Backgrounds — warm, never blue-leaning */
@@ -120,8 +139,9 @@
   --sz-f-mono:    "JetBrains Mono", "Iosevka", Consolas, monospace;
   --sz-f-script:  "Allura", "Pinyon Script", cursive;
 
-  /* Fluid body size — JS toggles between 13/14/16/18/20 */
-  --sz-text-base: 16px;
+  /* Fluid body size — JS toggles between 13/14/16/18/20.
+     × var(--zoom): browser zoom resizes text only (see stage note). */
+  --sz-text-base: calc(16px * var(--zoom));
   --sz-text-lg:   calc(var(--sz-text-base) * 1.125);
   --sz-text-xl:   calc(var(--sz-text-base) * 1.25);
   --sz-line:      1.65;
@@ -197,11 +217,11 @@ body[data-mode="day"] {
 
 
 /* ── Text size classes — set on <html> by settings JS ────── */
-.text-xs { --sz-text-base: 13px; }
-.text-s  { --sz-text-base: 14px; }
-.text-m  { --sz-text-base: 16px; }
-.text-l  { --sz-text-base: 18px; }
-.text-xl { --sz-text-base: 20px; }
+.text-xs { --sz-text-base: calc(13px * var(--zoom)); }
+.text-s  { --sz-text-base: calc(14px * var(--zoom)); }
+.text-m  { --sz-text-base: calc(16px * var(--zoom)); }
+.text-l  { --sz-text-base: calc(18px * var(--zoom)); }
+.text-xl { --sz-text-base: calc(20px * var(--zoom)); }
 
 /* ── Avatar size classes — set on <html> by settings JS ──── */
 .avatar-xxs { --sz-avatar-w: 180px; }
@@ -224,10 +244,15 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  /* Single-screen app: the stage letterboxes inside the window;
+     nothing ever scrolls at page level. */
+  overflow: hidden;
 }
 
+/* Page backdrop = the letterbox/pillarbox bars around the stage.
+   One step deeper than the stage's own background so the frame reads. */
 html, body, body > div {
-  background: var(--sz-ink);
+  background: var(--sz-ink-deep);
   color: var(--sz-cream);
 }
 
