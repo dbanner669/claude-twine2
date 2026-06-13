@@ -36,7 +36,7 @@ Female Agent/
 │   ├── src/
 │   │   ├── story/             # System passages (StoryInit, interface, variables, caption)
 │   │   ├── widgets/           # Reusable widgets (7 files: avatar, clothing, expressions, etc.)
-│   │   ├── scripts/           # JavaScript (5 files: macros, events, avatar, preload, index)
+│   │   ├── scripts/           # JavaScript (6 files: macros, events, avatar, preload, index, ui-scale)
 │   │   ├── styles/            # CSS (8 files: reset, layout, avatar, passages, character-creator, notifications, tables, icons)
 │   │   └── content/           # Playable passages (main-menu, character-creator, briefing)
 │   ├── fonts/                 # WOFF2 web fonts (5 families, 8 files)

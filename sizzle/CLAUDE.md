@@ -23,7 +23,7 @@ sizzle/
 ├── src/
 │   ├── story/       System passages (StoryInit, interface, variables)
 │   ├── widgets/     Reusable widgets (avatar, clothing, expressions, etc.)
-│   ├── scripts/     JavaScript (macros, events, settings, menus)
+│   ├── scripts/     JavaScript (preload, macros, events, avatar, index, ui-scale)
 │   ├── styles/      CSS (8 files — design tokens through icons)
 │   └── content/     All playable passage content
 ├── fonts/           WOFF2 web fonts (Allura, Cormorant Garamond, EB Garamond, Inter, JetBrains Mono)
@@ -70,8 +70,8 @@ Eight stylesheet files in `src/styles/`, loaded in order:
 
 | File | Purpose |
 |------|---------|
-| `reset.css` | Design tokens (`:root` custom properties), `@font-face`, base resets, SugarCube overrides |
-| `layout.css` | CSS Grid scaffold for `#game`, screen mode switching, header/footer, atmosphere overlays |
+| `reset.css` | Design tokens (`:root` custom properties), fixed-proportion stage tokens, `@font-face`, base resets, SugarCube overrides |
+| `layout.css` | Fixed-proportion stage (`#game` as a scaled 1920×992 canvas), CSS Grid scaffold, screen mode switching, header/footer, atmosphere overlays |
 | `avatar.css` | Layered PNG composite, avatar meta block, composure pips |
 | `passages.css` | Prose typography, dialogue, choice links, main menu, buttons |
 | `character-creator.css` | Dossier creation flow — tabs, option grids, background cards |
@@ -87,6 +87,23 @@ All tokens are prefixed `--sz-` and defined on `:root` in `reset.css`:
 - **Typography:** `--sz-f-body` (EB Garamond), `--sz-f-display` (Cormorant Garamond), `--sz-f-ui` (Inter), `--sz-f-script` (Allura), `--sz-f-mono` (JetBrains Mono)
 - **Text sizes:** `--sz-text-xs` through `--sz-text-xl`
 - **Spacing, borders, shadows, radius:** `--sz-space-*`, `--sz-border-*`, `--sz-shadow-*`, `--sz-radius-*`
+- **Stage scaling:** `--sz-stage-w` / `--sz-stage-h` (the 1920×992 design canvas), `--sz-scale` (uniform fit factor), `--zoom` (browser-zoom factor; see Fixed-Proportion Stage below)
+
+### Fixed-Proportion Stage
+
+The entire UI renders on a fixed **1920×992 design canvas** (`#game`), centered and uniformly scaled to fit the window via `transform: scale(var(--sz-scale))`. Relative proportions of the header, avatar column, passage area, and footer never drift with window size. The window is filled as far as the aspect ratio allows; the remainder is solid bars (the page backdrop, `--sz-ink-deep`):
+
+- Window **wider** than ~1.935:1 → pillarbox bars left and right.
+- Window **taller** → letterbox bars top and bottom.
+
+`src/scripts/ui-scale.js` keeps two `:root` custom properties current:
+
+| Property | Driven by | Effect |
+|----------|-----------|--------|
+| `--sz-scale` | window size — `min(innerW/1920, innerH/992)` | scales the whole stage to fit; updated on resize/load/observer |
+| `--zoom` | `devicePixelRatio` relative to first load | **browser zoom is the one exception to "everything scales together"** — `--zoom` multiplies into the text-size tokens only, so Ctrl +/− resizes reading text inside the unmoving frame |
+
+A pure-CSS `min()` fallback on `--sz-scale` keeps the stage sized before the script runs. Known caveat: moving the window between monitors of different DPI reads as zoom (DPR-based detection). Body-level fixed elements (glossary tooltip overlay, toasts, atmosphere overlays) stay viewport-anchored rather than scaling with the stage — they live on `<body>`, outside the transformed canvas.
 
 ### Screen Modes
 
@@ -145,7 +162,7 @@ Default header status mapping:
 | 5-6 | `COOL & COLLECTED` | Blue |
 | 7 or higher | `ICE VEINS` | Dark blue |
 
-The avatar panel (left column) shows automatically on `scene` mode passages. The dotted avatar frame is centered within the flexible space above the metadata block; the `AvatarMeta` passage (in `caption.twee`) renders the bottom-anchored identity block and composure bar via `data-passage` attribute. The Settings dialog currently exposes only live controls: `Avatar Visible` remains available, while inactive `Avatar Size` and `Text Size` controls are intentionally hidden until they are wired to the current responsive layout.
+The avatar panel (left column) shows automatically on `scene` mode passages. The dotted avatar frame is centered within the flexible space above the metadata block; the `AvatarMeta` passage (in `caption.twee`) renders the bottom-anchored identity block and composure bar via `data-passage` attribute. The Settings dialog currently exposes only live controls: `Avatar Visible` remains available, while inactive `Avatar Size` and `Text Size` controls stay hidden. Reading-size is handled by browser zoom against the fixed-proportion stage (the `--zoom` mechanism above resizes text inside the unmoving frame), so a dedicated `Text Size` control is lower priority; the `.text-*` classes still exist if it is wired later.
 
 The `FooterStatus` passage renders the current in-game date/time as `Month D, YYYY · Slot` from `$date`. The fake autosave/quicksave helper text and misleading `SAVED` label have been removed from the UI.
 
