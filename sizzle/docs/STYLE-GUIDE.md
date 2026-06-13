@@ -619,6 +619,12 @@ Documented patterns where AI-assisted writing goes wrong. Watch for all of them.
 
 - **"The engine," "load-bearing," "the cope."** Meta-vocabulary that creeps from craft-talk into prose. These belong in documents *about* the writing, not in the writing itself. Watch also for *"the work,"* *"the stakes,"* *"the texture,"* *"the gap"* used in narration — they're symptoms of the AI describing its own intentions instead of executing them. If a sentence sounds like it could appear in a workshop critique, recast it as the thing the critique would be praising.
 
+- **Trite similes — plainness is no defence.** A simile doesn't need literary varnish to be a tell. *"The storm settled in like it pays rent," "buzzing like it's tired too," "her face was the face of someone counting change"* are trite-clever rather than over-crafted, and they read as generated just the same. A comparison must carry information the plain statement can't: size by a body measure ("thicker than your wrist"), a sound by its real referent ("a yelp like a kicked dog, deeper than any dog could go") survive; comparisons that exist to be admired don't. *(Earned in the WDS pass, 2026-06.)*
+
+- **Atmospheric verbs doing poetry instead of work.** *"Where the highway light gives up," "a sign swims up out of the dark," "the plan carried you to dark," "an air conditioner losing to August."* Light doesn't give up and signs don't swim; this is the over-crafted metaphor wearing a verb. Say where the light ends and what the thing does. *(Earned in the WDS pass, 2026-06.)*
+
+- **Passive scene-dressing → recast active.** *"The light was the kind that makes everything look like evidence"* → *"Everything looks like evidence under the ice machine's cold white light."* When a description can be recast so the scene's objects act, recast it. Pairs with the §15.12 "the kind of" check.
+
 ### 13.2 Information Loss (the most damaging mistakes)
 
 - **Amputation instead of conversion.** Cutting content that was *told badly* instead of converting it to *showing*. Information disappears with the clunky delivery. (See §3.6.)
