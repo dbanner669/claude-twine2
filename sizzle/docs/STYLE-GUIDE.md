@@ -553,7 +553,7 @@ When erotic content overlaps with horror — NYSE compulsion, contamination, ove
 
 Physical descriptions must be consistent with established facts. Build, scars, tattoos, hair, physical capabilities — these are constraints on all future descriptions. Getting a body detail wrong breaks trust.
 
-The player character's appearance is set at CC-200 (skin tone, hair colour, hair style, eye colour) and reflected in `$player.complexion` / `$player.hairColour` / `$player.hairStyle` / `$player.eyeColour` / `$player.faceShape`. Reference these via `<<print>>` or background-conditional prose rather than asserting fixed traits.
+The player character has a single fixed baseline appearance — the greybox lock of medium skin, long straight hair, and blue eyes (see `docs/avatar-bakeoff/OPTION-2-ASSET-TODO.md`). Appearance is no longer chosen at character creation (the CC-200 picker was descoped). Treat the baseline as a fixed constraint, the way an NPC's appearance is fixed; what changes at runtime is clothing, expression, and physical state, not her build or colouring. (The legacy `$player.complexion` / `$player.hairColour` / `$player.hairStyle` / `$player.eyeColour` / `$player.faceShape` fields still exist with stale defaults — do not drive prose off them.)
 
 Robert's appearance is fixed (NPC-handler.md §Appearance). Future NPCs get their fixed appearance written into their profile docs at first introduction.
 

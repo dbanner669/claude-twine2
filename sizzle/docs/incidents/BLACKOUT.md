@@ -160,7 +160,7 @@ CC-300 Background  →  CC-400 Incident (select "the Toronto Blackout")
 ```
 
 - `CC-400` currently holds redacted placeholder text; selection there picks the sequence.
-- BLK passages are **scene-mode** flashback with the **avatar panel visible** (decided — she's the created character; appearance set at CC-200 carries into the flashback).
+- BLK passages are **scene-mode** flashback with the **avatar panel visible** (decided — she's the created character; her fixed baseline appearance carries into the flashback).
 - **Day→night transition at the threshold (decided).** BLK-085 through BLK-135 run in **afternoon / day mode** (`<<setTime "afternoon">>`, daytime palette) — the table-setting, the bar, the blackout at 4:11, the walk. When she **crosses into the building at BLK-140**, set evening (`<<setTime "evening">>`) and the palette flips to **night mode**. The mode flip lands on the act of entering the wrong space, and it tracks the real event clock (blackout mid-afternoon, full dark by the time the trouble inside is underway). Everything BLK-140 onward is night.
 - BLK-210 → `CC-500` keeps the existing summary/signature/deploy flow intact.
 - No edits to INTRO-* required; INTRO-101's fallback simply stops being exercised once the value is set.

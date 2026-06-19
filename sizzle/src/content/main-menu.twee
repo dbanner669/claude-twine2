@@ -6,6 +6,7 @@
   <h1>Sizzle</h1>
   <div class="subtitle">Toronto, 2005</div>
   <div class="tagline">Queen Street West &middot; After Hours</div>
+  <img src="media/locations/sizzle-exterior.png" alt="The exterior of Sizzle on Queen Street West after dark" class="menu-image">
   <div class="rule" style="width:140px;margin:38px auto 38px"></div>
   <div class="decisions">
     [[Begin a new assignment.|CC-100 Name]]

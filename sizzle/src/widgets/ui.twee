@@ -54,16 +54,16 @@
 <</nobr>><</widget>>
 
 /* --- Character creation dossier shell ---
-   ccTabStrip: renders the 5-step tab indicator strip
+   ccTabStrip: renders the 4-step tab indicator strip
    ccDossierOpen: opens the dossier page with header
    ccDossierFooter: renders the navigation footer inside the dossier
    ------------------------------------------------------------ */
 
 <<widget "ccTabStrip">><<nobr>>
 <<set _step to _args[0]>>
-<<set _labels to ["Personnel", "Appearance", "Background", "The Incident", "Summary"]>>
-<div class="cc-tabs" style="grid-template-columns:repeat(5,1fr)">
-<<for _i to 0; _i lt 5; _i++>>
+<<set _labels to ["Personnel", "Background", "The Incident", "Summary"]>>
+<div class="cc-tabs" style="grid-template-columns:repeat(4,1fr)">
+<<for _i to 0; _i lt 4; _i++>>
 <<set _cls to "cc-tab">>
 <<if (_i + 1) is _step>><<set _cls to _cls + " --active">>
 <<elseif (_i + 1) lt _step>><<set _cls to _cls + " --done">>
@@ -100,7 +100,7 @@
 <<set _ccNextText to _ccNextLabel + " →">>
 <div class="cc-dossier-footer">
   <div><<if _ccBack>><<link _ccBackText>><<goto _ccBack>><</link>><</if>></div>
-  <span class="step-counter">STEP <<print String(_ccStep).padStart(2, '0')>> / 05</span>
+  <span class="step-counter">STEP <<print String(_ccStep).padStart(2, '0')>> / 04</span>
   <div>
     <<if _ccNext>>
       <<link _ccNextText>><<goto _ccNext>><</link>>

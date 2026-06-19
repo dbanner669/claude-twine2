@@ -346,7 +346,7 @@ Failure text and onward links.
 
 ### What's built and working
 - **Main menu** — centered title page with night mode, single "Begin" link
-- **Character creation (5 steps)** — full dossier-style flow with tab strip, option grids with `:has()` selection, background cards, redacted incident placeholder, summary table, signature block, and background-selection guardrails
+- **Character creation (4 steps)** — dossier-style flow (Identification → Background → The Incident → Summary) with tab strip, background cards, redacted incident placeholder, summary table, signature block, and background-selection guardrails. The player's baseline appearance is fixed (the CC-200 appearance picker was descoped); clothing and expression are manipulated at runtime per scene, not chosen at creation
 - **Derived-state rebuilds** — `CC-500` recalculates skill bonuses and background-derived story tags from scratch on revisit instead of stacking
 - **Briefing scene (INTRO-100 through INTRO-800)** — ~30 passages, complete prologue with branching dialogue, skill checks, background-specific variants
 - **Glossary hover terms** — `<<term>>` widget and tooltip styling are live, currently used for `NYSE`

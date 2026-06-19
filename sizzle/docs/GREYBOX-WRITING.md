@@ -11,9 +11,8 @@
 - [x] Field labels — done
 - [x] Flavor text — done. Service record panel + blockquote about codename assignment.
 
-### CC-200 Appearance
-- [x] Header and option labels — done
-- [ ] Flavor text: brief, optional. Could be a note about the player looking at herself, or the clinical tone of a personnel file describing physical characteristics.
+### CC-200 Appearance — *descoped (removed)*
+- The appearance picker has been cut from the character creator. The player character now has a single fixed baseline appearance (see STYLE-GUIDE.md §12.1). No writing needed here.
 
 ### CC-300 Background
 - [x] Header and intro paragraph — done
@@ -132,7 +131,7 @@ Reference the GDD Section 10 (Tone & Content Guidelines) during all writing. Key
 
 | Category | Total Items | Done | Remaining |
 |----------|------------|------|-----------|
-| CC screen text polish | 5 screens | 4 | 1 (CC-200 flavor text) |
+| CC screen text polish | 4 screens | 4 | 0 (CC-200 appearance screen descoped) |
 | Background descriptions | 4 | 4 | 0 |
 | Skill bonuses per background | 4 | 4 | 0 |
 | Playable inciting incident sequences | 4 | 0 | **4 selected; need full sequence design and implementation** |

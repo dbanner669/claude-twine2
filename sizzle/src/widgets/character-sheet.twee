@@ -20,10 +20,6 @@
     <table class="profile-table">
       <tr><td>Age</td><td>$player.age</td></tr>
       <tr><td>Background</td><td>$player.background</td></tr>
-      <tr><td>Complexion</td><td>$player.complexion</td></tr>
-      <tr><td>Hair</td><td>$player.hairColour $player.hairStyle</td></tr>
-      <tr><td>Eyes</td><td>$player.eyeColour $player.eyeShape</td></tr>
-      <tr><td>Face</td><td>$player.faceShape</td></tr>
     </table>
   </div>
 

@@ -596,6 +596,18 @@ body[data-mode="day"] .skill-check {
   margin-bottom: var(--sz-s-9);
 }
 
+.page-main-menu .menu-image {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  max-height: 300px;
+  object-fit: cover;
+  margin: 0 auto;
+  border: 1px solid var(--sz-rule);
+  box-shadow: var(--sz-shadow-card);
+  border-radius: var(--sz-radius-md);
+}
+
 .page-main-menu .decisions {
   align-items: center;
 }

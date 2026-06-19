@@ -152,10 +152,11 @@ The inciting incident selected during character creation explains why the player
 | Choice | Screen | Effect |
 |--------|--------|--------|
 | Name | CC-100 | First name and surname. Used for real identity. |
-| Appearance | CC-200 | Skin tone (3), hair colour (3), hair style (3), eye colour (3). Drives avatar sprite selection. |
 | Pre-Branch background | CC-300 | What the player was doing before the Branch recruited them. Four options: RCMP constable, CSIS analyst, grad student (psychology), unemployed after university. Influences starting skill levels and can assign background-derived story tags. |
 | Inciting incident | CC-400 | Why the Branch recruited them. Planned as a selectable playable August 2003 origin sequence; may grant a trait, establish backstory, and determine relationship to NYSE phenomena. |
 | Cover identity | *In-game* | The persona used inside Sizzle. Not defined during character creation — developed a few passages into the main story, possibly partially assigned by the Branch and partially crafted by the player. |
+
+Appearance is **not** a player choice. The player character has a single fixed baseline appearance (greybox lock: medium skin, long straight hair, blue eyes). Her look is varied at runtime through clothing, expression, and physical state, not picked at creation.
 
 ### Skills
 
@@ -320,7 +321,7 @@ The `$date` object tracks year, month, day, day of week, and a coarse time-of-da
 ### Act structure
 
 **Prologue: Recruitment**
-- Character creation (name, appearance, background, inciting incident), including a playable origin sequence for the selected incident.
+- Character creation (name, background, inciting incident), including a playable origin sequence for the selected incident.
 - The player's recruitment to the Branch two years prior is established. She's trained, not green.
 - Assignment briefing: this is the mission, this is what we know, this is what we need.
 
@@ -399,7 +400,7 @@ The greybox covers the **Prologue** and the **briefing** (the opening beat of Ac
 
 **What's in v1:**
 
-- Character creation (name, appearance, background, inciting incident, summary), plus a playable origin sequence for the selected incident
+- Character creation (name, background, inciting incident, summary), plus a playable origin sequence for the selected incident
 - The player's recruitment context is established through the August 2003 incident sequence and the later briefing context (two years at the Branch, trained, not green)
 - Branch briefing scene: the handler, the assignment, what's known about Sizzle, what the player is being asked to do
 - At least one skill check (likely composure or academic during the briefing)

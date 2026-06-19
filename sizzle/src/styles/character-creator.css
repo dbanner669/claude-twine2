@@ -190,75 +190,6 @@
   position: relative;
 }
 
-.cc-avatar-preview .preview-footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-  color: var(--sz-cream-faint);
-  font-family: var(--sz-f-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-}
-
-
-/* --- Option grid --------------------------------------------- */
-.cc-options {
-  display: grid;
-  gap: 8px;
-  margin: 0 0 22px;
-}
-
-.cc-options.--cols-3 { grid-template-columns: repeat(3, 1fr); }
-.cc-options.--cols-4 { grid-template-columns: repeat(4, 1fr); }
-.cc-options.--cols-6 { grid-template-columns: repeat(6, 1fr); }
-
-.cc-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 8px;
-  background: var(--sz-ink-3);
-  border: 1px solid var(--sz-rule);
-  cursor: pointer;
-  transition: border-color 0.15s;
-  position: relative;
-}
-
-.cc-option:hover {
-  border-color: var(--sz-brass-dim);
-}
-
-.cc-option.selected,
-.cc-option:has(.is-selected) {
-  border-color: var(--sz-brick);
-  outline: 1px solid var(--sz-brick-glow);
-  outline-offset: 2px;
-}
-
-.cc-option .is-selected {
-  display: none;
-}
-
-.cc-option .swatch {
-  width: 100%;
-  height: 56px;
-  border: 1px solid var(--sz-rule-strong);
-}
-
-.cc-option .option-name {
-  font-family: var(--sz-f-ui);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--sz-cream-soft);
-}
-
-.cc-option.selected .option-name,
-.cc-option:has(.is-selected) .option-name {
-  color: var(--sz-cream);
-}
-
 
 /* --- Field (text input with eyebrow label) ------------------- */
 .cc-field {
@@ -539,29 +470,6 @@
   display: none;
 }
 .cc-bg-card a.link-internal:hover {
-  color: inherit;
-  border-bottom: none;
-  padding-left: 0;
-  background: transparent;
-}
-
-/* Option grid link overrides */
-.cc-option a.link-internal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: inherit;
-  border-bottom: none;
-  padding: 0;
-  font-style: normal;
-  width: 100%;
-}
-.cc-option a.link-internal::before,
-.cc-option a.link-internal::after {
-  display: none;
-}
-.cc-option a.link-internal:hover {
   color: inherit;
   border-bottom: none;
   padding-left: 0;
