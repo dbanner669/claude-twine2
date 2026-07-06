@@ -16,6 +16,7 @@
     "start": "node dist/index.js",
     "figjam-sync": "ts-node-dev --respawn src/figjam-sync/index.ts",
     "figjam-sync:start": "node dist/figjam-sync/index.js",
+    "export-ink": "npm run build && node dist/ink-export/index.js",
     "lint": "eslint src --ext .ts",
     "test": "vitest run"
   },
