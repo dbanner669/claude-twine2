@@ -1,0 +1,10 @@
+# Godot
+.godot/
+*.import
+!addons/**/*.import
+
+# .NET
+bin/
+obj/
+*.user
+.vs/

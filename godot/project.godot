@@ -1,0 +1,23 @@
+; Engine configuration file.
+; Sizzle — greenfield Godot build (see sizzle/docs/GODOT-PORT-PLAN.md)
+config_version=5
+
+[application]
+
+config/name="Sizzle"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[dotnet]
+
+project/assembly_name="Sizzle"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotInk/plugin.cfg", "res://addons/gut/plugin.cfg")
