@@ -29,7 +29,7 @@ Week-one paper work; everything downstream targets these four artifacts (drafts 
 3. **Avatar layer manifest** — the Option 2 stack (`background → hairBack → body → … → expression → overlay`), canvas size, registration, alpha rules, file naming, and the crossed-composite pass/fail test. Art production and the runtime both target this contract; neither chases the other.
 4. **Parity matrix** — one page listing every live SugarCube construct and tool (`<<first>>`, visited-choice styling, glossary, `nobr` layouts, Obsidian lint rules, …), each marked `port` / `rebuild` / `drop`. Several rows are free wins — ink has native visit counts and `once`/`cycle` sequences, superseding `<<first>>` outright. Nothing on the SugarCube side is retired until every `port`/`rebuild` row has a live replacement.
 
-Gate: all four reviewed and signed off by the human (these are the decisions that are expensive to reverse).
+Gate: all four reviewed and signed off by the human (these are the decisions that are expensive to reverse). **✔ PASSED 2026-07-05** — all eight embedded questions resolved; sign-off records in each contract.
 
 ## Phase 0.5 — Vertical slice (prove the hard things first)
 

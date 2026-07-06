@@ -28,7 +28,7 @@ Status: **draft — pending human sign-off**. Every live SugarCube-side construc
 | `<<addNotification>>/<<showNotifications>>` | 3/2 | rebuild | `toast(...)` + toast scene |
 | `<<avatar>>`, `avatar-*`, `wear-*`, `remove-*` widgets (21) | 5 + clothing calls | rebuild | manifest API ops (AVATAR-MANIFEST.md) |
 | `ccTabStrip/ccDossierHeader/ccDossierFooter` | 4/4/6 | rebuild | native CC scenes (Phase 5) |
-| `<<charSheet>>` | widget | rebuild | character-sheet dialog scene (deferred until post-parity is fine) |
+| `<<charSheet>>` | widget | rebuild | character-sheet dialog scene (P3 — signed off; aids P6 QA) |
 | `<<first>>` (macros.js) | **0** | drop | never used in content; ink has native `{once:}`/visit counts anyway |
 | `<<rollDice>>` (low-level) | 0 player-facing | drop | GDScript RNG util inside the dice scene |
 | `newFeatureIcon/improvementIcon/bugreport` | dev-only | drop | dev affordances; re-add natively if missed |
@@ -81,4 +81,6 @@ Status: **draft — pending human sign-off**. Every live SugarCube-side construc
 ## Sign-off record (2026-07-05)
 
 1. ~~Story-graph visualization~~ **Resolved:** authoring interface must remain writer-friendly. Inky becomes the primary writing environment (live playable preview); the canvas generator is ported to read `.ink` and emit a read-only `story.canvas` for Obsidian viewing; only the sync-back machinery is dropped. Rows above updated.
-2. `charSheet` dialog: **pending final word** — recommendation revised to *rebuild in P3* (small scope, and useful during P6 first-play QA for watching grants/composure).
+2. `charSheet` dialog: **approved — rebuild in P3** (small scope, and useful during P6 first-play QA for watching grants/composure). Row updated below.
+
+**All four Phase 0 contracts signed off 2026-07-05. Phase 0 gate: PASSED.**
