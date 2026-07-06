@@ -47,7 +47,7 @@ Gate: the slice plays, and a scripted run through it matches the SugarCube build
 - **This is scaffolding, not product.** It runs once; "good enough plus a hand-fix report" beats converter perfection. The `nobr` character-creator passages are excluded (rebuilt natively in Phase 5).
 - Stop-loss: if more than ~20% of passages need hand conversion, stop improving the converter and just hand-convert with agents — 25K words is small enough that the converter is a convenience, not a bet.
 
-Gate: all 19 content files converted; inklecate compiles clean; prose spot-diff against the twee source; twee files frozen (archived read-only) at sign-off.
+Gate: all narrative content files converted; inklecate compiles clean; prose spot-diff against the twee source; twee files frozen (archived read-only) at sign-off. **✔ PASSED 2026-07-05** — 131 knots, 0 hand-fixes (stop-loss untriggered), all verification green; report in `docs/godot/PHASE-1-CONVERSION-REPORT.md`. Five twee files frozen read-only (`src/content/FROZEN.md`); ink canonical from here.
 
 ## Phase 2 — Runtime hardening
 
