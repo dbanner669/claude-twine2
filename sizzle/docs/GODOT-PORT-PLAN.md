@@ -22,7 +22,7 @@ Core architectural decision: **ink becomes the canonical content language.** No 
 
 ## Phase 0 — Contracts (before any code)
 
-Week-one paper work; everything downstream targets these four artifacts:
+Week-one paper work; everything downstream targets these four artifacts (drafts live in `docs/godot/`: [STATE-SCHEMA.md](godot/STATE-SCHEMA.md), [INK-CONVENTIONS.md](godot/INK-CONVENTIONS.md), [AVATAR-MANIFEST.md](godot/AVATAR-MANIFEST.md), [PARITY-MATRIX.md](godot/PARITY-MATRIX.md)):
 
 1. **State schema** — the full `$player/$sizzle/$nyse/$date/$header` tree as a typed, versioned dictionary with named accessors. Specifies the mirror set (which variables project into ink), the command surface (which ops mutate engine state), and the one-way sync rules. Schema version field from day one; greybox saves may be wiped on schema change, but the version check must exist before the first save is ever written.
 2. **ink conventions doc** — knot = passage (`BLK_100`; ink identifiers can't contain hyphens); tags for screen mode / day-night / history-root; the external-function surface (time helpers, composure ops, toasts, avatar cues, glossary); the **mid-knot interactive pause convention** for `<<skillCheck>>` (engine halts continuation at a tagged check point, runs the click-to-roll interaction, writes the result into an ink variable, resumes into conditional weave — a solved pattern in shipped ink titles, but it must be *our* written pattern); the **`<<linkreplace>>` decision** (reveal-in-place primitive vs. restructure, decided per-instance, with explicit acceptance that some navigation semantics drift); rich-text markup convention; link-text and passage-length rules carried over from STYLE-GUIDE.md verbatim.
