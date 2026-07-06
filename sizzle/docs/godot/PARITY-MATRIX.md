@@ -66,19 +66,19 @@ Status: **draft — pending human sign-off**. Every live SugarCube-side construc
 | Tool | Disposition | Notes |
 |---|---|---|
 | Tweego build (`build/compile.bat`, output.html) | drop | at Phase 6 retirement gate only |
-| Obsidian vault + `build-obsidian-canvas.js` / `build-twee-from-vault.js` | drop | ink is natively plain-text/agent-legible; vault archived at P6 |
+| Obsidian vault + `build-obsidian-canvas.js` / `build-twee-from-vault.js` | rebuild (half) | **Authoring moves to Inky** (live playable preview while writing — the primary writer interface). `build-obsidian-canvas.js` is ported to read `.ink` and emit a **read-only** `story.canvas`, so Obsidian stays available as the story-map viewer. Sync-back (`build-twee-from-vault.js`) is dropped — ink is directly editable, no round-trip needed |
 | obsidian-sizzle-plugin lint (9 rules) | port | free via inklecate: broken refs, dup passages, undeclared vars, unclosed syntax. Custom ink linter: orphan knots, word count, editorial markers, link-text form, tag coherence + mirrored-var ban (INK-CONVENTIONS.md) |
 | FigJam sync (`:4747` + plugin) | drop | already legacy; archive |
 | twine-mcp-server | port (repurposed) | hosts the one-time twee→ink converter; story-manipulation tools retire with twee at P6 |
 | STYLE-GUIDE.md / EDITORIAL-SWEEP.md / audit workflow | port | unchanged in substance; operates on ink text |
-| Story graph visualization (canvas) | drop* | *inky's own graph / future need; not load-bearing — flag if missed in practice |
+| Story graph visualization (canvas) | rebuild | read-only `story.canvas` generated from `.ink` (see Obsidian row above) |
 
 ## Census notes
 
 - The hard-case tail is **smaller than both reviews assumed**: 1 `linkreplace`, 7 `replace`, 0 `<<first>>`, 2 document-layout passage families (Branch file extracts ×4 sequences, CC dossier — both already dispositioned as native scenes).
 - The 506 `<<set>>` calls concentrate in `<<silently>>` header/state preambles — mechanical converter fodder, not logic.
 
-## Open questions for sign-off
+## Sign-off record (2026-07-05)
 
-1. Story-graph visualization: accept losing the canvas graph view (drop) or budget a small ink graph tool later? **Draft says: drop, revisit only if its absence hurts in practice.**
-2. `charSheet` dialog: rebuild during P3 or defer past parity (it's a convenience view, not a gameplay system)? **Draft says: defer past parity.**
+1. ~~Story-graph visualization~~ **Resolved:** authoring interface must remain writer-friendly. Inky becomes the primary writing environment (live playable preview); the canvas generator is ported to read `.ink` and emit a read-only `story.canvas` for Obsidian viewing; only the sync-back machinery is dropped. Rows above updated.
+2. `charSheet` dialog: **pending final word** — recommendation revised to *rebuild in P3* (small scope, and useful during P6 first-play QA for watching grants/composure).

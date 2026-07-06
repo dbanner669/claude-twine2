@@ -90,7 +90,7 @@ Every command triggers a mirror push before ink continues.
 
 History atom = **choice commit** (fixed decision in GODOT-PORT-PLAN.md): snapshot at knot entry; back = restore the entry frame. Explicit GUT tests required for back/load across: a skill check, a one-shot grant, a day-crossing.
 
-## Open questions for sign-off
+## Sign-off record (2026-07-05)
 
-1. Mirror `nyse_influence` now (cheap, hidden from player anyway) or only when content first conditions on it? **Draft says: mirror now.**
-2. `attributes: {}` exists in the tree but nothing writes it yet — keep as reserved or drop until used? **Draft says: drop; re-add with schema bump when a system needs it.**
+1. Mirror `nyse_influence` now: **approved as drafted.**
+2. Drop unused `attributes: {}`, re-add with schema bump when needed: **approved as drafted.**

@@ -64,7 +64,7 @@ Appearance locked to **medium skin, long straight hair, blue eyes** — one cohe
 
 Greybox minimum asset set: 1 body, 1 hair_back, 1 hair_front, 1 face, 1 eyes, the four-piece starter outfit (tee/jeans/sneakers/underwear), 2–3 expressions, 6 phase-override images (already exist in `media/avatar/`). Production targets (39 minimum / 60 recommended layers) remain as per `OPTION-2-ASSET-TODO.md`.
 
-## Open questions for sign-off
+## Sign-off record (2026-07-05)
 
-1. Phase overrides as full-frame images (current approach, cheap) vs composed layer looks per incident phase (more work, more reuse)? **Draft says: keep full-frame overrides for greybox — they exist and they ship.**
-2. `nipples`/`genitals` as separate slots is the bakeoff plan (clean SFW/NSFW toggling). Confirm the runtime should expose an `explicit_layers_visible` setting from day one. **Draft says: yes — trivial now, painful later.**
+1. Full-frame phase overrides for greybox: **approved as drafted.**
+2. `explicit_layers_visible` setting from day one: **approved as drafted.**

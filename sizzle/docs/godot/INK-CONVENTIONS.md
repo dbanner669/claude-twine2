@@ -105,7 +105,13 @@ STYLE-GUIDE.md remains the prose source of truth: 80–120 visible words per kno
 
 inklecate itself catches broken diverts, duplicate knots, undeclared variables, and syntax errors for free. Custom linter adds: orphan knots, word-count-per-knot, link-text form, editorial markers, tag coherence (`# check` knots have both branches; `# scene` knots have a matching resource; mirrored-var assignment ban).
 
-## Open questions for sign-off
+## Authoring environment
 
-1. Reveal drift default (append vs `# reveal` hint) — accept append as the norm? **Draft says: yes; hint only if the slice proves it matters.**
-2. Do knot display titles (the prose halves of passage names) survive anywhere player-visible? **Draft says: no — they were never player-visible in SugarCube either; comments only.**
+- **Inky (`_tools/inky/`) is the primary writing interface:** split-pane editing with the story playable live as you type, inline compile errors, jump-to-knot. This replaces the Obsidian shadow-MD workflow for drafting and revision.
+- ink files are plain text — any editor works for quick edits; agents (Claude/Codex) edit them directly.
+- **Story map:** `build-obsidian-canvas.js` gets ported to parse `.ink` and emit a read-only `story.canvas`; Obsidian remains the graph viewer. No sync-back exists or is needed.
+
+## Sign-off record (2026-07-05)
+
+1. Reveal drift default (append via choice+gather): **approved as drafted** — `# reveal` hint only if the BLK_130/145 slice proves append hurts.
+2. Knot display titles player-invisible, comments only: **approved as drafted.**
