@@ -5,7 +5,14 @@ config_version=5
 [application]
 
 config/name="Sizzle"
+run/main_scene="res://scenes/slice_player.tscn"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+
+[autoload]
+
+State="*res://autoload/state.gd"
+Rules="*res://autoload/rules.gd"
+StoryBridge="*res://autoload/story_bridge.gd"
 
 [display]
 
