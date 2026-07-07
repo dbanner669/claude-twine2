@@ -13,6 +13,7 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 State="*res://autoload/state.gd"
 Rules="*res://autoload/rules.gd"
 StoryBridge="*res://autoload/story_bridge.gd"
+SaveManager="*res://autoload/save_manager.gd"
 
 [display]
 

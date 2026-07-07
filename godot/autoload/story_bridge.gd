@@ -24,6 +24,17 @@ signal check_ready(check: Dictionary)
 signal scene_stub(scene_kind: String, extract_id: String)
 signal flow_reset(knot: String)
 signal flow_ended
+signal handoff_reached(knot: String)
+
+## Native-handoff knots: reaching one sets player.inciting_incident engine-side
+## (ink has no write op for a mirrored variable — Phase 1 report follow-up #2).
+## Strings match the frozen twee exactly. intro_end is deliberately absent.
+const HANDOFF_INCIDENTS := {
+	"blk_end": "the Toronto Blackout",
+	"man_end": "the Dark of Manitoulin",
+	"pale_end": "the Woman with the Pale Eyes",
+	"wds_end": "Wet Dog Smell",
+}
 
 var story = null  # GodotInk.InkStory (C#); duck-typed from GDScript.
 var story_path: String = ""
@@ -41,7 +52,10 @@ var transcript: String = ""
 ## True once the story hits END.
 var ended: bool = false
 
-var _bound := false
+## Instance ids of InkStory resources whose externals are already bound.
+## load() returns cached resources for repeat paths, so a per-instance record
+## is the only safe way to avoid double-binding (godot-ink throws on rebind).
+var _bound_story_ids := {}
 var _rng := RandomNumberGenerator.new()
 
 
@@ -55,14 +69,13 @@ func start(path: String, start_knot: String) -> void:
 	if story == null or story_path != path:
 		story = load(path)
 		story_path = path
-		_bound = false
 	if story == null:
 		push_error("StoryBridge.start: failed to load %s" % path)
 		return
 	story.ResetState()
-	if not _bound:
+	if not _bound_story_ids.has(story.get_instance_id()):
 		_bind_externals()
-		_bound = true
+		_bound_story_ids[story.get_instance_id()] = true
 	State.reset()
 	pending_check = {}
 	current_choices = []
@@ -93,8 +106,31 @@ func roll() -> void:
 	if pending_check.is_empty():
 		return
 	var dice_total := _roll_dice(String(pending_check["dice"]))
-	var total := dice_total + State.skill_level(String(pending_check["skill"]))
+	var total := dice_total + check_modifier(String(pending_check["skill"]))
 	resolve_check(total)
+
+
+## Modifier for a # check skill spec. Slash-separated specs ("composure/agent")
+## resolve as MAX of the parts — the twee's Math.max two-skill checks.
+## "composure" reads Current Composure with the macros.js skill-level fallback.
+func check_modifier(skill_spec: String) -> int:
+	var best := 0
+	var first := true
+	for part in skill_spec.split("/", false):
+		var value := _resolve_skill_value(String(part).strip_edges())
+		if first or value > best:
+			best = value
+			first = false
+	return best
+
+
+func _resolve_skill_value(skill_name: String) -> int:
+	if skill_name == "composure":
+		var current: Variant = State.player().get("current_composure")
+		if current is int or current is float:
+			return int(current)
+		return State.skill_level("composure")
+	return State.skill_level(skill_name)
 
 
 ## Resolve the pending check with an explicit total (deterministic path;
@@ -247,6 +283,10 @@ func _continue_flow() -> void:
 		if tags.has("id"):
 			var knot := String(tags["id"])
 			State.push_frame(knot, pre_engine, pre_ink)
+			if HANDOFF_INCIDENTS.has(knot):
+				State.player()["inciting_incident"] = String(HANDOFF_INCIDENTS[knot])
+				push_mirror()
+				handoff_reached.emit(knot)
 			knot_entered.emit(knot, tags)
 			if tags.has("scene"):
 				last_stub = {
