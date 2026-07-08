@@ -81,6 +81,13 @@ var _saves_dialog: SavesDialog
 var _saves_button: Button
 var _check_panel: CheckPanel
 var _menu_shown := false
+# Character creation (Phase 5)
+var _cc_holder: VBoxContainer
+var _cc_flow: CCFlow
+var _cc_active := false
+## Set when a *_end handoff knot is reached; the following flow_ended then
+## returns to the CC summary instead of the end screen.
+var _handoff_pending := false
 
 
 func _ready() -> void:
@@ -94,6 +101,7 @@ func _ready() -> void:
 	StoryBridge.scene_stub.connect(_on_scene_stub)
 	StoryBridge.flow_reset.connect(_on_flow_reset)
 	StoryBridge.flow_ended.connect(_on_flow_ended)
+	StoryBridge.handoff_reached.connect(_on_handoff_reached)
 	Rules.toast_requested.connect(_on_toast)
 	Rules.state_changed.connect(_on_state_changed)
 	ThemeService.mode_changed.connect(func(_m: String) -> void: _restyle())
@@ -219,6 +227,14 @@ func _build_ui() -> void:
 	_extract_holder.visible = false
 	_extract_holder.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_column.add_child(_extract_holder)
+
+	_cc_holder = VBoxContainer.new()
+	_cc_holder.visible = false
+	_column.add_child(_cc_holder)
+	_cc_flow = load("res://scenes/cc/cc_flow.tscn").instantiate()
+	_cc_flow.incident_chosen.connect(_on_cc_incident_chosen)
+	_cc_flow.summary_signed.connect(_on_cc_summary_signed)
+	_cc_holder.add_child(_cc_flow)
 
 	_check_holder = VBoxContainer.new()
 	_check_holder.visible = false
@@ -449,6 +465,7 @@ func _apply_screen_mode(mode: String) -> void:
 
 func _on_knot_entered(knot: String, tags: Dictionary) -> void:
 	_menu_shown = false
+	_exit_cc_view()
 	_current_knot = knot
 	_current_tags = tags
 	if tags.has("check"):
@@ -528,6 +545,7 @@ func _on_flow_reset(_knot: String) -> void:
 	_prose.clear()
 	_defer_prose_clear = false
 	_clear_choices()
+	_exit_cc_view()
 	_extract_holder.visible = false
 	_end_panel.visible = false
 	_prose.visible = true
@@ -535,7 +553,17 @@ func _on_flow_reset(_knot: String) -> void:
 
 func _on_flow_ended() -> void:
 	_clear_choices()
-	_show_end_screen()
+	if _handoff_pending:
+		# A *_end incident handoff ended the flashback story: return to the
+		# CC summary (CC-500 equivalent) instead of the end screen.
+		_handoff_pending = false
+		_enter_cc_summary()
+	else:
+		_show_end_screen()
+
+
+func _on_handoff_reached(_knot: String) -> void:
+	_handoff_pending = true
 
 
 func _on_state_changed(_op: String) -> void:
@@ -602,6 +630,8 @@ func _show_main_menu() -> void:
 	_current_knot = ""
 	_current_tags = {}
 	_apply_screen_mode("menu")
+	_exit_cc_view()
+	_handoff_pending = false
 	_prose.visible = true
 	_prose.clear()
 	_scene_image.visible = false
@@ -613,8 +643,7 @@ func _show_main_menu() -> void:
 	_prose.append_text("[font=res://fonts/CormorantGaramond-Italic.woff2][font_size=38][color=%s]An infiltration in three acts[/color][/font_size][/font]\n\n" % ThemeService.color("cream").to_html(false))
 	_prose.append_text("[color=%s]T O R O N T O   ·   2 0 0 5[/color][/center]\n\n" % ThemeService.color("brass_dim").to_html(false))
 	_choices_label.visible = false
-	_add_menu_button("Begin", func() -> void:
-		StoryBridge.start(BRIEFING_PATH, BRIEFING_START))
+	_add_menu_button("Begin", _start_character_creation)
 	if SaveManager.has_autosave():
 		_add_menu_button("Continue", _continue_from_autosave)
 	_refresh_header()
@@ -672,6 +701,68 @@ func _show_end_screen() -> void:
 	_end_panel.add_child(sub)
 
 	_add_menu_button("Main menu", _show_main_menu)
+
+
+# =========================================================================
+# Character creation (Phase 5) — native CC-100/300/400/500 flow
+# =========================================================================
+
+## Main menu Begin: fresh character, dossier flow at step 1. The twee CC
+## passages are tagged `nighttime`, so night mode is forced for the flow.
+func _start_character_creation() -> void:
+	State.reset()
+	_menu_shown = false
+	_current_knot = ""
+	_current_tags = {}
+	_handoff_pending = false
+	ThemeService.set_mode("night")
+	Rules.set_header("Branch HQ — Personnel File", "")
+	_show_cc_view()
+	_cc_flow.begin()
+
+
+## Post-flashback return point (CC-500). inciting_incident was already set
+## by the StoryBridge handoff map at *_end. No rebuild happens here — the
+## CC-400-top rebuild ran before the flashback and re-running it would wipe
+## the flashback's skill grants.
+func _enter_cc_summary() -> void:
+	ThemeService.set_mode("night")
+	Rules.set_header("Branch HQ — Personnel File", "")
+	_show_cc_view()
+	_cc_flow.open_summary()
+
+
+func _show_cc_view() -> void:
+	_cc_active = true
+	_apply_screen_mode("creation")
+	_prose.visible = false
+	_scene_image.visible = false
+	_extract_holder.visible = false
+	_check_holder.visible = false
+	_end_panel.visible = false
+	_clear_choices()
+	_cc_holder.visible = true
+	_refresh_header()
+	_refresh_footer()
+
+
+func _exit_cc_view() -> void:
+	_cc_active = false
+	_cc_holder.visible = false
+
+
+## Incident card confirmed at the incident step. CCFlow already ran
+## Rules.cc_rebuild_derived (upstream of the flashback); the engine state
+## must survive into the story, hence keep_engine_state = true.
+func _on_cc_incident_chosen(incident: Dictionary) -> void:
+	StoryBridge.start(String(incident["story"]), String(incident["start"]), true)
+
+
+## Summary signed: finalize (baseline composure copy, AFTER the flashback)
+## and hand off to the briefing.
+func _on_cc_summary_signed() -> void:
+	Rules.cc_finalize()
+	StoryBridge.start(BRIEFING_PATH, BRIEFING_START, true)
 
 
 # =========================================================================
@@ -774,6 +865,9 @@ func _on_character_pressed() -> void:
 
 
 func _on_saves_pressed() -> void:
+	# SAVE is blocked during the CC flow (pre-story steps have no story
+	# frame; see PHASE-5-PROGRESS.md). LOAD remains available.
+	_saves_dialog.block_saves = _cc_active
 	_saves_dialog.open()
 
 

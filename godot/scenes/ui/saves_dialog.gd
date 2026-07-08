@@ -7,6 +7,12 @@ extends AcceptDialog
 
 const SLOT_COUNT := 5
 
+## Phase 5: the shell sets this while the character-creation flow is on
+## screen. Pre-story CC steps have no story frame to save (and a summary-time
+## manual save would just duplicate the *_end autosave), so SAVE is disabled
+## for the whole CC flow; LOAD stays available.
+var block_saves := false
+
 var _wrapper: MarginContainer
 var _content: VBoxContainer
 
@@ -89,7 +95,7 @@ func _add_row(save_name: String, label_text: String, is_slot: bool) -> void:
 
 	if is_slot:
 		row.add_child(_make_button("SAVE", _on_save_pressed.bind(save_name),
-			not StoryBridge.story_path.is_empty()))
+			not StoryBridge.story_path.is_empty() and not block_saves))
 	row.add_child(_make_button("LOAD", _on_load_pressed.bind(save_name), not save.is_empty()))
 	if is_slot:
 		row.add_child(_make_button("DELETE", _on_delete_pressed.bind(save_name), not save.is_empty()))

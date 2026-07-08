@@ -1,0 +1,76 @@
+{
+	"comment": "Character-creation data, extracted verbatim from sizzle/src/content/character-creator.twee (blurbs, bonuses, tags) and sizzle/src/story/variables.twee (setup.backgrounds/firstNames/surnames/codenames). Background ids are the exact twee $player.background strings — ink conditionals and extract variants compare against them.",
+	"background_story_tags": ["Northern Ontario", "City Dweller", "Lived in Toronto"],
+	"branch_training": {"agent": 1, "composure": 1},
+	"backgrounds": [
+		{
+			"id": "RCMP constable",
+			"title": "RCMP Constable",
+			"blurb": "Three years posted to a detachment in Northern Ontario. Long shifts, domestic calls, highway patrols, the occasional missing person report that didn't add up. You were good at your job — steady, observant, hard to rattle.",
+			"bonuses": {"confrontation": 2, "composure": 1, "athlete": 1},
+			"story_tags": ["Northern Ontario"]
+		},
+		{
+			"id": "CSIS analyst",
+			"title": "CSIS Analyst",
+			"blurb": "Intelligence analysis in Ottawa. You read reports, cross-referenced data, identified patterns no one else saw. You were never in the field — you were the person the field reported to.",
+			"bonuses": {"agent": 2, "academic": 1, "composure": 1},
+			"story_tags": ["City Dweller"]
+		},
+		{
+			"id": "grad student",
+			"title": "Grad Student (Psychology)",
+			"blurb": "Master's program at York, clinical psychology. Your thesis on coercive persuasion and interpersonal influence caught the Branch's attention — interesting enough to recruit you before you finished.",
+			"bonuses": {"academic": 2, "charmer": 1, "sexology": 1},
+			"story_tags": ["City Dweller", "Lived in Toronto"]
+		},
+		{
+			"id": "unemployed after university",
+			"title": "Unemployed After University",
+			"blurb": "BA from Ryerson, no job prospects, a lot of student debt, and too much free time spent in places your parents wouldn't approve of. You learned things about people — and about yourself — that don't go on a resume.",
+			"bonuses": {"streetwise": 1, "sexology": 1, "composure": 1},
+			"story_tags": ["City Dweller", "Lived in Toronto"]
+		}
+	],
+	"incidents": [
+		{
+			"id": "the Toronto Blackout",
+			"title": "The Toronto Blackout",
+			"blurb": "Thursday, August 14, 2003. The night the lights went out, you were the one who lit a match.",
+			"story": "res://content/blackout.ink",
+			"start": "BLK_085"
+		},
+		{
+			"id": "the Dark of Manitoulin",
+			"title": "The Dark of Manitoulin",
+			"blurb": "August 2003. A lakehouse on Manitoulin Island. A ritual that was not supposed to work.",
+			"story": "res://content/manitoulin.ink",
+			"start": "MAN_085"
+		},
+		{
+			"id": "the Woman with the Pale Eyes",
+			"title": "The Woman with the Pale Eyes",
+			"blurb": "August 2003. A hotel lobby in Ottawa. Heavy rain. Wrong eyes.",
+			"story": "res://content/pale.ink",
+			"start": "PALE_085"
+		},
+		{
+			"id": "Wet Dog Smell",
+			"title": "Wet Dog Smell",
+			"blurb": "August 2003. A roadside motel. Something in the dark outside.",
+			"story": "res://content/wds.ink",
+			"start": "WDS_085"
+		}
+	],
+	"first_names": ["Alex", "Sam", "Jordan", "Casey", "Riley",
+		"Morgan", "Taylor", "Quinn", "Avery", "Blake",
+		"Cameron", "Drew", "Ellis", "Finley", "Harper",
+		"Kelly", "Logan", "Parker", "Sage", "Val"],
+	"surnames": ["Anderson", "Belanger", "Chen", "Duval", "Edwards",
+		"Fletcher", "Grant", "Hayes", "Ivanov", "Jensen",
+		"Kessler", "Lawson", "Monroe", "Nash", "Okafor",
+		"Palmer", "Quinn", "Reeves", "Singh", "Tremblay"],
+	"codenames": ["Falcon", "Ghost", "Hawk", "Jackal", "Lynx",
+		"Mantis", "Osprey", "Phantom", "Raven", "Viper",
+		"Wolf", "Cobra", "Eagle", "Fox", "Panther"]
+}

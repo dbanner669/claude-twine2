@@ -65,7 +65,16 @@ func _ready() -> void:
 
 
 ## Load the story, reset all state, and enter start_knot.
-func start(path: String, start_knot: String) -> void:
+##
+## PHASE 5 CHANGE (documented in PHASE-5-PROGRESS.md): optional
+## keep_engine_state. The native CC flow builds engine state (identity,
+## background, rebuilt skills) BEFORE any ink story exists; the flashback's
+## first knot immediately reads the `background` mirror variable, so start()
+## unconditionally resetting State was a real gap blocking the flow.
+## With keep_engine_state = true the canonical State.data survives (only the
+## choice-commit history is cleared for the new story). Default false keeps
+## every pre-existing call site and test byte-identical in behavior.
+func start(path: String, start_knot: String, keep_engine_state: bool = false) -> void:
 	if story == null or story_path != path:
 		story = load(path)
 		story_path = path
@@ -76,7 +85,10 @@ func start(path: String, start_knot: String) -> void:
 	if not _bound_story_ids.has(story.get_instance_id()):
 		_bind_externals()
 		_bound_story_ids[story.get_instance_id()] = true
-	State.reset()
+	if keep_engine_state:
+		State.history.clear()
+	else:
+		State.reset()
 	pending_check = {}
 	current_choices = []
 	last_check_result = {}

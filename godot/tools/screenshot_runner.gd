@@ -1,8 +1,10 @@
 extends Node
-## Screenshot / smoke runner (Phase 3 verification).
+## Screenshot / smoke runner (Phase 3 verification; Phase 5 CC stages).
 ##
-## Drives the shell through its states — main menu, scene knot, image knot,
-## dice check, branch-file extract — capturing a PNG at each stop.
+## Drives the shell through its states — main menu, the four-step character
+## creation flow (identity, background, incident, flashback round-trip,
+## summary, sign-off into the briefing), scene knot, image knot, dice check,
+## branch-file extract — capturing a PNG at each stop.
 ##
 ## Run (windowed, real pixels):
 ##   & <godot-exe> --path godot res://tools/screenshot_runner.tscn
@@ -40,17 +42,89 @@ func _run() -> void:
 	await _settle()
 	await _shot("01_main_menu")
 
-	# --- Main menu: Begin ---------------------------------------------------
+	# --- Main menu: Begin -> character creation (Phase 5) --------------------
 	var begin := _button_containing("Begin")
 	_expect(begin != null, "main menu shows Begin")
 	if begin != null:
 		begin.pressed.emit()
-	else:
-		StoryBridge.start("res://content/briefing.ink", "INTRO_100")
+	await _settle()
+	var cc := _cc_flow()
+	_expect(cc != null and cc.is_visible_in_tree(), "Begin opens the CC dossier flow")
+	_expect(cc != null and cc.step == 0, "CC starts at the identification step")
+	await _shot("10_cc_identity")
+
+	# --- CC step 1: identity ---------------------------------------------------
+	cc.set_identity("Riley", "Nash")
+	cc.next_step()
+	await _settle()
+	_expect(cc.step == 1, "identity Continue reaches the background step")
+	_expect(String(State.player()["first_name"]) == "Riley"
+		and String(State.player()["surname"]) == "Nash",
+		"identity applied through Rules on Continue")
+
+	# --- CC step 2: background (guardrail + selection) -----------------------
+	cc.next_step()
+	await _settle()
+	_expect(cc.step == 1, "background guardrail blocks Continue until selected")
+	cc.select_background("RCMP constable")
+	await _settle()
+	await _shot("11_cc_background")
+	cc.next_step()
+	await _settle()
+	_expect(cc.step == 2, "background selected -> incident step reachable")
+	await _shot("12_cc_incident")
+
+	# --- CC step 3: incident confirm -> rebuild -> flashback ------------------
+	cc.next_step()
+	await _settle()
+	_expect(cc.step == 2, "incident guardrail blocks Continue until an incident is lived")
+	cc.select_incident("the Toronto Blackout")
+	await _settle()
+	_expect(String(State.current_frame().get("knot", "")) == "BLK_085",
+		"incident confirm starts the flashback at BLK_085 (got '%s')" %
+		State.current_frame().get("knot", ""))
+	_expect(String(State.player()["background"]) == "RCMP constable",
+		"CC-400-top rebuild set the background")
+	_expect(State.skill_level("confrontation") == 2 and State.skill_level("agent") == 1,
+		"rebuild applied background bonuses + Branch training before the flashback")
+	_expect(cc != null and not cc.is_visible_in_tree(),
+		"CC view yields to the story once the flashback starts")
+
+	# --- Force-resolve the flashback through to blk_end ----------------------
+	for _i in 80:
+		if StoryBridge.ended:
+			break
+		if not StoryBridge.pending_check.is_empty():
+			StoryBridge.resolve_check(99)
+		elif not StoryBridge.current_choices.is_empty():
+			StoryBridge.choose(0)
+		else:
+			break
+		await _settle()
+	_expect(StoryBridge.ended, "flashback force-resolves through to blk_end")
+	_expect(String(State.player()["inciting_incident"]) == "the Toronto Blackout",
+		"handoff map set inciting_incident at blk_end")
+
+	# --- CC step 4: summary (post-flashback return) ---------------------------
+	_expect(cc.is_visible_in_tree() and cc.step == 3,
+		"blk_end handoff returns to the CC summary step")
+	_expect(String(State.player()["codename"]) != "",
+		"summary auto-assigned a codename")
+	var composure_at_summary := State.skill_level("composure")
+	_expect(composure_at_summary >= 2,
+		"summary shows rebuilt skills (composure >= background+training)")
+	await _shot("13_cc_summary")
+
+	# --- Sign & Deploy -> briefing --------------------------------------------
+	cc.next_step()
 	await _settle()
 	_expect(String(State.current_frame().get("knot", "")) == "INTRO_100",
-		"Begin starts the briefing at INTRO_100")
+		"signing starts the briefing at INTRO_100")
 	_expect(StoryBridge.current_choices.size() > 0, "INTRO_100 offers a choice")
+	_expect(String(State.player()["first_name"]) == "Riley",
+		"engine state survives into the briefing (keep_engine_state)")
+	_expect(int(State.player()["baseline_composure"]) == composure_at_summary,
+		"cc_finalize copied the composure level into baseline")
 	await _shot("02_scene_intro_100")
 
 	# --- Image knot: INTRO_110 (Robert diner entry) ----------------------
@@ -172,6 +246,11 @@ func _prose_text() -> String:
 		if label.visible and label.get_parsed_text().length() > 0:
 			return label.get_parsed_text()
 	return ""
+
+
+func _cc_flow() -> CCFlow:
+	var flows := _shell.find_children("*", "CCFlow", true, false)
+	return flows[0] as CCFlow if not flows.is_empty() else null
 
 
 func _button_containing(text: String) -> Button:

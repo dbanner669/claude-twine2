@@ -189,6 +189,112 @@ func avatar_clear() -> void:
 	state_changed.emit("avatar_clear")
 
 
+# --- Character creation (Phase 5) --------------------------------------------
+## Native port of sizzle/src/content/character-creator.twee derived-state logic.
+## Data (backgrounds, bonuses, tags, name lists) lives in content/data/cc.json.
+##
+## Ordering contract (the twee's CC-500 -> CC-400 rebuild relocation):
+##   cc_rebuild_derived runs when an incident is confirmed at CC-400 —
+##   UPSTREAM of the inciting-incident flashback. It resets skills and
+##   background-derived story tags FROM SCRATCH (idempotent; revisits never
+##   stack) and is NEVER called again after the flashback, so flashback
+##   grant_skill() grants stay durable through the CC-500 summary.
+##   cc_finalize runs at CC-500 sign-off — AFTER the flashback — copying the
+##   composure skill level (including any flashback composure grant) into
+##   durable baseline_composure, with current_composure starting at baseline.
+
+const CC_DATA_PATH := "res://content/data/cc.json"
+
+var _cc_data: Dictionary = {}
+
+
+## Parsed cc.json (lazy-loaded, cached).
+func cc_data() -> Dictionary:
+	if _cc_data.is_empty():
+		var file := FileAccess.open(CC_DATA_PATH, FileAccess.READ)
+		if file == null:
+			push_error("Rules.cc_data: cannot read %s" % CC_DATA_PATH)
+			return {}
+		var parsed: Variant = JSON.parse_string(file.get_as_text())
+		file.close()
+		if not (parsed is Dictionary):
+			push_error("Rules.cc_data: %s is not a JSON object" % CC_DATA_PATH)
+			return {}
+		_cc_data = parsed
+	return _cc_data
+
+
+## Background entry by id ("" -> {}).
+func cc_background(background_id: String) -> Dictionary:
+	for background: Dictionary in cc_data().get("backgrounds", []):
+		if String(background["id"]) == background_id:
+			return background
+	return {}
+
+
+## Incident entry by id ("" -> {}).
+func cc_incident(incident_id: String) -> Dictionary:
+	for incident: Dictionary in cc_data().get("incidents", []):
+		if String(incident["id"]) == incident_id:
+			return incident
+	return {}
+
+
+## CC-100: set the player's identity. Empty arguments leave the current
+## value untouched (the twee textboxes always carry a value; codename is
+## auto-assigned at CC-500 when still empty).
+func cc_apply_identity(first_name: String, surname: String, codename: String) -> void:
+	var player := State.player()
+	if first_name.strip_edges() != "":
+		player["first_name"] = first_name.strip_edges()
+	if surname.strip_edges() != "":
+		player["surname"] = surname.strip_edges()
+	if codename.strip_edges() != "":
+		player["codename"] = codename.strip_edges()
+	state_changed.emit("cc_apply_identity")
+
+
+## CC-400-top rebuild (see ordering contract above). Reset-then-derive:
+##   1. all skills to {level 0, xp 0, specialities []}
+##   2. background-derived story tags removed
+##   3. the chosen background's bonuses + tags applied from scratch
+##   4. Branch training (+1 agent, +1 composure)
+## Calling twice equals calling once.
+func cc_rebuild_derived(background_id: String) -> void:
+	var background := cc_background(background_id)
+	if background.is_empty():
+		push_error("cc_rebuild_derived: unknown background '%s'" % background_id)
+		return
+	var data := cc_data()
+	var player := State.player()
+	var skills: Dictionary = player["skills"]
+	for skill_name: String in State.SKILL_NAMES:
+		skills[skill_name] = {"level": 0, "xp": 0, "specialities": []}
+	var story_tags: Array = player["story_tags"]
+	for tag: String in data.get("background_story_tags", []):
+		story_tags.erase(tag)
+	var bonuses: Dictionary = background["bonuses"]
+	for skill_name: String in bonuses:
+		skills[skill_name]["level"] = int(skills[skill_name]["level"]) + int(bonuses[skill_name])
+	for tag: String in background["story_tags"]:
+		_append_if_absent(story_tags, tag)
+	var training: Dictionary = data.get("branch_training", {})
+	for skill_name: String in training:
+		skills[skill_name]["level"] = int(skills[skill_name]["level"]) + int(training[skill_name])
+	player["background"] = background_id
+	state_changed.emit("cc_rebuild_derived")
+
+
+## CC-500 finalization (twee timing: after the flashback, so an incident
+## composure grant flows into the durable baseline). No clamp — matches the
+## twee's plain copy; values here cannot exceed the 0..7 range anyway.
+func cc_finalize() -> void:
+	var player := State.player()
+	player["baseline_composure"] = int(player["skills"]["composure"]["level"])
+	player["current_composure"] = int(player["baseline_composure"])
+	state_changed.emit("cc_finalize")
+
+
 # --- Presentation ops -------------------------------------------------------
 
 func set_header(location: String, time_label: String) -> void:
