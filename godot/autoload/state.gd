@@ -11,7 +11,7 @@ extends Node
 ## restoring a frame re-runs the knot's entry ops deterministically and
 ## un-fires every mutation that belonged to the frame above it.
 
-const SCHEMA_VERSION := 1
+const SCHEMA_VERSION := 2  # v2: player.avatar slot-state dict (Phase 4)
 
 const SKILL_NAMES := [
 	"academic", "agent", "athlete", "confrontation",
@@ -64,6 +64,10 @@ static func default_state() -> Dictionary:
 			"nose_shape": "",
 			"mouth_shape": "",
 		},
+		# Avatar slot-state: slot -> asset_id. "" = explicitly cleared;
+		# ABSENT = the manifest base look applies (AvatarManifest.resolve_slot).
+		# Empty dict = pure base look. Snapshots/saves carry it like all state.
+		"avatar": {},
 		"sizzle": {"suspicion": 0, "access_level": 0, "reputation": 0},
 		"nyse": {"influence": 0, "power": 0},
 		# day_of_week is DERIVED (Rules.day_of_week()), never stored.

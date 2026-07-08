@@ -19,6 +19,13 @@ EXTERNAL adjust_influence(delta)
 EXTERNAL set_header(location, time_label)
 EXTERNAL toast(kind, text)
 
+// --- Avatar (AVATAR-MANIFEST.md runtime API; asset/outfit/expression ids
+//     validated against godot/avatar/manifest.json at call time) ---
+EXTERNAL avatar_set_slot(slot, asset_id)
+EXTERNAL avatar_apply_outfit(outfit_id)
+EXTERNAL avatar_set_expression(expression_id)
+EXTERNAL avatar_clear()
+
 // --- Queries (pure, no side effects) ---
 EXTERNAL has_tag(tag)
 EXTERNAL has_kink(kink)

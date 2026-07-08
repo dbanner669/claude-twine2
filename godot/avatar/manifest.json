@@ -1,0 +1,56 @@
+{
+	"canvas": [523, 1536],
+	"slots": [
+		"background", "hair_back", "body", "nipples", "genitals", "body_mods",
+		"face", "eyes", "underwear", "clothing_bottom", "clothing_top",
+		"shoes", "hair_front", "expression", "overlay"
+	],
+	"explicit_slots": ["nipples", "genitals"],
+	"assets": {
+		"body-medium": { "slot": "body", "path": "res://avatar/placeholder/20_body-medium.png" },
+		"nipples-medium": { "slot": "nipples", "path": "res://avatar/placeholder/25_nipples-medium.png" },
+		"genitals-medium": { "slot": "genitals", "path": "res://avatar/placeholder/26_genitals-medium.png" },
+		"hair-back-long-straight-brown": { "slot": "hair_back", "path": "res://avatar/placeholder/30_hair-back-long-straight-brown.png" },
+		"face-default": { "slot": "face", "path": "res://avatar/placeholder/40_face-default.png" },
+		"eyes-blue": { "slot": "eyes", "path": "res://avatar/placeholder/45_eyes-blue.png" },
+		"underwear-basic": { "slot": "underwear", "path": "res://avatar/placeholder/50_underwear-basic.png" },
+		"jeans-dark": { "slot": "clothing_bottom", "path": "res://avatar/placeholder/55_jeans-dark.png" },
+		"tshirt-black": { "slot": "clothing_top", "path": "res://avatar/placeholder/60_tshirt-black.png" },
+		"sneakers": { "slot": "shoes", "path": "res://avatar/placeholder/65_sneakers.png" },
+		"hair-front-long-straight-brown": { "slot": "hair_front", "path": "res://avatar/placeholder/70_hair-front-long-straight-brown.png" },
+		"expression-calm": { "slot": "expression", "path": "res://avatar/placeholder/75_expression-calm.png" },
+		"expression-smile": { "slot": "expression", "path": "res://avatar/placeholder/76_expression-smile.png" }
+	},
+	"base_look": {
+		"body": "body-medium",
+		"nipples": "nipples-medium",
+		"genitals": "genitals-medium",
+		"hair_back": "hair-back-long-straight-brown",
+		"face": "face-default",
+		"eyes": "eyes-blue",
+		"hair_front": "hair-front-long-straight-brown",
+		"expression": "expression-calm"
+	},
+	"outfits": {
+		"street-casual": {
+			"underwear": "underwear-basic",
+			"clothing_bottom": "jeans-dark",
+			"clothing_top": "tshirt-black",
+			"shoes": "sneakers"
+		},
+		"underwear-only": {
+			"underwear": "underwear-basic",
+			"clothing_bottom": "",
+			"clothing_top": "",
+			"shoes": ""
+		}
+	},
+	"expressions": {
+		"calm": { "expression": "expression-calm" },
+		"smile": { "expression": "expression-smile" }
+	},
+	"phase_overrides": {
+		"blk_day": "res://media/blackout-day.png",
+		"blk_night": "res://media/blackout-night.png"
+	}
+}

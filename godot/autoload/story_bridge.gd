@@ -282,6 +282,10 @@ func _bind_externals() -> void:
 	story.BindExternalFunction("adjust_influence", Rules.adjust_influence)
 	story.BindExternalFunction("set_header", Rules.set_header)
 	story.BindExternalFunction("toast", Rules.toast)
+	story.BindExternalFunction("avatar_set_slot", Rules.avatar_set_slot)
+	story.BindExternalFunction("avatar_apply_outfit", Rules.avatar_apply_outfit)
+	story.BindExternalFunction("avatar_set_expression", Rules.avatar_set_expression)
+	story.BindExternalFunction("avatar_clear", Rules.avatar_clear)
 	# Queries: pure, lookahead-safe.
 	story.BindExternalFunction("has_tag", _query_has_tag, true)
 	story.BindExternalFunction("has_kink", _query_has_kink, true)

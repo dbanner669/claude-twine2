@@ -146,6 +146,49 @@ func adjust_influence(delta: int) -> void:
 	state_changed.emit("adjust_influence")
 
 
+# --- Avatar ops (AVATAR-MANIFEST.md runtime API) ------------------------------
+
+func avatar_set_slot(slot: String, asset_id: String) -> void:
+	if not AvatarManifest.slots.has(slot):
+		push_error("avatar_set_slot: unknown slot '%s'" % slot)
+		return
+	if asset_id != "" and not AvatarManifest.has_asset(asset_id):
+		push_error("avatar_set_slot: unknown asset '%s'" % asset_id)
+		return
+	if asset_id != "" and AvatarManifest.asset_slot(asset_id) != slot:
+		push_error("avatar_set_slot: asset '%s' belongs to slot '%s', not '%s'" % [
+			asset_id, AvatarManifest.asset_slot(asset_id), slot])
+		return
+	State.data["avatar"][slot] = asset_id
+	state_changed.emit("avatar_set_slot")
+
+
+func avatar_apply_outfit(outfit_id: String) -> void:
+	if not AvatarManifest.outfits.has(outfit_id):
+		push_error("avatar_apply_outfit: unknown outfit '%s'" % outfit_id)
+		return
+	var outfit: Dictionary = AvatarManifest.outfits[outfit_id]
+	for slot: String in outfit:
+		State.data["avatar"][slot] = String(outfit[slot])
+	state_changed.emit("avatar_apply_outfit")
+
+
+func avatar_set_expression(expression_id: String) -> void:
+	if not AvatarManifest.expressions.has(expression_id):
+		push_error("avatar_set_expression: unknown expression '%s'" % expression_id)
+		return
+	var expression: Dictionary = AvatarManifest.expressions[expression_id]
+	for slot: String in expression:
+		State.data["avatar"][slot] = String(expression[slot])
+	state_changed.emit("avatar_set_expression")
+
+
+## Back to the pure manifest base look.
+func avatar_clear() -> void:
+	(State.data["avatar"] as Dictionary).clear()
+	state_changed.emit("avatar_clear")
+
+
 # --- Presentation ops -------------------------------------------------------
 
 func set_header(location: String, time_label: String) -> void:

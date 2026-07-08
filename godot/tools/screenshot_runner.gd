@@ -21,9 +21,19 @@ var _failed := false
 
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SHOT_DIR)
+	_watchdog()
 	_shell = load("res://scenes/game_shell.tscn").instantiate()
 	add_child(_shell)
 	_run()
+
+
+## A crashed stage kills the _run coroutine before its final quit(), leaving
+## the process alive forever (this hung two background shells during the
+## Phase 3 gate). Hard deadline: if we're still running, quit(1).
+func _watchdog() -> void:
+	await get_tree().create_timer(120.0).timeout
+	push_error("screenshot_runner: watchdog deadline hit — forcing quit(1)")
+	get_tree().quit(1)
 
 
 func _run() -> void:

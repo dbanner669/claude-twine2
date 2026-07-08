@@ -1,20 +1,19 @@
 class_name AvatarPanel
 extends Control
 ## Left avatar column (~430px, the CSS grid's avatar area): dotted-border
-## frame with the `# avatar:` phase image (or the placeholder suit), and the
-## bottom identity block — name / codename kicker / composure pips 0..7.
+## frame, the Option 2 manifest-driven layer stack, and the bottom identity
+## block — name / codename kicker / composure pips 0..7.
 ##
-## Phase 3 scope: only the BLK phase overrides exist as art. Any unknown
-## `# avatar:` id (man_*, pale_*, wds_*) falls back to the placeholder;
-## Phase 4 wires the manifest-driven layer stack.
+## Display precedence (Phase 4):
+##   1. `# avatar:` phase override with a manifest phase_overrides entry
+##      (full-frame image, hides the stack — the BLK day/night PNGs)
+##   2. layer stack, when State avatar slot-state is in use (any key set)
+##   3. greybox placeholder portrait (unknown phase ids land here too —
+##      MAN/PALE/WDS art doesn't exist yet)
 
 const PANEL_WIDTH := 430.0
 const FRAME_PAD := 30.0  # --sz-avatar-pad
 
-const PHASE_IMAGES := {
-	"blk_day": "res://media/blackout-day.png",
-	"blk_night": "res://media/blackout-night.png",
-}
 const PLACEHOLDER := "res://media/placeholder-suit.png"
 
 const COMPOSURE_MAX := 7
@@ -23,6 +22,9 @@ var _bg: ColorRect
 var _border_right: ColorRect
 var _frame: Control
 var _portrait: TextureRect
+var _layer_holder: Control
+var _layer_rects: Dictionary = {}  # slot -> TextureRect, manifest z-order
+var _phase_id := ""
 var _identity: PanelContainer
 var _name_label: Label
 var _kicker: Label
@@ -34,10 +36,27 @@ var _pip_value: Label
 func _ready() -> void:
 	custom_minimum_size.x = PANEL_WIDTH
 	_build()
-	ThemeService.mode_changed.connect(func(_m: String) -> void: restyle())
+	ThemeService.mode_changed.connect(_on_mode_changed)
+	Rules.state_changed.connect(_on_state_changed)
+	Settings.changed.connect(_on_settings_changed)
 	set_phase("")
 	restyle()
 	refresh()
+
+
+func _on_mode_changed(_mode: String) -> void:
+	restyle()
+
+
+func _on_state_changed(op: String) -> void:
+	if op.begins_with("avatar_"):
+		_render()
+	refresh()
+
+
+func _on_settings_changed(key: String) -> void:
+	if key == "explicit_layers_visible":
+		_render()
 
 
 func _build() -> void:
@@ -73,6 +92,21 @@ func _build() -> void:
 		portrait_margin.add_theme_constant_override(side, 10)
 	_frame.add_child(portrait_margin)
 
+	# Layer stack: one TextureRect per manifest slot, manifest order = z-order.
+	# All layers share the canonical 523x1536 canvas, so identical
+	# keep-aspect-centered rects stay in registration at any panel size.
+	_layer_holder = Control.new()
+	_layer_holder.set_anchors_preset(Control.PRESET_FULL_RECT)
+	portrait_margin.add_child(_layer_holder)
+	for slot: String in AvatarManifest.slots:
+		var rect := TextureRect.new()
+		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		_layer_holder.add_child(rect)
+		_layer_rects[slot] = rect
+
+	# Full-frame override / greybox placeholder portrait, above the stack.
 	_portrait = TextureRect.new()
 	_portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -116,10 +150,39 @@ func _build() -> void:
 	stat_row.add_child(_pip_value)
 
 
-## `# avatar:` phase id ("" = no override -> placeholder for the greybox).
+## `# avatar:` phase id ("" = no override). Precedence per the class doc.
 func set_phase(avatar_id: String) -> void:
-	var path: String = PHASE_IMAGES.get(avatar_id, PLACEHOLDER)
-	_portrait.texture = load(path)
+	_phase_id = avatar_id
+	_render()
+
+
+## Recompute what the frame shows: override image, layer stack, or placeholder.
+func _render() -> void:
+	var override_path := AvatarManifest.phase_override_path(_phase_id)
+	if _phase_id != "" and override_path != "":
+		_portrait.texture = load(override_path)
+		_portrait.visible = true
+		_layer_holder.visible = false
+		return
+
+	var slot_state: Dictionary = State.data.get("avatar", {})
+	if _phase_id == "" and not slot_state.is_empty():
+		_layer_holder.visible = true
+		_portrait.visible = false
+		var show_explicit := Settings.explicit_layers_visible()
+		for slot: String in _layer_rects:
+			var rect: TextureRect = _layer_rects[slot]
+			if AvatarManifest.explicit_slots.has(slot) and not show_explicit:
+				rect.texture = null
+				continue
+			var asset_id := AvatarManifest.resolve_slot(slot, slot_state)
+			rect.texture = load(AvatarManifest.asset_path(asset_id)) if asset_id != "" else null
+		return
+
+	# Greybox default and unknown phase ids (man_*/pale_*/wds_* until art lands).
+	_portrait.texture = load(PLACEHOLDER)
+	_portrait.visible = true
+	_layer_holder.visible = false
 
 
 ## Re-read name/codename/composure from State.
