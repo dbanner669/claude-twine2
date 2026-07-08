@@ -199,6 +199,7 @@ func save_game() -> Dictionary:
 	var frame := State.current_frame()
 	return {
 		"schema_version": State.SCHEMA_VERSION,
+		"story_path": story_path,
 		"engine_state": State.data.duplicate(true),
 		"ink_state_json": frame.get("ink_snapshot", ""),
 		"current_knot": frame.get("knot", ""),
@@ -210,6 +211,21 @@ func load_game(save: Dictionary) -> bool:
 	if int(save.get("schema_version", -1)) != State.SCHEMA_VERSION:
 		push_error("load_game: schema_version mismatch — refusing to load")
 		return false
+	# Saves record their story (additive field; older saves fall through to
+	# the current-story behavior). Loading a save from a different story —
+	# or with no story loaded at all — switches to the recorded one first;
+	# restoring an ink snapshot into the wrong story is undefined behavior.
+	var saved_path := String(save.get("story_path", ""))
+	if saved_path != "" and (story == null or story_path != saved_path):
+		var loaded = load(saved_path)
+		if loaded == null:
+			push_error("load_game: cannot load story '%s'" % saved_path)
+			return false
+		story = loaded
+		story_path = saved_path
+		if not _bound_story_ids.has(story.get_instance_id()):
+			_bind_externals()
+			_bound_story_ids[story.get_instance_id()] = true
 	if story == null:
 		push_error("load_game: no story loaded; call start() first")
 		return false

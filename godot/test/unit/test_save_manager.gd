@@ -64,3 +64,17 @@ func test_autosave_load_resumes_current_knot() -> void:
 	var knot := String(State.current_frame().get("knot", ""))
 	assert_true(SaveManager.load_autosave())
 	assert_eq(String(State.current_frame().get("knot", "")), knot)
+
+
+func test_load_switches_to_the_saved_story() -> void:
+	StoryBridge.choose(0)
+	var knot := String(State.current_frame().get("knot", ""))
+	assert_true(SaveManager.save_slot(3))
+
+	StoryBridge.start("res://content/briefing.ink", "INTRO_100")
+	assert_eq(StoryBridge.story_path, "res://content/briefing.ink")
+
+	assert_true(SaveManager.load_slot(3),
+		"loading a save from another story must switch stories")
+	assert_eq(StoryBridge.story_path, SLICE)
+	assert_eq(String(State.current_frame().get("knot", "")), knot)

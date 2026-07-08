@@ -77,6 +77,8 @@ var _tooltip_text: RichTextLabel
 var _toast_box: VBoxContainer        # toast stack (D)
 var _glossary: Dictionary = {}
 var _charsheet: CharSheetDialog
+var _saves_dialog: SavesDialog
+var _saves_button: Button
 var _check_panel: CheckPanel
 var _menu_shown := false
 
@@ -148,6 +150,13 @@ func _build_ui() -> void:
 	_status_badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header_row.add_child(_status_badge)
 
+	_saves_button = Button.new()
+	_saves_button.text = "SAVES"
+	_saves_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_saves_button.focus_mode = Control.FOCUS_NONE
+	_saves_button.pressed.connect(_on_saves_pressed)
+	header_row.add_child(_saves_button)
+
 	_character_button = Button.new()
 	_character_button.text = "CHARACTER"
 	_character_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -191,9 +200,7 @@ func _build_ui() -> void:
 
 	_scene_image = TextureRect.new()
 	_scene_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_scene_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	_scene_image.custom_minimum_size = Vector2(CONTENT_WIDTH, 300)
-	_scene_image.clip_contents = true
+	_scene_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_scene_image.visible = false
 	_column.add_child(_scene_image)
 
@@ -278,6 +285,9 @@ func _build_ui() -> void:
 
 	_charsheet = CharSheetDialog.new()
 	add_child(_charsheet)
+
+	_saves_dialog = SavesDialog.new()
+	add_child(_saves_dialog)
 
 
 # =========================================================================
@@ -455,7 +465,12 @@ func _on_knot_entered(knot: String, tags: Dictionary) -> void:
 	_apply_screen_mode(screen)
 	_avatar_panel.set_phase(String(tags.get("avatar", "")))
 	if KNOT_IMAGES.has(knot):
-		_scene_image.texture = load(String(KNOT_IMAGES[knot]))
+		var texture: Texture2D = load(String(KNOT_IMAGES[knot]))
+		_scene_image.texture = texture
+		# Full frame at natural aspect, scaled to the content column width
+		# (gate punch-list: no 16:9 cropping).
+		var aspect := texture.get_height() / float(texture.get_width())
+		_scene_image.custom_minimum_size = Vector2(CONTENT_WIDTH, CONTENT_WIDTH * aspect)
 		_scene_image.visible = true
 	else:
 		_scene_image.visible = false
@@ -756,6 +771,10 @@ func _on_back_pressed() -> void:
 
 func _on_character_pressed() -> void:
 	_charsheet.open()
+
+
+func _on_saves_pressed() -> void:
+	_saves_dialog.open()
 
 
 func _clear_choices() -> void:
