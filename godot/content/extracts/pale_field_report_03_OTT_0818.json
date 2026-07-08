@@ -1,0 +1,22 @@
+{
+  "stamp": { "text": "Classified", "rotation_deg": -8 },
+  "eyebrow": "Incident File · 03-OTT-0818 · Extract",
+  "paragraphs": [
+    { "seg": [ { "t": "INCIDENT DATE: 2003.08.18. Occurrence report, Ottawa duty element, filed 2003.08.19." } ] },
+    { "seg": [
+      { "t": "Response to " },
+      { "r": 110 },
+      { "t": ", downtown Ottawa, 21:40 hrs. Interval, alert to arrival: four minutes. Subject (F, age indeterminate) secured without resistance, unconscious on arrival, transferred to " },
+      { "r": 80 },
+      { "t": ". Ocular presentation consistent with file " },
+      { "r": 60 },
+      { "t": "." }
+    ] },
+    { "seg": [ { "t": "Verbal compliance influence documented in effects only; mechanism not explained. Affected persons: nine. Treated on site, released. Recall absent or fragmentary. Hotel records for the evening removed; registry page substituted." } ] },
+    { "seg": [
+      { "t": "One civilian witness retains complete recall. Interviewed on site, released pending assessment. See attached recommendation. Classification: " },
+      { "em": "pending review" },
+      { "t": "." }
+    ] }
+  ]
+}

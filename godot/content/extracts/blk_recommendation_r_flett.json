@@ -1,0 +1,15 @@
+{
+  "stamp": { "text": "Eyes Only", "rotation_deg": 5 },
+  "eyebrow": "Recruitment Recommendation · R. Flett · 2003.08.21",
+  "paragraphs": [
+    { "seg": [
+      { "t": "Re: " },
+      { "r": 130 },
+      { "t": " (subject, file 03-DAN-0814)." }
+    ] },
+    { "seg": [ { "t": "Event classification: NYSE. Focal condition, environmental vector, single-structure scope. Resolved before we arrived, by the subject, with a book of matches." } ] },
+    { "seg": [ { "t": "Subject behaviour, per the ground-floor resident's camcorder: enters the lobby, holds at the threshold some forty-five seconds, brings up a light, and leaves. No panic. No call to emergency services. She does not wait to be seen. What she misses is the resident in his doorway with the camcorder, which is the only reason we have her at all. By chance or otherwise, she was carrying the one thing the condition could not tolerate." } ] },
+    { "seg": [ { "t": "Recommend contact inside thirty days. She is field-eligible, pending evaluation. What we look for is not nerve, and it is not immunity. It is the person who keeps seeing straight after the situation stops making sense, and then does the next plain thing. The footage is three minutes of exactly that." } ] }
+  ],
+  "signature": "— R. Flett, Branch"
+}

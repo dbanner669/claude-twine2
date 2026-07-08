@@ -1,0 +1,15 @@
+{
+  "stamp": { "text": "Eyes Only", "rotation_deg": 5 },
+  "eyebrow": "Recruitment Recommendation · R. Flett · 2003.08.23",
+  "paragraphs": [
+    { "seg": [
+      { "t": "Re: " },
+      { "r": 130 },
+      { "t": " (subject, file 03-MAN-0816)." }
+    ] },
+    { "seg": [ { "t": "Event classification: NYSE. Focal condition, marked locus, residence-scale scope. Active when the subject arrived. Ended when she broke the marking." } ] },
+    { "seg": [ { "t": "Twenty-three people in that house and the subject is the only one who can tell us what happened in it. She walked in looking for a telephone, went all the way to the centre of an event that had taken everyone else, felt it begin to take her, and ruined it anyway. By her own account she nearly didn't. I find the account more convincing for that." } ] },
+    { "seg": [ { "t": "Recommend contact inside thirty days. She is field-eligible, pending evaluation. The quality is not immunity. Nobody in that house was immune, and neither was she. It is staying able to see the shape of a thing while it works on you, and then wrecking the shape. That is rarer than nerve, and it is what we are short of." } ] }
+  ],
+  "signature": "— R. Flett, Branch"
+}

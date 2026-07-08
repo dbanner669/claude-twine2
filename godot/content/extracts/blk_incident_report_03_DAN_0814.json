@@ -1,0 +1,24 @@
+{
+  "stamp": { "text": "Classified", "rotation_deg": -8 },
+  "eyebrow": "Incident File · 03-DAN-0814 · Extract",
+  "paragraphs": [
+    { "seg": [ { "t": "INCIDENT DATE: 2003.08.14. Flagged from TPS unusual-occurrence log 2003.08.18." } ] },
+    { "seg": [
+      { "t": "Complaint received re: disturbance, " },
+      { "r": 110 },
+      { "t": " Danforth Avenue East, approx. 18:30 hrs. Responding officer: no evidence. Residents, upper floors: disoriented, no recall 16:15–19:00 hrs. No injuries. No charges." }
+    ] },
+    { "seg": [
+      { "t": "Recording obtained 2003.08.20: handheld camcorder footage from a ground-floor resident, taped through the outage on battery. Subject (F, approx. 25–30) enters lobby, hesitates at the stairwell threshold approx. 45 sec., introduces " },
+      { "r": 80 },
+      { "t": " light source, departs approx. 3 min. later. Subject does not return to frame." }
+    ] },
+    { "seg": [
+      { "t": "Building maintenance records: stairwell fixture confirmed operational continuously, min. " },
+      { "r": 50 },
+      { "t": " years prior to incident date. Classification: " },
+      { "em": "pending review" },
+      { "t": "." }
+    ] }
+  ]
+}

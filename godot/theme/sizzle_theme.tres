@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://c3sizzlethemea"]
+
+[ext_resource type="FontFile" uid="uid://bf7yfnfc0jivf" path="res://fonts/EBGaramond-Regular.woff2" id="1_body"]
+[ext_resource type="FontFile" uid="uid://by60lhpcgu3b2" path="res://fonts/EBGaramond-Italic.woff2" id="2_body_it"]
+[ext_resource type="FontFile" uid="uid://dty380qh5g2hb" path="res://fonts/CormorantGaramond-Regular.woff2" id="3_disp"]
+[ext_resource type="FontFile" uid="uid://2mntyi3a2oq7" path="res://fonts/CormorantGaramond-Italic.woff2" id="4_disp_it"]
+[ext_resource type="FontFile" uid="uid://dll6r8gqrh4x3" path="res://fonts/Inter-Regular.woff2" id="5_ui"]
+[ext_resource type="FontFile" uid="uid://ckmtvgysqpg8l" path="res://fonts/Inter-Medium.woff2" id="6_ui_md"]
+[ext_resource type="FontFile" uid="uid://dobgsliricll1" path="res://fonts/JetBrainsMono-Regular.woff2" id="7_mono"]
+[ext_resource type="FontFile" uid="uid://bd2hd6wubeuuq" path="res://fonts/Allura-Regular.woff2" id="8_script"]
+
+[resource]
+default_font = ExtResource("1_body")
+default_font_size = 16
+RichTextLabel/fonts/normal_font = ExtResource("1_body")
+RichTextLabel/fonts/italics_font = ExtResource("2_body_it")
+RichTextLabel/fonts/bold_font = ExtResource("6_ui_md")
+RichTextLabel/fonts/mono_font = ExtResource("7_mono")
+RichTextLabel/font_sizes/normal_font_size = 18
+RichTextLabel/font_sizes/italics_font_size = 18
+RichTextLabel/font_sizes/mono_font_size = 12
+Sizzle/fonts/body = ExtResource("1_body")
+Sizzle/fonts/body_italic = ExtResource("2_body_it")
+Sizzle/fonts/display = ExtResource("3_disp")
+Sizzle/fonts/display_italic = ExtResource("4_disp_it")
+Sizzle/fonts/ui = ExtResource("5_ui")
+Sizzle/fonts/ui_medium = ExtResource("6_ui_md")
+Sizzle/fonts/mono = ExtResource("7_mono")
+Sizzle/fonts/script = ExtResource("8_script")
+Sizzle/font_sizes/base = 16
+Sizzle/font_sizes/lg = 18
+Sizzle/font_sizes/xl = 20
+Sizzle/font_sizes/ui = 11
+Sizzle/font_sizes/ui_md = 13
+Sizzle/font_sizes/mono = 10
+Sizzle/font_sizes/mono_body = 12

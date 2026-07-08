@@ -1,0 +1,15 @@
+{
+  "stamp": { "text": "Eyes Only", "rotation_deg": 5 },
+  "eyebrow": "Recruitment Recommendation · R. Flett · 2003.08.25",
+  "paragraphs": [
+    { "seg": [
+      { "t": "Re: " },
+      { "r": 130 },
+      { "t": " (witness, file 03-ONT-0820)." }
+    ] },
+    { "seg": [ { "t": "Event classification: NYSE. Mobile biological subject, atypical olfactory influence vector. Subject not recovered. What we have is what it left: hair, prints, one coherent statement, and a parking lot of people who cannot account for forty minutes." } ] },
+    { "seg": [ { "t": "Witness behaviour, per her statement and the site walk-through: she connected the effect to the odour while actively exposed, improvised respiratory cover from a wet towel, understood the cover was partial and worked inside the window it bought, cleared the affected guests off the source, and turned the subject with a can of dog repellent." } ] },
+    { "seg": [ { "t": "She is not resistant to the influence. Her statement is plain about how hard it was working on her the whole time. What she is, is rarer: a person who keeps working the problem while the problem is working on her. A wet towel and a can of dog spray is not training, and it is not equipment we issue. Recommend contact inside thirty days. Field-eligible, pending evaluation." } ] }
+  ],
+  "signature": "— R. Flett, Branch"
+}

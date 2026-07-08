@@ -1,0 +1,33 @@
+{
+  "stamp": { "text": "Classified", "rotation_deg": -8 },
+  "eyebrow": "Incident File · 03-MAN-0816 · Extract",
+  "paragraphs": [
+    { "variants": {
+      "RCMP constable": [
+        { "t": "INCIDENT DATE: 2003.08.16. Flagged from an off-duty RCMP member's occurrence report, filed through " },
+        { "r": 90 },
+        { "t": " detachment 2003.08.18." }
+      ],
+      "else": [
+        { "t": "INCIDENT DATE: 2003.08.16. Flagged from OPP general occurrence log, " },
+        { "r": 70 },
+        { "t": " detachment, 2003.08.18." }
+      ]
+    } },
+    { "seg": [
+      { "t": "LOCATION: private residence, " },
+      { "r": 130 },
+      { "t": ", Manitoulin Island. Twenty-three adults on scene. No fatalities. No injuries consistent with assault. No charges laid." }
+    ] },
+    { "seg": [
+      { "t": "WITNESSES (22): no coherent recall of a period of approx. " },
+      { "r": 40 },
+      { "t": " hours. Reports of a \"party,\" embarrassment, waking undressed. Statements do not corroborate one another, or the scene." }
+    ] },
+    { "seg": [
+      { "t": "WITNESS (1): full and consistent recall. Describes a five-point figure marked in chalk on the dock, ringed with candles, and its deliberate disruption. Figure photographed and logged. No determination as to function. Classification: " },
+      { "em": "pending review" },
+      { "t": "." }
+    ] }
+  ]
+}

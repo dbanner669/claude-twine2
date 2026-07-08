@@ -110,6 +110,25 @@ func roll() -> void:
 	resolve_check(total)
 
 
+## Dice-panel display path: roll the pending check's dice WITHOUT resolving,
+## so the UI can animate toward the settled total before handing it to
+## resolve_check(). Returns {} when no check is pending. roll() and
+## resolve_check() are unchanged (test path stays deterministic).
+func roll_preview() -> Dictionary:
+	if pending_check.is_empty():
+		return {}
+	var dice_total := _roll_dice(String(pending_check["dice"]))
+	var modifier := check_modifier(String(pending_check["skill"]))
+	return {
+		"skill": pending_check["skill"],
+		"dice": pending_check["dice"],
+		"target": int(pending_check["target"]),
+		"dice_total": dice_total,
+		"modifier": modifier,
+		"total": dice_total + modifier,
+	}
+
+
 ## Modifier for a # check skill spec. Slash-separated specs ("composure/agent")
 ## resolve as MAX of the parts — the twee's Math.max two-skill checks.
 ## "composure" reads Current Composure with the macros.js skill-level fallback.
@@ -268,6 +287,17 @@ func _query_has_quirk(quirk: String) -> bool:
 
 func _query_skill_level(skill_name: String) -> int:
 	return State.skill_level(skill_name)
+
+
+# --- Presentation helpers ------------------------------------------------------
+
+## ink visit count for a knot path (visited-choice greying / knot-driven UI).
+## Returns 0 when no story is loaded. Only call with known knot names — the
+## underlying ink API raises on paths that don't exist in the story.
+func visit_count(knot_path: String) -> int:
+	if story == null:
+		return 0
+	return int(story.VisitCountAtPathString(knot_path))
 
 
 # --- Flow --------------------------------------------------------------------

@@ -1,0 +1,20 @@
+{
+  "stamp": { "text": "Classified", "rotation_deg": -8 },
+  "eyebrow": "Incident File · 03-ONT-0820 · Extract",
+  "paragraphs": [
+    { "seg": [ { "t": "INCIDENT DATE: 2003.08.20–21. Flagged from OPP occurrence report 2003.08.21; file assumed 2003.08.22." } ] },
+    { "seg": [
+      { "t": "Location: motel, " },
+      { "r": 110 },
+      { "t": ", Ontario. Affected: eleven registered guests. Common presentation: disinhibition, fixation, partial or absent recall 02:10–03:00 hrs approx. Two treated for minor injuries, one for " },
+      { "r": 80 },
+      { "t": ". No fatalities." }
+    ] },
+    { "seg": [ { "t": "Subject: large unidentified, bipedal/quadrupedal, est. 210+ cm, heavy hair cover, nude, fled north on foot. Not recovered. Influence assessed atypical: airborne/olfactory, oil-borne, severity gradient consistent with concentration. Recovered: hair samples (analysis pending), partial prints (no species match), persistent odour on witness effects." } ] },
+    { "seg": [
+      { "t": "One witness retains complete, ordered recall and applied effective exposure countermeasures during the event. See attached recommendation. Classification: " },
+      { "em": "pending review" },
+      { "t": "." }
+    ] }
+  ]
+}
