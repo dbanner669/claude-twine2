@@ -98,7 +98,12 @@
       "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='python.exe' OR Name='py.exe'\" | Where-Object { $_.CommandLine -match 'http.server' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force; \"stopped PID $\\($_.ProcessId\\)\" })",
       "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" rev-parse --abbrev-ref HEAD)",
       "PowerShell(git -C \"C:\\\\Users\\\\Oculus\\\\My Drive\\\\Female Agent\" status --porcelain)",
-      "PowerShell(node sizzle/scripts/build-obsidian-canvas.js)"
+      "PowerShell(node sizzle/scripts/build-obsidian-canvas.js)",
+      "Bash(TWEEGO_PATH=\"_tools/tweego/storyformats\" \"_tools/tweego/tweego.exe\" -o sizzle/output.html sizzle/src/)",
+      "Bash(cd \"/c/Users/Oculus/My Drive/Female Agent\" && grep -n \"^:: \" sizzle/src/story/variables.twee | head -20)",
+      "PowerShell($env:TWEEGO_PATH = \"_tools/tweego/storyformats\"; & _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/ 2>&1)",
+      "PowerShell(Get-Item sizzle/output.html | Select-Object Length, LastWriteTime; $html = Get-Content sizzle/output.html -Raw; @\\('PALE-180 The way home', 'PALE-180 The drive home', '%%%', 'Château Laurier', 'furniture that breathes', 'R. Flett'\\) | ForEach-Object { \"{0} -> {1}\" -f $_, \\($html.Contains\\($_\\)\\) })",
+      "PowerShell(Start-Sleep -Milliseconds 800; \\(Invoke-WebRequest -Uri \"http://127.0.0.1:8000/output.html\" -Method Head -UseBasicParsing\\).StatusCode)"
     ]
   }
 }
