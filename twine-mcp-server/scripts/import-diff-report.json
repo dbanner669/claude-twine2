@@ -1,0 +1,121 @@
+{
+  "sequences": [
+    {
+      "sequence": "briefing",
+      "tweePassages": 37,
+      "inkKnots": 38,
+      "stubbed": 0,
+      "added": 1,
+      "compared": 37,
+      "clean": 37,
+      "mismatched": 0
+    },
+    {
+      "sequence": "blackout",
+      "tweePassages": 26,
+      "inkKnots": 27,
+      "stubbed": 2,
+      "added": 1,
+      "compared": 24,
+      "clean": 24,
+      "mismatched": 0
+    },
+    {
+      "sequence": "manitoulin",
+      "tweePassages": 24,
+      "inkKnots": 25,
+      "stubbed": 2,
+      "added": 1,
+      "compared": 22,
+      "clean": 22,
+      "mismatched": 0
+    },
+    {
+      "sequence": "pale",
+      "tweePassages": 22,
+      "inkKnots": 23,
+      "stubbed": 2,
+      "added": 1,
+      "compared": 20,
+      "clean": 20,
+      "mismatched": 0
+    },
+    {
+      "sequence": "wds",
+      "tweePassages": 22,
+      "inkKnots": 23,
+      "stubbed": 2,
+      "added": 1,
+      "compared": 20,
+      "clean": 20,
+      "mismatched": 0
+    }
+  ],
+  "knownStubbed": [
+    {
+      "sequence": "blackout",
+      "id": "BLK-210",
+      "inkId": "BLK_210"
+    },
+    {
+      "sequence": "blackout",
+      "id": "BLK-215",
+      "inkId": "BLK_215"
+    },
+    {
+      "sequence": "manitoulin",
+      "id": "MAN-200",
+      "inkId": "MAN_200"
+    },
+    {
+      "sequence": "manitoulin",
+      "id": "MAN-205",
+      "inkId": "MAN_205"
+    },
+    {
+      "sequence": "pale",
+      "id": "PALE-200",
+      "inkId": "PALE_200"
+    },
+    {
+      "sequence": "pale",
+      "id": "PALE-205",
+      "inkId": "PALE_205"
+    },
+    {
+      "sequence": "wds",
+      "id": "WDS-200",
+      "inkId": "WDS_200"
+    },
+    {
+      "sequence": "wds",
+      "id": "WDS-205",
+      "inkId": "WDS_205"
+    }
+  ],
+  "addedKnots": [
+    {
+      "sequence": "briefing",
+      "id": "intro_end"
+    },
+    {
+      "sequence": "blackout",
+      "id": "blk_end"
+    },
+    {
+      "sequence": "manitoulin",
+      "id": "man_end"
+    },
+    {
+      "sequence": "pale",
+      "id": "pale_end"
+    },
+    {
+      "sequence": "wds",
+      "id": "wds_end"
+    }
+  ],
+  "coverageGapsTweeNoInk": [],
+  "coverageGapsInkNoTwee": [],
+  "mismatches": []
+}
