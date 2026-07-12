@@ -1,6 +1,7 @@
 # Sizzle Suspicion / Reputation Model — Design Proposal
 
-Status: **DRAFT for human review — no code yet.** First system of the Phase 7 systems track
+Status: **APPROVED 2026-07-11 — design locked with the human's resolutions folded into §7;
+implementation may proceed.** First system of the Phase 7 systems track
 (GODOT-PORT-PLAN.md). Pattern locked by the plan: simulation lives in GDScript (`Rules` +
 `State`), exposed to ink only as mirrored variables and command ops; passages stay thin;
 lands with GUT tests and normal review.
@@ -83,10 +84,14 @@ Pushed on every mutation through the existing mirror-sync path in `StoryBridge`.
 ## 5. Signals / UI
 
 - `Rules.suspicion_band_changed(old_band, new_band)` — emitted on band transitions only.
-  v1 consumers: none in UI (see visibility question below); the signal exists so Act 1
-  content and the eventual club-state system can react without polling.
-- No header/avatar UI change in v1. If suspicion becomes player-visible it belongs in the
-  CHARACTER sheet dialog, not the header badge (which is composure's).
+  v1 UI consumers: none; the signal exists so Act 1 content and the eventual club-state
+  system can attach programmatic consequences later without restructuring (per §7.3).
+- **Directional change indicator (per §7.1):** every suspicion movement surfaces a
+  player-facing indicator of direction only — v1 uses the existing toast system
+  (`warn` kind rising, `info` kind easing), text at implementation's discretion,
+  **never showing the number**. No running count anywhere player-facing: no header
+  element, no CHARACTER-sheet row. Reputation gets no indicator in v1.
+- No header/avatar UI change (the header badge stays composure's).
 
 ## 6. Tests (GUT, `test/unit/test_rules.gd` additions or a new `test_sizzle_rules.gd`)
 
@@ -97,16 +102,16 @@ Pushed on every mutation through the existing mirror-sync path in `StoryBridge`.
 - Save/load round-trip preserves all three plus band derivation.
 - Back-across-a-mutation restores the pre-choice value (choice-commit contract).
 
-## 7. Open design questions (need your call before implementation)
+## 7. Design questions — RESOLVED (human, 2026-07-11)
 
-1. **Visibility.** Is suspicion shown to the player (CHARACTER sheet row, like composure)
-   or felt only through content (like `nyse.influence`)? GDD leans "active gameplay
-   challenge," which suggests *visible*; recommendation: show the **band word**, never the
-   number. Reputation likewise band-or-number?
-2. **Scale.** 0–10 with four bands proposed above — happy to compress to 0–6 if you want
-   coarser authored deltas to dominate.
-3. **`burned` consequences.** Auto-triggered confrontation content vs. purely authored
-   gates that read the band. Recommendation: purely authored in v1 (no engine-forced scene
-   jumps), revisit when Act 2's club-state system exists.
-4. **Suspicion reduction.** Confirm the "no decay, authored ops only" stance — it matches
-   `nyse.influence` precedent but means content must supply the relief valves.
+1. **Visibility:** a player-facing **indicator when suspicion moves up or down**, but **no
+   running count of the number** anywhere. (Implemented as the directional toast in §5;
+   no persistent display, numeric or band, in v1.)
+2. **Scale:** keep **0–10**, with the caveat that content may never actually use values
+   above 6 — the 7–10 range (and the `burned` band) may stay unexercised early.
+3. **`burned` consequences:** authored-only for now, **both authored and programmatic
+   wanted in the final game** — do not architect in a way that excludes programmatic
+   triggers later. (Satisfied by `suspicion_band_changed`: engine-forced consequences
+   attach as listeners when wanted; nothing else needs restructuring.)
+4. **Suspicion reduction:** confirmed — **no passive decay; it only goes down through
+   authored ops.**

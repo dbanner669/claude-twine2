@@ -78,6 +78,7 @@ var _toast_box: VBoxContainer        # toast stack (D)
 var _glossary: Dictionary = {}
 var _charsheet: CharSheetDialog
 var _saves_dialog: SavesDialog
+var _menu_button: Button
 var _saves_button: Button
 var _check_panel: CheckPanel
 var _menu_shown := false
@@ -157,6 +158,17 @@ func _build_ui() -> void:
 	_status_badge = Label.new()
 	_status_badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header_row.add_child(_status_badge)
+
+	# In-game route back to the main menu (the twee header's clickable
+	# wordmark; the merged Godot header had no equivalent — first-play
+	# review finding, 2026-07-11). Safe mid-story: autosave already runs
+	# on every knot entry, so Continue restores the exact position.
+	_menu_button = Button.new()
+	_menu_button.text = "MENU"
+	_menu_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_menu_button.focus_mode = Control.FOCUS_NONE
+	_menu_button.pressed.connect(_on_menu_pressed)
+	header_row.add_child(_menu_button)
 
 	_saves_button = Button.new()
 	_saves_button.text = "SAVES"
@@ -328,6 +340,7 @@ func _restyle() -> void:
 	_header.add_theme_stylebox_override("panel", header_style)
 
 	_style_ui_button(_back_button, 14)
+	_style_ui_button(_menu_button, 10)
 	_style_ui_button(_saves_button, 10)
 	_style_ui_button(_character_button, 10)
 
@@ -672,6 +685,7 @@ func _refresh_header() -> void:
 	_back_button.disabled = _menu_shown \
 		or _current_tags.has("history_root") \
 		or not State.can_go_back()
+	_menu_button.disabled = _menu_shown
 
 
 func _refresh_footer() -> void:
@@ -927,6 +941,12 @@ func _on_back_pressed() -> void:
 
 func _on_character_pressed() -> void:
 	_charsheet.open()
+
+
+func _on_menu_pressed() -> void:
+	if _menu_shown:
+		return
+	_show_main_menu()
 
 
 func _on_saves_pressed() -> void:

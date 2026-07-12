@@ -17,11 +17,11 @@ Automated defect scan (`_ISSUES.md`): **0 issues.** No unconverted twee macros, 
 
 Reviewer note: the dumps read `StoryBridge.transcript` (the ink prose), so file-extract knots show their **stub placeholder line** ("Rendered by the native BranchFileExtract scene template…"). In the running game the styled `BranchFileExtract` scene renders the real document there — the dump is for prose review, not extract-layout review (see the extract screenshots from Phase 3 for those).
 
-## 2. Prose first-play review — YOURS (pending)
+## 2. Prose first-play review — ✔ SIGNED OFF 2026-07-11
 
-The four incident sequences and the briefing are now reachable in-game (Phase 5) and read correctly. The **prose-quality** sign-off — the "first-play review" the plan has carried since these sequences were drafted — is a human judgment I can't substitute for. The review packet in `sizzle/docs/godot/first-play/` is the fastest way to do it (read the rendered prose without driving the UI), or play it: `& <godot.exe> --path godot`.
+The human played through in-engine and signed off on the prose (the in-engine playthrough, not the rendered-dump reading copy, is what cleared this). The four incidents and the briefing drop their "pending first-play review" status carried since the SugarCube era.
 
-Until you sign off on the prose, the four incidents stay "pending first-play review" as they have since the SugarCube era — the port didn't change that; it just made the review possible in the shipping engine.
+One finding from the playthrough: **no way back to the main menu from in-game** (the twee header's clickable wordmark had no equivalent in the merged Godot header). Fixed same day — a MENU button in the header chrome routes to `_show_main_menu()`; safe mid-story since autosave runs on every knot entry.
 
 ## 3. SugarCube retirement — HELD (do not execute yet)
 
@@ -32,13 +32,13 @@ The plan gates retirement on "**every `port`/`rebuild` parity-matrix row demonst
 - **Glossary brass term styling** — ✔ live via display-time BBCode decoration; residual: underline is soft-brass solid, not dotted (no dotted underline style exists in RichTextLabel 4.7).
 - **Choice-row right chevron** — ✔ live: right-anchored Label child, opacity 0.5, brick-glow hover.
 
-The parity matrix is now discharged. One blocker remains, and it is sufficient to hold:
+Both blockers are now resolved:
 
-1. ~~Parity matrix not fully discharged.~~ **Discharged 2026-07-11.**
-2. Human prose review (#2) not done — retiring the reference build before the content it's the reference for is signed off removes the differential safety net prematurely.
+1. ~~Parity matrix not fully discharged.~~ **Discharged 2026-07-11 (parity-polish pass).**
+2. ~~Human prose review (#2) not done.~~ **Signed off 2026-07-11 (in-engine playthrough).**
 
-**Recommendation:** get the prose sign-off, *then* execute retirement as a clean, deliberate one-step action (archive Tweego build, Obsidian vault + scripts, FigJam sync; move `sizzle/src` twee; rewrite CLAUDE.md/AGENTS.md). Retirement remains intentionally unexecuted.
+**Retirement is UNBLOCKED.** It remains a deliberate, explicitly-triggered step (archive Tweego build, Obsidian vault + scripts, FigJam sync; move `sizzle/src` twee to an archive path; rewrite CLAUDE.md/AGENTS.md for the Godot world) — hard to walk back, so it executes on an explicit go, not automatically.
 
 ## Verdict
 
-Phase 6 mechanical QA gate: **PASSED.** Parity polish: **DONE (2026-07-11).** Phase 6 as a whole remains **open** on the human prose first-play review only. No content or runtime defects found.
+Phase 6 mechanical QA gate: **PASSED.** Parity polish: **DONE (2026-07-11).** Prose first-play review: **SIGNED OFF (2026-07-11).** All Phase 6 gate conditions are met except the retirement execution itself, which awaits an explicit go. No content or runtime defects found; one UI gap (main-menu return) found in review and fixed.
