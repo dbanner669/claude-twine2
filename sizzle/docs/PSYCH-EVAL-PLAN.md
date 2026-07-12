@@ -1,11 +1,19 @@
 # Psych Eval — Prologue Extension Plan
 
-Status: **framework for human review — no ink written yet.** Extends the prologue with a
-Branch psychological evaluation scene between the diner briefing and departure for
-Toronto, and replaces the abrupt "End of Prologue" with real transition-out beats.
+Status: **IMPLEMENTED 2026-07-12** — EVAL_090–EVAL_210 live in `godot/content/briefing.ink`
+(INTRO_720 diverts into the eval; INTRO_800 remains the terminal knot, so the engine
+needed no changes). Extends the prologue with a Branch psychological evaluation scene
+between the diner briefing and departure for Toronto, and replaces the abrupt "End of
+Prologue" with transition-out beats ending on the morning train.
 
-Design locked in conversation 2026-07-12 (20-question round). Open items for sign-off at
-the bottom.
+Design locked 2026-07-12 (20-question round + follow-ups): psychologist is
+**Dr. Denise Caron**; departure is by **VIA rail**; original SQ5 replaced — the player
+character's bisexuality is **canon** (told to the Branch at intake), so SQ5 asks how
+*out* she is, with no lie option (Caron is holding the intake file). Prose direction:
+crisp, no AI-voice tells — STYLE-GUIDE §13 applied at draft time. Flags documented in
+STORY-TAGS.md; differential tests cover the first-choice and lie paths
+(`test_differential.gd`), asserting lies record the truth. Question table below updated
+to as-shipped.
 
 ## What this scene is
 
@@ -108,7 +116,7 @@ option exists before anything that counts.
 | SQ2 | The incident, fear | "The file says what happened. I'm asking what stayed. What still has weight — what you saw, that no one could be told, or that it could happen again?" | what I saw / the silence after / that it isn't over | `Haunted by what she saw` / `Marked by the silence` / `Fears it isn't over` |
 | SQ3 | Attachment, isolation | "Months under, nobody who knows your name. Is there anyone outside the Branch you'd call close?" | yes / no / "no" [lie] | `Has someone who'd miss her` / `No close attachments` / `Has someone who'd miss her` |
 | SQ4 | Sexual comfort — being seen (kink seed) | "The venue's social fabric is sexual and it is not private. Being watched — is that something that appeals to you, personally?" | yes / no / "no" [lie] | tag `Drawn to being watched` + kink `exhibitionism` on truth-yes; tag `Prefers the door closed` on no |
-| SQ5 | Sexual comfort — women (kink seed) | "You may need to be convincing with women as well as men. Is there anything true underneath that, for you?" | yes / no / "no" [lie] | tag `Attracted to women` + kink `women` on truth-yes; tag `Men only, truthfully` on no |
+| SQ5 | Outness (bisexuality is canon — Branch intake, two years prior) | "You told us at intake you're attracted to women as well as men. That's not the question. The question is who else knows." | people know / people close to me / nobody outside this building (no lie — she holds the file) | `Openly bi` / `Quietly bi` / `Closeted outside the Branch` |
 | SQ6 | Motive (closer) | "Last one, and it's off the form. Two years in — why are you still here?" | to understand what happened to me / because someone has to stand between / because nothing else felt real afterward | `Here to understand` / `Here to protect` / `Here because nothing else is real` |
 
 Reaction knots: her response in-character (warm, precise, occasionally one notch too
@@ -124,10 +132,10 @@ on the table, zero heat staging; her office is the one place in the game sex is 
 checkbox. STYLE-GUIDE.md governs prose throughout (80–120 words/knot, 200 ceiling; choice
 text = complete sentence, PC dialogue / narration / Continue).
 
-## Open items (need your call before ink)
+## Resolved items (2026-07-12)
 
-1. **Name** — pick from the list (Caron recommended) or supply one.
-2. **The six questions** — approve/edit/replace the set above; SQ4/SQ5 are the kink
-   seeds, swap targets if you want different kinks seeded here.
-3. **Departure detail** — train or bus to Toronto (EVAL_210 staging; Ottawa→Toronto 2005
-   is plausibly either; train reads better on the page).
+1. **Name** — Dr. Denise Caron.
+2. **The six questions** — approved with SQ5 replaced (outness, not attraction —
+   bisexuality is structural canon). SQ4 remains the sole kink seed (`exhibitionism`).
+3. **Departure** — train (VIA, Ottawa Station on Tremblay Road, Monday September 19,
+   2005; briefing-to-departure is exactly one week).

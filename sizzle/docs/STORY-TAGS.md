@@ -30,10 +30,26 @@ These are the currently implemented player story tags in source.
 | `City Dweller` | Character creation background | Assigned if the player chooses `CSIS analyst`, `grad student`, or `unemployed after university` | The player is more urban-oriented in background and default frame of reference. Useful for reactions to cities, institutions, nightlife, crowds, and social texture. |
 | `Lived in Toronto` | Character creation background | Assigned if the player chooses `grad student` or `unemployed after university` | The player has prior lived experience in Toronto. Useful for neighborhood familiarity, transit knowledge, local memory, and city-specific internal narration. |
 
+### Psych eval tags (EVAL_110–165 in `godot/content/briefing.ink`; design: PSYCH-EVAL-PLAN.md)
+
+Recorded during Dr. Caron's evaluation. **Every tag records the TRUTH** — where a lie
+option exists, it writes the same tag as the honest answer; nothing records that she
+lied. Exactly one tag per group is assigned; groups are mutually exclusive.
+
+| Tag | Question | Meaning / future use |
+|-----|----------|----------------------|
+| `Sleeps fine` / `Sleeps badly` | SQ1 sleep | Stress baseline going into the operation. |
+| `Remembers what she saw` / `Remembers the silence` / `Thinks it will happen again` | SQ2 incident | What the inciting incident left behind — feeds fear/NYSE texture later. |
+| `Has someone who would miss her` / `No close attachments` | SQ3 attachment | Whether anyone outside the Branch is close to her; isolation texture under cover. |
+| `Likes being watched` / `Prefers privacy` | SQ4 being watched | Exhibition comfort; `Likes being watched` co-assigns the `exhibitionism` kink. |
+| `Openly bi` / `Quietly bi` / `Closeted outside the Branch` | SQ5 who knows | She is canonically bisexual (Branch intake, two years prior); this records how out she is. Stakes for being seen at the club. |
+| `Here to understand` / `Here to protect` / `Here because nothing else is real` | SQ6 motive | Why she stayed after the incident. |
+
 ### Implementation Notes
 
-- Background-derived story tags are currently rebuilt in `CC-500 Summary`, so they stay accurate if the player goes back and changes backgrounds during character creation.
+- Background-derived story tags are currently rebuilt in `CC-500 Summary` (native CC flow post-port), so they stay accurate if the player goes back and changes backgrounds during character creation.
 - When adding new background-derived tags, update the same rebuild logic so obsolete tags do not linger after a change.
+- Psych-eval tags are assigned once, in-story, via the `add_tag` op (first in-story use of the op). The choice-commit snapshot model handles back/undo — no latches.
 
 ## Quirks
 
@@ -53,12 +69,17 @@ Use quirks for:
 
 ## Kinks
 
-Kinks exist structurally in `$player.kinks`, but no concrete kink values have been implemented in source yet.
+Kink values are lowercase single tokens (convention set with the first entry).
+
+| Kink | Source | Assignment rule |
+|------|--------|-----------------|
+| `exhibitionism` | Psych eval SQ4 | Assigned when the truth is yes on "does being watched do anything for you" — including the lie path (truth recorded, lie is texture). |
 
 Current status:
 
-- No active kink entries assigned during character creation
-- No kink checks currently used in story passages
+- One kink assignable in-story (above); none assigned during character creation
+- No kink checks used in story passages yet — the player character's bisexuality is
+  canon (not a kink flag); SQ5 records outness as story tags instead
 
 Use kinks for:
 

@@ -34,6 +34,22 @@ func _run_story(path: String, start: String, pass_checks: bool) -> int:
 	return steps
 
 
+## Same walk as _run_story but always taking the LAST offered choice — on the
+## psych-eval questions that's the lie option where one exists.
+func _run_story_last_choice(path: String, start: String) -> void:
+	StoryBridge.start(path, start)
+	var steps := 0
+	while not StoryBridge.ended and steps < MAX_STEPS:
+		steps += 1
+		if not StoryBridge.pending_check.is_empty():
+			StoryBridge.resolve_check(999)
+		elif not StoryBridge.current_choices.is_empty():
+			StoryBridge.choose(StoryBridge.current_choices.size() - 1)
+		else:
+			break
+	assert_true(StoryBridge.ended, "%s must reach END" % path)
+
+
 func _skill_sum() -> int:
 	var total := 0
 	for skill_name in State.SKILL_NAMES:
@@ -54,6 +70,35 @@ func test_briefing_all_pass_reaches_end_without_incident() -> void:
 func test_briefing_all_fail_also_terminates() -> void:
 	_run_story("res://content/briefing.ink", "INTRO_100", false)
 	assert_eq(String(State.player()["inciting_incident"]), "")
+
+
+# --- Psych eval (EVAL_090..210; sizzle/docs/PSYCH-EVAL-PLAN.md) --------------------
+
+func test_eval_first_choice_path_records_truth_flags() -> void:
+	_run_story("res://content/briefing.ink", "EVAL_090", true)
+	var tags: Array = State.player()["story_tags"]
+	for expected: String in ["Sleeps fine", "Remembers what she saw",
+			"Has someone who would miss her", "Likes being watched",
+			"Openly bi", "Here to understand"]:
+		assert_true(tags.has(expected), "eval records '%s'" % expected)
+	assert_true(Array(State.player()["kinks"]).has("exhibitionism"),
+		"SQ4 yes seeds the kink")
+	assert_eq(State.date()["month"], 9)
+	assert_eq(State.date()["day"], 19, "EVAL_205 advances to departure day")
+	assert_eq(Rules.day_of_week(), "Monday", "departure is Monday Sept 19 2005")
+
+
+func test_eval_lie_options_record_the_truth() -> void:
+	# Last-choice path takes the lie on SQ1/SQ3/SQ4 — the recorded flags must
+	# match the honest-yes flags (a lie stores the truth; player-facing only).
+	_run_story_last_choice("res://content/briefing.ink", "EVAL_090")
+	var tags: Array = State.player()["story_tags"]
+	for expected: String in ["Sleeps badly", "Thinks it will happen again",
+			"Has someone who would miss her", "Likes being watched",
+			"Closeted outside the Branch", "Here because nothing else is real"]:
+		assert_true(tags.has(expected), "lie path records '%s'" % expected)
+	assert_true(Array(State.player()["kinks"]).has("exhibitionism"),
+		"the lie at SQ4 still seeds the kink")
 
 
 # --- Blackout (full grant map documented) ------------------------------------------

@@ -20,6 +20,13 @@ const PAIRS = [
 ];
 
 const KNOWN_ADDED_KNOTS = new Set(["blk_end", "man_end", "pale_end", "wds_end", "intro_end"]);
+// Post-retirement (2026-07-11) ink is canonical and new content is authored directly in
+// the ink files; knots with these prefixes never had a twee source and are skipped by
+// the ink->twee coverage check. The twee->ink direction stays exhaustive.
+const KNOWN_ADDED_PREFIXES = ["eval_"];
+const isKnownAdded = (id) =>
+  KNOWN_ADDED_KNOTS.has(id) ||
+  KNOWN_ADDED_PREFIXES.some((p) => id.toLowerCase().startsWith(p));
 const PLACEHOLDER = "⟨var⟩"; // ⟨var⟩
 
 // ---------------------------------------------------------------------------
@@ -340,7 +347,7 @@ function main() {
 
     // Identify stub knots and added knots up front
     for (const [id, knot] of inkKnots) {
-      if (KNOWN_ADDED_KNOTS.has(id)) {
+      if (isKnownAdded(id)) {
         seqAdded.push(id);
       }
     }
@@ -387,7 +394,7 @@ function main() {
 
     // coverage: ink knots (excluding added) with no twee source
     for (const [inkId] of inkKnots) {
-      if (KNOWN_ADDED_KNOTS.has(inkId)) continue;
+      if (isKnownAdded(inkId)) continue;
       const tweeId = inkId.replace(/_/g, "-");
       if (!tweePassages.has(tweeId)) {
         // try matching by scanning all twee ids normalized (in case of hyphen/underscore mismatch)
