@@ -3,7 +3,7 @@
  *
  * Usage: npm run export-ink   (from twine-mcp-server/)
  *
- * Reads the five sequence files from sizzle/src/content/, writes
+ * Reads the five sequence files from sizzle/archive/twee-src/content/, writes
  * godot/content/{briefing,blackout,manitoulin,pale,wds}.ink plus a
  * matching .ink.import sidecar with is_main_file=true (Phase 0.5 gate
  * finding #2). main-menu / character-creator are native scenes — excluded.
@@ -17,7 +17,7 @@ import { parseTwee } from "../twine-parser";
 import { convertStory, type Warning } from "./convert";
 
 const REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
-const SRC_DIR = path.join(REPO_ROOT, "sizzle", "src", "content");
+const SRC_DIR = path.join(REPO_ROOT, "sizzle", "archive", "twee-src", "content");
 const OUT_DIR = path.join(REPO_ROOT, "godot", "content");
 
 interface FileSpec {

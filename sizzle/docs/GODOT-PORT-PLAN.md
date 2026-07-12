@@ -83,7 +83,7 @@ Gate: full flow — creation → incident flashback → briefing — playable wi
 - **Playthrough harness:** scripted choice runs per sequence asserting state trajectories (skill grants fire once, `$nyse.influence` lands on calibrated values, day-crossings reset composure). The four still-unreviewed incident sequences get their first-play reviews here, in the engine they'll ship in.
 - Retirement is gated on the Phase 0 parity matrix: every `port`/`rebuild` row demonstrably live in Godot before the corresponding SugarCube capability is switched off. Then: Tweego build scripts, the Obsidian vault pipeline, and the FigJam sync marked archived; `sizzle/src/` twee moved to an archive path; CLAUDE.md and AGENTS.md rewritten for the Godot world.
 
-Gate: harness green on all sequences; human has played each once; parity matrix fully discharged; no doc still describes SugarCube as the build.
+Gate: harness green on all sequences; human has played each once; parity matrix fully discharged; no doc still describes SugarCube as the build. **✔ PASSED 2026-07-11** — mechanical QA 2026-07-07, parity polish + prose sign-off + retirement executed 2026-07-11 (human go: "twee lives on in a fork"). Record: `docs/godot/PHASE-6-STATUS.md`.
 
 ## Phase 7 — Systems track (the gamestate driver)
 

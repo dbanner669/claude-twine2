@@ -19,18 +19,20 @@ Sizzle is a literate erotic thriller. Second person, present, female PC. Toronto
 
 ## Current Writing Scope
 
-Playable greybox prose covers:
+**Prose lives in ink at `godot/content/*.ink` since SugarCube retirement (2026-07-11)** —
+written and edited directly; knots use underscores (`BLK_100`). The retired twee is at
+`sizzle/archive/twee-src/` (read-only). Playable prose covers:
 
 - Main menu
-- Character creation: `CC-100` through `CC-500` (with `CC-400` still a source placeholder; see below)
-- Briefing / prologue: `INTRO-100` through `INTRO-800 End`
-
-Approximate scale: ~30 prologue passages + 26 BLK flashback passages, full branching dialogue, skill-check variants, four background variants throughout.
+- Character creation: native dossier flow (identity / background / incident / summary)
+- All four origin-incident flashbacks: `BLK` (Toronto Blackout), `MAN` (Dark of
+  Manitoulin), `PALE` (Woman with the Pale Eyes), `WDS` (Wet Dog Smell) — **all
+  human-signed-off at first-play review, 2026-07-11**
+- Briefing / prologue: `INTRO_100` through `INTRO_800` End
 
 ## Current Writing Gaps
 
-- **`CC-400 Incident` — Toronto Blackout: ✓ implemented, pending review.** `sizzle/src/content/blackout.twee`, BLK-085–BLK-215. The three remaining incidents (`the Dark of Manitoulin`, `the Woman with the Pale Eyes`, `Wet Dog Smell`) are "Coming Soon" stubs in CC-400; their playable-sequence design docs live in [docs/incidents/](incidents/). See [INCIDENTPLAN.md](INCIDENTPLAN.md).
-- **`INTRO-322 Concerns`** — refusal branch is functional but minimal.
-- **`INTRO-550 Question Toronto`** — Northern Ontario reaction stub; explicit `//To be written.//` marker in source.
-- **Act 1 onward** — no playable content yet beyond the prologue. STYLE-GUIDE.md sets the rules forward; no Act 1 prose exists to apply them to.
+- **`INTRO_322 Concerns`** — refusal branch is functional but minimal.
+- **`INTRO_550 Question Toronto`** — Northern Ontario reaction stub.
+- **Act 1 onward** — no playable content yet beyond the prologue. STYLE-GUIDE.md sets the rules forward; Act 1 prose is the next writing frontier, written directly in ink.
 - **NPC voice profiles** — only Robert Flett is profiled. Each new NPC needs the template in [STYLE-GUIDE.md §6](STYLE-GUIDE.md) filled out before sustained dialogue work.

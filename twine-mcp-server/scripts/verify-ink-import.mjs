@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Text-fidelity diff: sizzle/src/content/*.twee (frozen source) vs godot/content/*.ink (converted output).
+// Text-fidelity diff: sizzle/archive/twee-src/content/*.twee (frozen source) vs godot/content/*.ink (converted output).
 // Verifies every authored prose paragraph / choice-link display text survived the twee->ink conversion.
 // Run: node twine-mcp-server/scripts/verify-ink-import.mjs
 // Output: JSON report written to scratch path given as argv[2] (optional) and a human summary to stdout.
@@ -12,11 +12,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..", "..");
 
 const PAIRS = [
-  { name: "briefing", twee: "sizzle/src/content/briefing.twee", ink: "godot/content/briefing.ink" },
-  { name: "blackout", twee: "sizzle/src/content/blackout.twee", ink: "godot/content/blackout.ink" },
-  { name: "manitoulin", twee: "sizzle/src/content/manitoulin.twee", ink: "godot/content/manitoulin.ink" },
-  { name: "pale", twee: "sizzle/src/content/pale.twee", ink: "godot/content/pale.ink" },
-  { name: "wds", twee: "sizzle/src/content/wds.twee", ink: "godot/content/wds.ink" },
+  { name: "briefing", twee: "sizzle/archive/twee-src/content/briefing.twee", ink: "godot/content/briefing.ink" },
+  { name: "blackout", twee: "sizzle/archive/twee-src/content/blackout.twee", ink: "godot/content/blackout.ink" },
+  { name: "manitoulin", twee: "sizzle/archive/twee-src/content/manitoulin.twee", ink: "godot/content/manitoulin.ink" },
+  { name: "pale", twee: "sizzle/archive/twee-src/content/pale.twee", ink: "godot/content/pale.ink" },
+  { name: "wds", twee: "sizzle/archive/twee-src/content/wds.twee", ink: "godot/content/wds.ink" },
 ];
 
 const KNOWN_ADDED_KNOTS = new Set(["blk_end", "man_end", "pale_end", "wds_end", "intro_end"]);

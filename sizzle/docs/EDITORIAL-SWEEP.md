@@ -1,5 +1,10 @@
 # Editorial Sweep — Process Template
 
+> **Since SugarCube retirement (2026-07-11), prose source is ink at `godot/content/*.ink`**
+> — sweeps operate on the ink files directly. Path references to `sizzle/src/` in this
+> template and in past audit reports are twee-era; the workflow itself is unchanged in
+> substance.
+
 How to run a style-guide audit against existing Sizzle prose and convert findings into source edits. The process is staged so the human approves before any source touches happen.
 
 The source of truth for *what* counts as a finding is [STYLE-GUIDE.md](STYLE-GUIDE.md). This doc is *how* an audit happens — the workflow, the stage-gates, and the local conventions a sweep agent needs to know.

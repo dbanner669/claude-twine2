@@ -3,92 +3,92 @@
 ## Overview
 
 Three projects:
-1. **twine-mcp-server/** — MCP server (Node.js/TypeScript) for programmatic Twine story interaction (32 tools)
-2. **twine-sugarcube-template/** — Reusable SugarCube game template extracted from Female Agent
-3. **sizzle/** — An adult interactive fiction game built on the SugarCube template. See `sizzle/CLAUDE.md` for game-specific documentation.
+1. **godot/ + sizzle/** — **Sizzle**, an adult interactive fiction game. The game runs in
+   **Godot 4.7 .NET with ink content** (`godot/` is the engine project, `sizzle/` holds
+   design docs, media, and the retired-twee archive). See `sizzle/CLAUDE.md` and
+   `sizzle/AGENTS.md` (start there for game work). SugarCube/twee was retired 2026-07-11;
+   the twee line lives on in a fork and on the frozen `master` branch.
+2. **twine-mcp-server/** — MCP server (Node.js/TypeScript) for programmatic Twine story
+   interaction (32 tools). Post-retirement its live role for Sizzle is the one-time
+   twee→ink converter (`npm run export-ink`) and the import-fidelity verifier
+   (`scripts/verify-ink-import.mjs`), both now pointed at `sizzle/archive/twee-src/`.
+   The general Twine tooling remains useful for other SugarCube projects.
+3. **twine-sugarcube-template/** — Reusable SugarCube game template (predates the Godot
+   port; still a valid standalone template).
+
+## Branch model
+
+- `godot-main` — active default line. Work here.
+- `master` — frozen twee/SugarCube legacy line. Don't touch.
 
 ## Project Structure
 
 ```
 Female Agent/
-├── twine-mcp-server/          # MCP server source
-│   ├── src/
-│   │   ├── index.ts           # Entry point (stdio transport)
-│   │   ├── tools.ts           # 24 core MCP tool registrations
-│   │   ├── sugarcube-tools.ts # 8 SugarCube-specific tools
-│   │   ├── store.ts           # In-memory story store + JSON persistence
-│   │   ├── twine-parser.ts    # HTML/Twee parsing + export + link extraction
-│   │   └── types.ts           # TwinePassage, TwineStory interfaces
-│   ├── test/
-│   │   ├── twine-parser.test.ts  # 21 parser tests
-│   │   └── store.test.ts         # 29 store tests
-│   └── vitest.config.ts
-├── twine-sugarcube-template/  # Game template (Twee source)
-│   ├── src/
-│   │   ├── story/             # System passages (StoryInit, StoryInterface, etc.)
-│   │   ├── widgets/           # Reusable widget passages (7 files)
-│   │   ├── scripts/           # JavaScript (5 files)
-│   │   ├── styles/            # CSS (8 files)
-│   │   └── content/           # Example passages (3 files)
-│   ├── build/                 # Tweego compilation scripts
-│   └── template-docs/         # Architecture and reference documentation
-├── sizzle/                    # Sizzle game project (active development)
-│   ├── src/
-│   │   ├── story/             # System passages (StoryInit, interface, variables, caption)
-│   │   ├── widgets/           # Reusable widgets (7 files: avatar, clothing, expressions, etc.)
-│   │   ├── scripts/           # JavaScript (6 files: macros, events, avatar, preload, index, ui-scale)
-│   │   ├── styles/            # CSS (8 files: reset, layout, avatar, passages, character-creator, notifications, tables, icons)
-│   │   └── content/           # Playable passages (main-menu, character-creator, briefing)
-│   ├── fonts/                 # WOFF2 web fonts (5 families, 8 files)
-│   ├── media/                 # Avatar layers, location images, UI assets
-│   ├── docs/                  # GDD, design brief, NPC profiles, greybox checklists
-│   ├── build/                 # Tweego compilation scripts
-│   └── CLAUDE.md              # Game-specific project instructions (start here)
-├── _tools/tweego/             # Tweego compiler + story formats (gitignored)
-├── Female_Agent_1.20.1P_offlin/  # Reference game (gitignored)
-└── Twine-2.12.0-Windows.exe     # Twine app (gitignored)
+├── godot/                     # The Sizzle game (Godot 4.7 .NET + godot-ink)
+│   ├── autoload/              # State, Rules, StoryBridge, ThemeService, SaveManager…
+│   ├── scenes/                # game_shell, cc/, ui/
+│   ├── content/               # *.ink — canonical story content
+│   ├── theme/                 # palette.gd tokens, theme, shaders
+│   ├── test/                  # GUT unit + differential suites
+│   └── tools/                 # screenshot_runner, review_dump
+├── sizzle/                    # Sizzle design docs, media, fonts, archive
+│   ├── docs/                  # GDD, STYLE-GUIDE, GODOT-PORT-PLAN, docs/godot contracts
+│   ├── media/  fonts/         # art + type assets
+│   └── archive/twee-src/      # retired SugarCube twee (frozen; do not edit)
+├── twine-mcp-server/          # MCP server + twee→ink converter + verifier
+│   ├── src/                   # tools, parser, ink-export/, figjam-sync/ (archived)
+│   └── test/                  # vitest suites
+├── twine-sugarcube-template/  # Standalone SugarCube template (twee + build)
+├── obsidian-sizzle-plugin/    # ARCHIVED (twee-era lint/round-trip plugin)
+├── figjam-sync-plugin/        # ARCHIVED (twee-era FigJam sync)
+├── _tools/godot4/             # Godot 4.7 .NET editor (gitignored)
+├── _tools/inky/               # Inky/inklecate (gitignored)
+├── _tools/tweego/             # Tweego compiler (gitignored; template + archive only)
+└── Female_Agent_1.20.1P_offlin/  # Reference game (gitignored)
 ```
 
 ## Tech Stack
 
-- **Runtime:** Node.js 24.x
-- **Language:** TypeScript 5.x
-- **MCP SDK:** @modelcontextprotocol/sdk 1.12.0
-- **HTML parsing:** cheerio 1.0.0
-- **Testing:** vitest 2.1.8
-- **Build:** tsc (TypeScript compiler)
-- **Story format:** SugarCube v2.37.3
-- **Compiler:** Tweego (in `_tools/tweego/`)
+- **Game:** Godot 4.7-stable .NET (GDScript game code; C# only under the godot-ink
+  addon), ink content, GUT tests. Details + commands: `sizzle/CLAUDE.md`.
+- **MCP server:** Node.js 24.x, TypeScript 5.x, @modelcontextprotocol/sdk 1.12.0,
+  cheerio 1.0.0, vitest 2.1.8.
+- **Template / archive era:** SugarCube v2.37.3, Tweego (`_tools/tweego/`).
 
 ## Key Conventions
 
 - Passage content is HTML-encoded in Twine HTML files; cheerio `.text()` handles decoding
-- The game uses PREFIX-NUMBER naming (e.g., GNO-100, TNG-200)
-- SugarCube link patterns handled: `[[]]`, `<<goto>>`, `<<goto $var>>`, `<<include>>`, `<<button>>`, `<<link>>`, `data-passage=`
-- Wiki links with setter syntax `[[text|Target][$var to val]]` are supported (setter stripped from target)
+- PREFIX-NUMBER naming (e.g. GNO-100, TNG-200); ink knots use underscores (BLK_100)
+- SugarCube link patterns handled: `[[]]`, `<<goto>>`, `<<goto $var>>`, `<<include>>`,
+  `<<button>>`, `<<link>>`, `data-passage=`; setter syntax `[[text|Target][$var to val]]`
+  supported (setter stripped from target)
 
 ## Workflow
 
 Claude orchestrates. Codex (cc-codex-plugin:codex-agent) implements. Claude reviews.
+Note: the Codex CLI runs on its own (OpenAI) budget; the Claude subagent driving it
+shares the Claude plan limit — subagent "session limit" errors are the Claude side.
 
 ## Commands
 
-```bash
-# MCP server
-cd twine-mcp-server && npm install && npm run build
-npm test                    # 50 tests (vitest)
+```powershell
+# Sizzle (the game) — full command set in sizzle/CLAUDE.md
+$godot = "_tools/godot4/Godot_v4.7-stable_mono_win64/Godot_v4.7-stable_mono_win64.exe"
+& $godot --path godot                                  # play
+dotnet build godot/Sizzle.sln                          # build
+& $godot --headless --path godot -s res://addons/gut/gut_cmdln.gd `
+    -gdir=res://test/unit -gdir=res://test/differential -gexit   # tests (GUT)
 
-# Template (using local Tweego)
-# On Windows with local Tweego:
+# MCP server
+cd twine-mcp-server; npm install; npm run build
+npm test                                   # vitest
+npm run export-ink                         # one-time twee->ink converter (archive input)
+node scripts/verify-ink-import.mjs         # ink vs archived twee fidelity audit
+
+# SugarCube template (standalone; local Tweego)
 $env:TWEEGO_PATH = "_tools/tweego/storyformats"
 & _tools/tweego/tweego.exe -o twine-sugarcube-template/output.html twine-sugarcube-template/src/
-
-# Or if Tweego is in PATH:
-cd twine-sugarcube-template && tweego -o output.html src/
-
-# Sizzle game:
-$env:TWEEGO_PATH = "_tools/tweego/storyformats"
-& _tools/tweego/tweego.exe -o sizzle/output.html sizzle/src/
 ```
 
 ## Reference Game Stats

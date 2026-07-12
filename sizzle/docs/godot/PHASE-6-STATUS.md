@@ -37,8 +37,13 @@ Both blockers are now resolved:
 1. ~~Parity matrix not fully discharged.~~ **Discharged 2026-07-11 (parity-polish pass).**
 2. ~~Human prose review (#2) not done.~~ **Signed off 2026-07-11 (in-engine playthrough).**
 
-**Retirement is UNBLOCKED.** It remains a deliberate, explicitly-triggered step (archive Tweego build, Obsidian vault + scripts, FigJam sync; move `sizzle/src` twee to an archive path; rewrite CLAUDE.md/AGENTS.md for the Godot world) — hard to walk back, so it executes on an explicit go, not automatically.
+**Retirement EXECUTED 2026-07-11** on the human's explicit go ("twee lives on in a fork" — the twee line is preserved in a fork, on the frozen `master` branch, and in history). What was done:
+
+- `sizzle/src/` (34 files, incl. `content/FROZEN.md`) → **moved** to `sizzle/archive/twee-src/` with an ARCHIVED.md cover note.
+- **Marked archived** (ARCHIVED.md notices, kept in place): `sizzle/build/` (Tweego), `sizzle/scripts/` (Obsidian round-trip), `obsidian-sizzle-plugin/`, `figjam-sync-plugin/`, `twine-mcp-server/src/figjam-sync/`.
+- **Kept live, repointed at the archive:** the twee→ink converter (`twine-mcp-server` `npm run export-ink`) and `scripts/verify-ink-import.mjs` — the verifier re-ran green against the new path (0 mismatch units, 0 coverage gaps).
+- **Rewritten for the Godot world:** root `CLAUDE.md`, `sizzle/CLAUDE.md`, `sizzle/AGENTS.md`. The `// GENERATED` banners in the five original ink files are documented as historical — ink is canonical and directly edited from here on.
 
 ## Verdict
 
-Phase 6 mechanical QA gate: **PASSED.** Parity polish: **DONE (2026-07-11).** Prose first-play review: **SIGNED OFF (2026-07-11).** All Phase 6 gate conditions are met except the retirement execution itself, which awaits an explicit go. No content or runtime defects found; one UI gap (main-menu return) found in review and fixed.
+Phase 6: **CLOSED 2026-07-11.** Mechanical QA passed, parity matrix discharged, prose signed off (one UI gap — main-menu return — found in review and fixed), SugarCube retired. ink is the sole canonical content format; the Godot build is the game.
