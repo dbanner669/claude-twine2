@@ -25,20 +25,20 @@ Until you sign off on the prose, the four incidents stay "pending first-play rev
 
 ## 3. SugarCube retirement — HELD (do not execute yet)
 
-The plan gates retirement on "**every `port`/`rebuild` parity-matrix row demonstrably live in Godot.**" It is not, yet. Open rebuild rows:
+The plan gates retirement on "**every `port`/`rebuild` parity-matrix row demonstrably live in Godot.**" The four rows that were open here were closed by the **parity-polish pass (2026-07-11)** — see PARITY-POLISH-PROGRESS.md for evidence (GUT 75/75, screenshot runner green, shots in `parity-polish-shots/`):
 
-- **Atmosphere overlays (vignette/grain)** — deferred at Phase 3; not ported. This is a live `rebuild` row.
-- **Day-mode header bronze variant** — deferred at Phase 3.
-- **Glossary dotted-underline brass term styling** — currently default link styling (tooltip itself matches).
-- **Choice-row right chevron** — omitted (dash prefix / hover shift / brick glow present).
+- **Atmosphere overlays (vignette/grain)** — ✔ live: `theme/atmosphere.gdshader` + `AtmosphereOverlay`, night + day variants.
+- **Day-mode header bronze variant** — ✔ live: ink-4 bronze bar, `bronze_cream`/brass-glow text (layout.css values).
+- **Glossary brass term styling** — ✔ live via display-time BBCode decoration; residual: underline is soft-brass solid, not dotted (no dotted underline style exists in RichTextLabel 4.7).
+- **Choice-row right chevron** — ✔ live: right-anchored Label child, opacity 0.5, brick-glow hover.
 
-None are load-bearing, but the retirement rule is explicit, and archiving working tooling (Tweego build, Obsidian vault + scripts, FigJam sync, moving `sizzle/src` twee, rewriting CLAUDE.md/AGENTS.md) is hard to walk back. Two blockers, either sufficient to hold:
+The parity matrix is now discharged. One blocker remains, and it is sufficient to hold:
 
-1. Parity matrix not fully discharged (above).
+1. ~~Parity matrix not fully discharged.~~ **Discharged 2026-07-11.**
 2. Human prose review (#2) not done — retiring the reference build before the content it's the reference for is signed off removes the differential safety net prematurely.
 
-**Recommendation:** clear the deferred parity rows (a small Phase 3-style polish pass) and get the prose sign-off, *then* execute retirement as a clean, deliberate step. Retirement is intentionally left unexecuted this session.
+**Recommendation:** get the prose sign-off, *then* execute retirement as a clean, deliberate one-step action (archive Tweego build, Obsidian vault + scripts, FigJam sync; move `sizzle/src` twee; rewrite CLAUDE.md/AGENTS.md). Retirement remains intentionally unexecuted.
 
 ## Verdict
 
-Phase 6 mechanical QA gate: **PASSED.** Phase 6 as a whole remains **open** on the two human/polish items above. No content or runtime defects found.
+Phase 6 mechanical QA gate: **PASSED.** Parity polish: **DONE (2026-07-11).** Phase 6 as a whole remains **open** on the human prose first-play review only. No content or runtime defects found.

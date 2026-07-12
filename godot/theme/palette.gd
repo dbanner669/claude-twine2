@@ -29,6 +29,10 @@ const NIGHT := {
 	"rule": Color(0.722, 0.580, 0.369, 0.18),
 	"rule_strong": Color(0.722, 0.580, 0.369, 0.32),
 	"rule_cool": Color(0.925, 0.886, 0.804, 0.08),
+	# Day-header bronze variant text (layout.css literals; night values fall
+	# back to cream so night styling is unchanged by the shared token)
+	"bronze_cream": Color("#ece2cd"),
+	"bronze_cream_bright": Color("#ece2cd"),
 	# Status
 	"composed": Color("#6f8c5a"),
 	"rattled": Color("#c46b3d"),
@@ -63,6 +67,10 @@ const DAY := {
 	"rule": Color(0.157, 0.098, 0.039, 0.28),
 	"rule_strong": Color(0.157, 0.098, 0.039, 0.45),
 	"rule_cool": Color(0.157, 0.098, 0.039, 0.12),
+	# Day-header bronze variant text (layout.css: #ecdcb8 header text,
+	# #f6ead0 menu-link hover)
+	"bronze_cream": Color("#ecdcb8"),
+	"bronze_cream_bright": Color("#f6ead0"),
 	# Status
 	"composed": Color("#3e5a26"),
 	"rattled": Color("#a8421f"),

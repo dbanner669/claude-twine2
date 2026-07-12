@@ -275,6 +275,10 @@ func _build_ui() -> void:
 	footer_row.add_child(_footer_version)
 
 	# --- Overlays ---------------------------------------------------------
+	# Atmosphere (vignette + grain) above the shell chrome, below toasts and
+	# the glossary tooltip — the layout.css stacking, minus the backdrop bars.
+	add_child(AtmosphereOverlay.new())
+
 	_toast_box = VBoxContainer.new()
 	_toast_box.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	_toast_box.offset_left = -404.0
@@ -311,8 +315,12 @@ func _build_ui() -> void:
 # =========================================================================
 
 func _restyle() -> void:
+	# Day mode gets the bronze header variant (layout.css "Daytime header"):
+	# ink-4 bronze bar, #ecdcb8 text, brass-glow accents. Night values are
+	# untouched (bronze_cream's night value IS cream).
+	var day := ThemeService.mode == "day"
 	var header_style := StyleBoxFlat.new()
-	header_style.bg_color = ThemeService.color("ink_2")
+	header_style.bg_color = ThemeService.color("ink_4" if day else "ink_2")
 	header_style.border_color = ThemeService.color("rule")
 	header_style.border_width_bottom = 1
 	header_style.content_margin_left = 24
@@ -320,19 +328,23 @@ func _restyle() -> void:
 	_header.add_theme_stylebox_override("panel", header_style)
 
 	_style_ui_button(_back_button, 14)
+	_style_ui_button(_saves_button, 10)
 	_style_ui_button(_character_button, 10)
 
 	_location_label.add_theme_font_override("font", _tracked(ThemeService.font("ui_medium"), 2.4))
 	_location_label.add_theme_font_size_override("font_size", ThemeService.font_size("ui"))
-	_location_label.add_theme_color_override("font_color", ThemeService.color("brass"))
+	_location_label.add_theme_color_override("font_color", ThemeService.color("brass_glow" if day else "brass"))
 
 	_time_label.add_theme_font_override("font", ThemeService.font("display_italic"))
 	_time_label.add_theme_font_size_override("font_size", 22)
-	_time_label.add_theme_color_override("font_color", ThemeService.color("cream"))
+	_time_label.add_theme_color_override("font_color", ThemeService.color("bronze_cream"))
 
+	var weather_color := ThemeService.color("bronze_cream") if day else ThemeService.color("cream_faint")
+	if day:
+		weather_color.a = 0.75
 	_weather_label.add_theme_font_override("font", _tracked(ThemeService.font("mono"), 2.0))
 	_weather_label.add_theme_font_size_override("font_size", ThemeService.font_size("ui"))
-	_weather_label.add_theme_color_override("font_color", ThemeService.color("cream_faint"))
+	_weather_label.add_theme_color_override("font_color", weather_color)
 
 	_status_badge.add_theme_font_override("font", _tracked(ThemeService.font("ui"), 2.0))
 	_status_badge.add_theme_font_size_override("font_size", ThemeService.font_size("ui"))
@@ -397,8 +409,10 @@ func _style_ui_button(button: Button, font_size: int) -> void:
 	button.add_theme_stylebox_override("hover", hover)
 	button.add_theme_font_override("font", _tracked(ThemeService.font("ui"), 1.8))
 	button.add_theme_font_size_override("font_size", font_size)
-	button.add_theme_color_override("font_color", ThemeService.color("brass"))
-	button.add_theme_color_override("font_hover_color", ThemeService.color("cream"))
+	# Day bronze header: menu links brass-glow, hover #f6ead0 (layout.css).
+	var day := ThemeService.mode == "day"
+	button.add_theme_color_override("font_color", ThemeService.color("brass_glow" if day else "brass"))
+	button.add_theme_color_override("font_hover_color", ThemeService.color("bronze_cream_bright" if day else "cream"))
 	button.add_theme_color_override("font_disabled_color", ThemeService.color("cream_faint"))
 
 
@@ -428,6 +442,45 @@ func _style_choice_button(button: Button, greyed: bool) -> void:
 	button.add_theme_color_override("font_pressed_color", ThemeService.color("brick_glow"))
 	button.add_theme_color_override("font_focus_color", base_color)
 	button.add_theme_color_override("font_disabled_color", ThemeService.color("cream_faint"))
+	_style_choice_chevron(button, base_color)
+
+
+## Right-aligned "›" on every choice row (passages.css .choice::after:
+## \203A, margin-left auto, normal style, opacity 0.5; hover brick-glow).
+## Buttons can't right-align a suffix glyph, so the chevron is an anchored
+## Label child, created once and recolored on every restyle.
+func _style_choice_chevron(button: Button, base_color: Color) -> void:
+	var chevron: Label = button.get_node_or_null("Chevron")
+	if chevron == null:
+		chevron = Label.new()
+		chevron.name = "Chevron"
+		chevron.text = "›"
+		chevron.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(chevron)
+		button.mouse_entered.connect(_on_choice_chevron_hover.bind(button, true))
+		button.mouse_exited.connect(_on_choice_chevron_hover.bind(button, false))
+	chevron.add_theme_font_override("font", ThemeService.font("body"))
+	chevron.add_theme_font_size_override("font_size", ThemeService.font_size("lg"))
+	var color := base_color
+	color.a = 0.5
+	chevron.add_theme_color_override("font_color", color)
+	chevron.set_anchors_and_offsets_preset(
+		Control.PRESET_CENTER_RIGHT, Control.PRESET_MODE_MINSIZE, 8)
+
+
+func _on_choice_chevron_hover(button: Button, entered: bool) -> void:
+	var chevron: Label = button.get_node_or_null("Chevron")
+	if chevron == null:
+		return
+	var color: Color
+	if entered:
+		color = ThemeService.color("brick_glow")
+	elif button.get_meta("greyed", false):
+		color = ThemeService.color("cream_faint")
+	else:
+		color = ThemeService.color("brass")
+	color.a = 0.5
+	chevron.add_theme_color_override("font_color", color)
 
 
 static func _tracked(base: Font, spacing_px: float) -> FontVariation:
@@ -502,7 +555,11 @@ func _on_text_appended(line: String) -> void:
 	if _defer_prose_clear:
 		_defer_prose_clear = false
 		_prose.clear()
-	_prose.append_text(line + "\n\n")
+	# Brass glossary terms (passages.css .glossary-label): decorated at
+	# display time so the generated ink stays untouched. Append-time color is
+	# mode-correct because ThemeService (autoload, connected first) resolves
+	# the knot's day/night mode before the shell receives any of its text.
+	_prose.append_text(_decorate_gloss(line, ThemeService.color("brass").to_html(false)) + "\n\n")
 
 
 func _on_choices_ready(choices: Array) -> void:
@@ -768,6 +825,14 @@ func _on_cc_summary_signed() -> void:
 # =========================================================================
 # Glossary tooltip (deliverable D)
 # =========================================================================
+
+## Wraps every [url=gloss:...]...[/url] span in a color tag so terms render
+## brass and the meta underline (drawn at underline_alpha, 50%) reads as the
+## soft hairline from passages.css. Pure; unit-tested in test_gloss_markup.gd.
+static func _decorate_gloss(line: String, brass_hex: String) -> String:
+	var regex := RegEx.create_from_string("\\[url=gloss:.*?\\[/url\\]")
+	return regex.sub(line, "[color=#" + brass_hex + "]$0[/color]", true)
+
 
 func _load_glossary() -> Dictionary:
 	var file := FileAccess.open("res://content/data/glossary.json", FileAccess.READ)

@@ -105,12 +105,12 @@ dotnet build "C:\Users\Oculus\My Drive\Female Agent\godot\Sizzle.sln"
 
 ## Known approximations / deferred polish
 
-- Choice rows have no right-aligned chevron (Button suffix glyph); dash prefix, hover shift, brick glow are in.
+- ~~Choice rows have no right-aligned chevron~~ **Resolved 2026-07-11 (parity-polish pass):** chevron shipped as a right-anchored Label child of each choice Button — "›", opacity 0.5, brick-glow on hover.
 - Check knots pause before their own prose is emitted (ops-only first line carries the `# check` tag — engine protocol, unchanged). The shell keeps the previous knot's prose on screen during the pause and swaps it for the check knot's prose after the roll (deferred-clear; matches twee reading order as closely as the protocol allows).
 - The header status badge and CHARACTER button also show on the main menu (twee hid the in-passage header there). Cosmetic; one `visible` toggle in `_show_main_menu` if it bothers anyone.
-- Atmosphere overlays (vignette/grain) and day-mode header bronze variant not ported; day palette itself is complete.
+- ~~Atmosphere overlays (vignette/grain) and day-mode header bronze variant not ported~~ **Resolved 2026-07-11 (parity-polish pass):** `theme/atmosphere.gdshader` + `AtmosphereOverlay` port the layout.css vignette/grain (night and day variants, CSS alphas exact, static grain) over the full stage; day header now uses the ink-4 bronze bar with `bronze_cream`/brass-glow text per layout.css "Daytime header".
 - `# screen: creation` currently behaves like `menu` (native CC flow is Phase 5).
-- Glossary terms render in RichTextLabel's default link styling rather than dotted-underline brass; tooltip itself matches passages.css.
+- ~~Glossary terms render in RichTextLabel's default link styling~~ **Resolved 2026-07-11 (parity-polish pass, with residual):** terms now render brass via display-time BBCode decoration (`GameShell._decorate_gloss`, unit-tested; generated ink untouched). Residual: RichTextLabel 4.7 has no dotted underline style, so the underline is the meta underline drawn in brass at `underline_alpha` 50% — a soft solid hairline, not dotted; term hover-recolor not ported (the tooltip is the hover feedback).
 
 ## Log
 

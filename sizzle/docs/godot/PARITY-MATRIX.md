@@ -50,13 +50,13 @@ Status: **draft — pending human sign-off**. Every live SugarCube-side construc
 |---|---|---|
 | Fixed-proportion stage + `ui-scale.js` + `--zoom` | drop | native stretch `canvas_items`/`keep` (P2) |
 | CSS design system (8 files, `--sz-*` tokens) | rebuild | Godot Theme + variants (P3) |
-| Day/night palette swap | rebuild | theme variants driven by `# mode:`/slot (P3) |
+| Day/night palette swap | rebuild | theme variants driven by `# mode:`/slot (P3); day-mode header bronze variant **live 2026-07-11** (parity-polish pass) |
 | Fonts (5 families, WOFF2) | port | Godot loads WOFF2 directly (P3) |
-| Atmosphere overlays (vignette/grain) | rebuild | shaders (P3) |
+| Atmosphere overlays (vignette/grain) | rebuild | shaders — **live 2026-07-11**: `theme/atmosphere.gdshader` + `AtmosphereOverlay` (parity-polish pass) |
 | Header bar / footer date / composure badge | rebuild | native scenes off mirrored state (P3) |
 | Toast system (4 kinds) | rebuild | toast scene (P2/P3) |
-| Glossary tooltip | rebuild | RichTextLabel `meta_hover` (P3) |
-| Choice-link styling incl. visited-greying | rebuild | theme + ink visit counts (P3) |
+| Glossary tooltip | rebuild | RichTextLabel `meta_hover` (P3); brass term styling **live 2026-07-11** (soft-brass underline — dotted style unsupported by RichTextLabel 4.7; see PARITY-POLISH-PROGRESS.md) |
+| Choice-link styling incl. visited-greying | rebuild | theme + ink visit counts (P3); right chevron **live 2026-07-11** (parity-polish pass) |
 | SugarCube saves/history/back arrow | rebuild | choice-commit snapshots + save addon (P2) |
 | `$statistics`, achievements | rebuild | engine dict; no UI exists yet anyway (P7) |
 | Avatar 6-array compositor | drop | Option 2 manifest runtime (P4) |
