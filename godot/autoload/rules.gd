@@ -10,9 +10,16 @@ extends Node
 
 signal state_changed(op: String)
 signal toast_requested(kind: String, text: String)
+signal suspicion_band_changed(old_band: String, new_band: String)
 
 const COMPOSURE_MIN := 0
 const COMPOSURE_MAX := 7
+const SUSPICION_MIN := 0
+const SUSPICION_MAX := 10
+const REPUTATION_MIN := 0
+const REPUTATION_MAX := 10
+const ACCESS_MIN := 0
+const ACCESS_MAX := 3
 
 const TIME_SLOTS := [
 	"earlyMorning", "morning", "noon", "afternoon",
@@ -144,6 +151,71 @@ func adjust_influence(delta: int) -> void:
 	# nyse.influence: goes up and down by ops only; no natural decay, ever.
 	State.data["nyse"]["influence"] = int(State.data["nyse"]["influence"]) + delta
 	state_changed.emit("adjust_influence")
+
+
+# --- Sizzle ops ----------------------------------------------------------------
+
+func sizzle_suspicion(delta: int) -> void:
+	var sizzle: Dictionary = State.data["sizzle"]
+	var current := int(sizzle["suspicion"])
+	var updated := clampi(current + delta, SUSPICION_MIN, SUSPICION_MAX)
+	if updated == current:
+		return
+	var old_band := _suspicion_band_for(current)
+	var new_band := _suspicion_band_for(updated)
+	sizzle["suspicion"] = updated
+	if old_band != new_band:
+		suspicion_band_changed.emit(old_band, new_band)
+	toast_requested.emit(
+		"warn" if updated > current else "info",
+		"You're drawing attention." if updated > current else "Attention drifts elsewhere."
+	)
+	state_changed.emit("sizzle_suspicion")
+
+
+func sizzle_reputation(delta: int) -> void:
+	var sizzle: Dictionary = State.data["sizzle"]
+	var current := int(sizzle["reputation"])
+	var updated := clampi(current + delta, REPUTATION_MIN, REPUTATION_MAX)
+	if updated == current:
+		return
+	sizzle["reputation"] = updated
+	state_changed.emit("sizzle_reputation")
+
+
+func sizzle_access(level: int) -> void:
+	var sizzle: Dictionary = State.data["sizzle"]
+	var current := int(sizzle["access_level"])
+	var updated := maxi(current, clampi(level, ACCESS_MIN, ACCESS_MAX))
+	if updated == current:
+		return
+	sizzle["access_level"] = updated
+	state_changed.emit("sizzle_access")
+
+
+func sizzle_reset() -> void:
+	var sizzle: Dictionary = State.data["sizzle"]
+	var old_band := _suspicion_band_for(int(sizzle["suspicion"]))
+	var changed := false
+	if int(sizzle["suspicion"]) != 0:
+		sizzle["suspicion"] = 0
+		changed = true
+	if int(sizzle["reputation"]) != 0:
+		sizzle["reputation"] = 0
+		changed = true
+	if int(sizzle["access_level"]) != 0:
+		sizzle["access_level"] = 0
+		changed = true
+	if not changed:
+		return
+	var new_band := _suspicion_band_for(int(sizzle["suspicion"]))
+	if old_band != new_band:
+		suspicion_band_changed.emit(old_band, new_band)
+	state_changed.emit("sizzle_reset")
+
+
+func suspicion_band() -> String:
+	return _suspicion_band_for(int(State.data["sizzle"]["suspicion"]))
 
 
 # --- Avatar ops (AVATAR-MANIFEST.md runtime API) ------------------------------
@@ -348,3 +420,13 @@ func _shift_calendar_days(count: int) -> void:
 func _append_if_absent(list: Array, value: String) -> void:
 	if not list.has(value):
 		list.append(value)
+
+
+func _suspicion_band_for(value: int) -> String:
+	if value <= 2:
+		return "unremarked"
+	if value <= 5:
+		return "noticed"
+	if value <= 8:
+		return "watched"
+	return "burned"

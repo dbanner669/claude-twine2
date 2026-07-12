@@ -1,7 +1,7 @@
 # Sizzle Suspicion / Reputation Model — Design Proposal
 
-Status: **APPROVED 2026-07-11 — design locked with the human's resolutions folded into §7;
-implementation may proceed.** First system of the Phase 7 systems track
+Status: **IMPLEMENTED 2026-07-11 — approved design shipped in the Godot port, with the
+human's locked §7 resolutions preserved.** First system of the Phase 7 systems track
 (GODOT-PORT-PLAN.md). Pattern locked by the plan: simulation lives in GDScript (`Rules` +
 `State`), exposed to ink only as mirrored variables and command ops; passages stay thin;
 lands with GUT tests and normal review.

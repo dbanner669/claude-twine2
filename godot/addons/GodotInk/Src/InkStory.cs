@@ -210,6 +210,11 @@ public partial class InkStory : Resource
         return FetchVariable(variableName).As<T>();
     }
 
+    public bool HasVariable(string variableName)
+    {
+        return runtimeStory.variablesState.GlobalVariableExistsWithName(variableName);
+    }
+
     public void StoreVariable(string variableName, Variant value)
     {
         runtimeStory.variablesState[variableName] = FromVariant(value);

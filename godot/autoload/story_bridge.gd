@@ -258,18 +258,22 @@ func push_mirror() -> void:
 	if story == null:
 		return
 	var player := State.player()
-	story.StoreVariable("background", String(player["background"]))
-	story.StoreVariable("inciting_incident", String(player["inciting_incident"]))
-	story.StoreVariable("arousal", int(player["arousal"]))
-	story.StoreVariable("baseline_composure", int(player["baseline_composure"]))
-	story.StoreVariable("current_composure", int(player["current_composure"]))
-	story.StoreVariable("nyse_influence", int(State.data["nyse"]["influence"]))
-	story.StoreVariable("date_slot", String(State.date()["slot"]))
-	story.StoreVariable("day_of_week", Rules.day_of_week())
-	story.StoreVariable("player_name", String(player["first_name"]))
-	story.StoreVariable("player_full_name", "%s %s" % [player["first_name"], player["surname"]])
-	story.StoreVariable("cover_known_as", String(player["cover"]["known_as"]))
-	story.StoreVariable("codename", String(player["codename"]))
+	_store_mirror_if_declared("background", String(player["background"]))
+	_store_mirror_if_declared("inciting_incident", String(player["inciting_incident"]))
+	_store_mirror_if_declared("arousal", int(player["arousal"]))
+	_store_mirror_if_declared("baseline_composure", int(player["baseline_composure"]))
+	_store_mirror_if_declared("current_composure", int(player["current_composure"]))
+	_store_mirror_if_declared("nyse_influence", int(State.data["nyse"]["influence"]))
+	_store_mirror_if_declared("date_slot", String(State.date()["slot"]))
+	_store_mirror_if_declared("day_of_week", Rules.day_of_week())
+	_store_mirror_if_declared("player_name", String(player["first_name"]))
+	_store_mirror_if_declared("player_full_name", "%s %s" % [player["first_name"], player["surname"]])
+	_store_mirror_if_declared("cover_known_as", String(player["cover"]["known_as"]))
+	_store_mirror_if_declared("codename", String(player["codename"]))
+	_store_mirror_if_declared("sizzle_suspicion", int(State.data["sizzle"]["suspicion"]))
+	_store_mirror_if_declared("sizzle_reputation", int(State.data["sizzle"]["reputation"]))
+	_store_mirror_if_declared("sizzle_access", int(State.data["sizzle"]["access_level"]))
+	_store_mirror_if_declared("sizzle_band", Rules.suspicion_band())
 
 
 func _on_state_changed(_op: String) -> void:
@@ -292,6 +296,10 @@ func _bind_externals() -> void:
 	story.BindExternalFunction("add_kink", Rules.add_kink)
 	story.BindExternalFunction("add_quirk", Rules.add_quirk)
 	story.BindExternalFunction("adjust_influence", Rules.adjust_influence)
+	story.BindExternalFunction("sizzle_suspicion", Rules.sizzle_suspicion)
+	story.BindExternalFunction("sizzle_reputation", Rules.sizzle_reputation)
+	story.BindExternalFunction("sizzle_access", Rules.sizzle_access)
+	story.BindExternalFunction("sizzle_reset", Rules.sizzle_reset)
 	story.BindExternalFunction("set_header", Rules.set_header)
 	story.BindExternalFunction("toast", Rules.toast)
 	story.BindExternalFunction("avatar_set_slot", Rules.avatar_set_slot)
@@ -319,6 +327,11 @@ func _query_has_quirk(quirk: String) -> bool:
 
 func _query_skill_level(skill_name: String) -> int:
 	return State.skill_level(skill_name)
+
+
+func _store_mirror_if_declared(variable_name: String, value: Variant) -> void:
+	if story.HasVariable(variable_name):
+		story.StoreVariable(variable_name, value)
 
 
 # --- Presentation helpers ------------------------------------------------------
