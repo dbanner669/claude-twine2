@@ -167,6 +167,12 @@ Current Composure, not Baseline.
   (`Settings.text_speed`: slow/normal/fast/instant, default normal; click to skip;
   choices appear when the reveal lands; tools force instant via
   `Settings.text_speed_override`).
+- **Graphic polish (2026-07-12):** day/night palette cross-fades (~0.4s;
+  `ThemeService.day_amount()` lerps the palettes, `mode_changed` re-emits per step,
+  `instant_mode` for tools); choice rows glide on hover and cascade in; scene images sit
+  in a dossier mat with fade-in + slow drift; avatar phase changes cross-fade, composure
+  pips pulse on change, day-mode sunbeam wash; main-menu wordmark breathes with staggered
+  entrance. Cosmetic animation kill switch: `Settings.animations_override_disabled`.
 - **Prose:** all four incidents + briefing human-signed-off (first-play review,
   2026-07-11).
 - **Avatar:** manifest-driven runtime is live against placeholder art; real layers come

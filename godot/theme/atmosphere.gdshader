@@ -10,7 +10,8 @@ shader_type canvas_item;
 // The grain is STATIC by design (CSS pattern, not animated noise). Screen
 // texture is sampled so the overlay/multiply blend modes match the CSS.
 
-uniform bool day = false;
+// 0 = night, 1 = day; fractional mid cross-fade (ThemeService.day_amount).
+uniform float day_amount : hint_range(0.0, 1.0) = 0.0;
 uniform sampler2D screen_tex : hint_screen_texture;
 
 // 1px dot in an NxN pixel tile, dot centered in the tile (the CSS
@@ -37,21 +38,20 @@ void fragment() {
 	vec2 px = SCREEN_UV / SCREEN_PIXEL_SIZE;
 
 	// --- Vignette / light washes (body::before) ---------------------------
-	if (day) {
-		// Bottom shadow: transparent 50% -> rgba(70,40,20,0.25) at 100%.
-		float ts = ellipse_t(SCREEN_UV, vec2(0.5, 1.0), vec2(1.2, 0.8));
-		float shadow_a = 0.25 * clamp((ts - 0.5) / 0.5, 0.0, 1.0);
-		base = mix(base, vec3(0.275, 0.157, 0.078), shadow_a);
-		// Sunbeam: rgba(255,228,170,0.35) at center -> transparent at 55%.
-		float tb = ellipse_t(SCREEN_UV, vec2(0.7, 0.2), vec2(0.8, 0.6));
-		float beam_a = 0.35 * clamp(1.0 - tb / 0.55, 0.0, 1.0);
-		base = mix(base, vec3(1.0, 0.894, 0.667), beam_a);
-	} else {
-		// Night vignette: transparent to 40%, rgba(0,0,0,0.55) at 100%.
-		float tv = ellipse_t(SCREEN_UV, vec2(0.5, 0.35), vec2(1.2, 0.8));
-		float vig_a = 0.55 * clamp((tv - 0.4) / 0.6, 0.0, 1.0);
-		base = mix(base, vec3(0.0), vig_a);
-	}
+	// Both variants computed, blended by day_amount for the cross-fade.
+	// Night vignette: transparent to 40%, rgba(0,0,0,0.55) at 100%.
+	float tv = ellipse_t(SCREEN_UV, vec2(0.5, 0.35), vec2(1.2, 0.8));
+	float vig_a = 0.55 * clamp((tv - 0.4) / 0.6, 0.0, 1.0);
+	vec3 night_base = mix(base, vec3(0.0), vig_a);
+	// Day: bottom shadow (transparent 50% -> rgba(70,40,20,0.25)) + sunbeam
+	// (rgba(255,228,170,0.35) at center -> transparent at 55%).
+	float ts = ellipse_t(SCREEN_UV, vec2(0.5, 1.0), vec2(1.2, 0.8));
+	float shadow_a = 0.25 * clamp((ts - 0.5) / 0.5, 0.0, 1.0);
+	vec3 day_base = mix(base, vec3(0.275, 0.157, 0.078), shadow_a);
+	float tb = ellipse_t(SCREEN_UV, vec2(0.7, 0.2), vec2(0.8, 0.6));
+	float beam_a = 0.35 * clamp(1.0 - tb / 0.55, 0.0, 1.0);
+	day_base = mix(day_base, vec3(1.0, 0.894, 0.667), beam_a);
+	base = mix(night_base, day_base, day_amount);
 
 	// --- Film grain (body::after) ------------------------------------------
 	// Two dot grids: rgba(255,235,200,0.6) @ 3px and rgba(255,235,200,0.4)
@@ -60,8 +60,8 @@ void fragment() {
 	float g2 = grain_dot(px, 7.0, vec2(2.0, 3.0));
 	float dot_a = g1 * 0.6 + (1.0 - g1) * g2 * 0.4;
 	vec3 grain_rgb = vec3(1.0, 0.921, 0.784);
-	float layer_opacity = day ? 0.10 : 0.06;
-	vec3 blended = day ? base * grain_rgb : blend_overlay(base, grain_rgb);
+	float layer_opacity = mix(0.06, 0.10, day_amount);
+	vec3 blended = mix(blend_overlay(base, grain_rgb), base * grain_rgb, day_amount);
 	base = mix(base, blended, dot_a * layer_opacity);
 
 	COLOR = vec4(base, 1.0);

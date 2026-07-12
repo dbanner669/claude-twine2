@@ -19,12 +19,16 @@ const PLACEHOLDER := "res://media/placeholder-suit.png"
 const COMPOSURE_MAX := 7
 
 var _bg: ColorRect
+var _sunbeam: TextureRect
 var _border_right: ColorRect
 var _frame: Control
 var _portrait: TextureRect
+var _fade_rect: TextureRect
+var _fade_tween: Tween
 var _layer_holder: Control
 var _layer_rects: Dictionary = {}  # slot -> TextureRect, manifest z-order
 var _phase_id := ""
+var _last_composure := -1
 var _identity: PanelContainer
 var _name_label: Label
 var _kicker: Label
@@ -63,6 +67,25 @@ func _build() -> void:
 	_bg = ColorRect.new()
 	_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(_bg)
+
+	# Day-mode sunbeam wash (layout.css #avatar::before): warm radial from
+	# the upper frame, faded in/out with ThemeService.day_amount().
+	_sunbeam = TextureRect.new()
+	_sunbeam.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_sunbeam.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_sunbeam.stretch_mode = TextureRect.STRETCH_SCALE
+	_sunbeam.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var beam_gradient := Gradient.new()
+	beam_gradient.set_color(0, Color(1.0, 0.894, 0.667, 0.30))
+	beam_gradient.set_color(1, Color(1.0, 0.894, 0.667, 0.0))
+	var beam_texture := GradientTexture2D.new()
+	beam_texture.gradient = beam_gradient
+	beam_texture.fill = GradientTexture2D.FILL_RADIAL
+	beam_texture.fill_from = Vector2(0.5, 0.3)
+	beam_texture.fill_to = Vector2(0.5, 0.85)
+	_sunbeam.texture = beam_texture
+	_sunbeam.modulate.a = 0.0
+	add_child(_sunbeam)
 
 	_border_right = ColorRect.new()
 	_border_right.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
@@ -112,6 +135,15 @@ func _build() -> void:
 	_portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	portrait_margin.add_child(_portrait)
 
+	# Cross-fade layer: holds the OUTGOING portrait while it fades.
+	_fade_rect = TextureRect.new()
+	_fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_fade_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_fade_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_fade_rect.visible = false
+	portrait_margin.add_child(_fade_rect)
+
 	# Identity block — bottom-anchored (the AvatarMeta passage, native).
 	_identity = PanelContainer.new()
 	column.add_child(_identity)
@@ -158,11 +190,14 @@ func set_phase(avatar_id: String) -> void:
 
 ## Recompute what the frame shows: override image, layer stack, or placeholder.
 func _render() -> void:
+	var previous: Texture2D = _portrait.texture if _portrait.visible else null
 	var override_path := AvatarManifest.phase_override_path(_phase_id)
 	if _phase_id != "" and override_path != "":
 		_portrait.texture = load(override_path)
 		_portrait.visible = true
 		_layer_holder.visible = false
+		if _portrait.texture != previous:
+			_crossfade_from(previous)
 		return
 
 	var slot_state: Dictionary = State.data.get("avatar", {})
@@ -177,12 +212,33 @@ func _render() -> void:
 				continue
 			var asset_id := AvatarManifest.resolve_slot(slot, slot_state)
 			rect.texture = load(AvatarManifest.asset_path(asset_id)) if asset_id != "" else null
+		_crossfade_from(previous)
 		return
 
 	# Greybox default and unknown phase ids (man_*/pale_*/wds_* until art lands).
 	_portrait.texture = load(PLACEHOLDER)
 	_portrait.visible = true
 	_layer_holder.visible = false
+	if _portrait.texture != previous:
+		_crossfade_from(previous)
+
+
+## Fades the outgoing portrait out over whatever replaced it.
+func _crossfade_from(old_texture: Texture2D) -> void:
+	if old_texture == null or not Settings.animations_enabled():
+		return
+	_fade_rect.texture = old_texture
+	_fade_rect.visible = true
+	_fade_rect.modulate.a = 1.0
+	if _fade_tween != null and _fade_tween.is_valid():
+		_fade_tween.kill()
+	_fade_tween = create_tween()
+	_fade_tween.tween_property(_fade_rect, "modulate:a", 0.0, 0.35)
+	_fade_tween.tween_callback(_hide_fade_rect)
+
+
+func _hide_fade_rect() -> void:
+	_fade_rect.visible = false
 
 
 ## Re-read name/codename/composure from State.
@@ -195,11 +251,19 @@ func refresh() -> void:
 	_pip_value.text = "%d/%d" % [current, COMPOSURE_MAX]
 	for i in _pips.size():
 		_style_pip(_pips[i], i < current)
+	# Pulse the pips that changed so composure movement is legible.
+	if _last_composure >= 0 and current != _last_composure and Settings.animations_enabled():
+		for i in range(mini(current, _last_composure), maxi(current, _last_composure)):
+			if i < _pips.size():
+				_pulse_pip(_pips[i])
+	_last_composure = current
 
 
 func restyle() -> void:
 	_bg.color = ThemeService.color("ink")
 	_border_right.color = ThemeService.color("rule")
+	# Tracks the day/night cross-fade (mode_changed re-emits per step).
+	_sunbeam.modulate.a = ThemeService.day_amount()
 
 	var identity_style := StyleBoxFlat.new()
 	identity_style.bg_color = ThemeService.color("ink_2")
@@ -224,6 +288,11 @@ func restyle() -> void:
 
 	_frame.queue_redraw()
 	refresh()
+
+
+func _pulse_pip(pip: Panel) -> void:
+	pip.modulate = Color(1.7, 1.55, 1.2)
+	pip.create_tween().tween_property(pip, "modulate", Color.WHITE, 0.6)
 
 
 func _style_pip(pip: Panel, on: bool) -> void:

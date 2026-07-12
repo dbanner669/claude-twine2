@@ -60,13 +60,22 @@ var _avatar_panel: AvatarPanel
 var _passage_bg: ColorRect
 var _outer_column: VBoxContainer
 var _column: VBoxContainer
+var _scene_frame: PanelContainer
+var _scene_clip: Control
 var _scene_image: TextureRect
+var _drift_tween: Tween
 var _prose: RichTextLabel
 var _extract_holder: VBoxContainer   # BranchFileExtract panel mounts here (F)
 var _check_holder: VBoxContainer     # check panel mounts here (E)
 var _choices_label: Label
 var _choices_box: VBoxContainer
 var _end_panel: VBoxContainer
+# Main-menu title block (native labels so the wordmark glow can breathe)
+var _menu_panel: VBoxContainer
+var _menu_title: Label
+var _menu_subtitle: Label
+var _menu_kicker: Label
+var _menu_glow_tween: Tween
 # Footer
 var _footer: PanelContainer
 var _footer_date: Label
@@ -88,6 +97,7 @@ var _settings_button: Button
 var _reveal_position := 0.0
 var _reveal_active := false
 var _choices_label_wanted := false
+var _choices_tween: Tween
 var _check_panel: CheckPanel
 var _menu_shown := false
 # Character creation (Phase 5)
@@ -233,11 +243,36 @@ func _build_ui() -> void:
 	_column.add_theme_constant_override("separation", 16)
 	_outer_column.add_child(_column)
 
+	_menu_panel = VBoxContainer.new()
+	_menu_panel.visible = false
+	_menu_panel.add_theme_constant_override("separation", 26)
+	_column.add_child(_menu_panel)
+	_menu_title = Label.new()
+	_menu_title.text = "Sizzle"
+	_menu_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_menu_panel.add_child(_menu_title)
+	_menu_subtitle = Label.new()
+	_menu_subtitle.text = "An infiltration in three acts"
+	_menu_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_menu_panel.add_child(_menu_subtitle)
+	_menu_kicker = Label.new()
+	_menu_kicker.text = "T O R O N T O   ·   2 0 0 5"
+	_menu_kicker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_menu_panel.add_child(_menu_kicker)
+
+	# Scene image sits in a dossier-photograph mat: hairline border + mat
+	# padding, contents clipped so the slow drift can overscan.
+	_scene_frame = PanelContainer.new()
+	_scene_frame.visible = false
+	_column.add_child(_scene_frame)
+	_scene_clip = Control.new()
+	_scene_clip.clip_contents = true
+	_scene_frame.add_child(_scene_clip)
 	_scene_image = TextureRect.new()
+	_scene_image.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_scene_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_scene_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_scene_image.visible = false
-	_column.add_child(_scene_image)
+	_scene_clip.add_child(_scene_image)
 
 	_prose = RichTextLabel.new()
 	_prose.bbcode_enabled = true
@@ -409,6 +444,26 @@ func _restyle() -> void:
 		label.add_theme_font_size_override("font_size", ThemeService.font_size("mono"))
 		label.add_theme_color_override("font_color", ThemeService.color("cream_faint"))
 
+	# Scene-image mat (dossier-photograph treatment)
+	var mat := StyleBoxFlat.new()
+	mat.bg_color = ThemeService.color("ink_2")
+	mat.border_color = ThemeService.color("rule_strong")
+	mat.set_border_width_all(1)
+	mat.set_content_margin_all(10)
+	_scene_frame.add_theme_stylebox_override("panel", mat)
+
+	# Main-menu title block
+	_menu_title.add_theme_font_override("font", load("res://fonts/Allura-Regular.woff2"))
+	_menu_title.add_theme_font_size_override("font_size", 120)
+	if _menu_glow_tween == null or not _menu_glow_tween.is_valid():
+		_menu_title.add_theme_color_override("font_color", ThemeService.color("brick_glow"))
+	_menu_subtitle.add_theme_font_override("font", ThemeService.font("display_italic"))
+	_menu_subtitle.add_theme_font_size_override("font_size", 38)
+	_menu_subtitle.add_theme_color_override("font_color", ThemeService.color("cream"))
+	_menu_kicker.add_theme_font_override("font", _tracked(ThemeService.font("ui"), 2.0))
+	_menu_kicker.add_theme_font_size_override("font_size", ThemeService.font_size("ui_md"))
+	_menu_kicker.add_theme_color_override("font_color", ThemeService.color("brass_dim"))
+
 	var tooltip_style := StyleBoxFlat.new()
 	tooltip_style.bg_color = ThemeService.color("ink_3")
 	tooltip_style.border_color = ThemeService.color("rule_strong")
@@ -450,23 +505,25 @@ func _style_ui_button(button: Button, font_size: int) -> void:
 
 
 ## The .choices .choice pattern: brass italic, em-dash prefix, hairline
-## bottom border; hover shifts right and glows brick.
+## bottom border; hover shifts right and glows brick. One SHARED StyleBox
+## across all states so the hover shift can be tweened (the CSS had
+## transition: padding-left/border-color 0.15s; Button state swaps snap).
 func _style_choice_button(button: Button, greyed: bool) -> void:
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color.TRANSPARENT
-	normal.border_color = ThemeService.color("rule")
-	normal.border_width_bottom = 1
-	normal.content_margin_left = 22
-	normal.content_margin_right = 8
-	normal.content_margin_top = 8
-	normal.content_margin_bottom = 8
-	var hover := normal.duplicate()
-	hover.border_color = ThemeService.color("brick_glow")
-	hover.content_margin_left = 28
-	for state in ["normal", "pressed", "focus"]:
-		button.add_theme_stylebox_override(state, normal)
-	button.add_theme_stylebox_override("hover", hover)
-	button.add_theme_stylebox_override("disabled", normal)
+	if button.has_meta("hover_tween"):
+		var old_tween: Tween = button.get_meta("hover_tween")
+		if old_tween != null and old_tween.is_valid():
+			old_tween.kill()
+	var box := StyleBoxFlat.new()
+	box.bg_color = Color.TRANSPARENT
+	box.border_color = ThemeService.color("rule")
+	box.border_width_bottom = 1
+	box.content_margin_left = 22
+	box.content_margin_right = 8
+	box.content_margin_top = 8
+	box.content_margin_bottom = 8
+	for state in ["normal", "hover", "pressed", "focus", "disabled"]:
+		button.add_theme_stylebox_override(state, box)
+	button.set_meta("box", box)
 	button.add_theme_font_override("font", ThemeService.font("body_italic"))
 	button.add_theme_font_size_override("font_size", ThemeService.font_size("lg"))
 	var base_color := ThemeService.color("cream_faint") if greyed else ThemeService.color("brass")
@@ -515,6 +572,27 @@ func _on_choice_chevron_hover(button: Button, entered: bool) -> void:
 	color.a = 0.5
 	chevron.add_theme_color_override("font_color", color)
 
+	# The hover glide (padding-left 22->28, border rule->brick-glow, 0.15s).
+	if button.disabled or not button.has_meta("box"):
+		return
+	var box: StyleBoxFlat = button.get_meta("box")
+	if box == null:
+		return
+	var margin := 28.0 if entered else 22.0
+	var border := ThemeService.color("brick_glow") if entered else ThemeService.color("rule")
+	if button.has_meta("hover_tween"):
+		var old_tween: Tween = button.get_meta("hover_tween")
+		if old_tween != null and old_tween.is_valid():
+			old_tween.kill()
+	if not Settings.animations_enabled():
+		box.content_margin_left = margin
+		box.border_color = border
+		return
+	var tween := button.create_tween().set_parallel(true)
+	tween.tween_property(box, "content_margin_left", margin, 0.15)
+	tween.tween_property(box, "border_color", border, 0.15)
+	button.set_meta("hover_tween", tween)
+
 
 static func _tracked(base: Font, spacing_px: float) -> FontVariation:
 	var variation := FontVariation.new()
@@ -552,6 +630,7 @@ func _apply_screen_mode(mode: String) -> void:
 func _on_knot_entered(knot: String, tags: Dictionary) -> void:
 	_menu_shown = false
 	_exit_cc_view()
+	_hide_menu_panel()
 	_current_knot = knot
 	_current_tags = tags
 	if tags.has("check"):
@@ -569,15 +648,9 @@ func _on_knot_entered(knot: String, tags: Dictionary) -> void:
 	_apply_screen_mode(screen)
 	_avatar_panel.set_phase(String(tags.get("avatar", "")))
 	if KNOT_IMAGES.has(knot):
-		var texture: Texture2D = load(String(KNOT_IMAGES[knot]))
-		_scene_image.texture = texture
-		# Full frame at natural aspect, scaled to the content column width
-		# (gate punch-list: no 16:9 cropping).
-		var aspect := texture.get_height() / float(texture.get_width())
-		_scene_image.custom_minimum_size = Vector2(CONTENT_WIDTH, CONTENT_WIDTH * aspect)
-		_scene_image.visible = true
+		_show_scene_image(load(String(KNOT_IMAGES[knot])))
 	else:
-		_scene_image.visible = false
+		_hide_scene_image()
 	_refresh_header()
 	_refresh_footer()
 	_avatar_panel.refresh()
@@ -619,6 +692,8 @@ func _on_choices_ready(choices: Array) -> void:
 		_style_choice_button(button, false)
 		button.pressed.connect(func() -> void: StoryBridge.choose(index))
 		_choices_box.add_child(button)
+	if not _reveal_active:
+		_animate_choices_in()
 
 
 func _on_check_ready(check: Dictionary) -> void:
@@ -737,20 +812,51 @@ func _show_main_menu() -> void:
 	_prose.clear()
 	_reveal_active = false
 	_prose.visible_characters = -1
-	_scene_image.visible = false
+	_hide_scene_image()
 	_extract_holder.visible = false
 	_check_holder.visible = false
 	_end_panel.visible = false
 	_clear_choices()
-	_prose.append_text("[center][font=res://fonts/Allura-Regular.woff2][font_size=120][color=%s]Sizzle[/color][/font_size][/font]\n\n" % ThemeService.color("brick_glow").to_html(false))
-	_prose.append_text("[font=res://fonts/CormorantGaramond-Italic.woff2][font_size=38][color=%s]An infiltration in three acts[/color][/font_size][/font]\n\n" % ThemeService.color("cream").to_html(false))
-	_prose.append_text("[color=%s]T O R O N T O   ·   2 0 0 5[/color][/center]\n\n" % ThemeService.color("brass_dim").to_html(false))
+	_menu_panel.visible = true
 	_choices_label.visible = false
 	_add_menu_button("Begin", _start_character_creation)
 	if SaveManager.has_autosave():
 		_add_menu_button("Continue", _continue_from_autosave)
+	_animate_menu_in()
 	_refresh_header()
 	_refresh_footer()
+
+
+## Title block entrance (staggered fades) + the breathing wordmark glow.
+func _animate_menu_in() -> void:
+	if _menu_glow_tween != null and _menu_glow_tween.is_valid():
+		_menu_glow_tween.kill()
+	_menu_title.add_theme_color_override("font_color", ThemeService.color("brick_glow"))
+	if not Settings.animations_enabled():
+		for label: Control in [_menu_title, _menu_subtitle, _menu_kicker]:
+			label.modulate.a = 1.0
+		for child: Control in _choices_box.get_children():
+			child.modulate.a = 1.0
+		return
+	var entrance := create_tween().set_parallel(true)
+	var index := 0
+	for label: Control in [_menu_title, _menu_subtitle, _menu_kicker]:
+		label.modulate.a = 0.0
+		entrance.tween_property(label, "modulate:a", 1.0, 0.5).set_delay(index * 0.18)
+		index += 1
+	_animate_choices_in()
+	# Slow breath on the wordmark: brick-glow up to the hover pink and back.
+	_menu_glow_tween = create_tween().set_loops()
+	_menu_glow_tween.tween_property(_menu_title, "theme_override_colors/font_color",
+		Color("#f07880"), 2.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_menu_glow_tween.tween_property(_menu_title, "theme_override_colors/font_color",
+		ThemeService.color("brick_glow"), 2.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func _hide_menu_panel() -> void:
+	if _menu_glow_tween != null and _menu_glow_tween.is_valid():
+		_menu_glow_tween.kill()
+	_menu_panel.visible = false
 
 
 func _add_menu_button(label: String, action: Callable) -> void:
@@ -782,6 +888,7 @@ func _show_end_screen() -> void:
 	var is_prologue_end := _current_knot == "INTRO_800" or _current_knot == "intro_end"
 	_reveal_active = false
 	_prose.visible_characters = -1
+	_hide_menu_panel()
 	_prose.visible = false
 	_check_holder.visible = false
 	_apply_screen_mode("menu")
@@ -806,6 +913,7 @@ func _show_end_screen() -> void:
 	_end_panel.add_child(sub)
 
 	_add_menu_button("Main menu", _show_main_menu)
+	_animate_choices_in()
 
 
 # =========================================================================
@@ -840,8 +948,9 @@ func _enter_cc_summary() -> void:
 func _show_cc_view() -> void:
 	_cc_active = true
 	_apply_screen_mode("creation")
+	_hide_menu_panel()
 	_prose.visible = false
-	_scene_image.visible = false
+	_hide_scene_image()
 	_extract_holder.visible = false
 	_check_holder.visible = false
 	_end_panel.visible = false
@@ -998,6 +1107,8 @@ func _clear_choices() -> void:
 	_choices_label.visible = false
 	_choices_label_wanted = false
 	_choices_box.visible = true
+	if _choices_tween != null and _choices_tween.is_valid():
+		_choices_tween.kill()
 	for child in _choices_box.get_children():
 		_choices_box.remove_child(child)
 		child.queue_free()
@@ -1022,6 +1133,25 @@ func _finish_reveal() -> void:
 	_prose.visible_characters = -1
 	_choices_box.visible = true
 	_choices_label.visible = _choices_label_wanted
+	_animate_choices_in()
+
+
+## Cascade fade-in for whatever is in the choices box (60ms stagger).
+func _animate_choices_in() -> void:
+	if _choices_tween != null and _choices_tween.is_valid():
+		_choices_tween.kill()
+	if not Settings.animations_enabled():
+		for child: Control in _choices_box.get_children():
+			child.modulate.a = 1.0
+		return
+	if _choices_box.get_child_count() == 0:
+		return
+	_choices_tween = create_tween().set_parallel(true)
+	var index := 0
+	for child: Control in _choices_box.get_children():
+		child.modulate.a = 0.0
+		_choices_tween.tween_property(child, "modulate:a", 1.0, 0.15).set_delay(index * 0.06)
+		index += 1
 
 
 func _process(delta: float) -> void:
@@ -1045,3 +1175,37 @@ func _process(delta: float) -> void:
 func _on_prose_gui_input(event: InputEvent) -> void:
 	if _reveal_active and event is InputEventMouseButton and event.pressed:
 		_finish_reveal()
+
+
+# =========================================================================
+# Scene image (dossier-photograph treatment)
+# =========================================================================
+
+## Full frame at natural aspect scaled to the content column (gate
+## punch-list: no 16:9 cropping), fade-in on entry, and a very slow drift
+## (scale 1.0 -> 1.02 over ~18s, yoyo) so stills read as alive.
+func _show_scene_image(texture: Texture2D) -> void:
+	var inner_w := CONTENT_WIDTH - 20.0  # mat padding both sides
+	var aspect := texture.get_height() / float(texture.get_width())
+	var inner := Vector2(inner_w, inner_w * aspect)
+	_scene_image.texture = texture
+	_scene_clip.custom_minimum_size = inner
+	_scene_image.pivot_offset = inner / 2.0
+	_scene_image.scale = Vector2.ONE
+	_scene_frame.visible = true
+	if _drift_tween != null and _drift_tween.is_valid():
+		_drift_tween.kill()
+	if not Settings.animations_enabled():
+		_scene_frame.modulate.a = 1.0
+		return
+	_scene_frame.modulate.a = 0.0
+	create_tween().tween_property(_scene_frame, "modulate:a", 1.0, 0.4)
+	_drift_tween = create_tween().set_loops()
+	_drift_tween.tween_property(_scene_image, "scale", Vector2(1.02, 1.02), 18.0)
+	_drift_tween.tween_property(_scene_image, "scale", Vector2.ONE, 18.0)
+
+
+func _hide_scene_image() -> void:
+	_scene_frame.visible = false
+	if _drift_tween != null and _drift_tween.is_valid():
+		_drift_tween.kill()

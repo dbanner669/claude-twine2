@@ -19,6 +19,15 @@ const TEXT_SPEEDS := {
 ## persisted value WITHOUT writing the user's settings file.
 var text_speed_override := ""
 
+## Session-only kill switch for cosmetic animation (staggered fades, hover
+## glides, drifts) — tools set this for deterministic frames. Not persisted,
+## not player-facing.
+var animations_override_disabled := false
+
+
+func animations_enabled() -> bool:
+	return not animations_override_disabled
+
 var _config := ConfigFile.new()
 
 

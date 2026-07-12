@@ -21,5 +21,6 @@ func _ready() -> void:
 	_on_mode_changed(ThemeService.mode)
 
 
-func _on_mode_changed(mode: String) -> void:
-	(material as ShaderMaterial).set_shader_parameter("day", mode == "day")
+func _on_mode_changed(_mode: String) -> void:
+	# mode_changed re-emits per cross-fade step, so this tracks the blend.
+	(material as ShaderMaterial).set_shader_parameter("day_amount", ThemeService.day_amount())
