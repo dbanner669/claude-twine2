@@ -70,6 +70,14 @@ Claude orchestrates. Codex (cc-codex-plugin:codex-agent) implements. Claude revi
 Note: the Codex CLI runs on its own (OpenAI) budget; the Claude subagent driving it
 shares the Claude plan limit — subagent "session limit" errors are the Claude side.
 
+**Hand-back links are mandatory.** The user interacts via GUI. Whenever a reply turns
+something back to the user with a directive — "worth testing this", "read this doc",
+"review these shots" — it MUST contain a direct clickable markdown link to the exact
+target: `[name](relative/path)` or `[name](relative/path:line)`. Bare path strings in
+prose and "run this terminal command" explanations are not acceptable substitutes. If
+the target is genuinely runnable-only (e.g. play the game), link the most relevant
+file(s) alongside any command, never the command alone.
+
 ## Commands
 
 ```powershell
