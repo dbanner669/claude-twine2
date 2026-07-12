@@ -78,8 +78,16 @@ var _toast_box: VBoxContainer        # toast stack (D)
 var _glossary: Dictionary = {}
 var _charsheet: CharSheetDialog
 var _saves_dialog: SavesDialog
+var _settings_dialog: SettingsDialog
 var _menu_button: Button
 var _saves_button: Button
+var _settings_button: Button
+## Paced prose reveal (Settings.text_speed): visible_characters advances at
+## N chars/sec in _process; choices stay hidden until the reveal lands.
+## 0 cps = instant = exactly the old behavior.
+var _reveal_position := 0.0
+var _reveal_active := false
+var _choices_label_wanted := false
 var _check_panel: CheckPanel
 var _menu_shown := false
 # Character creation (Phase 5)
@@ -184,6 +192,13 @@ func _build_ui() -> void:
 	_character_button.pressed.connect(_on_character_pressed)
 	header_row.add_child(_character_button)
 
+	_settings_button = Button.new()
+	_settings_button.text = "SETTINGS"
+	_settings_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_settings_button.focus_mode = Control.FOCUS_NONE
+	_settings_button.pressed.connect(_on_settings_pressed)
+	header_row.add_child(_settings_button)
+
 	# --- Mid row ----------------------------------------------------------
 	var mid := HBoxContainer.new()
 	mid.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -233,6 +248,7 @@ func _build_ui() -> void:
 	_prose.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_prose.meta_hover_started.connect(_on_meta_hover_started)
 	_prose.meta_hover_ended.connect(_on_meta_hover_ended)
+	_prose.gui_input.connect(_on_prose_gui_input)
 	_column.add_child(_prose)
 
 	_extract_holder = VBoxContainer.new()
@@ -321,6 +337,9 @@ func _build_ui() -> void:
 	_saves_dialog = SavesDialog.new()
 	add_child(_saves_dialog)
 
+	_settings_dialog = SettingsDialog.new()
+	add_child(_settings_dialog)
+
 
 # =========================================================================
 # Styling (all palette-dependent; re-run on mode change)
@@ -343,6 +362,7 @@ func _restyle() -> void:
 	_style_ui_button(_menu_button, 10)
 	_style_ui_button(_saves_button, 10)
 	_style_ui_button(_character_button, 10)
+	_style_ui_button(_settings_button, 10)
 
 	_location_label.add_theme_font_override("font", _tracked(ThemeService.font("ui_medium"), 2.4))
 	_location_label.add_theme_font_size_override("font_size", ThemeService.font_size("ui"))
@@ -539,6 +559,7 @@ func _on_knot_entered(knot: String, tags: Dictionary) -> void:
 	else:
 		_defer_prose_clear = false
 		_prose.clear()
+		_begin_reveal()
 	_clear_choices()
 	_end_panel.visible = false
 	_extract_holder.visible = false
@@ -568,18 +589,25 @@ func _on_text_appended(line: String) -> void:
 	if _defer_prose_clear:
 		_defer_prose_clear = false
 		_prose.clear()
+		_begin_reveal()
 	# Brass glossary terms (passages.css .glossary-label): decorated at
 	# display time so the generated ink stays untouched. Append-time color is
 	# mode-correct because ThemeService (autoload, connected first) resolves
 	# the knot's day/night mode before the shell receives any of its text.
 	_prose.append_text(_decorate_gloss(line, ThemeService.color("brass").to_html(false)) + "\n\n")
+	if _reveal_active:
+		# New text joins the queue rather than flashing in fully.
+		_prose.visible_characters = int(_reveal_position)
 
 
 func _on_choices_ready(choices: Array) -> void:
 	if _menu_shown:
 		return
 	_clear_choices()
-	_choices_label.visible = _screen_mode == "scene" and choices.size() > 1
+	_choices_label_wanted = _screen_mode == "scene" and choices.size() > 1
+	# During a reveal the choices wait for the prose to finish landing.
+	_choices_box.visible = not _reveal_active
+	_choices_label.visible = _choices_label_wanted and not _reveal_active
 	for choice in choices:
 		var index := int(choice["index"])
 		var button := Button.new()
@@ -614,6 +642,8 @@ func _on_scene_stub(scene_kind: String, extract_id: String) -> void:
 func _on_flow_reset(_knot: String) -> void:
 	_prose.clear()
 	_defer_prose_clear = false
+	_reveal_active = false
+	_prose.visible_characters = -1
 	_clear_choices()
 	_exit_cc_view()
 	_extract_holder.visible = false
@@ -705,6 +735,8 @@ func _show_main_menu() -> void:
 	_handoff_pending = false
 	_prose.visible = true
 	_prose.clear()
+	_reveal_active = false
+	_prose.visible_characters = -1
 	_scene_image.visible = false
 	_extract_holder.visible = false
 	_check_holder.visible = false
@@ -748,6 +780,8 @@ func _continue_from_autosave() -> void:
 
 func _show_end_screen() -> void:
 	var is_prologue_end := _current_knot == "INTRO_800" or _current_knot == "intro_end"
+	_reveal_active = false
+	_prose.visible_characters = -1
 	_prose.visible = false
 	_check_holder.visible = false
 	_apply_screen_mode("menu")
@@ -956,8 +990,58 @@ func _on_saves_pressed() -> void:
 	_saves_dialog.open()
 
 
+func _on_settings_pressed() -> void:
+	_settings_dialog.open()
+
+
 func _clear_choices() -> void:
 	_choices_label.visible = false
+	_choices_label_wanted = false
+	_choices_box.visible = true
 	for child in _choices_box.get_children():
 		_choices_box.remove_child(child)
 		child.queue_free()
+
+
+# =========================================================================
+# Paced prose reveal (Settings.text_speed)
+# =========================================================================
+
+func _begin_reveal() -> void:
+	if _menu_shown or Settings.text_speed_cps() <= 0.0:
+		_reveal_active = false
+		_prose.visible_characters = -1
+		return
+	_reveal_position = 0.0
+	_prose.visible_characters = 0
+	_reveal_active = true
+
+
+func _finish_reveal() -> void:
+	_reveal_active = false
+	_prose.visible_characters = -1
+	_choices_box.visible = true
+	_choices_label.visible = _choices_label_wanted
+
+
+func _process(delta: float) -> void:
+	if not _reveal_active:
+		return
+	# Switching to instant mid-reveal (settings dialog is reachable live).
+	var cps := Settings.text_speed_cps()
+	if cps <= 0.0:
+		_finish_reveal()
+		return
+	var total := _prose.get_total_character_count()
+	if total <= 0:
+		return
+	_reveal_position = minf(_reveal_position + cps * delta, float(total))
+	_prose.visible_characters = int(_reveal_position)
+	if int(_reveal_position) >= total:
+		_finish_reveal()
+
+
+## Click anywhere in the prose during a reveal = show it all now.
+func _on_prose_gui_input(event: InputEvent) -> void:
+	if _reveal_active and event is InputEventMouseButton and event.pressed:
+		_finish_reveal()

@@ -161,8 +161,12 @@ Current Composure, not Baseline.
 ## Current Status
 
 - **Playable end-to-end:** main menu → character creation (native dossier flow) → chosen
-  origin-incident flashback (BLK/MAN/PALE/WDS) → briefing (INTRO), with saves, day/night
-  theming, animated checks, glossary, Branch-file extracts, MENU/SAVES/CHARACTER chrome.
+  origin-incident flashback (BLK/MAN/PALE/WDS) → briefing + psych eval (INTRO/EVAL), with
+  saves, day/night theming, animated checks, glossary, Branch-file extracts, and
+  MENU/SAVES/CHARACTER/SETTINGS chrome. Prose renders with a paced reveal
+  (`Settings.text_speed`: slow/normal/fast/instant, default normal; click to skip;
+  choices appear when the reveal lands; tools force instant via
+  `Settings.text_speed_override`).
 - **Prose:** all four incidents + briefing human-signed-off (first-play review,
   2026-07-11).
 - **Avatar:** manifest-driven runtime is live against placeholder art; real layers come

@@ -24,6 +24,9 @@ var _failed := false
 func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SHOT_DIR)
 	_watchdog()
+	# Deterministic shots: bypass the paced prose reveal (session-only; does
+	# not touch the user's settings file).
+	Settings.text_speed_override = "instant"
 	_shell = load("res://scenes/game_shell.tscn").instantiate()
 	add_child(_shell)
 	_run()
